@@ -3,17 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DatabaseConnection;
+package lib.database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.ResultSet;
 
 /**
  *
  * @author erincoey
  */
-public class DatabaseConnection {
+public class DatabaseConnection{
     public static void main(String[] args){
+        Connection conn =connectToDatabase();
         
     }
     
@@ -31,5 +34,6 @@ public class DatabaseConnection {
         }
         return null; 
     }
+    
 }
 
