@@ -22,8 +22,11 @@ public class testModel {
 public String getStaffDetails()
 {
     try{
-    Connection conn = DatabaseConnection.connectToDatabase();
-    Statement st = conn.createStatement();
+    
+        DatabaseConnection db = new DatabaseConnection();
+        Connection conn = db.connectToDatabase();
+        System.out.println("Database connected: "+conn);
+        Statement st = conn.createStatement();
     String query = "SELECT * from staff";
     
     ResultSet rs = st.executeQuery(query);

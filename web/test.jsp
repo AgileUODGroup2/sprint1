@@ -4,6 +4,9 @@
     Author     : erincoey
 --%>
 
+<%@page import="models.testModel"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="lib.database.DatabaseConnection"%>
 <%@page import="stores.testStore"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -17,9 +20,14 @@
         <h1>Testing </h1>
         
         <%
-                    testStore ts = (testStore) session.getAttribute("testStore");
-                    String test = ts.getResult();
+testModel test = new testModel();
+    String result = test.getStaffDetails();
+    
+    testStore ts = new testStore();
+    ts.setResult(result);
+                   
+                    String string1 = ts.getResult();
             %>
-            <h1> <%=test%> </h1>
+            <h1> <%=string1%> </h1>
     </body>
 </html>
