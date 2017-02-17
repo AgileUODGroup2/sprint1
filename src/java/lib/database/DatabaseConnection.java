@@ -4,26 +4,20 @@
  * and open the template in the editor.
  */
 package lib.database;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.ResultSet;
+import java.sql.*;
 
 /**
  *
  * @author erincoey
  */
 public class DatabaseConnection{
-    public static void main(String[] args){
-        Connection conn =connectToDatabase();
-        
-    }
     
-    public static Connection connectToDatabase()
+    
+    public Connection connectToDatabase()
     {
         try{
-        String host = "silva.computing.dundee.ac.uk";
+            Class.forName("com.mysql.jdbc.Driver");
+        String host = "jdbc:mysql://134.36.36.37:3306/16agileteam2db";
         String username = "16agileteam2";
         String password = "9374.at2.4739";
         Connection conn = DriverManager.getConnection(host,username,password);
@@ -31,8 +25,13 @@ public class DatabaseConnection{
         }
         catch(SQLException err){
             System.out.println(err.getMessage());
+            return null; 
         }
-        return null; 
+        catch(Exception e) {
+            System.out.println("Connection to database failed");
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
     
 }
