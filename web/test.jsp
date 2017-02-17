@@ -20,14 +20,14 @@
         <h1>Testing </h1>
         
         <%
-testModel test = new testModel();
-    String result = test.getStaffDetails();
+            testModel test = new testModel();
+            String result = test.getStaffDetails();
     
-    testStore ts = new testStore();
-    ts.setResult(result);
-                   
-                    String string1 = ts.getResult();
-            %>
+            testStore ts = new testStore();
+            ts.setResult(result);
+
+            String string1 = ts.getResult();
+        %>
             <h1> <%=string1%> </h1>
     </body>
 </html>
