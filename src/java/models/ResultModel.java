@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 package models;
-import java.sql.Date;
+import java.sql.Connection;
+import java.sql.*;
 import lib.database.DatabaseConnection;
 import stores.Result;
 
@@ -13,10 +14,32 @@ import stores.Result;
  * @author viivipursiainen
  */
 public class ResultModel {
-    DatabaseConnection db;
+    DatabaseConnection db = new DatabaseConnection();
     
-    public java.util.LinkedList<Result> getResultsForDates(Date date1, Date date2) {
-        java.util.LinkedList<Result> Results = new java.util.LinkedList<>();
-        return Results;
+    public java.util.LinkedList<Result> getResultsForDates(Date date1, Date date2) throws SQLException {
+        java.util.LinkedList<Result> results = new java.util.LinkedList<>();
+        
+        String query = "SELECT * FROM student_quiz WHERE (Date_Completed BETWEEN ? AND ?)";
+        
+        try (Connection con = db.connectToDatabase();
+                PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setDate(1, date1);
+            ps.setDate(2,date2);
+            try (ResultSet rs = ps.executeQuery()) {
+                while(rs.next()) {
+                    Result res = new Result();
+                    res.setMatricNo(rs.getInt("Matriculation_Number"));
+                    res.setQuizID(rs.getInt("Quiz_ID"));
+                    res.setCompleted(rs.getBoolean("Has_Completed"));
+                    res.setAttempts(rs.getInt("Attempted_Count"));
+                    res.setScore(rs.getInt("Score"));
+                    res.setDate(rs.getDate("Date_Completed"));
+                    
+                    results.add(res);
+                }
+            }
+            
+        }
+        return results;
     }
 }

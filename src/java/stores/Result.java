@@ -31,20 +31,26 @@ public class Result {
     public void setAttempts(int attempts) {
         this.attempts = attempts;
     }
+    public void setScore(int score) {
+        this.score = score;
+    }
     public void setDate(Date date) {
         this.date = date;
     }
     public int getMatricNo() {
         return matricNo;
     }
-    public int setQuizID() {
+    public int getQuizID() {
         return quizID;
     }
-    public boolean setCompleted() {
+    public boolean getCompleted() {
         return completed;
     }
-    public int setAttempts() {
+    public int getAttempts() {
         return attempts;
+    }
+    public int getScore() {
+        return score;
     }
     public Date getDate() {
         return date;
