@@ -59,11 +59,11 @@ public class DateSearch extends HttpServlet {
         
         ResultModel rm = new ResultModel();
         java.util.LinkedList<Result> resultList = null;
-        try {
+        
             resultList = rm.getResultsForDates(date1, date2);
-        } catch (SQLException ex) {
-            Logger.getLogger(DateSearch.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
+            
+        
         RequestDispatcher rd = request.getRequestDispatcher("/quizResults.jsp");
         request.setAttribute("ResultList", resultList);
         rd.forward(request, response);
