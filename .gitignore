@@ -1,2 +1,7 @@
 /nbproject/private/
 /build/
+/.idea/
+
+.idea/dataSources.xml
+
+*.iml
