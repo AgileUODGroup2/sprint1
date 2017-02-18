@@ -4,7 +4,6 @@
     Author     : daniellewilliams
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <body>
@@ -24,6 +23,4 @@
                 </form>
 
 
-</body>
-</html>
-
+   
