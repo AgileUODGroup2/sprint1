@@ -9,9 +9,26 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title> Staff Portal </title>
+        <link rel="stylesheet" type="text/css" href="styles.css">
+
     </head>
-    <body>
-        <h1>Hello World!</h1>
+    <body bgcolor="9BD5E8">
+
+
+        <div class="navBar">
+            <ul>
+                <li><a href="index.jsp">QUIZ MASTER</a></li>
+
+            </ul>
+        </div>
+
+        <div class="navBar1">
+            <ul>
+                <li><a> STAFF PORTAL - Welcome Rachel </a></li>
+            </ul>
+        </div>
+
+
     </body>
 </html>

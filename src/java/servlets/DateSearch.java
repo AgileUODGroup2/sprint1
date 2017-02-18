@@ -60,9 +60,7 @@ public class DateSearch extends HttpServlet {
         ResultModel rm = new ResultModel();
         java.util.LinkedList<Result> resultList = null;
         
-            resultList = rm.getResultsForDates(date1, date2);
-        
-            
+        resultList = rm.getResultsForDates(date1, date2);
         
         RequestDispatcher rd = request.getRequestDispatcher("/quizResults.jsp");
         request.setAttribute("ResultList", resultList);

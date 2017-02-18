@@ -8,3 +8,89 @@ and open the template in the editor.
     Author     : daniellewilliams
 */
 
+h1{
+    font-family: candara;
+    font-size: 45px;
+    color: black;
+}
+
+.navBar{
+    height: 40%;
+    width: 100%;
+    background-color: black;
+    margin: 0 auto;
+    text-align: center;
+    text-color: white;
+    white-space: nowrap; 
+
+
+}
+
+.navBar ul{
+    margin: 0;
+    padding: 0;
+
+}
+
+.navBar li{
+    list-style: none; /*Removes bullet points from Nav bar*/
+    display: inline-block;
+}
+
+.navBar a{
+    text-decoration: none; 
+    float: left; 
+    display: block;
+    padding: 10px 15px; 
+    margin: 0;
+    font-family: Candara;
+    color: white;
+    font-size: 45px;
+    font-weight: bold;
+}
+
+
+.navBar1{
+    height: 50px;
+    width: 100%;
+    background-color: #696D6E;
+    margin: 0 auto;
+    text-align: center;
+    text-color: white;
+    white-space: nowrap; 
+}
+
+.navBar1 ul{
+    margin: 0;
+    padding: 0;
+
+}
+
+.navBar1 li{
+    list-style: none; /*Removes bullet points from Nav bar*/
+    display: inline-block;
+    text-align: center;
+}
+
+.navBar1 a{
+    text-decoration: none; 
+
+    display: block;
+    padding: 10px 15px; 
+    margin: 0;
+    font-family: Candara;
+    color: white;
+    font-size: 22px;
+
+}
+
+.navBar1 a:hover{
+    color: white; /*When Nav bar links are hovered over they change colour and have a 1 pixel thick black stroke*/
+    text-shadow:
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+    background-color: white;
+
+}
