@@ -16,7 +16,7 @@ import stores.Result;
 public class ResultModel {
     DatabaseConnection db = new DatabaseConnection();
     
-    public java.util.LinkedList<Result> getResultsForDates(Date date1, Date date2) throws SQLException {
+    public java.util.LinkedList<Result> getResultsForDates(Date date1, Date date2) {
         java.util.LinkedList<Result> results = new java.util.LinkedList<>();
         
         String query = "SELECT * FROM student_quiz WHERE (Date_Completed BETWEEN ? AND ?)";
@@ -38,7 +38,8 @@ public class ResultModel {
                     results.add(res);
                 }
             }
-            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
         return results;
     }

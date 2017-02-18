@@ -25,7 +25,7 @@
 
         <div class="navBar1">
             <ul>
-                <li><a> STAFF PORTAL - Welcome Rachel </a></li>
+                <li><a> STAFF PORTAL - Welcome Rachel (insert name)</a></li>
             </ul>
         </div>
 

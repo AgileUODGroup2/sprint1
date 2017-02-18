@@ -7,12 +7,9 @@ package servlets;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -39,6 +36,24 @@ public class DateSearch extends HttpServlet {
         String year1 = request.getParameter("year1");
         String year2 = request.getParameter("year2");
         
+        if (day1.equals("31") || day2.equals("31")) {
+            String[] months = {"4","6","9","11"};
+            for (String month : months) {
+                if (month.equals(month1)) {
+                    day1 = "30";
+                }
+                if (month.equals(month2)) {
+                    day2 = "30";
+                }
+            }
+        }
+        if ((month1.equals("2") && (day1.equals("31") || day1.equals("30")))) {
+            day1 = "29";
+        }
+        if ((month2.equals("2") && (day2.equals("31") || day2.equals("30")))) {
+            day2 = "29";
+        }
+        
         String stringDate1 = year1 + "-" + month1 + "-" + day1;
         String stringDate2 = year2 + "-" + month2 + "-" + day2;
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
@@ -58,8 +73,7 @@ public class DateSearch extends HttpServlet {
         
         
         ResultModel rm = new ResultModel();
-        java.util.LinkedList<Result> resultList = null;
-        
+        java.util.LinkedList<Result> resultList;
         resultList = rm.getResultsForDates(date1, date2);
         
         RequestDispatcher rd = request.getRequestDispatcher("/quizResults.jsp");
