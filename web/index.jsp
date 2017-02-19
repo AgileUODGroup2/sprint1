@@ -11,7 +11,7 @@
    <h1>Login </h1>
    <br>
                
-                <form method="POST"  action="LoginCheck.jsp">
+                <form method="POST"  action="login">
                     <ul>
                         <br>
                         <li>User Name <input type="text" name="username"></li>
@@ -19,7 +19,7 @@
 
                     </ul>
                     <br>
-                    <input type="submit" value="login" id="button"> 
+                    <input type="submit" value="login" id="button" action="login"> 
                 </form>
 
 
