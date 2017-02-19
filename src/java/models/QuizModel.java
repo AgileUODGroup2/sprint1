@@ -20,21 +20,20 @@ import stores.Quiz;
 public class QuizModel {
     DatabaseConnection db;
 
-public void createQuiz(int quizID, int moduleID, String staffName, String dateCreated, String quizName ){
+public void createQuiz(String moduleID, String staffName, String dateCreated, String quizName,String available ){
         
     try{
         db = new DatabaseConnection();
         Connection conn = db.connectToDatabase();
         
         String query = "INSERT INTO quiz (Quiz_ID, Module_ID, Staff_Name, Date_Created, Quiz_Name)"+"values(?,?,?,?,?)";
-        System.out.println("Result: "+quizID+moduleID+staffName+dateCreated+quizName);
+        System.out.println("Result: "+moduleID+staffName+dateCreated+quizName);
         PreparedStatement preparedStmt = conn.prepareStatement(query);
-        preparedStmt.setInt(1,quizID);
-        preparedStmt.setInt(2, moduleID);
+        preparedStmt.setString(2, moduleID);
         preparedStmt.setString(3,staffName);
         preparedStmt.setString(4,dateCreated);
         preparedStmt.setString(5,quizName);
-        
+        preparedStmt.setString(6,available);
         preparedStmt.executeUpdate();
         conn.close();
         }
@@ -51,7 +50,7 @@ public java.util.LinkedList<Quiz> getQuizzes(String query) {
     java.util.LinkedList<Quiz> quizzes = new java.util.LinkedList<>();
     try (Connection con = db.connectToDatabase();
         PreparedStatement ps = con.prepareStatement(query)) {
-        ps.setDate(1, staffname);
+        //ps.setDate(1, staffname);
         try (ResultSet rs = ps.executeQuery()) {
             while(rs.next()) {
                 Quiz q = new Quiz();

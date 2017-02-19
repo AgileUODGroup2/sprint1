@@ -19,9 +19,9 @@ import models.QuizModel;
  *
  * @author erincoey
  */
-@WebServlet(name ="createQuiz", urlPatterns = {"/createQuiz"})
+@WebServlet(name ="addQuestions", urlPatterns = {"/addQuestions"})
 
-public class createQuiz extends HttpServlet {
+public class addQuestions extends HttpServlet {
     
     public void init(ServletConfig config) throws ServletException {
         // TODO Auto-generated method stub
@@ -32,29 +32,31 @@ public class createQuiz extends HttpServlet {
 protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-    String quizName = request.getParameter("quizName");
-    String moduleID = request.getParameter("moduleId");
-    String staffName = request.getParameter("staffName");
-    String dateCreated = request.getParameter("date");
-    String available = request.getParameter("available");
-    String numOfQuestions = request.getParameter("numOfQuestions");
-    
-//    int quizIDnew = Integer.parseInt(quizID);
-    //int moduleIDnew = Integer.parseInt(moduleID);
-  
-    
-    System.out.println("Result: "+moduleID+staffName+dateCreated+quizName+available+numOfQuestions);
-    QuizModel quiz = new QuizModel();
-    quiz.createQuiz(moduleID,staffName,dateCreated,quizName,available);
-
-    response.sendRedirect("/AC31007Quiz/addQuestions.jsp");
+        String submit = request.getParameter("submit");
+        String save = request.getParameter("save");
+        String addQuestion = request.getParameter("addQuestion");
+        
+        if (submit!=null)
+        {
+            response.sendRedirect("/AC31007Quiz/staffPortal.jsp");
+        }
+        else if (save!=null)
+        {
+            response.sendRedirect("/AC31007Quiz/staffPortal.jsp");
+        }
+        else if (addQuestion!=null)
+        {
+            
+            response.sendRedirect("/AC31007Quiz/addQuestions.jsp");
+        }
     
 }
 
 @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        RequestDispatcher rd=request.getRequestDispatcher("createAQuiz.jsp");
+        RequestDispatcher rd=request.getRequestDispatcher("addQuestions.jsp");
 	    rd.forward(request,response);
     }
 }
+    

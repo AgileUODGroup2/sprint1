@@ -19,6 +19,7 @@
         <h2> Quiz Details: </h2>
         
         <%
+            session.setAttribute( "newQuiz", null );
             String date = new SimpleDateFormat("YYYY-MM-dd").format(new Date()); 
             
         %>
@@ -26,9 +27,6 @@
 		<form method="post"  action="createQuiz">
                         <label for = "quizName">Quiz Name: </label>
                         <input type="text" name="quizName" id="quizName">
-                        <br>
-                        <label for = "quizId">Quiz ID: </label>
-                        <input type="text" name="quizId" id="quizId" style="width:30%;">
                         <br>
 			<label for = "moduleId">Module ID: </label>
                         <input type="text" name="moduleId" id="moduleId" style="width:30%;">
@@ -40,8 +38,8 @@
                         <input type="text" name="date" id="date" value="<%=date%>"><br>
                         <br>
                         <label for = "available">Available: </label>
-                        <input type="radio" name="available" value="yes"> Yes
-                        <input type="radio" name="available" value="no"> No
+                        <input type="radio" name="available" value="Live"> Yes
+                        <input type="radio" name="available" value="Unfinished"> No
                         
                         <label for = "numOfQuestions">Number of Questions: </label>
                         <input type="text" name="numOfQuestions" id="numOfQuestions"><br>
