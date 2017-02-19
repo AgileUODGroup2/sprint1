@@ -29,6 +29,13 @@
             </ul>
         </div>
 
-
+<a href="createQuiz.jsp"><button>Create Quiz</button></a>
+        <br>
+        <a href="completedQuizzes.jsp"><button>Completed Quizzes</button></a>
+          <br>
+        <a href="liveQuizzes.jsp"><button>Live Quizzes</button></a>
+            <br>
+            <a href="unfinishedQuizzes.jsp"><button>Unfinished Quizzes</button></a>
+              <br>
     </body>
 </html>
