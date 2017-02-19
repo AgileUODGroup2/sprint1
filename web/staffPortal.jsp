@@ -38,6 +38,7 @@
         <br>
         <a href="unfinishedQuiz"><button>Unfinished Quizzes</button></a>
         <br>
+        <a href="logout.jsp"><button>Log Out</button></a>
     
         <% LoggedIn lg =(LoggedIn) session.getAttribute("LoggedIn"); %>
        

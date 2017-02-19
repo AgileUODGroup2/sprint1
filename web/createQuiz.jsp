@@ -19,5 +19,6 @@
             LoggedIn lg =(LoggedIn) session.getAttribute("LoggedIn");
             %>
        <h2> Hey <%=lg.getUsername()%>, this is your profile! </h2> 
+       
     </body>
 </html>
