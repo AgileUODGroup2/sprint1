@@ -92,7 +92,7 @@ public class login extends HttpServlet {
     }
     else
     {
-            response.sendRedirect("failed.jsp");
+            response.sendRedirect("failedLogin");
     }
     }
     

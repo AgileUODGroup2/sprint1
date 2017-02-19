@@ -12,6 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>access denied!!!!!!!!!!!!!!</h1>
+        <h1>Access denied!!</h1>
     </body>
 </html>

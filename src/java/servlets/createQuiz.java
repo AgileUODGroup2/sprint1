@@ -54,7 +54,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
 @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        RequestDispatcher rd=request.getRequestDispatcher("createAQuiz.jsp");
+        RequestDispatcher rd=request.getRequestDispatcher("createQuiz.jsp");
 	    rd.forward(request,response);
     }
 }
