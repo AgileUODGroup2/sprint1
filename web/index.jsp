@@ -6,7 +6,7 @@
 
 <!DOCTYPE html>
 <html>
-  <body bgcolor=red>
+  <body bgcolor=#9BD5E8>
 
    <h1>Login </h1>
    <br>
