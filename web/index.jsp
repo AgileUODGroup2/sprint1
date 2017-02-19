@@ -6,7 +6,7 @@
 
 <!DOCTYPE html>
 <html>
-  <body bgcolor="9BD5E8">
+  <body bgcolor=red>
 
    <h1>Login </h1>
    <br>
@@ -22,6 +22,6 @@
                     <input type="submit" value="login" id="button" action="login"> 
                 </form>
 
-
+                
 </html>
 </body>
