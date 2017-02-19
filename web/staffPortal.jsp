@@ -32,11 +32,11 @@
 
         <a href="createQuiz.jsp"><button>Create Quiz</button></a>
         <br>
-        <a href="completedQuizzes.jsp"><button>Completed Quizzes</button></a>
+        <a href="completedQuiz"><button>Completed Quizzes</button></a>
         <br>
-        <a href="liveQuizzes.jsp"><button>Live Quizzes</button></a>
+        <a href="liveQuiz"><button>Live Quizzes</button></a>
         <br>
-        <a href="unfinishedQuizzes.jsp"><button>Unfinished Quizzes</button></a>
+        <a href="unfinishedQuiz"><button>Unfinished Quizzes</button></a>
         <br>
     
         <% LoggedIn lg =(LoggedIn) session.getAttribute("LoggedIn"); %>
