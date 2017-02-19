@@ -4,8 +4,7 @@
     Author     : erincoey
 --%>
 
-<%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.util.Date"%>
+<%@page import="stores.LoggedIn"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -15,40 +14,10 @@
         <title>Create A Quiz</title>
     </head>
     <body>
-        <h1> Would you like to create a quiz?</h1>
-        <h2> Quiz Details: </h2>
-        
-        <%
-            session.setAttribute( "newQuiz", null );
-            String date = new SimpleDateFormat("YYYY-MM-dd").format(new Date()); 
-            
-        %>
-        <div class ="main">
-		<form method="post"  action="createQuiz">
-                        <label for = "quizName">Quiz Name: </label>
-                        <input type="text" name="quizName" id="quizName">
-                        <br>
-			<label for = "moduleId">Module ID: </label>
-                        <input type="text" name="moduleId" id="moduleId" style="width:30%;">
-                        <br>
-			<label for = "staffName">Staff Name: </label>
-                        <input type="text" name="staffName" id="staffName" style="width:30%;">
-                        <br>
-                        <label for = "date">Date: </label>
-                        <input type="text" name="date" id="date" value="<%=date%>"><br>
-                        <br>
-                        <label for = "available">Available: </label>
-                        <input type="radio" name="available" value="Live"> Yes
-                        <input type="radio" name="available" value="Unfinished"> No
-                        
-                        <label for = "numOfQuestions">Number of Questions: </label>
-                        <input type="text" name="numOfQuestions" id="numOfQuestions"><br>
-                        <br><br><br>
-                        
-                        
-                        <input type="submit" value="Submit" >  
-                </form>
-			</div>
-        
+        <h1>Hello World!</h1>
+         <%
+            LoggedIn lg =(LoggedIn) session.getAttribute("LoggedIn");
+            %>
+       <h2> Hey <%=lg.getUsername()%>, this is your profile! </h2> 
     </body>
 </html>

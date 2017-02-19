@@ -4,6 +4,7 @@
     Author     : daniellewilliams
 --%>
 
+<%@page import="stores.LoggedIn"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -29,13 +30,21 @@
             </ul>
         </div>
 
-<a href="createQuiz"><button>Create Quiz</button></a>
+        <a href="createQuiz.jsp"><button>Create Quiz</button></a>
         <br>
-        <a href="completedQuiz"><button>Completed Quizzes</button></a>
-          <br>
-        <a href="liveQuiz"><button>Live Quizzes</button></a>
-            <br>
-            <a href="unfinishedQuiz"><button>Unfinished Quizzes</button></a>
-              <br>
+        <a href="completedQuizzes.jsp"><button>Completed Quizzes</button></a>
+        <br>
+        <a href="liveQuizzes.jsp"><button>Live Quizzes</button></a>
+        <br>
+        <a href="unfinishedQuizzes.jsp"><button>Unfinished Quizzes</button></a>
+        <br>
+    
+        <% LoggedIn lg =(LoggedIn) session.getAttribute("LoggedIn"); %>
+       
+        <h2> Hey <%=lg.getUsername()%>, this is your profile! </h2>  
+        
+        <%lg.getUsername(); 
+                
+         System.out.println(lg.getUsername());%>
     </body>
 </html>
