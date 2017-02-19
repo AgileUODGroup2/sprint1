@@ -4,6 +4,7 @@
     Author     : daniellewilliams
 --%>
 
+<%@page import="stores.LoggedIn"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,5 +14,9 @@
     </head>
     <body>
         <h1>Hello World!</h1>
+         <%
+            LoggedIn lg =(LoggedIn) session.getAttribute("LoggedIn");
+            %>
+       <h2> Hey <%=lg.getUsername()%>, this is your profile! </h2> 
     </body>
 </html>
