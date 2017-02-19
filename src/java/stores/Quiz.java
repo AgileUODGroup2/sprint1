@@ -16,8 +16,7 @@ public class Quiz {
     String staffName;
     Date dateCreated;
     String quizName;
-    boolean available;
-    boolean completed;
+    String status;
     int numberOfQuestions;
     
     public void setQuizID(int quizID) {
@@ -35,11 +34,8 @@ public class Quiz {
     public void setQuizName(String quizName) {
         this.quizName = quizName;
     }
-    public void setAvailable(boolean available) {
-        this.available = available;
-    }
-    public void setCompleted(boolean completed) {
-        this.completed = completed;
+    public void setStatus(String status) {
+        this.status = status;
     }
     public void setNumberOfQuestions(int numberOfQuestions) {
         this.numberOfQuestions = numberOfQuestions;
@@ -48,25 +44,22 @@ public class Quiz {
     public int getQuizID() {
         return quizID;
     }
-    public String setModuleID() {
+    public String getModuleID() {
         return moduleID;
     }
-    public String setStaffName() {
+    public String getStaffName() {
         return staffName;
     }
-    public Date setDateCreated() {
+    public Date getDateCreated() {
         return dateCreated;
     }
-    public String setQuizName() {
+    public String getQuizName() {
         return quizName;
     }
-    public boolean setAvailable() {
-        return available;
+    public String getStatus() {
+        return status;
     }
-    public boolean setCompleted() {
-        return completed;
-    }
-    public int setNumberOfQuestions() {
+    public int getNumberOfQuestions() {
         return numberOfQuestions;
     }
 }
