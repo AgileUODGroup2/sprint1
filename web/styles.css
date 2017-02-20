@@ -10,6 +10,7 @@ and open the template in the editor.
 
 h1{
     font-family: candara;
+    font-family: segoe marker;
     font-size: 130px;
     color: White;
     text-align: center;
@@ -30,9 +31,9 @@ h4{
 
 
 .navBar{
-    height: 40%;
+    height: 90px;;
     width: 100%;
-    background-color: black;
+    background-color: #042356;
     margin: 0 auto;
     text-align: center;
     text-color: white;
@@ -58,9 +59,9 @@ h4{
     display: block;
     padding: 10px 15px; 
     margin: 0;
-    font-family: Candara;
+    font-family: segoe marker;
     color: white;
-    font-size: 45px;
+    font-size: 55px;
     font-weight: bold;
 }
 
@@ -68,7 +69,7 @@ h4{
 .navBar1{
     height: 50px;
     width: 100%;
-    background-color: #696D6E;
+    background-color: #25619f;
     margin: 0 auto;
     text-align: center;
     text-color: white;
@@ -94,6 +95,7 @@ h4{
     padding: 10px 15px; 
     margin: 0;
     font-family: Candara;
+    font-weight: bold;
     color: white;
     font-size: 22px;
 
@@ -182,15 +184,16 @@ input[type=submit] {
 span { display: block; margin: 0 0 3px; font-size: 1.2em; font-weight: bold; }
 
 button {
-    background-color: black;
+    background-color: #042356;
     border: none;
     color: white;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
-    display: block;
+    display: inline-block;
     font-size: 16px;
 }
+
 
 div1{
     position: relative;
@@ -207,5 +210,27 @@ div1{
    top: -1400px;
    left: 130px;
 }
+
+#sec-button{
+      background-color: #25619f;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+#third-button{
+    background-color: #b71010;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+   display:inline-block;
+    font-size: 16px;
+}
+
 
 
