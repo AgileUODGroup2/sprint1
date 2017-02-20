@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpSession;
+import stores.LoggedIn;
 
 /**
  * Created by cmckillop on 17/02/2017.
@@ -62,8 +64,15 @@ public class DisplayResult extends HttpServlet {
 
         ResultModel rm = new ResultModel();
 
-        int matricNo = 1; // TEMP - GET THIS FROM SESSION VARIABLE!
-
+        
+        //HttpSession session = request.getSession(true);
+        //LoggedIn lg =(LoggedIn)session.getAttribute("LoggedIn");
+        
+        LoggedIn lg = new LoggedIn();
+        
+        lg.setUsername("1"); // TEMP - GET THIS FROM SESSION VARIABLE!
+        
+        int matricNo = Integer.parseInt(lg.getUsername());
         Result quizResult = rm.getQuizResult(matricNo, quizID);
 
         request.setAttribute("Result", quizResult);

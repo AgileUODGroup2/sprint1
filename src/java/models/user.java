@@ -53,6 +53,84 @@ public class user {
          }
          return null;
     }
+    
+    public void updateFirstName(boolean isStaff, int userID, String firstName){
+        
+        DatabaseConnection db = new DatabaseConnection();
+        
+        String query = "";
+        
+        if(isStaff) {
+            query = "UPDATE staff SET First_Name = ? WHERE Staff_ID = ?";
+        } else {
+            query = "UPDATE student SET First_Name = ? WHERE Matriculation_Number = ?";
+        }
+        
+        try (Connection con = db.connectToDatabase(); ) {
+
+            PreparedStatement ps = con.prepareStatement(query);
+
+            ps.setString(1, firstName);
+            ps.setInt(2, userID);
+            
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.print(e.getMessage());
+        }
+    }
+    
+    public void updateLastName(boolean isStaff, int userID, String lastName){
+        
+        DatabaseConnection db = new DatabaseConnection();
+        
+        String query = "";
+        
+        if(isStaff) {
+            query = "UPDATE staff SET Last_Name = ? WHERE Staff_ID = ?";
+        } else {
+            query = "UPDATE student SET Last_Name = ? WHERE Matriculation_Number = ?";
+        }
+        
+        try (Connection con = db.connectToDatabase(); ) {
+
+            PreparedStatement ps = con.prepareStatement(query);
+
+            ps.setString(1, lastName);
+            ps.setInt(2, userID);
+            
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.print(e.getMessage());
+        }
+    }
+    
+    public void updatePassword(boolean isStaff, int userID, String password){
+        
+        DatabaseConnection db = new DatabaseConnection();
+        
+        String query = "";
+        
+        if(isStaff) {
+            query = "UPDATE staff SET Password = ? WHERE Staff_ID = ?";
+        } else {
+            query = "UPDATE student SET Password = ? WHERE Matriculation_Number = ?";
+        }
+        
+        try (Connection con = db.connectToDatabase(); ) {
+
+            PreparedStatement ps = con.prepareStatement(query);
+
+            ps.setString(1, password);
+            ps.setInt(2, userID);
+            
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.print(e.getMessage());
+        }
+    }
 
     public String[] getStudentDetails(int matriculationNo) {
 
