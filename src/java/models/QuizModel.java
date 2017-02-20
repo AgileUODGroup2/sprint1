@@ -5,6 +5,7 @@
  */
 package models;
 
+import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import lib.database.DatabaseConnection;
@@ -12,6 +13,8 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.servlet.http.HttpSession;
+import stores.LoggedIn;
 import stores.Quiz;
 
 /**
@@ -96,15 +99,13 @@ public void addQuestion()
     
 }
 
-public java.util.LinkedList<Quiz> getQuizzes(String query) {
-    // get staff name!!
-    // String staffname = ;
+public java.util.LinkedList<Quiz> getQuizzes(String query, int staffID) {
     
     db = new DatabaseConnection();
     java.util.LinkedList<Quiz> quizzes = new java.util.LinkedList<>();
     try (Connection con = db.connectToDatabase();
         PreparedStatement ps = con.prepareStatement(query)) {
-        //ps.setDate(1, staffname);
+        ps.setInt(1, staffID);
         try (ResultSet rs = ps.executeQuery()) {
             while(rs.next()) {
                 Quiz q = new Quiz();
@@ -122,16 +123,16 @@ public java.util.LinkedList<Quiz> getQuizzes(String query) {
     return quizzes;
 }
 
-public java.util.LinkedList<Quiz> getUnfinishedQuizzes() {
-    String query = "SELECT * FROM unfinishedquiz WHERE Staff_Name = ?";
-    return getQuizzes(query);
+public java.util.LinkedList<Quiz> getUnfinishedQuizzes(int staffID) {
+    String query = "SELECT * FROM unfinishedquiz WHERE Staff_ID = ?";
+    return getQuizzes(query, staffID);
 }
-public java.util.LinkedList<Quiz> getLiveQuizzes() {
-    String query = "SELECT * FROM livequiz WHERE Staff_Name = ?";
-    return getQuizzes(query);
+public java.util.LinkedList<Quiz> getLiveQuizzes(int staffID) {
+    String query = "SELECT * FROM livequiz WHERE Staff_ID = ?";
+    return getQuizzes(query, staffID);
 }
-public java.util.LinkedList<Quiz> getCompletedQuizzes() {
-    String query = "SELECT * FROM completedquiz WHERE Staff_Name = ?";
-    return getQuizzes(query);
+public java.util.LinkedList<Quiz> getCompletedQuizzes(int staffID) {
+    String query = "SELECT * FROM completedquiz WHERE Staff_ID = ?";
+    return getQuizzes(query, staffID);
 }
 }
