@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import models.user;
 
 
@@ -46,7 +47,8 @@ public class login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
+        HttpSession sess = request.getSession(true);
         RequestDispatcher rd=request.getRequestDispatcher("index.jsp");
 	rd.forward(request,response);
         
@@ -66,7 +68,6 @@ public class login extends HttpServlet {
         
     String username = request.getParameter("username");
     String password = request.getParameter("password");
-
     
     user us = new user();
     String result = us.login(username, password);
