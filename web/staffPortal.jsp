@@ -29,6 +29,9 @@
             </ul>
         </div>
 
+  <form method="get" action="staffModules.jsp">
+            <button type="submit">My Modules</button>
+        </form>
 
     </body>
 </html>
