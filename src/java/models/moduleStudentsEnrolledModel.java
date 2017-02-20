@@ -22,16 +22,17 @@ import stores.moduleStudentsEnrolledStore;
  */
 public class moduleStudentsEnrolledModel {
     
-    DatabaseConnection db = new DatabaseConnection();
+    
   
    public String getStudentsEnrolled(int Module_ID){
         
     
   try{
+      DatabaseConnection db = new DatabaseConnection();
         db = new DatabaseConnection();
         Connection conn = db.connectToDatabase();
         Statement st = conn.createStatement();
-        Statement a = conn.createStatement();
+ 
         String query = "SELECT * FROM student_enrolment WHERE Module_ID = 210101";  //change to session variable
         //LinkedList students = new LinkedList();    
         ResultSet rs = st.executeQuery(query);
@@ -39,6 +40,8 @@ public class moduleStudentsEnrolledModel {
          while (rs.next())               
             {
                int numColumns = rs.getMetaData().getColumnCount();
+              
+               
             for ( int i = 1 ; i <= numColumns ; i++ ) {
                 
                 
@@ -46,14 +49,15 @@ public class moduleStudentsEnrolledModel {
                     System.out.println("Matriculation_Number " + rs.getInt(i));
                      int Matriculation_Number= rs.getInt("Matriculation_Number");
                     result = Matriculation_Number + " " ;
-                    
-                    
+      
                 }
                 else{
+                    Module_ID = rs.getInt("Module_ID");
                     System.out.println("Module_ID " + rs.getInt(i)); 
                     result = Module_ID + " " ;
                     
                 }
+              
                System.out.println("Result "+ result);   
             
             /*    
