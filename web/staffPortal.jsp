@@ -12,7 +12,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title> Staff Portal </title>
         <link rel="stylesheet" type="text/css" href="styles.css">
-
+        
+        <% LoggedIn lg =(LoggedIn) session.getAttribute("LoggedIn"); %>
+        
     </head>
     <body bgcolor="9BD5E8">
 
@@ -26,7 +28,7 @@
 
         <div class="navBar1">
             <ul>
-                <li><a> STAFF PORTAL - Welcome Rachel (insert name)</a></li>
+                <li><a> STAFF PORTAL - Welcome <%=lg.getFirstName()%>!</a></li>
             </ul>
         </div>
 
@@ -39,13 +41,11 @@
         <a href="unfinishedQuiz"><button>Unfinished Quizzes</button></a>
         <br>
         <a href="logout.jsp"><button>Log Out</button></a>
-    
-        <% LoggedIn lg =(LoggedIn) session.getAttribute("LoggedIn"); %>
        
-        <h2> Hey <%=lg.getUsername()%>, this is your profile! </h2>  
+        <h2>Profile</h2>
+        <h4>Staff ID: </h4><p><%=lg.getUsername()%><p>
+        <h4>First Name: </h4><p><%=lg.getFirstName()%></p>
+        <h4>Last Name: </h4><p><%=lg.getLastName()%></p>
         
-        <%lg.getUsername(); 
-                
-         System.out.println(lg.getUsername());%>
     </body>
 </html>

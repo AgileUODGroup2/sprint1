@@ -80,4 +80,8 @@ public java.util.LinkedList<Quiz> getCompletedQuizzes() {
     String query = "SELECT * FROM completedquiz WHERE Staff_Name = ?";
     return getQuizzes(query);
 }
+public java.util.LinkedList<Quiz> getQuiz(int quizID) {
+    String query = "SELECT * FROM quiz WHERE Quiz_ID = " + quizID;
+    return getQuizzes(query);
+}
 }

@@ -5,3 +5,4 @@
 .idea/dataSources.xml
 
 *.iml
+/dist/
