@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.user;
-
+import stores.LoggedIn;
 
 /**
  *
@@ -52,6 +52,8 @@ public class login extends HttpServlet {
         RequestDispatcher rd=request.getRequestDispatcher("index.jsp");
 	rd.forward(request,response);
         
+     
+        
     }
 
     /**
@@ -68,6 +70,15 @@ public class login extends HttpServlet {
         
     String username = request.getParameter("username");
     String password = request.getParameter("password");
+    System.out.println(username);
+    HttpSession session = request.getSession();
+    LoggedIn lg= new LoggedIn();
+    lg.setLoggedin();
+    lg.setUsername(username);
+    
+    System.out.println(lg.getUsername());
+    
+    session.setAttribute("LoggedIn", lg);
     
     user us = new user();
     String result = us.login(username, password);
@@ -82,7 +93,7 @@ public class login extends HttpServlet {
     }
     else
     {
-            response.sendRedirect("failed.jsp");
+            response.sendRedirect("failedLogin");
     }
     }
     
