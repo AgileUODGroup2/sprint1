@@ -30,7 +30,7 @@
             </ul>
         </div>
 
-        <a href="createQuiz.jsp"><button>Create Quiz</button></a>
+        <a href="createQuiz"><button>Create Quiz</button></a>
         <br>
         <a href="completedQuiz"><button>Completed Quizzes</button></a>
         <br>
