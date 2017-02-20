@@ -43,4 +43,56 @@ public class ResultModel {
         }
         return results;
     }
+    
+    public java.util.LinkedList<Result> getResultsForAllModules(int StaffID) {
+         
+          java.util.LinkedList<Result> results = new java.util.LinkedList<>();
+          
+          String query = "SELECT * FROM Student_Quiz" +
+                         "WHERE Quiz_ID=(" +
+                         "    SELECT Quiz_ID FROM Quiz" +
+                         "    WHERE Quiz_ID = (" +
+                         "    	SELECT Quiz_ID FROM Quiz" +
+                         "        WHERE Module_ID=(" +
+                         "      		SELECT Module_ID FROM Staff_Enrolment" +
+                         "      		WHERE Staff_ID = ?" +
+                         "        )" +
+                         "    )" +
+                         ")";
+          
+          try {
+               
+               DatabaseConnection dConn = new DatabaseConnection();
+               
+               try (Connection conn = dConn.connectToDatabase()) {
+                    
+                    PreparedStatement preparedStmt = conn.prepareStatement(query);
+                    preparedStmt.setInt(1, StaffID);
+                    preparedStmt.executeUpdate();
+                    
+                    try (ResultSet set = preparedStmt.executeQuery()) {
+                    
+                         while(set.next()) {
+                              
+                              Result res = new Result();
+                              res.setMatricNo(set.getInt("Matriculation_Number"));
+                              res.setQuizID(set.getInt("Quiz_ID"));
+                              res.setCompleted(set.getBoolean("Has_Completed"));
+                              res.setAttempts(set.getInt("Attempted_Count"));
+                              res.setScore(set.getInt("Score"));
+                              res.setDate(set.getDate("Date_Completed"));
+                              results.add(res);
+                              
+                         }
+                    }
+               }
+               
+          } catch(SQLException err) {
+               
+                    System.out.println(err.getMessage());
+                    
+          }
+          
+          return results;
+    }
 }
