@@ -6,9 +6,10 @@
 
 <!DOCTYPE html>
 <html>
-  <body bgcolor=#9BD5E8>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+  <body bgcolor=#042356>
 
-   <h1>Login </h1>
+   <h1>Quiz Master </h1>
    <br>
                
                 <form method="POST"  action="login">
