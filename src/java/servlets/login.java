@@ -7,11 +7,15 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import models.user;
+import stores.LoggedIn;
 
 /**
  *
@@ -29,22 +33,7 @@ public class login extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet login</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>You have successfully logged into " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -58,8 +47,13 @@ public class login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        HttpSession sess = request.getSession(true);
+        RequestDispatcher rd=request.getRequestDispatcher("index.jsp");
+	rd.forward(request,response);
         
-        processRequest(request, response);
+     
+        
     }
 
     /**
@@ -73,9 +67,36 @@ public class login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+    String username = request.getParameter("username");
+    String password = request.getParameter("password");
+    System.out.println(username);
+    HttpSession session = request.getSession();
+    LoggedIn lg= new LoggedIn();
+    lg.setLoggedin();
+    lg.setUsername(username);
+    
+    System.out.println(lg.getUsername());
+    
+    session.setAttribute("LoggedIn", lg);
+    
+    user us = new user();
+    String result = us.login(username, password);
+    System.out.println("Here is the result: "+result);
+    if (result.equals ("Staff"))
+    {
+        response.sendRedirect("staffPortal.jsp");
     }
-
+    else if (result.equals ("Student"))
+    {
+        response.sendRedirect("studentPortal.jsp");
+    }
+    else
+    {
+            response.sendRedirect("failedLogin");
+    }
+    }
+    
     /**
      * Returns a short description of the servlet.
      *

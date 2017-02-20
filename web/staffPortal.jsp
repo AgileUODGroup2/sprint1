@@ -4,13 +4,15 @@
     Author     : daniellewilliams
 --%>
 
+<%@page import="stores.LoggedIn"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title> Staff Portal </title>
         <link rel="stylesheet" type="text/css" href="styles.css">
+        <title> Staff Portal </title>
+        
 
     </head>
     <body bgcolor="9BD5E8">
@@ -33,5 +35,22 @@
             <button type="submit">My Modules</button>
         </form>
 
+        <a href="createQuiz.jsp"><button>Create Quiz</button></a>
+        <br>
+        <a href="completedQuiz"><button>Completed Quizzes</button></a>
+        <br>
+        <a href="liveQuiz"><button>Live Quizzes</button></a>
+        <br>
+        <a href="unfinishedQuiz"><button>Unfinished Quizzes</button></a>
+        <br>
+        <a href="logout.jsp"><button>Log Out</button></a>
+    
+        <% LoggedIn lg =(LoggedIn) session.getAttribute("LoggedIn"); %>
+       
+        <h2> Hey <%=lg.getUsername()%>, this is your profile! </h2>  
+        
+        <%lg.getUsername(); 
+                
+         System.out.println(lg.getUsername());%>
     </body>
 </html>
