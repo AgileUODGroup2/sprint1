@@ -8,9 +8,10 @@
 <html>
     <link rel="stylesheet" type="text/css" href="styles.css">
   <body bgcolor=#042356>
-
+      <br>
    <h1>Quiz Master </h1>
    <br>
+   <img src="logo123.png">
                
                 <form method="POST"  action="login">
                     <ul>
