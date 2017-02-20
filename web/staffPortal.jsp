@@ -10,8 +10,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title> Staff Portal </title>
         <link rel="stylesheet" type="text/css" href="styles.css">
+        <title> Staff Portal </title>
+        
+
         
         <% LoggedIn lg =(LoggedIn) session.getAttribute("LoggedIn"); %>
         
@@ -31,6 +33,10 @@
                 <li><a> STAFF PORTAL - Welcome <%=lg.getFirstName()%>!</a></li>
             </ul>
         </div>
+
+  <form method="get" action="staffModules.jsp">
+            <button type="submit">My Modules</button>
+        </form>
 
         <a href="createQuiz.jsp"><button>Create Quiz</button></a>
         <br>

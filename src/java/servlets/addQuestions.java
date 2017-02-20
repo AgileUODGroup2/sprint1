@@ -35,6 +35,15 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
         String submit = request.getParameter("submit");
         String save = request.getParameter("save");
         String addQuestion = request.getParameter("addQuestion");
+        String question = request.getParameter("question");
+        String answerA = request.getParameter("answerA");
+        String answerB = request.getParameter("answerB");
+        String answerC = request.getParameter("answerC");
+        String answerD = request.getParameter("answerD");
+        String correctAnswer = request.getParameter("correctAnswer");
+        String answerDesc = request.getParameter("answerDesc");
+        
+        System.out.println("Question: "+question+" "+answerA+" "+answerB+" "+answerC+ " " + answerD+ " " + correctAnswer + " "+ answerDesc);
         
         if (submit!=null)
         {

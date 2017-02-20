@@ -13,7 +13,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import models.QuizModel;
+import stores.Quiz;
 
 /**
  *
@@ -44,8 +46,15 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
   
     
     System.out.println("Result: "+moduleID+staffName+dateCreated+quizName+available+numOfQuestions);
-    QuizModel quiz = new QuizModel();
-    quiz.createQuiz(moduleID,staffName,dateCreated,quizName,available);
+    QuizModel quizModel = new QuizModel();
+    quizModel.createQuiz(moduleID,staffName,dateCreated,quizName,available);
+    int quizID = quizModel.getQuizId();
+
+    HttpSession session = request.getSession();
+    Quiz quiz= new Quiz();
+    quiz.setQuizID(quizID);
+    session.setAttribute("Quiz", quiz);
+    
 
     response.sendRedirect("/AC31007Quiz/addQuestions.jsp");
     
