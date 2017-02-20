@@ -85,10 +85,17 @@ public class login extends HttpServlet {
     System.out.println("Here is the result: "+result);
     if (result.equals ("Staff"))
     {
+        lg.setAsStaff(true);
+        String[] name = us.getStaffDetails(Integer.parseInt(username));
+        lg.setFirstName(name[0]);
+        lg.setLastName(name[1]);
         response.sendRedirect("staffPortal.jsp");
     }
     else if (result.equals ("Student"))
     {
+        String[] name = us.getStudentDetails(Integer.parseInt(username));
+        lg.setFirstName(name[0]);
+        lg.setLastName(name[1]);
         response.sendRedirect("studentPortal.jsp");
     }
     else
