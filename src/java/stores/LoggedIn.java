@@ -12,7 +12,10 @@ package stores;
 public class LoggedIn {
     
     boolean loggedin=false;
-    String username=null;    
+    String username=null;
+    boolean staff;
+    String firstName;
+    String lastName;
     
     public void LoggedIn(){
         
@@ -23,6 +26,33 @@ public class LoggedIn {
     }
     public String getUsername(){
         return username;
+    }
+    
+    public int getID(){
+        return Integer.parseInt(username);
+    }
+    
+    public void setAsStaff(boolean staff){
+        this.staff = staff;
+    }
+    
+    public boolean isStaff(){
+        return staff;
+    }
+    
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+    
+    public String getFirstName() {
+        return firstName;
+    }
+    
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+    public String getLastName() {
+        return lastName;
     }
     
     public void setLoggedin(){

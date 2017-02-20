@@ -4,6 +4,7 @@
     Author     : daniellewilliams
 --%>
 
+<%@page import="stores.LoggedIn"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -11,6 +12,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title> Student Portal </title>
         <link rel="stylesheet" type="text/css" href="styles.css">
+        
+        <%
+            LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
+        %>
 
     </head>
     <body bgcolor="9BD5E8">
@@ -25,10 +30,15 @@
 
         <div class="navBar1">
             <ul>
-                <li><a> STUDENT PORTAL - Welcome Student(insert name) </a></li>
+                <li><a> STUDENT PORTAL - Welcome <%=lg.getFirstName()%>!</a></li>
             </ul>
         </div>
-
+            
+            
+        <h2>Profile</h2>
+        <h4>Matriculation Number: </h4><p><%=lg.getUsername()%><p>
+        <h4>First Name: </h4><p><%=lg.getFirstName()%></p>
+        <h4>Last Name: </h4><p><%=lg.getLastName()%></p>
 
     </body>
 </html>
