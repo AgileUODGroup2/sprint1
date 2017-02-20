@@ -9,8 +9,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title> Staff Portal </title>
         <link rel="stylesheet" type="text/css" href="styles.css">
+        <title> Staff Portal </title>
+        
 
     </head>
     <body bgcolor="9BD5E8">
@@ -36,6 +37,8 @@
         <a href="liveQuizzes.jsp"><button>Live Quizzes</button></a>
             <br>
             <a href="unfinishedQuizzes.jsp"><button>Unfinished Quizzes</button></a>
+              <br>
+              <br>
               <br>
     </body>
 </html>
