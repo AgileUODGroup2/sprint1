@@ -68,6 +68,14 @@
     </select>
     <input type="submit" value="Search" />
 </form>
+    
+<% //Glen - Testing Display all quiz results %>
+<form method="POST" action="staffOrderByMatNo">
+               
+     <input type="submit" name="Order By Matriculation_Number" value="Submit">
+               
+</form>
+    
             <% }%>
             
             
