@@ -9,9 +9,10 @@ and open the template in the editor.
 */
 
 h1{
-    font-family: candara;
-    font-size: 45px;
-    color: black;
+    font-family: segoe marker;
+    font-size: 130px;
+    color: White;
+    text-align: center;
 }
 
 .navBar{
