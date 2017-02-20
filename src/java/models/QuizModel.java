@@ -135,4 +135,8 @@ public java.util.LinkedList<Quiz> getCompletedQuizzes(int staffID) {
     String query = "SELECT * FROM completedquiz WHERE Staff_ID = ?";
     return getQuizzes(query, staffID);
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 }
