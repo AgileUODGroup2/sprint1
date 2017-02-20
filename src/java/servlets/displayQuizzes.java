@@ -35,8 +35,7 @@ public class displayQuizzes extends HttpServlet {
     private void DisplayQuizzes(String type, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         LoggedIn user = (LoggedIn) session.getAttribute("LoggedIn");
-        //int staffID = user.getID();
-        int staffID = 1;
+        int staffID = user.getID();
         
         QuizModel qm = new QuizModel();
         java.util.LinkedList<Quiz> quizList = new java.util.LinkedList<Quiz>();
