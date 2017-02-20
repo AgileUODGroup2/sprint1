@@ -135,8 +135,5 @@ public java.util.LinkedList<Quiz> getCompletedQuizzes(int staffID) {
     String query = "SELECT * FROM completedquiz WHERE Staff_ID = ?";
     return getQuizzes(query, staffID);
 }
-public java.util.LinkedList<Quiz> getQuiz(int quizID) {
-    String query = "SELECT * FROM quiz WHERE Quiz_ID = " + quizID;
-    return getQuizzes(query);
-}
+
 }
