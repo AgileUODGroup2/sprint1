@@ -12,7 +12,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="styles.css">
-        <title> Staff Portal </title>
+        <title>Staff Portal </title>
         
 
         
@@ -56,6 +56,7 @@
         <h4>Staff ID: </h4><p><%=lg.getUsername()%><p>
         <h4>First Name: </h4><p><%=lg.getFirstName()%></p>
         <h4>Last Name: </h4><p><%=lg.getLastName()%></p>
+        <a href="editProfile.jsp">Edit Profile</a>
         
     </body>
 </html>
