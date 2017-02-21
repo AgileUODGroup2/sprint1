@@ -46,24 +46,24 @@ public class displayStudentQuizzes extends HttpServlet {
             case "completedQuizzes":
                 quizList = qm.getCompletedStudentQuizzes(staffID);
                 rd = request.getRequestDispatcher("/displayStudentQuizzes.jsp");
-                request.setAttribute("QuizType", "Completed Quizzes");
+                session.setAttribute("QuizType", "Completed Quizzes");
                 break;
             case "pendingdQuizzes":
                 quizList = qm.getPendingStudentQuizzes(staffID);
                 rd = request.getRequestDispatcher("/displayStudentQuizzes.jsp");
-                request.setAttribute("QuizType", "Pending Quizzes");
+                session.setAttribute("QuizType", "Pending Quizzes");
                 break;
             case "incompleteQuizzes":
                 quizList = qm.getIncompleteStudentQuizzes(staffID);
                 rd = request.getRequestDispatcher("/displayStudentQuizzes.jsp");
-                request.setAttribute("QuizType", "Incomplete Quizzes");
+                session.setAttribute("QuizType", "Incomplete Quizzes");
                 break;
             default:
                 rd = request.getRequestDispatcher("/index.jsp");
                 break;
         }
         
-        request.setAttribute("StudentQuizList", quizList);
+        session.setAttribute("StudentQuizList", quizList);
         rd.forward(request, response);
     }
 }

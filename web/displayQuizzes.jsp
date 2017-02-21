@@ -34,8 +34,22 @@
             <input type="submit" value="Filter by Module" />
             </select>
         </form>
+            
+        <%
+            if (type.equals("Completed Quizzes")) {
+        %>
+        <form method="GET" action="completedQuiz"><input type="submit" value="Reset" /></form>
+        <%
+            } else if (type.equals("Live Quizzes")) {
+        %>
         
-         <% java.util.LinkedList<Quiz> quizList = (java.util.LinkedList<Quiz>) request.getAttribute("QuizList");
+        <form method="GET" action="liveQuiz"><input type="submit" value="Reset" /></form>
+        
+        <%
+            } else {
+        %>
+        <form method="GET" action="unfinishedQuiz"><input type="submit" value="Reset" /></form>
+         <% }java.util.LinkedList<Quiz> quizList = (java.util.LinkedList<Quiz>) request.getAttribute("QuizList");
                 if (quizList != null) {
                     Iterator<Quiz> it = quizList.iterator();
                     while(it.hasNext()) {

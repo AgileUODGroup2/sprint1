@@ -47,6 +47,31 @@ public void createQuiz(String moduleID, String staffName, String dateCreated, St
         }
 }
 
+//Call this function to update Num_Of_Questions column 
+public void UpdateQuestionAmmount(int quizID){
+    db = new DatabaseConnection();
+        try (Connection conn = db.connectToDatabase()) {
+            
+            //Create and prepare query
+            String query =  "UPDATE Quiz " +
+                            "SET Num_Of_Questions=(" +
+                            "SELECT COUNT(*) FROM Question_Bank " +
+                            "WHERE Quiz.Quiz_ID = Question_Bank.Quiz_ID " +
+                            ")"+
+                            "WHERE Quiz_ID=?";
+            PreparedStatement preparedStmt = conn.prepareStatement(query);
+            
+            preparedStmt.setInt(1, quizID);
+            System.out.println(preparedStmt);
+            
+            //Execute Query
+            preparedStmt.executeUpdate();
+        }
+        catch(SQLException err){
+            System.out.println(err.getMessage());
+        }
+}
+
 public int getQuizId()
 {
     try{
@@ -135,15 +160,15 @@ public java.util.LinkedList<Quiz> getCompletedQuizzes(int staffID) {
 }
 
 public java.util.LinkedList<Quiz> getUnfinishedQuizzesMod(int staffID, String module) {
-    String query = "SELECT * FROM unfinishedquiz WHERE Module_ID ="+module+" AND Staff_ID = ?";
+    String query = "SELECT * FROM unfinishedquiz WHERE Module_ID ='"+module+"' AND Staff_ID = ?";
     return getQuizzes(query, staffID);
 }
 public java.util.LinkedList<Quiz> getLiveQuizzesMod(int staffID, String module) {
-    String query = "SELECT * FROM livequiz WHERE Module_ID ="+module+" AND Staff_ID = ?";
+    String query = "SELECT * FROM livequiz WHERE Module_ID ='"+module+"' AND Staff_ID = ?";
     return getQuizzes(query, staffID);
 }
 public java.util.LinkedList<Quiz> getCompletedQuizzesMod(int staffID, String module) {
-    String query = "SELECT * FROM completedquiz WHERE Module_ID ="+module+" AND Staff_ID = ?";
+    String query = "SELECT * FROM completedquiz WHERE Module_ID ='"+module+"' AND Staff_ID = ?";
     return getQuizzes(query, staffID);
 }
 
@@ -223,6 +248,19 @@ public java.util.LinkedList<StudentQuiz> getIncompleteStudentQuizzes(int matricN
 }
 public java.util.LinkedList<StudentQuiz> getPendingStudentQuizzes(int matricNo) {
     String query = "select * from studentpending where Matriculation_Number=? order by Module_ID";
+    return getStudentQuizzes(query, matricNo);
+}
+
+public java.util.LinkedList<StudentQuiz> getCompletedStudentQuizzesMod(int matricNo, String module) {
+    String query = "select * from studentcompleted where Module_ID = '"+module+"' AND Matriculation_Number=?";
+    return getStudentQuizzes(query, matricNo);
+}
+public java.util.LinkedList<StudentQuiz> getIncompleteStudentQuizzesMod(int matricNo, String module) {
+    String query = "select * from studentincomplete where Module_ID = '"+module+"' AND Matriculation_Number=?";
+    return getStudentQuizzes(query, matricNo);
+}
+public java.util.LinkedList<StudentQuiz> getPendingStudentQuizzesMod(int matricNo, String module) {
+    String query = "select * from studentpending where Module_ID = '"+module+"' AND Matriculation_Number=?";
     return getStudentQuizzes(query, matricNo);
 }
 
