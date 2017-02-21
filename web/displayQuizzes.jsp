@@ -13,10 +13,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+           <link rel="stylesheet" type="text/css" href="styles.css">
         <title>JSP Page</title>
     </head>
-    <body>
-        <h1><%String type = (String) session.getAttribute("QuizType");%><%=type%></h1>
+    <body bgcolor="d3dfeb">
+     
+        <h7><%String type = (String) session.getAttribute("QuizType");%><%=type%></h7>
         
         <%
             LoggedIn staff = (LoggedIn) session.getAttribute("LoggedIn");
