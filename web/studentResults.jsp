@@ -4,7 +4,7 @@
     Author     : daniellewilliams
 --%>
 
-<%@page import="stores.Result"%>
+<%@page import="stores.StudentResult"%>
 <%@page import="stores.Quiz"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -14,8 +14,10 @@
         <title>Student Results</title>
         
         <%
-            java.util.LinkedList<Result> quizResult = (java.util.LinkedList<Result>) request.getAttribute("Results");
+            java.util.LinkedList<StudentResult> quizResult = (java.util.LinkedList<StudentResult>) request.getAttribute("Results");
             Quiz quiz = (Quiz) request.getAttribute("Quiz");
+            
+            StudentResult studTest = quizResult.get(1);
         %>
         
     </head>
@@ -35,11 +37,11 @@
         <td>Date Completed</td>
         </tr>
         <tr>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
+        <td><%=studTest.getMatriculationNumber()%></td>
+        <td><%=studTest.getStudentName()%></td>
+        <td><%=studTest.getScore()%></td>
+        <td><%=studTest.getAttemptedCount()%></td>
+        <td><%=studTest.getDate()%></td>
         </tr>
         </tbody>
         </table>
