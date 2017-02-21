@@ -174,5 +174,47 @@ public java.util.LinkedList<StudentQuiz> getPendingStudentQuizzes(int matricNo) 
     String query = "select * from studentpending where Matriculation_Number=?;";
     return getStudentQuizzes(query, matricNo);
 }
+
+public void makeQuizLive(int QuizID){ //change to session variables
+    
+     try{
+        db = new DatabaseConnection();
+        Connection conn = db.connectToDatabase();
+ 
+        String query = "UPDATE quiz set Quiz_Status = 'Live' WHERE Quiz_ID = ?";
+        
+        PreparedStatement preparedStmt = conn.prepareStatement(query);
+       
+        preparedStmt.setInt(1,QuizID);
+        
+        preparedStmt.executeUpdate();
+        conn.close();
+        }
+    catch(SQLException err){
+            System.out.println(err.getMessage());
+        }
+ }
+
+public void filterByRecent(){ //change to session variables
+  
+     try{
+        db = new DatabaseConnection();
+        Connection conn = db.connectToDatabase();
+ 
+        String query =  "SELECT * FROM quiz WHERE Quiz_Status = 'Live' ORDER BY Date_Created";
+        
+        PreparedStatement preparedStmt = conn.prepareStatement(query);
+       
+      //  preparedStmt.setInt(1,QuizID);
+        
+        preparedStmt.executeUpdate();
+        conn.close();
+        }
+    catch(SQLException err){
+            System.out.println(err.getMessage());
+        }
+ }
+
+
 }
 
