@@ -24,13 +24,13 @@ import stores.StudentQuiz;
 public class QuizModel {
     DatabaseConnection db;
 
-public void createQuiz(String moduleID, String staffName, String dateCreated, String quizName,String available ){
+public void createQuiz(String moduleID, String staffName, String dateCreated, String quizName,String available, String staffID ){
         
     try{
         db = new DatabaseConnection();
         Connection conn = db.connectToDatabase();
         
-        String query = "INSERT INTO quiz (Module_ID, Staff_Name, Date_Created, Quiz_Name,Quiz_Status)"+"values(?,?,?,?,?)";
+        String query = "INSERT INTO quiz (Module_ID, Staff_Name, Date_Created, Quiz_Name,Quiz_Status,Staff_ID)"+"values(?,?,?,?,?,?)";
         System.out.println("Result: "+moduleID+staffName+dateCreated+quizName);
         PreparedStatement preparedStmt = conn.prepareStatement(query);
         preparedStmt.setString(1, moduleID);
@@ -38,6 +38,7 @@ public void createQuiz(String moduleID, String staffName, String dateCreated, St
         preparedStmt.setString(3,dateCreated);
         preparedStmt.setString(4,quizName);
         preparedStmt.setString(5,available);
+        preparedStmt.setString(6,staffID);
         preparedStmt.executeUpdate();
         conn.close();
         }
@@ -53,7 +54,7 @@ public int getQuizId()
         Connection conn = db.connectToDatabase();
         int result =0;
         Statement st = conn.createStatement();
-        String query = "SELECT Quiz_ID from quiz";
+        String query = "SELECT * FROM quiz ORDER BY Quiz_ID;";
     
         ResultSet rs = st.executeQuery(query);
             while (rs.next())
@@ -252,6 +253,25 @@ public void filterByRecent(){ //change to session variables
         }
  }
 
+public void updateQuizStatus(int quizID)
+{
+    try{
+        db = new DatabaseConnection();
+        Connection conn = db.connectToDatabase();
+ 
+        String query = "UPDATE quiz set Quiz_Status = 'Completed' WHERE Quiz_ID = ?";
+        
+        PreparedStatement preparedStmt = conn.prepareStatement(query);
+       
+        preparedStmt.setInt(1,quizID);
+        
+        preparedStmt.executeUpdate();
+        conn.close();
+        }
+    catch(SQLException err){
+            System.out.println(err.getMessage());
+        }
+}
 
 }
 
