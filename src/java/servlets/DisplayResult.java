@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import models.QuizModel;
 import stores.LoggedIn;
 import stores.Quiz;
+import stores.StudentResult;
 
 /**
  * Created by cmckillop on 17/02/2017.
@@ -69,15 +70,14 @@ public class DisplayResult extends HttpServlet {
         HttpSession session = request.getSession(true);
         LoggedIn lg =(LoggedIn)session.getAttribute("LoggedIn");
         
-        //LoggedIn lg = new LoggedIn();
-        //lg.setUsername("1"); // TEMP - GET THIS FROM SESSION VARIABLE!
-        
         if(lg.isStaff()){
             Quiz quiz = qm.getQuizDetails(quizID);
             quiz.setAverageScore(rm.getQuizAverage(quizID));
+            java.util.LinkedList<StudentResult> quizResult = rm.getQuizResults(quizID);
             
             RequestDispatcher rd = request.getRequestDispatcher("/studentResults.jsp"); // SET CORRECT REDIRECT LOCATION
             
+            request.setAttribute("Results", quizResult);
             request.setAttribute("Quiz", quiz);
             rd.forward(request, response);
         }

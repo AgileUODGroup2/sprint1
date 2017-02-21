@@ -17,12 +17,29 @@
     <body>
         <h1><%=type%></h1>
         
-         <% java.util.LinkedList<StudentQuiz> quizList = (java.util.LinkedList<StudentQuiz>) request.getAttribute("StudentQuizList");
+         <%     java.util.LinkedList<StudentQuiz> quizList = (java.util.LinkedList<StudentQuiz>) request.getAttribute("StudentQuizList");
+                Iterator<StudentQuiz> it = quizList.iterator();
                 if (quizList != null) {
-                    Iterator<StudentQuiz> it = quizList.iterator();
-                    while(it.hasNext()) {
-                        StudentQuiz q = (StudentQuiz) it.next();
-                        %> <%=q.getQuizName()%>, <%=q.getQuizID()%>, <%=q.getModuleID()%> <br> <%
+                    if (type.equals("Completed Quizzes")) {
+                        while(it.hasNext()) {
+                            StudentQuiz q = (StudentQuiz) it.next();
+         %>
+         
+         
+         <table><tr><td><%=q.getModuleID()%></td><td><a href="result/<%=q.getQuizID()%>"><%=q.getQuizName()%></a></td></tr>
+             <tr><td></td><td><%=q.getStaffName()%></td></tr</table><br>
+             
+             
+             <%         }
+                    } else {
+                      while(it.hasNext()) {
+                            StudentQuiz q = (StudentQuiz) it.next();
+            %>
+
+            <table><tr><td><%=q.getModuleID()%></td><td><a href="edit/<%=q.getQuizID()%>"><%=q.getQuizName()%></a></td></tr>
+             <tr><td></td><td><%=q.getStaffName()%></td></tr</table><br>
+            
+            <%          }
                     }
                     request.setAttribute("StudentQuizList", null);
                 }%>
