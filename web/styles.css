@@ -195,11 +195,6 @@ button {
 }
 
 
-div1{
-    position: relative;
-    width: 100px;
-    height: 100px;
-}
 
 #div1{
    width: 40%;
@@ -234,3 +229,23 @@ div1{
 
 
 
+.centerContent1{
+	width: 70%;
+	margin: 0 auto;				/*Sets div to centre of page and is 70% width of the page*/
+	text-align: left;
+	padding: 20px;
+	color: #FFFFFF;
+	font-family: Calibri;
+	font-size: 25px;
+	background: #d3dfeb;			/*Gives the content div a slightly transparent black bacground*/
+}
+#cc1{
+        width: 100%;
+	margin: 0 auto;				/*Sets div to centre of page and is 70% width of the page*/
+	text-align: left;
+	padding: 20px;
+	color: #FFFFFF;
+	font-family: Calibri;
+	font-size: 25px;
+	background: grey;	
+}

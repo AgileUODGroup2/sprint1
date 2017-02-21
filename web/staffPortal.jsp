@@ -36,13 +36,15 @@
                 <li><a> Staff Portal - Welcome <%=lg.getFirstName()%>!</a></li>
             </ul>
         </div>
-
+<div class="centerContent1">
+    <div id="cc1">
   <form method="get" action="staffModules.jsp">
             <button type="submit">My Modules</button>
         </form>
 
         <a href="createQuiz"><button>Create Quiz</button></a>
         <br>
+        </div>
         <a href="completedQuiz"><button id="sec-button">Completed Quizzes</button></a>
         <br>
         <a href="liveQuiz"><button id="sec-button">Live Quizzes</button></a>
@@ -57,6 +59,8 @@
         <h4>First Name: </h4><p><%=lg.getFirstName()%></p>
         <h4>Last Name: </h4><p><%=lg.getLastName()%></p>
         <a href="editProfile.jsp">Edit Profile</a>
+        
+       </div>
         
     </body>
 </html>
