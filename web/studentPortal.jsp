@@ -36,7 +36,7 @@
             
             <br><br><a href="incompleteQuizzes">Incomplete Quizzes</a> <a href="pendingdQuizzes">Pending Quizzes</a> <a href="completedQuizzes">Completed Quizzes</a> 
             <br><br>
-            
+        <a href ="studentModules.jsp"><button id="fourth-button">My Modules</button></a>    
         <h2>Profile</h2>
         <h4>Matriculation Number: </h4><p><%=lg.getUsername()%><p>
         <h4>First Name: </h4><p><%=lg.getFirstName()%></p>
