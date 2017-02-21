@@ -13,7 +13,6 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import javax.servlet.http.HttpSession;
 import stores.LoggedIn;
 import stores.Quiz;
 import stores.StudentQuiz;
@@ -133,6 +132,44 @@ public java.util.LinkedList<Quiz> getCompletedQuizzes(int staffID) {
     String query = "SELECT * FROM completedquiz WHERE Staff_ID = ?";
     return getQuizzes(query, staffID);
 }
+
+public Quiz getQuizDetails(int quizID) {
+
+        DatabaseConnection db = new DatabaseConnection();
+        
+        Quiz quiz = new Quiz();
+        String query = "SELECT * FROM quiz WHERE Quiz_ID = ?";
+        
+        try (Connection con = db.connectToDatabase(); ) {
+
+            PreparedStatement ps = con.prepareStatement(query);
+
+            ps.setInt(1, quizID);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while(rs.next()) {
+                    
+                    quiz.setQuizID(rs.getInt("Quiz_ID"));
+                    //quiz.setModuleID(rs.getInt("Module_ID")); Servlet error when un-commented?
+                    //quiz.setStaffName(rs.getString("Staff_Name")); Not needed?
+                    quiz.setDateCreated(rs.getDate("Date_Created"));
+                    quiz.setQuizName(rs.getString("Quiz_Name"));
+                    quiz.setNumberOfQuestions(rs.getInt("Num_Of_Questions"));
+                    quiz.setStatus(rs.getString("Quiz_Status"));
+                    quiz.setStaffID(rs.getInt("Staff_ID"));
+                    
+                }
+            }
+
+
+        } catch (SQLException e) {
+            System.out.print(e.getMessage());
+        }
+
+        return quiz;
+
+    }
+
 public java.util.LinkedList<StudentQuiz> getStudentQuizzes(String query, int matricNo) {
     
     db = new DatabaseConnection();

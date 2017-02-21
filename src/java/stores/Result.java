@@ -55,4 +55,4 @@ public class Result {
     public Date getDate() {
         return date;
     }
-}
+    }

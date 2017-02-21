@@ -13,7 +13,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpSession;
+import models.QuizModel;
 import stores.LoggedIn;
+import stores.Quiz;
 
 /**
  * Created by cmckillop on 17/02/2017.
@@ -60,23 +62,36 @@ public class DisplayResult extends HttpServlet {
      */
     private void displayResult(int quizID, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        RequestDispatcher rd = request.getRequestDispatcher("/testResult.jsp"); // SET REDIRECT LOCATION!
-
         ResultModel rm = new ResultModel();
+        QuizModel qm = new QuizModel();
 
         
-        //HttpSession session = request.getSession(true);
-        //LoggedIn lg =(LoggedIn)session.getAttribute("LoggedIn");
+        HttpSession session = request.getSession(true);
+        LoggedIn lg =(LoggedIn)session.getAttribute("LoggedIn");
         
-        LoggedIn lg = new LoggedIn();
+        //LoggedIn lg = new LoggedIn();
+        //lg.setUsername("1"); // TEMP - THIS IS RETRIEVED FROM SESSION VARIABLE!
         
-        lg.setUsername("1"); // TEMP - GET THIS FROM SESSION VARIABLE!
-        
-        int matricNo = Integer.parseInt(lg.getUsername());
-        Result quizResult = rm.getQuizResult(matricNo, quizID);
-
-        request.setAttribute("Result", quizResult);
-        rd.forward(request, response);
+        if(lg.isStaff()){
+            Quiz quiz = qm.getQuizDetails(quizID);
+            quiz.setAverageScore(rm.getQuizAverage(quizID));
+            java.util.LinkedList<Result> quizResult = quizResult = rm.getQuizResults(quizID);
+            
+            RequestDispatcher rd = request.getRequestDispatcher("/studentResults.jsp"); // SET CORRECT REDIRECT LOCATION
+            
+            request.setAttribute("Results", quizResult);
+            request.setAttribute("Quiz", quiz);
+            rd.forward(request, response);
+        }
+        else
+        {
+            int matriculationNo = Integer.parseInt(lg.getUsername());
+            Result quizResult = rm.getQuizResult(matriculationNo, quizID);
+            
+            RequestDispatcher rd = request.getRequestDispatcher("/testResult.jsp"); // SET CORRECT REDIRECT LOCATION
+            request.setAttribute("Result", quizResult);
+            rd.forward(request, response);
+        }
     }
 
 }
