@@ -4,6 +4,8 @@
     Author     : daniellewilliams
 --%>
 
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.ListIterator"%>
 <%@page import="stores.StudentResult"%>
 <%@page import="stores.Quiz"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -24,27 +26,40 @@
     <body>
         <h2><%=quiz.getQuizName()%></h2>
         <h3>Class Average is <%=quiz.getAverageScore()%>%</h3>
-        <br>
-        <h3>Students took quiz: <%=quizResult.size()%></h3>
         
-        <table border="1">
-        <tbody>
-        <tr>
-        <td>Matriculation Number</td>
-        <td>Name</td>
-        <td>Score</td>
-        <td>Attempts</td>
-        <td>Date Completed</td>
-        </tr>
-        <tr>
-        <td><%=studTest.getMatriculationNumber()%></td>
-        <td><%=studTest.getStudentName()%></td>
-        <td><%=studTest.getScore()%></td>
-        <td><%=studTest.getAttemptedCount()%></td>
-        <td><%=studTest.getDate()%></td>
-        </tr>
-        </tbody>
-        </table>
+        <%
+            if(!quizResult.isEmpty()) {
+                %>
+                    <table border="1">
+                    <tbody>
+                    <tr>
+                        <td>Matriculation Number</td>
+                        <td>Name</td>
+                        <td>Score</td>
+                        <td>Attempts</td>
+                        <td>Date Completed</td>
+                    </tr>
+                <%
+                Iterator<StudentResult> iterator = quizResult.iterator();
+                while(iterator.hasNext()){
+                    StudentResult result = iterator.next(); 
+                    %>
+                        <tr>
+                            <td><%=result.getMatriculationNumber()%></td>
+                            <td><%=result.getStudentName()%></td>
+                            <td><%=result.getScore()%></td>
+                            <td><%=result.getAttemptedCount()%></td>
+                            <td><%=result.getDate()%></td>
+                        </tr>
+                    <%
+                }
+                %>
+                        </tbody>
+                        </table>
+                <%
+            }
+        %>
+        
         
     </body>
 </html>

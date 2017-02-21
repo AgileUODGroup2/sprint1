@@ -70,9 +70,6 @@ public class DisplayResult extends HttpServlet {
         HttpSession session = request.getSession(true);
         LoggedIn lg =(LoggedIn)session.getAttribute("LoggedIn");
         
-        //LoggedIn lg = new LoggedIn();
-        //lg.setUsername("1"); // TEMP - THIS IS RETRIEVED FROM SESSION VARIABLE!
-        
         if(lg.isStaff()){
             Quiz quiz = qm.getQuizDetails(quizID);
             quiz.setAverageScore(rm.getQuizAverage(quizID));
