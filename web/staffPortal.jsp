@@ -29,7 +29,7 @@
                  
             </ul>
         </div>
-        <img src="logo123.png" width="150px" style="position: absolute; left:0; top:0;">
+        <img src="logo123.png" width="115px" style="position: absolute; left:0; top: 0;">
 
         <div class="navBar1">
             <ul>
