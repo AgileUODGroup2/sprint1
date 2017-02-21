@@ -18,8 +18,6 @@
         <%
             java.util.LinkedList<StudentResult> quizResult = (java.util.LinkedList<StudentResult>) request.getAttribute("Results");
             Quiz quiz = (Quiz) request.getAttribute("Quiz");
-            
-            StudentResult studTest = quizResult.get(1);
         %>
         
     </head>
