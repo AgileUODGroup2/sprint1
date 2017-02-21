@@ -21,40 +21,35 @@ import stores.Quiz;
  *
  * @author viivipursiainen
  */
-@WebServlet(urlPatterns = {"/liveQuiz", "/unfinishedQuiz", "/completedQuiz"})
-public class displayQuizzes extends HttpServlet {
+@WebServlet(urlPatterns = {"/filterByModule"})
+public class filterByModule extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String uri = request.getRequestURI();
-        int i = uri.lastIndexOf("/");
-        String type = uri.substring(i+1);
-        DisplayQuizzes(type, request, response);
-    }
-    
-    private void DisplayQuizzes(String type, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        LoggedIn user = (LoggedIn) session.getAttribute("LoggedIn");
-        int staffID = user.getID();
+        String type = (String) session.getAttribute("QuizType");
+        System.out.println("Quiz type: "+type);
+        
+        LoggedIn staff = (LoggedIn) session.getAttribute("LoggedIn");
+        int staffID = staff.getID();
+        
+        String moduleID = request.getParameter("module");
         
         QuizModel qm = new QuizModel();
         java.util.LinkedList<Quiz> quizList = new java.util.LinkedList<Quiz>();
         RequestDispatcher rd = null;
         switch (type) {
-            case "completedQuiz":
-                quizList = qm.getCompletedQuizzes(staffID);
+            case "Completed Quizzes":
+                quizList = qm.getCompletedQuizzesMod(staffID, moduleID);
                 rd = request.getRequestDispatcher("/displayQuizzes.jsp");
-                session.setAttribute("QuizType", "Completed Quizzes");
                 break;
-            case "liveQuiz":
-                quizList = qm.getLiveQuizzes(staffID);
+            case "Live Quizzes":
+                quizList = qm.getLiveQuizzesMod(staffID, moduleID);
                 rd = request.getRequestDispatcher("/displayQuizzes.jsp");
-                session.setAttribute("QuizType", "Live Quizzes");
                 break;
-            case "unfinishedQuiz":
-                quizList = qm.getUnfinishedQuizzes(staffID);
+            case "Unfinished Quizzes":
+                quizList = qm.getUnfinishedQuizzesMod(staffID, moduleID);
                 rd = request.getRequestDispatcher("/displayQuizzes.jsp");
-                session.setAttribute("QuizType", "Unfinished Quizzes");
                 break;
             default:
                 rd = request.getRequestDispatcher("/index.jsp");

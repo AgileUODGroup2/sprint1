@@ -133,6 +133,19 @@ public java.util.LinkedList<Quiz> getCompletedQuizzes(int staffID) {
     return getQuizzes(query, staffID);
 }
 
+public java.util.LinkedList<Quiz> getUnfinishedQuizzesMod(int staffID, String module) {
+    String query = "SELECT * FROM unfinishedquiz WHERE Module_ID ="+module+" AND Staff_ID = ?";
+    return getQuizzes(query, staffID);
+}
+public java.util.LinkedList<Quiz> getLiveQuizzesMod(int staffID, String module) {
+    String query = "SELECT * FROM livequiz WHERE Module_ID ="+module+" AND Staff_ID = ?";
+    return getQuizzes(query, staffID);
+}
+public java.util.LinkedList<Quiz> getCompletedQuizzesMod(int staffID, String module) {
+    String query = "SELECT * FROM completedquiz WHERE Module_ID ="+module+" AND Staff_ID = ?";
+    return getQuizzes(query, staffID);
+}
+
 public Quiz getQuizDetails(int quizID) {
 
         DatabaseConnection db = new DatabaseConnection();

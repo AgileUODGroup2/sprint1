@@ -14,17 +14,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        
-            <% java.util.LinkedList<Result> resultList = (java.util.LinkedList<Result>) request.getAttribute("ResultList");
-                if (resultList != null) {
-                    Iterator<Result> it = resultList.iterator();
-                    while(it.hasNext()) {
-                        Result r = (Result) it.next();
-                    %> <%=r.getMatricNo()%>, <%=r.getQuizID()%>, <%=r.getAttempts()%>, <%=r.getCompleted()%>, <%=r.getScore()%>, <%=r.getDate()%> <%
-                    }
-                    request.setAttribute("ResultList", null);
-                } else {
-                    %>
+       
             
             
 <form method="POST" action="SearchResults">
@@ -69,14 +59,17 @@
     <input type="submit" value="Search" />
 </form>
     
-<% //Glen - Testing Display all quiz results %>
-<form method="POST" action="staffOrderByMatNo">
-               
-     <input type="submit" name="Order By Matriculation_Number" value="Submit">
-               
-</form>
-    
-            <% }%>
+<%
+    java.util.LinkedList<Result> resultList = (java.util.LinkedList<Result>) request.getAttribute("ResultList");
+                if (resultList != null) {
+                    Iterator<Result> it = resultList.iterator();
+                    while(it.hasNext()) {
+                        Result r = (Result) it.next();
+                    %> <%=r.getMatricNo()%>, <%=r.getQuizID()%>, <%=r.getAttempts()%>, <%=r.getCompleted()%>, <%=r.getScore()%>, <%=r.getDate()%> <%
+                    }
+                    request.setAttribute("ResultList", null);
+                }
+                    %>
             
             
             
