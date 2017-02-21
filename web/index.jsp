@@ -9,20 +9,24 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
   <body bgcolor=#042356>
       <br>
+      <div class="centerContent">
    <h1>Quiz Master</h1>
-   <img src="logo123.png" style="padding-left: 400px; position: relative; top:-180px;">
-   <div id="div1">
+   <div id="div3">
+       <img src="logo123.png" style="height: auto; max-width: 100%; padding-left: 50px;">
+   </div>
+   <div id="div2">
    <form method="POST"  action="login">
    <h3>Username</h3>
    <input type="text" name="username" style="width:350px;"><br>
    <h3>Password</h3>
-   <input type="text" name="password" style="width:350px;">
+   <input type="password" name="password" style="width:350px;">
    </br>
    </br>
    <input type="submit" value="login" id="button"> 
-   </div1>
    </form> 
    <h4> If you are a new user, please REGISTER here </h4>
+   </div>
+      </div>
 </html>
 </body>
  
