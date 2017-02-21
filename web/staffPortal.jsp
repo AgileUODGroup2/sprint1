@@ -50,10 +50,10 @@
         <div id="cc2">
              <br>
            
-            <a href="editProfile.jsp"><button id="sec-button">Edit Profile</button></a>
+            <a href="editProfile.jsp"><button id="fourth-button">Edit Profile</button></a>
         <form method="get" action="staffModules.jsp">
           
-        <button id="sec-button">My Modules</button>
+        <button id="fourth-button">My Modules</button>
         </form>
               <a href="logout.jsp"><button id="third-button">Log Out</button></a>
             <br>
@@ -67,13 +67,12 @@
 
         <div id ="cc3"
              <p> <h2>Quiz Information </h2></p>
-             <a href="createQuiz"><button id="sec-button">Create Quiz</button></a>
+        <p><a href="createQuiz"><button id="sec-button">Create Quiz</button></a></p>
               
-                <a href="completedQuiz"><button id="sec-button">Completed Quizzes</button></a>
-                <br>
-                <a href="liveQuiz"><button id="sec-button">Live Quizzes</button></a>
-                <br>
-
+        <p><a href="completedQuiz"><button id="sec-button">Completed Quizzes</button></a></p>
+                
+        <p><a href="liveQuiz"><button id="sec-button">Live Quizzes</button></a></p>
+               
                 <a href="unfinishedQuiz"><button id="sec-button">Unfinished Quizzes</button></a>
                 <br>
                  
