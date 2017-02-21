@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.*;
 import lib.database.DatabaseConnection;
 import stores.Result;
+import stores.StudentResult;
 
 /**
  *
@@ -131,11 +132,32 @@ public class ResultModel {
         return averageScore;
     }
     
-    public java.util.LinkedList<Result> getQuizResults(int quizID) {
+    public java.util.LinkedList<StudentResult> getQuizResults(int quizID) {
         
-        String query = "SELECT * FROM student_quiz WHERE Quiz_ID = ? AND Has_Completed = 'Completed'";
+        String query = "SELECT"
++	" Quiz.Quiz_ID,"
++	" CONCAT_WS(' ', Student.First_Name, Student.Last_Name) AS Student_Name,"
++	" Student_Quiz.Matriculation_Number,"
++	" Student_Quiz.Has_Completed,"
++	" Student_Quiz.Attempted_Count,"
++	" Student_Quiz.Score,"
++	" Student_Quiz.Date_Completed"
++	" FROM"
++	" Student_Quiz,"
++	" Quiz,"
++	" Student"
++	" WHERE"
++	" Student_Quiz.Quiz_ID=Quiz.Quiz_ID"
++	" AND"
++	" Quiz.Quiz_ID = ?"
++	" AND"
++	" Student.Matriculation_Number = Student_Quiz.Matriculation_Number"
++	" AND"
++	" Has_Completed = 'Completed'"
++	" ORDER BY"
++	" Student_Name, Attempted_Count";
         
-        java.util.LinkedList<Result> quizResult = new java.util.LinkedList<>();
+        java.util.LinkedList<StudentResult> quizResult = new java.util.LinkedList<>();
         
         try (Connection con = db.connectToDatabase();) {
             
@@ -145,11 +167,12 @@ public class ResultModel {
             try (ResultSet rs = ps.executeQuery()) {
                 while(rs.next()) {
                     
-                    Result result = new Result();
-                    result.setMatricNo(rs.getInt("Matriculation_Number"));
+                    StudentResult result = new StudentResult();
+                    result.setMatriculationNumber(rs.getInt("Matriculation_Number"));
+                    result.setStudentName(rs.getString("Student_Name"));
                     result.setQuizID(rs.getInt("Quiz_ID"));
-                    result.setCompleted(true);
-                    result.setAttempts(rs.getInt("Attempted_Count"));
+                    result.setHasCompleted(true);
+                    result.setAttemptedCount(rs.getInt("Attempted_Count"));
                     result.setScore(rs.getInt("Score"));
                     result.setDate(rs.getDate("Date_Completed"));
                     
