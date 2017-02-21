@@ -33,9 +33,11 @@
                 <li><a> Staff Portal - Welcome <%=lg.getFirstName()%>!</a></li>
             </ul>
         </div>
-        
+            <br>
+            <br>
+            <br>
             <div class="centerContent1">
-                <br>
+                 
         <div id="cc1">
             
             <h2>Your Profile</h2>
@@ -45,26 +47,28 @@
             <br>
             
        </div>
+          
             
  
         <div id="cc2">
              <br>
-           
+             <br>
             <a href="editProfile.jsp"><button id="fourth-button">Edit Profile</button></a>
         <form method="get" action="staffModules.jsp">
           
         <button id="fourth-button">My Modules</button>
         </form>
               <a href="logout.jsp"><button id="third-button">Log Out</button></a>
+    <br>
             <br>
-        
-        <br>
-         <br>
-          <br> 
+            <br>
        
           
         </div>
-
+            <br>
+            <br>
+            <br>
+            <br>
         <div id ="cc3"
              <p> <h2>Quiz Information </h2></p>
         <p><a href="createQuiz"><button id="sec-button">Create Quiz</button></a></p>
