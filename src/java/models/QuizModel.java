@@ -57,12 +57,13 @@ public void UpdateQuestionAmmount(int quizID){
                             "SET Num_Of_Questions=(" +
                             "SELECT COUNT(*) FROM Question_Bank " +
                             "WHERE Quiz.Quiz_ID = Question_Bank.Quiz_ID " +
-                            "AND Quiz_ID=? "+
-                            ");";
+                            ")"+
+                            "WHERE Quiz_ID=?";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             
             preparedStmt.setInt(1, quizID);
-            System.out.println("\n\n\n\n" + preparedStmt + "\n\n\n\n");
+            System.out.println(preparedStmt);
+            
             //Execute Query
             preparedStmt.executeUpdate();
         }
