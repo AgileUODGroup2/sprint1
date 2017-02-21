@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.QuizModel;
 import stores.Quiz;
+import stores.QuestionBank;
 
 /**
  *
@@ -24,7 +25,7 @@ import stores.Quiz;
 @WebServlet(name ="createQuiz", urlPatterns = {"/createQuiz"})
 
 public class createQuiz extends HttpServlet {
-    
+    @Override
     public void init(ServletConfig config) throws ServletException {
         // TODO Auto-generated method stub
         
@@ -40,21 +41,20 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
     String dateCreated = request.getParameter("date");
     String available = request.getParameter("available");
     String numOfQuestions = request.getParameter("numOfQuestions");
-    
-//    int quizIDnew = Integer.parseInt(quizID);
-    //int moduleIDnew = Integer.parseInt(moduleID);
-  
+
     
     System.out.println("Result: "+moduleID+staffName+dateCreated+quizName+available+numOfQuestions);
     QuizModel quizModel = new QuizModel();
     quizModel.createQuiz(moduleID,staffName,dateCreated,quizName,available);
     int quizID = quizModel.getQuizId();
-
+    
     HttpSession session = request.getSession();
     Quiz quiz= new Quiz();
     quiz.setQuizID(quizID);
     session.setAttribute("Quiz", quiz);
     
+    java.util.LinkedList<QuestionBank> questionList = new java.util.LinkedList();
+    session.setAttribute("QuestionBank", questionList);
 
     response.sendRedirect("/AC31007Quiz/addQuestions.jsp");
     
