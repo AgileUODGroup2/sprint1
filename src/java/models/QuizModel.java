@@ -163,15 +163,15 @@ public java.util.LinkedList<StudentQuiz> getStudentQuizzes(String query, int mat
 }
 
 public java.util.LinkedList<StudentQuiz> getCompletedStudentQuizzes(int matricNo) {
-    String query = "select * from studentcompleted where Matriculation_Number=?;";
+    String query = "select * from studentcompleted where Matriculation_Number=? order by Module_ID";
     return getStudentQuizzes(query, matricNo);
 }
 public java.util.LinkedList<StudentQuiz> getIncompleteStudentQuizzes(int matricNo) {
-    String query = "select * from studentincomplete where Matriculation_Number=?;";
+    String query = "select * from studentincomplete where Matriculation_Number=? order by Module_ID";
     return getStudentQuizzes(query, matricNo);
 }
 public java.util.LinkedList<StudentQuiz> getPendingStudentQuizzes(int matricNo) {
-    String query = "select * from studentpending where Matriculation_Number=?;";
+    String query = "select * from studentpending where Matriculation_Number=? order by Module_ID";
     return getStudentQuizzes(query, matricNo);
 }
 
