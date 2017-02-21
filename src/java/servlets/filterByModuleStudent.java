@@ -21,16 +21,18 @@ import stores.Quiz;
  *
  * @author viivipursiainen
  */
-@WebServlet(urlPatterns = {"/filterByModule"})
-public class filterByModule extends HttpServlet {
+@WebServlet(urlPatterns = {"/filterByModuleStudent"})
+public class filterByModuleStudent extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         String type = (String) session.getAttribute("QuizType");
         
-        LoggedIn staff = (LoggedIn) session.getAttribute("LoggedIn");
-        int staffID = staff.getID();
+        System.out.println("Type is: "+type);
+        
+        LoggedIn student = (LoggedIn) session.getAttribute("LoggedIn");
+        int matricNo = student.getID();
         
         String moduleID = request.getParameter("module");
         
@@ -39,23 +41,23 @@ public class filterByModule extends HttpServlet {
         RequestDispatcher rd = null;
         switch (type) {
             case "Completed Quizzes":
-                quizList = qm.getCompletedQuizzesMod(staffID, moduleID);
-                rd = request.getRequestDispatcher("/displayQuizzes.jsp");
+                quizList = qm.getCompletedQuizzesMod(matricNo, moduleID);
+                rd = request.getRequestDispatcher("/displayStudentQuizzes.jsp");
                 break;
-            case "Live Quizzes":
-                quizList = qm.getLiveQuizzesMod(staffID, moduleID);
-                rd = request.getRequestDispatcher("/displayQuizzes.jsp");
+            case "Pending Quizzes":
+                quizList = qm.getLiveQuizzesMod(matricNo, moduleID);
+                rd = request.getRequestDispatcher("/displayStudentQuizzes.jsp");
                 break;
-            case "Unfinished Quizzes":
-                quizList = qm.getUnfinishedQuizzesMod(staffID, moduleID);
-                rd = request.getRequestDispatcher("/displayQuizzes.jsp");
+            case "Incomplete Quizzes":
+                quizList = qm.getUnfinishedQuizzesMod(matricNo, moduleID);
+                rd = request.getRequestDispatcher("/displayStudentQuizzes.jsp");
                 break;
             default:
                 rd = request.getRequestDispatcher("/index.jsp");
                 break;
         }
         
-        request.setAttribute("QuizList", quizList);
+        request.setAttribute("StudentQuizList", quizList);
         rd.forward(request, response);
     }
 }

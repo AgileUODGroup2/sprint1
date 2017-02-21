@@ -160,15 +160,15 @@ public java.util.LinkedList<Quiz> getCompletedQuizzes(int staffID) {
 }
 
 public java.util.LinkedList<Quiz> getUnfinishedQuizzesMod(int staffID, String module) {
-    String query = "SELECT * FROM unfinishedquiz WHERE Module_ID ="+module+" AND Staff_ID = ?";
+    String query = "SELECT * FROM unfinishedquiz WHERE Module_ID ='"+module+"' AND Staff_ID = ?";
     return getQuizzes(query, staffID);
 }
 public java.util.LinkedList<Quiz> getLiveQuizzesMod(int staffID, String module) {
-    String query = "SELECT * FROM livequiz WHERE Module_ID ="+module+" AND Staff_ID = ?";
+    String query = "SELECT * FROM livequiz WHERE Module_ID ='"+module+"' AND Staff_ID = ?";
     return getQuizzes(query, staffID);
 }
 public java.util.LinkedList<Quiz> getCompletedQuizzesMod(int staffID, String module) {
-    String query = "SELECT * FROM completedquiz WHERE Module_ID ="+module+" AND Staff_ID = ?";
+    String query = "SELECT * FROM completedquiz WHERE Module_ID ='"+module+"' AND Staff_ID = ?";
     return getQuizzes(query, staffID);
 }
 
@@ -248,6 +248,19 @@ public java.util.LinkedList<StudentQuiz> getIncompleteStudentQuizzes(int matricN
 }
 public java.util.LinkedList<StudentQuiz> getPendingStudentQuizzes(int matricNo) {
     String query = "select * from studentpending where Matriculation_Number=? order by Module_ID";
+    return getStudentQuizzes(query, matricNo);
+}
+
+public java.util.LinkedList<StudentQuiz> getCompletedStudentQuizzesMod(int matricNo, String module) {
+    String query = "select * from studentcompleted where Module_ID = '"+module+"' AND Matriculation_Number=?";
+    return getStudentQuizzes(query, matricNo);
+}
+public java.util.LinkedList<StudentQuiz> getIncompleteStudentQuizzesMod(int matricNo, String module) {
+    String query = "select * from studentincomplete where Module_ID = '"+module+"' AND Matriculation_Number=?";
+    return getStudentQuizzes(query, matricNo);
+}
+public java.util.LinkedList<StudentQuiz> getPendingStudentQuizzesMod(int matricNo, String module) {
+    String query = "select * from studentpending where Module_ID = '"+module+"' AND Matriculation_Number=?";
     return getStudentQuizzes(query, matricNo);
 }
 
