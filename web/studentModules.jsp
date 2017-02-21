@@ -1,13 +1,17 @@
 <%-- 
-    Document   : studentModules
-    Created on : 17-Feb-2017, 19:49:36
+    Document   : staffModules
+    Created on : 17-Feb-2017, 19:51:04
     Author     : daniellewilliams
 --%>
 
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="stores.LoggedIn"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
 <%@page import="lib.database.DatabaseConnection"%>
+<%@page import="models.staffModulesModel"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
-<%@ page import="java.sql.*" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,14 +19,13 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <p>Testing - displaying student details. </p>
+     <p>Displaying Modules student  are enrolled on </p>
 
         <table border="0" cellpadding="10">
             <thead>
                 <tr>
-                    <th>Matric No.</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
+                    <th>Module Name</th>
+                    <th>Module Title</th>
 
                 </tr>
             </thead>
@@ -30,22 +33,25 @@
 
 
                 <%
+                    LoggedIn lg =(LoggedIn) session.getAttribute("LoggedIn"); 
+                    int staffID = lg.getID();
                     DatabaseConnection db = new DatabaseConnection();
                     Connection conn = db.connectToDatabase();
                     System.out.println("Database connected: " + conn);
-                    Statement st = conn.createStatement();
-                    String query = "SELECT * from student";
-                    ResultSet rs = st.executeQuery(query);
-                    while (rs.next()) {
+                    String query = "SELECT module.Module_ID, module.Module_Title, student_enrolment.Matriculation_Number FROM module JOIN student_enrolment WHERE module.Module_ID = student_enrolment.Module_ID AND student_enrolment.Matriculation_Number = ?";
+                    //Statement st = conn.createStatement();
+                    PreparedStatement ps = conn.prepareStatement(query);
+                    ps.setInt(1, staffID);
+                    ResultSet rs = ps.executeQuery();
+                    while(rs.next()) {
+                        
                 %>
                 <tr>
                     <%
-                        int matric = rs.getInt("Matriculation_Number");
-                        String firstname = rs.getString("First_Name");
-                        String lastname = rs.getString("Last_Name");
+                        String firstname = rs.getString("Module_ID");
+                        String lastname = rs.getString("Module_Title");
 
                     %>
-                    <td><%=matric%></td>
                     <td><%=firstname%></td>
                     <td><%=lastname%></td>
 
@@ -54,9 +60,7 @@
                 <%
                     }
                 %>
-
-            </tbody>
+</tbody>
         </table>
-
     </body>
 </html>
