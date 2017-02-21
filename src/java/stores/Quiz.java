@@ -18,7 +18,9 @@ public class Quiz {
     String quizName;
     String status;
     int numberOfQuestions;
-    
+    private int averageScore;
+    private int staffID;
+
     public void setQuizID(int quizID) {
         this.quizID = quizID;
     }
@@ -61,5 +63,17 @@ public class Quiz {
     }
     public int getNumberOfQuestions() {
         return numberOfQuestions;
+    }
+    public int getAverageScore() {
+        return averageScore;
+    }
+    public void setAverageScore(int averageScore) {
+        this.averageScore = averageScore;
+    }
+    public int getStaffID() {
+        return staffID;
+    }
+    public void setStaffID(int staffID) {
+        this.staffID = staffID;
     }
 }

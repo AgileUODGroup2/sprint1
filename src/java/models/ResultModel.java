@@ -75,7 +75,6 @@ public class ResultModel {
         
         return results;
     }
-    
 
     public Result getQuizResult(int matriculationNo, int quizID) {
 
@@ -108,5 +107,27 @@ public class ResultModel {
 
         return studentResult;
 
+    }
+    
+    public int getQuizAverage(int quizID) {
+        int averageScore = 0;
+        
+        String query = "SELECT AVG(Score) FROM student_quiz WHERE Has_Completed = 'Completed' AND Quiz_ID = ?";
+        
+        try (Connection con = db.connectToDatabase(); ) {
+            
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, quizID);
+            
+            try (ResultSet rs = ps.executeQuery()) {
+                while(rs.next()) {
+                    averageScore = rs.getInt("AVG(Score)");
+                }
+            }
+        } catch (SQLException e) {
+            System.out.print(e.getMessage());
+        }
+        
+        return averageScore;
     }
 }

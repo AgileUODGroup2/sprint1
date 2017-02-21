@@ -4,23 +4,21 @@
     Author     : daniellewilliams
 --%>
 
+<%@page import="stores.Quiz"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Student Results</title>
+        
+        <%
+            Quiz quiz = (Quiz) request.getAttribute("Quiz");
+        %>
+        
     </head>
     <body>
-        <!Below is a test for result checking. Can change - Conor>
-        <h1>Enter Quiz ID:</h1>
-        <form method="POST" action="result">
-            <label>
-                <input name="quizID" type="text"/>
-            </label>
-            <label>
-                <input type="submit" value="Submit"/>
-            </label>
-        </form>
+        <h2><%=quiz.getQuizName()%></h2>
+        <h3>Class Average is <%=quiz.getAverageScore()%>%</h3>
     </body>
 </html>
