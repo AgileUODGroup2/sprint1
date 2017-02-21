@@ -72,27 +72,24 @@ public int getQuizId()
             
 }
 
-public void addQuestion()
+public void addQuestion(String[] array)
 {
     
-//    try{
-//        db = new DatabaseConnection();
-//        Connection conn = db.connectToDatabase();
-//        
-//        String query = "INSERT INTO question_bank (Quiz_ID, Question, A, B, C, D, Answer, Answer_Desc)"+"values(?,?,?,?,?,?,?,?)";
-//        System.out.println("Result: "+moduleID+staffName+dateCreated+quizName);
-//        PreparedStatement preparedStmt = conn.prepareStatement(query);
-//        preparedStmt.setString(1, moduleID);
-//        preparedStmt.setString(2,staffName);
-//        preparedStmt.setString(3,dateCreated);
-//        preparedStmt.setString(4,quizName);
-//        preparedStmt.setString(5,available);
-//        preparedStmt.executeUpdate();
-//        conn.close();
-//        }
-//    catch(SQLException err){
-//            System.out.println(err.getMessage());
-//        }
+    try{
+        db = new DatabaseConnection();
+        Connection conn = db.connectToDatabase();
+        for (int i =0; i<array.length; i++)
+        {
+            
+            PreparedStatement preparedStmt = conn.prepareStatement(array[i]);
+            preparedStmt.executeUpdate();
+        }
+        
+        conn.close();
+        }
+    catch(SQLException err){
+            System.out.println(err.getMessage());
+        }
     
 }
 
