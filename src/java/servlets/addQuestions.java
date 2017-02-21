@@ -128,6 +128,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
                    quizModel.addQuestion(array);
                    System.out.println("Quiz ID: " +quizID);
                    quizModel.updateQuizStatus(quizID);
+                   quizModel.UpdateQuestionAmmount(quizID);
             }
             
             Quiz quiz= new Quiz();
@@ -206,6 +207,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
                   }
                    QuizModel quizModel = new QuizModel();
                    quizModel.addQuestion(array);
+                   quizModel.UpdateQuestionAmmount(quizID);
             }
             
             Quiz quiz= new Quiz();

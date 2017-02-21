@@ -47,6 +47,30 @@ public void createQuiz(String moduleID, String staffName, String dateCreated, St
         }
 }
 
+//Call this function to update Num_Of_Questions column 
+public void UpdateQuestionAmmount(int quizID){
+    db = new DatabaseConnection();
+        try (Connection conn = db.connectToDatabase()) {
+            
+            //Create and prepare query
+            String query =  "UPDATE Quiz " +
+                            "SET Num_Of_Questions=(" +
+                            "SELECT COUNT(*) FROM Question_Bank " +
+                            "WHERE Quiz.Quiz_ID = Question_Bank.Quiz_ID " +
+                            "AND Quiz_ID=? "+
+                            ");";
+            PreparedStatement preparedStmt = conn.prepareStatement(query);
+            
+            preparedStmt.setInt(1, quizID);
+            System.out.println("\n\n\n\n" + preparedStmt + "\n\n\n\n");
+            //Execute Query
+            preparedStmt.executeUpdate();
+        }
+        catch(SQLException err){
+            System.out.println(err.getMessage());
+        }
+}
+
 public int getQuizId()
 {
     try{
