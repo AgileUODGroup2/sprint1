@@ -20,14 +20,11 @@
         <h1>Testing </h1>
         
         <%
-testModel test = new testModel();
-    String result = test.getStaffDetails();
-    
-    testStore ts = new testStore();
-    ts.setResult(result);
-                   
-                    String string1 = ts.getResult();
+            String uri = "http://agileteam2/ac31007/liveQuizzes.jsp";
+            int i = uri.lastIndexOf("/");
+            String type = uri.substring(i+1);
+            
             %>
-            <h1> <%=string1%> </h1>
+            Here is the type: <%=type%>
     </body>
 </html>

@@ -5,6 +5,7 @@
  */
 package models;
 
+import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import lib.database.DatabaseConnection;
@@ -12,7 +13,10 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.servlet.http.HttpSession;
+import stores.LoggedIn;
 import stores.Quiz;
+import stores.StudentQuiz;
 
 /**
  *
@@ -93,15 +97,13 @@ public void addQuestion(String[] array)
     
 }
 
-public java.util.LinkedList<Quiz> getQuizzes(String query) {
-    // get staff name!!
-    // String staffname = ;
+public java.util.LinkedList<Quiz> getQuizzes(String query, int staffID) {
     
     db = new DatabaseConnection();
     java.util.LinkedList<Quiz> quizzes = new java.util.LinkedList<>();
     try (Connection con = db.connectToDatabase();
         PreparedStatement ps = con.prepareStatement(query)) {
-        //ps.setDate(1, staffname);
+        ps.setInt(1, staffID);
         try (ResultSet rs = ps.executeQuery()) {
             while(rs.next()) {
                 Quiz q = new Quiz();
@@ -119,16 +121,58 @@ public java.util.LinkedList<Quiz> getQuizzes(String query) {
     return quizzes;
 }
 
-public java.util.LinkedList<Quiz> getUnfinishedQuizzes() {
-    String query = "SELECT * FROM unfinishedquiz WHERE Staff_Name = ?";
-    return getQuizzes(query);
+public java.util.LinkedList<Quiz> getUnfinishedQuizzes(int staffID) {
+    String query = "SELECT * FROM unfinishedquiz WHERE Staff_ID = ?";
+    return getQuizzes(query, staffID);
 }
-public java.util.LinkedList<Quiz> getLiveQuizzes() {
-    String query = "SELECT * FROM livequiz WHERE Staff_Name = ?";
-    return getQuizzes(query);
+public java.util.LinkedList<Quiz> getLiveQuizzes(int staffID) {
+    String query = "SELECT * FROM livequiz WHERE Staff_ID = ?";
+    return getQuizzes(query, staffID);
 }
-public java.util.LinkedList<Quiz> getCompletedQuizzes() {
-    String query = "SELECT * FROM completedquiz WHERE Staff_Name = ?";
-    return getQuizzes(query);
+public java.util.LinkedList<Quiz> getCompletedQuizzes(int staffID) {
+    String query = "SELECT * FROM completedquiz WHERE Staff_ID = ?";
+    return getQuizzes(query, staffID);
+}
+public java.util.LinkedList<StudentQuiz> getStudentQuizzes(String query, int matricNo) {
+    
+    db = new DatabaseConnection();
+    java.util.LinkedList<StudentQuiz> quizzes = new java.util.LinkedList<>();
+    try (Connection con = db.connectToDatabase();
+        PreparedStatement ps = con.prepareStatement(query)) {
+        ps.setInt(1, matricNo);
+        try (ResultSet rs = ps.executeQuery()) {
+            while(rs.next()) {
+                StudentQuiz q = new StudentQuiz();
+                q.setQuizID(rs.getInt("Quiz_ID"));
+                q.setQuizName(rs.getString("Quiz_Name"));
+                q.setModuleID(rs.getString("Module_ID"));
+                q.setDateCreated(rs.getDate("Date_Created"));
+                q.setStaffName(rs.getString("Staff_Name"));
+                q.setNumberOfQuestions(rs.getInt("Num_Of_Questions"));
+                q.setAttempts(rs.getInt("Attempted_Count"));
+                q.setScore(rs.getInt("Score"));
+                q.setDateCompleted(rs.getDate("Date_Completed"));
+            
+                quizzes.add(q);
+            }
+        }
+    } catch (SQLException e) {
+        System.out.println(e.getMessage());
+    }
+    return quizzes;
+}
+
+public java.util.LinkedList<StudentQuiz> getCompletedStudentQuizzes(int matricNo) {
+    String query = "select * from studentcompleted where Matriculation_Number=?;";
+    return getStudentQuizzes(query, matricNo);
+}
+public java.util.LinkedList<StudentQuiz> getIncompleteStudentQuizzes(int matricNo) {
+    String query = "select * from studentincomplete where Matriculation_Number=?;";
+    return getStudentQuizzes(query, matricNo);
+}
+public java.util.LinkedList<StudentQuiz> getPendingStudentQuizzes(int matricNo) {
+    String query = "select * from studentpending where Matriculation_Number=?;";
+    return getStudentQuizzes(query, matricNo);
 }
 }
+

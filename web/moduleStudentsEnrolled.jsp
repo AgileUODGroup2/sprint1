@@ -6,6 +6,8 @@
 
 <%@page import="models.moduleStudentsEnrolledModel"%>
 <%@page import="stores.moduleStudentsEnrolledStore"%>
+<%@page import="servlets.moduleStudentsEnrolled"%>
+<%@page import="java.util.Iterator"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,17 +16,26 @@
         <title>JSP Page</title>
     </head>
     <body>
-         <%
-            moduleStudentsEnrolledModel studentsEn = new moduleStudentsEnrolledModel();
-           String result = studentsEn.getStudentsEnrolled(210101);
+        <h1><% String list = (String) request.getAttribute("students");%><%=list%></h1>
+         <% java.util.LinkedList<moduleStudentsEnrolledStore> studentList = (java.util.LinkedList<moduleStudentsEnrolledStore>) request.getAttribute("StudentList");
+            if (studentList != null){
+                Iterator<moduleStudentsEnrolledStore> it = studentList.iterator();
+                 while(it.hasNext()){
+                     moduleStudentsEnrolledStore se = (moduleStudentsEnrolledStore) it.next();
+                     %> <%=se.getMatriculation_Number()%>, <%=se.getModule_ID()%> <br> <%
+                 }
+                   request.setAttribute("studentList",null);
+            }
             
           
             
             
             %>
-          <h1> <%=result%> </h1>
+         
               <form method="get" action=wholeStudentList.jsp">
             <button type="submit">Add Student</button>
         </form> 
     </body>
 </html>
+
+          

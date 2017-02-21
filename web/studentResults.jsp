@@ -12,6 +12,15 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <!Below is a test for result checking. Can change - Conor>
+        <h1>Enter Quiz ID:</h1>
+        <form method="POST" action="result">
+            <label>
+                <input name="quizID" type="text"/>
+            </label>
+            <label>
+                <input type="submit" value="Submit"/>
+            </label>
+        </form>
     </body>
 </html>
