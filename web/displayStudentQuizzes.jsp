@@ -22,8 +22,14 @@
                     Iterator<StudentQuiz> it = quizList.iterator();
                     while(it.hasNext()) {
                         StudentQuiz q = (StudentQuiz) it.next();
-                        %> <%=q.getQuizName()%>, <%=q.getQuizID()%>, <%=q.getModuleID()%> <br> <%
-                    }
+         %>
+         
+         
+         <table><tr><td><%=q.getModuleID()%></td><td><a href="<%=q.getQuizID()%>"><%=q.getQuizName()%></a></td></tr>
+             <tr><td></td><td><%=q.getStaffName()%></td></tr</table><br>
+             
+             
+             <% }
                     request.setAttribute("StudentQuizList", null);
                 }%>
     </body>

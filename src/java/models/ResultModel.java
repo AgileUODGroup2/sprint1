@@ -44,38 +44,29 @@ public class ResultModel {
         }
         return results;
     }
-    
-    //Glen - Returns all quiz results by Matriculation_Number in descending order
-    public java.util.LinkedList<Result> getResultsByMatriculationDESC() {
-        
+
+    public java.util.LinkedList<Result> getResultsByModule(String moduleID) {
         java.util.LinkedList<Result> results = new java.util.LinkedList<>();
-        String query = "SELECT * FROM Student_Quiz ORDER BY Matriculation_Number DESC";
-          
-        DatabaseConnection dConn = new DatabaseConnection();
         
-        try (Connection conn = dConn.connectToDatabase()) {
-            
-            PreparedStatement preparedStmt = conn.prepareStatement(query);
-            
-            try (ResultSet set = preparedStmt.executeQuery()) {
-                while(set.next()) {
+        String query = "SELECT * FROM student_quiz WHERE Module_ID = ? AND Staff_ID = ?";
+        
+        try (Connection con = db.connectToDatabase();
+                PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setString(1, moduleID);
+            try (ResultSet rs = ps.executeQuery()) {
+                while(rs.next()) {
                     Result res = new Result();
-                    res.setMatricNo(set.getInt("Matriculation_Number"));
-                    res.setQuizID(set.getInt("Quiz_ID"));
-                    res.setCompleted(set.getBoolean("Has_Completed"));
-                    res.setAttempts(set.getInt("Attempted_Count"));
-                    res.setScore(set.getInt("Score"));
-                    res.setDate(set.getDate("Date_Completed"));
+                    res.setMatricNo(rs.getInt("Matriculation_Number"));
+                    
                     results.add(res);
-                 }
+                }
             }
-               
-        } catch(SQLException err) {
-            System.out.println(err.getMessage());
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
-        
         return results;
     }
+    
 
     public Result getQuizResult(int matriculationNo, int quizID) {
 
