@@ -4,6 +4,7 @@
     Author     : erincoey
 --%>
 
+<%@page import="stores.LoggedIn"%>
 <%@page import="models.QuizModel"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
@@ -17,12 +18,17 @@
         <title>Create A Quiz</title>
     </head>
     <body>
-        <h1> Would you like to create a quiz?</h1>
+        <h1 style="color:black;"> Would you like to create a quiz?</h1>
         <h2> Quiz Details: </h2>
         
         <%
-           String date = new SimpleDateFormat("YYYY-MM-dd").format(new Date()); 
-           
+           String date = new SimpleDateFormat("YYYY-MM-dd").format(new Date());
+    
+            LoggedIn lg =(LoggedIn) session.getAttribute("LoggedIn"); 
+            String firstName = lg.getFirstName();
+            String lastName = lg.getLastName();
+            String name = firstName + " " + lastName;
+
         %>
         <div class ="main">
 		<form method="post"  action="createQuiz">
@@ -33,14 +39,14 @@
                         <input type="text" name="moduleId" id="moduleId">
                         <br>
 			<label for = "staffName">Staff Name: </label>
-                        <input type="text" name="staffName" id="staffName" style="width:30%;">
+                        <input type="text" name="staffName" value="<%=name%>" id="staffName" style="width:30%;">
                         <br>
                         <label for = "date">Date: </label>
                         <input type="text" name="date" id="date" value="<%=date%>"><br>
                         <br>
                         <label for = "available">Available: </label>
                         <input type="radio" name="available" value="Live"> Yes
-                        <input type="radio" name="available" value="Unfinished"> No
+                        <input type="radio" name="available" value="Unfinished" checked> No
                         <br><br><br>
                         
                         

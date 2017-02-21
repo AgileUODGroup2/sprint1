@@ -40,6 +40,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
         String submit = request.getParameter("submit");
         String save = request.getParameter("save");
         String addQuestion = request.getParameter("addQuestion");
+        String cancel = request.getParameter("cancel");
         String question = request.getParameter("question");
         String answerA = request.getParameter("answerA");
         String answerB = request.getParameter("answerB");
@@ -54,32 +55,160 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
         if (submit!=null)
         {
             //send it to the database
-            HttpSession session = request.getSession();
-            java.util.LinkedList<QuestionBank> questionList = (java.util.LinkedList<QuestionBank>) session.getAttribute("QuestionBank");
-//            Iterator x = questionList.listIterator(1);
-//            // print list with the iterator
-//               while (x.hasNext()) {
-//               System.out.println(x.next());
-//               }
-            String[] array;
-            array = new String[questionList.size()];
+            if(question==null)
+            {
+                HttpSession session = request.getSession();
+                java.util.LinkedList<QuestionBank> questionList = (java.util.LinkedList<QuestionBank>) session.getAttribute("QuestionBank");
+
+                String[] array;
+                array = new String[questionList.size()];
+
+                System.out.println("LinkedList contains: ");
+                   for(int i=0; i< questionList.size(); i++)
+                   {
+                     QuestionBank result = questionList.get(i);
+                     System.out.println(result.getQuery());
+
+                     array[i] = result.getQuery();
+
+                  }
+                   QuizModel quizModel = new QuizModel();
+                   quizModel.addQuestion(array);
+
+             }
+            else if(question!=null)
+            {
+                HttpSession session = request.getSession();
+            Quiz quizStore = (Quiz) session.getAttribute("Quiz");
+            int quizID = quizStore.getQuizID();
+            int questionID = quizStore.getNumberOfQuestions();
+            QuestionBank questionBank = new QuestionBank();
+            questionBank.setQuestion(question);
+            questionBank.setQuizID(quizID);
+            questionBank.setQuestionID(questionID);
+            questionBank.setA(answerA);
+            questionBank.setB(answerB);
+            questionBank.setC(answerC);
+            questionBank.setD(answerD);
+            questionBank.setCorrectAnswer(correctAnswer);
+            questionBank.setAnswerDesc(answerDesc);
+
+            String test = questionBank.getQuestion();
+            System.out.println("Test: "+ test);
             
-            System.out.println("LinkedList contains : ");
-               for(int i=0; i< questionList.size(); i++)
-               {
-                 QuestionBank result = questionList.get(i);
-                 System.out.println(result.getQuery());
-                 
-                 array[i] = result.getQuery();
-                  
-              }
-               QuizModel quizModel = new QuizModel();
-               quizModel.addQuestion(array);
+            java.util.LinkedList<QuestionBank> questionList = (java.util.LinkedList<QuestionBank>) session.getAttribute("QuestionBank");
+            
+            if(questionList!=null)
+            {
+                    System.out.println("Question list is not null");
+                    questionList.add(questionBank);
+                    
+            }
+            else if (questionList == null)
+            {
+                System.out.println("Question list is null");
+                questionList.add(questionBank);
+            }
+            
+                
+
+                String[] array;
+                array = new String[questionList.size()];
+
+                System.out.println("LinkedList contains: ");
+                   for(int i=0; i< questionList.size(); i++)
+                   {
+                     QuestionBank result = questionList.get(i);
+                     System.out.println(result.getQuery());
+
+                     array[i] = result.getQuery();
+
+                  }
+                   QuizModel quizModel = new QuizModel();
+                   quizModel.addQuestion(array);
+                   System.out.println("Quiz ID: " +quizID);
+                   quizModel.updateQuizStatus(quizID);
+            }
+            
+            Quiz quiz= new Quiz();
             response.sendRedirect("/AC31007Quiz/staffPortal.jsp");
+            
         }
         else if (save!=null)
         {
-            //send it to the database
+            if(question==null)
+            {
+                HttpSession session = request.getSession();
+                java.util.LinkedList<QuestionBank> questionList = (java.util.LinkedList<QuestionBank>) session.getAttribute("QuestionBank");
+
+                String[] array;
+                array = new String[questionList.size()];
+
+                System.out.println("LinkedList contains: ");
+                   for(int i=0; i< questionList.size(); i++)
+                   {
+                     QuestionBank result = questionList.get(i);
+                     System.out.println(result.getQuery());
+
+                     array[i] = result.getQuery();
+
+                  }
+                   QuizModel quizModel = new QuizModel();
+                   quizModel.addQuestion(array);
+             }
+            else if(question!=null)
+            {
+                HttpSession session = request.getSession();
+            Quiz quizStore = (Quiz) session.getAttribute("Quiz");
+            int quizID = quizStore.getQuizID();
+            int questionID = quizStore.getNumberOfQuestions();
+            QuestionBank questionBank = new QuestionBank();
+            questionBank.setQuestion(question);
+            questionBank.setQuizID(quizID);
+            questionBank.setQuestionID(questionID);
+            questionBank.setA(answerA);
+            questionBank.setB(answerB);
+            questionBank.setC(answerC);
+            questionBank.setD(answerD);
+            questionBank.setCorrectAnswer(correctAnswer);
+            questionBank.setAnswerDesc(answerDesc);
+
+            String test = questionBank.getQuestion();
+            System.out.println("Test: "+ test);
+            
+            java.util.LinkedList<QuestionBank> questionList = (java.util.LinkedList<QuestionBank>) session.getAttribute("QuestionBank");
+            
+            if(questionList!=null)
+            {
+                    System.out.println("Question list is not null");
+                    questionList.add(questionBank);
+                    
+            }
+            else if (questionList == null)
+            {
+                System.out.println("Question list is null");
+                questionList.add(questionBank);
+            }
+            
+                
+
+                String[] array;
+                array = new String[questionList.size()];
+
+                System.out.println("LinkedList contains: ");
+                   for(int i=0; i< questionList.size(); i++)
+                   {
+                     QuestionBank result = questionList.get(i);
+                     System.out.println(result.getQuery());
+
+                     array[i] = result.getQuery();
+
+                  }
+                   QuizModel quizModel = new QuizModel();
+                   quizModel.addQuestion(array);
+            }
+            
+            Quiz quiz= new Quiz();
             response.sendRedirect("/AC31007Quiz/staffPortal.jsp");
         }
         else if (addQuestion!=null)
@@ -120,7 +249,10 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
             
             
         }
-    
+        else if(cancel!=null)
+        {
+            response.sendRedirect("/AC31007Quiz/staffPortal.jsp");
+        }
 }
 
 @Override
