@@ -75,6 +75,27 @@ public class ResultModel {
         
         return results;
     }
+    public java.util.LinkedList<Result> getResultsByModule(String moduleID) {
+        java.util.LinkedList<Result> results = new java.util.LinkedList<>();
+        
+        String query = "SELECT * FROM student_quiz WHERE Module_ID = ? AND Staff_ID = ?";
+        
+        try (Connection con = db.connectToDatabase();
+                PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setString(1, moduleID);
+            try (ResultSet rs = ps.executeQuery()) {
+                while(rs.next()) {
+                    Result res = new Result();
+                    res.setMatricNo(rs.getInt("Matriculation_Number"));
+                    
+                    results.add(res);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return results;
+    }
     
 
     public Result getQuizResult(int matriculationNo, int quizID) {
