@@ -6,6 +6,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,13 +17,14 @@ import javax.servlet.http.HttpSession;
 import models.QuizModel;
 import stores.LoggedIn;
 import stores.Quiz;
+import stores.StudentQuiz;
 
 /**
  *
  * @author viivipursiainen
  */
-@WebServlet(urlPatterns = {"/liveQuiz", "/unfinishedQuiz", "/completedQuiz"})
-public class displayQuizzes extends HttpServlet {
+@WebServlet(urlPatterns = {"/completedQuizzes", "/incompleteQuizzes", "/pendingdQuizzes"})
+public class displayStudentQuizzes extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,30 +40,30 @@ public class displayQuizzes extends HttpServlet {
         int staffID = user.getID();
         
         QuizModel qm = new QuizModel();
-        java.util.LinkedList<Quiz> quizList = new java.util.LinkedList<Quiz>();
+        java.util.LinkedList<StudentQuiz> quizList = new java.util.LinkedList<StudentQuiz>();
         RequestDispatcher rd = null;
         switch (type) {
-            case "completedQuiz":
-                quizList = qm.getCompletedQuizzes(staffID);
-                rd = request.getRequestDispatcher("/displayQuizzes.jsp");
+            case "completedQuizzes":
+                quizList = qm.getCompletedStudentQuizzes(staffID);
+                rd = request.getRequestDispatcher("/displayStudentQuizzes.jsp");
                 request.setAttribute("QuizType", "Completed Quizzes");
                 break;
-            case "liveQuiz":
-                quizList = qm.getLiveQuizzes(staffID);
-                rd = request.getRequestDispatcher("/displayQuizzes.jsp");
-                request.setAttribute("QuizType", "Live Quizzes");
+            case "pendingdQuizzes":
+                quizList = qm.getPendingStudentQuizzes(staffID);
+                rd = request.getRequestDispatcher("/displayStudentQuizzes.jsp");
+                request.setAttribute("QuizType", "Pending Quizzes");
                 break;
-            case "unfinishedQuiz":
-                quizList = qm.getUnfinishedQuizzes(staffID);
-                rd = request.getRequestDispatcher("/displayQuizzes.jsp");
-                request.setAttribute("QuizType", "Unfinished Quizzes");
+            case "incompleteQuizzes":
+                quizList = qm.getIncompleteStudentQuizzes(staffID);
+                rd = request.getRequestDispatcher("/displayStudentQuizzes.jsp");
+                request.setAttribute("QuizType", "Incomplete Quizzes");
                 break;
             default:
                 rd = request.getRequestDispatcher("/index.jsp");
                 break;
         }
         
-        request.setAttribute("QuizList", quizList);
+        request.setAttribute("StudentQuizList", quizList);
         rd.forward(request, response);
     }
 }

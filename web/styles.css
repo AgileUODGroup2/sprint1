@@ -9,16 +9,31 @@ and open the template in the editor.
 */
 
 h1{
+    font-family: candara;
     font-family: segoe marker;
     font-size: 130px;
     color: White;
     text-align: center;
 }
 
+h3{
+    color: white;
+    font-family: candara;
+    font-size: 20px;
+}
+
+h4{
+    color: white;
+    font-family: candara;
+    text-align: left;
+    font-size: 15px;
+}
+
+
 .navBar{
-    height: 40%;
+    height: 90px;;
     width: 100%;
-    background-color: black;
+    background-color: #042356;
     margin: 0 auto;
     text-align: center;
     text-color: white;
@@ -44,9 +59,9 @@ h1{
     display: block;
     padding: 10px 15px; 
     margin: 0;
-    font-family: Candara;
+    font-family: segoe marker;
     color: white;
-    font-size: 45px;
+    font-size: 55px;
     font-weight: bold;
 }
 
@@ -54,7 +69,7 @@ h1{
 .navBar1{
     height: 50px;
     width: 100%;
-    background-color: #696D6E;
+    background-color: #25619f;
     margin: 0 auto;
     text-align: center;
     text-color: white;
@@ -80,6 +95,7 @@ h1{
     padding: 10px 15px; 
     margin: 0;
     font-family: Candara;
+    font-weight: bold;
     color: white;
     font-size: 22px;
 
@@ -97,7 +113,7 @@ h1{
 }
 
 div.main{
-	max-width: 70%;
+    max-width: 70%;
     height: auto; 
     min-height:100%;
     margin: auto;
@@ -168,12 +184,68 @@ input[type=submit] {
 span { display: block; margin: 0 0 3px; font-size: 1.2em; font-weight: bold; }
 
 button {
-    background-color: black;
+    background-color: #042356;
     border: none;
     color: white;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
-    display: block;
+    display: inline-block;
     font-size: 16px;
+}
+
+
+
+#div1{
+   width: 40%;
+   margin: 40%;
+   color: #042356;
+   padding: 0% 0%;
+   position: relative;
+   top: -1400px;
+   left: 130px;
+}
+
+#sec-button{
+      background-color: #25619f;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+#third-button{
+    background-color: #b71010;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+   display:inline-block;
+    font-size: 16px;
+}
+
+
+
+.centerContent1{
+	width: 70%;
+	margin: 0 auto;				/*Sets div to centre of page and is 70% width of the page*/
+	text-align: left;
+	padding: 20px;
+	color: #FFFFFF;
+	font-family: Calibri;
+	font-size: 25px;
+	background: #d3dfeb;			/*Gives the content div a slightly transparent black bacground*/
+}
+#cc1{
+        width: 100%;
+	margin: 0 auto;				/*Sets div to centre of page and is 70% width of the page*/
+	text-align: left;
+	padding: 20px;
+	color: #FFFFFF;
+	font-family: Calibri;
+	font-size: 25px;
+	background: grey;	
 }

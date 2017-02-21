@@ -6,6 +6,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Iterator;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -13,7 +15,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import models.QuizModel;
+import stores.QuestionBank;
+import stores.Quiz;
 
 /**
  *
@@ -27,7 +32,7 @@ public class addQuestions extends HttpServlet {
         // TODO Auto-generated method stub
         
     }
-  
+
 @Override
 protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -43,20 +48,77 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
         String correctAnswer = request.getParameter("correctAnswer");
         String answerDesc = request.getParameter("answerDesc");
         
+        
         System.out.println("Question: "+question+" "+answerA+" "+answerB+" "+answerC+ " " + answerD+ " " + correctAnswer + " "+ answerDesc);
         
         if (submit!=null)
         {
+            //send it to the database
+            HttpSession session = request.getSession();
+            java.util.LinkedList<QuestionBank> questionList = (java.util.LinkedList<QuestionBank>) session.getAttribute("QuestionBank");
+//            Iterator x = questionList.listIterator(1);
+//            // print list with the iterator
+//               while (x.hasNext()) {
+//               System.out.println(x.next());
+//               }
+            String[] array;
+            array = new String[questionList.size()];
+            
+            System.out.println("LinkedList contains : ");
+               for(int i=0; i< questionList.size(); i++)
+               {
+                 QuestionBank result = questionList.get(i);
+                 System.out.println(result.getQuery());
+                 
+                 array[i] = result.getQuery();
+                  
+              }
+               QuizModel quizModel = new QuizModel();
+               quizModel.addQuestion(array);
             response.sendRedirect("/AC31007Quiz/staffPortal.jsp");
         }
         else if (save!=null)
         {
+            //send it to the database
             response.sendRedirect("/AC31007Quiz/staffPortal.jsp");
         }
         else if (addQuestion!=null)
         {
-            
             response.sendRedirect("/AC31007Quiz/addQuestions.jsp");
+            
+            HttpSession session = request.getSession();
+            Quiz quizStore = (Quiz) session.getAttribute("Quiz");
+            int quizID = quizStore.getQuizID();
+            int questionID = quizStore.getNumberOfQuestions();
+            QuestionBank questionBank = new QuestionBank();
+            questionBank.setQuestion(question);
+            questionBank.setQuizID(quizID);
+            questionBank.setQuestionID(questionID);
+            questionBank.setA(answerA);
+            questionBank.setB(answerB);
+            questionBank.setC(answerC);
+            questionBank.setD(answerD);
+            questionBank.setCorrectAnswer(correctAnswer);
+            questionBank.setAnswerDesc(answerDesc);
+
+            String test = questionBank.getQuestion();
+            System.out.println("Test: "+ test);
+            
+            java.util.LinkedList<QuestionBank> questionList = (java.util.LinkedList<QuestionBank>) session.getAttribute("QuestionBank");
+            
+            if(questionList!=null)
+            {
+                    System.out.println("Question list is not null");
+                    questionList.add(questionBank);
+                    
+            }
+            else if (questionList == null)
+            {
+                System.out.println("Question list is null");
+                questionList.add(questionBank);
+            }
+            
+            
         }
     
 }

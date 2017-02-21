@@ -6,6 +6,7 @@
 
 <%@page import="stores.LoggedIn"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,41 +19,48 @@
         <% LoggedIn lg =(LoggedIn) session.getAttribute("LoggedIn"); %>
         
     </head>
-    <body bgcolor="9BD5E8">
+    <body bgcolor="d3dfeb">
 
 
         <div class="navBar">
             <ul>
-                <li><a href="index.jsp">QUIZ MASTER</a></li>
-
+                  
+                <li><a href="index.jsp">QUIZ MASTER </a></li>
+                 
             </ul>
         </div>
+        <img src="logo123.png" width="150px" style="position: absolute; left:0; top:0;">
 
         <div class="navBar1">
             <ul>
-                <li><a> STAFF PORTAL - Welcome <%=lg.getFirstName()%>!</a></li>
+                <li><a> Staff Portal - Welcome <%=lg.getFirstName()%>!</a></li>
             </ul>
         </div>
-
+<div class="centerContent1">
+    <div id="cc1">
   <form method="get" action="staffModules.jsp">
             <button type="submit">My Modules</button>
         </form>
 
         <a href="createQuiz"><button>Create Quiz</button></a>
         <br>
-        <a href="completedQuiz"><button>Completed Quizzes</button></a>
+        </div>
+        <a href="completedQuiz"><button id="sec-button">Completed Quizzes</button></a>
         <br>
-        <a href="liveQuiz"><button>Live Quizzes</button></a>
+        <a href="liveQuiz"><button id="sec-button">Live Quizzes</button></a>
         <br>
-        <a href="unfinishedQuiz"><button>Unfinished Quizzes</button></a>
+       
+        <a href="unfinishedQuiz"><button id="sec-button">Unfinished Quizzes</button></a>
         <br>
-        <a href="logout.jsp"><button>Log Out</button></a>
+        <a href="logout.jsp"><button id="third-button">Log Out</button></a>
        
         <h2>Profile</h2>
         <h4>Staff ID: </h4><p><%=lg.getUsername()%><p>
         <h4>First Name: </h4><p><%=lg.getFirstName()%></p>
         <h4>Last Name: </h4><p><%=lg.getLastName()%></p>
         <a href="editProfile.jsp">Edit Profile</a>
+        
+       </div>
         
     </body>
 </html>

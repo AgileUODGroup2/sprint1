@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import stores.LoggedIn;
 import stores.Quiz;
+import stores.StudentQuiz;
 
 /**
  *
@@ -74,27 +75,24 @@ public int getQuizId()
             
 }
 
-public void addQuestion()
+public void addQuestion(String[] array)
 {
     
-//    try{
-//        db = new DatabaseConnection();
-//        Connection conn = db.connectToDatabase();
-//        
-//        String query = "INSERT INTO question_bank (Quiz_ID, Question, A, B, C, D, Answer, Answer_Desc)"+"values(?,?,?,?,?,?,?,?)";
-//        System.out.println("Result: "+moduleID+staffName+dateCreated+quizName);
-//        PreparedStatement preparedStmt = conn.prepareStatement(query);
-//        preparedStmt.setString(1, moduleID);
-//        preparedStmt.setString(2,staffName);
-//        preparedStmt.setString(3,dateCreated);
-//        preparedStmt.setString(4,quizName);
-//        preparedStmt.setString(5,available);
-//        preparedStmt.executeUpdate();
-//        conn.close();
-//        }
-//    catch(SQLException err){
-//            System.out.println(err.getMessage());
-//        }
+    try{
+        db = new DatabaseConnection();
+        Connection conn = db.connectToDatabase();
+        for (int i =0; i<array.length; i++)
+        {
+            
+            PreparedStatement preparedStmt = conn.prepareStatement(array[i]);
+            preparedStmt.executeUpdate();
+        }
+        
+        conn.close();
+        }
+    catch(SQLException err){
+            System.out.println(err.getMessage());
+        }
     
 }
 
@@ -134,6 +132,7 @@ public java.util.LinkedList<Quiz> getCompletedQuizzes(int staffID) {
     String query = "SELECT * FROM completedquiz WHERE Staff_ID = ?";
     return getQuizzes(query, staffID);
 }
+<<<<<<< HEAD
 
 public Quiz getQuizDetails(int quizID) {
 
@@ -172,4 +171,90 @@ public Quiz getQuizDetails(int quizID) {
 
     }
 
+=======
+public java.util.LinkedList<StudentQuiz> getStudentQuizzes(String query, int matricNo) {
+    
+    db = new DatabaseConnection();
+    java.util.LinkedList<StudentQuiz> quizzes = new java.util.LinkedList<>();
+    try (Connection con = db.connectToDatabase();
+        PreparedStatement ps = con.prepareStatement(query)) {
+        ps.setInt(1, matricNo);
+        try (ResultSet rs = ps.executeQuery()) {
+            while(rs.next()) {
+                StudentQuiz q = new StudentQuiz();
+                q.setQuizID(rs.getInt("Quiz_ID"));
+                q.setQuizName(rs.getString("Quiz_Name"));
+                q.setModuleID(rs.getString("Module_ID"));
+                q.setDateCreated(rs.getDate("Date_Created"));
+                q.setStaffName(rs.getString("Staff_Name"));
+                q.setNumberOfQuestions(rs.getInt("Num_Of_Questions"));
+                q.setAttempts(rs.getInt("Attempted_Count"));
+                q.setScore(rs.getInt("Score"));
+                q.setDateCompleted(rs.getDate("Date_Completed"));
+            
+                quizzes.add(q);
+            }
+        }
+    } catch (SQLException e) {
+        System.out.println(e.getMessage());
+    }
+    return quizzes;
+>>>>>>> origin/master
 }
+
+public java.util.LinkedList<StudentQuiz> getCompletedStudentQuizzes(int matricNo) {
+    String query = "select * from studentcompleted where Matriculation_Number=?;";
+    return getStudentQuizzes(query, matricNo);
+}
+public java.util.LinkedList<StudentQuiz> getIncompleteStudentQuizzes(int matricNo) {
+    String query = "select * from studentincomplete where Matriculation_Number=?;";
+    return getStudentQuizzes(query, matricNo);
+}
+public java.util.LinkedList<StudentQuiz> getPendingStudentQuizzes(int matricNo) {
+    String query = "select * from studentpending where Matriculation_Number=?;";
+    return getStudentQuizzes(query, matricNo);
+}
+
+public void makeQuizLive(int QuizID){ //change to session variables
+    
+     try{
+        db = new DatabaseConnection();
+        Connection conn = db.connectToDatabase();
+ 
+        String query = "UPDATE quiz set Quiz_Status = 'Live' WHERE Quiz_ID = ?";
+        
+        PreparedStatement preparedStmt = conn.prepareStatement(query);
+       
+        preparedStmt.setInt(1,QuizID);
+        
+        preparedStmt.executeUpdate();
+        conn.close();
+        }
+    catch(SQLException err){
+            System.out.println(err.getMessage());
+        }
+ }
+
+public void filterByRecent(){ //change to session variables
+  
+     try{
+        db = new DatabaseConnection();
+        Connection conn = db.connectToDatabase();
+ 
+        String query =  "SELECT * FROM quiz WHERE Quiz_Status = 'Live' ORDER BY Date_Created";
+        
+        PreparedStatement preparedStmt = conn.prepareStatement(query);
+       
+      //  preparedStmt.setInt(1,QuizID);
+        
+        preparedStmt.executeUpdate();
+        conn.close();
+        }
+    catch(SQLException err){
+            System.out.println(err.getMessage());
+        }
+ }
+
+
+}
+
