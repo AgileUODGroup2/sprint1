@@ -28,7 +28,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)t
     
 
    QuizModel makeLive = new QuizModel();
-    makeLive.makeQuizLive(10); // change to session variable
+    makeLive.makeQuizLive(10); // change to session variables
     
     response.sendRedirect("specificQuiz.jsp");
 }
