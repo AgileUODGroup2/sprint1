@@ -130,4 +130,36 @@ public class ResultModel {
         
         return averageScore;
     }
+    
+    public java.util.LinkedList<Result> getQuizResults(int quizID) {
+        
+        String query = "SELECT * FROM student_quiz WHERE Quiz_ID = ? AND Has_Completed = 'Completed'";
+        
+        java.util.LinkedList<Result> quizResult = new java.util.LinkedList<>();
+        
+        try (Connection con = db.connectToDatabase();) {
+            
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, quizID);
+            
+            try (ResultSet rs = ps.executeQuery()) {
+                while(rs.next()) {
+                    
+                    Result result = new Result();
+                    result.setMatricNo(rs.getInt("Matriculation_Number"));
+                    result.setQuizID(rs.getInt("Quiz_ID"));
+                    result.setCompleted(true);
+                    result.setAttempts(rs.getInt("Attempted_Count"));
+                    result.setScore(rs.getInt("Score"));
+                    result.setDate(rs.getDate("Date_Completed"));
+                    
+                    quizResult.add(result);
+                }
+            }
+            
+        } catch (SQLException e) {
+                System.out.println(e.getMessage());
+        }
+        return quizResult;
+    }
 }

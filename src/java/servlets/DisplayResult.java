@@ -70,14 +70,16 @@ public class DisplayResult extends HttpServlet {
         LoggedIn lg =(LoggedIn)session.getAttribute("LoggedIn");
         
         //LoggedIn lg = new LoggedIn();
-        //lg.setUsername("1"); // TEMP - GET THIS FROM SESSION VARIABLE!
+        //lg.setUsername("1"); // TEMP - THIS IS RETRIEVED FROM SESSION VARIABLE!
         
         if(lg.isStaff()){
             Quiz quiz = qm.getQuizDetails(quizID);
             quiz.setAverageScore(rm.getQuizAverage(quizID));
+            java.util.LinkedList<Result> quizResult = quizResult = rm.getQuizResults(quizID);
             
             RequestDispatcher rd = request.getRequestDispatcher("/studentResults.jsp"); // SET CORRECT REDIRECT LOCATION
             
+            request.setAttribute("Results", quizResult);
             request.setAttribute("Quiz", quiz);
             rd.forward(request, response);
         }
