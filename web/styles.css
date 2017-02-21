@@ -14,21 +14,46 @@ h1{
     font-size: 130px;
     color: White;
     text-align: center;
+    margin: 2%;
 }
 
 h3{
     color: white;
     font-family: candara;
+    text-align: left;
+    font-size: 15px;
+}
+h5{
+    color: white;
+    font-family: candara;
     font-size: 20px;
+    text-align: center;
 }
 
 h4{
     color: white;
     font-family: candara;
-    text-align: left;
     font-size: 15px;
 }
+/* unvisited link */
+a:link {
+    color: white;
+}
 
+/* visited link */
+a:visited {
+    color: white;
+}
+
+/* mouse over link */
+a:hover {
+    color: #1E90FF;
+}
+
+/* selected link */
+a:active {
+    color: white;
+}
 
 .navBar{
     height: 90px;;
@@ -38,8 +63,6 @@ h4{
     text-align: center;
     text-color: white;
     white-space: nowrap; 
-
-
 }
 
 .navBar ul{
@@ -195,17 +218,6 @@ button {
 }
 
 
-
-#div1{
-   width: 40%;
-   margin: 40%;
-   color: #042356;
-   padding: 0% 0%;
-   position: relative;
-   top: -1400px;
-   left: 130px;
-}
-
 #sec-button{
       background-color: #25619f;
     border: none;
@@ -227,25 +239,20 @@ button {
     font-size: 16px;
 }
 
-
-
-.centerContent1{
+.centerContent2{
 	width: 70%;
 	margin: 0 auto;				/*Sets div to centre of page and is 70% width of the page*/
-	text-align: left;
-	padding: 20px;
-	color: #FFFFFF;
-	font-family: Calibri;
-	font-size: 25px;
-	background: #d3dfeb;			/*Gives the content div a slightly transparent black bacground*/
+	background: #042356;			/*Gives the content div a slightly transparent black bacground*/
 }
-#cc1{
-        width: 100%;
-	margin: 0 auto;				/*Sets div to centre of page and is 70% width of the page*/
-	text-align: left;
-	padding: 20px;
-	color: #FFFFFF;
-	font-family: Calibri;
-	font-size: 25px;
-	background: grey;	
+
+#cen1{
+       width: 100%;
+       background-color: #042356;
+       align-items: center;
+}
+#cen2{
+       width: 100%;
+       background-color: #042356;
+       display: block;
+       margin: auto;
 }
