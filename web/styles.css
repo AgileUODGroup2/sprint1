@@ -15,11 +15,21 @@ h1{
     color: White;
     text-align: center;
 }
+h2{
+    color: white;
+    font-family: candara;
+    font-size: 40px;
+    font-weight: bold;
+    margin:10px;
+   
+}
 
 h3{
     color: white;
     font-family: candara;
-    font-size: 20px;
+    font-size: 30px;
+    font-weight: bold;
+     margin:10px;
 }
 
 h4{
@@ -27,6 +37,7 @@ h4{
     font-family: candara;
     text-align: left;
     font-size: 15px;
+     margin:10px;
 }
 
 
@@ -61,7 +72,7 @@ h4{
     margin: 0;
     font-family: segoe marker;
     color: white;
-    font-size: 55px;
+    font-size: 60px;
     font-weight: bold;
 }
 
@@ -184,7 +195,7 @@ input[type=submit] {
 span { display: block; margin: 0 0 3px; font-size: 1.2em; font-weight: bold; }
 
 button {
-    background-color: #042356;
+    background-color: yellow;
     border: none;
     color: white;
     padding: 15px 32px;
@@ -207,27 +218,48 @@ button {
 }
 
 #sec-button{
-      background-color: #25619f;
-    border: none;
+    background-color: #25619f;
     color: white;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 20px;
+    border: 2px solid #042356;
+    border-radius: 25px;
+    margin-left: 50px;
+    width: 80%;
+
 }
 #third-button{
     background-color: #b71010;
-    border: none;
     color: white;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
-   display:inline-block;
-    font-size: 16px;
+    display: inline-block;
+    font-size: 20px;
+    border: 1px solid #042356;
+    border-radius: 25px;
+    margin-left: 50px;
+    width: 80%;
+    
 }
 
+#fourth-button{
+    background-color: #25619f;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    border: 2px solid #042356;
+    border-radius: 15px;
+    margin-left: 50px;
+    width: 80%;
 
+}
 
 .centerContent1{
 	width: 70%;
@@ -240,12 +272,36 @@ button {
 	background: #d3dfeb;			/*Gives the content div a slightly transparent black bacground*/
 }
 #cc1{
-        width: 100%;
-	margin: 0 auto;				/*Sets div to centre of page and is 70% width of the page*/
-	text-align: left;
-	padding: 20px;
-	color: #FFFFFF;
-	font-family: Calibri;
-	font-size: 25px;
-	background: grey;	
+        
+	width: 60%;		/*welcome message is 50% width of centreContent div*/
+	float: left;
+	height: 30%;
+	overflow: auto;
+        background: #042356;
+        
+        
+        
+}
+
+
+#cc2{
+        width: 40%;		/*welcome message is 50% width of centreContent div*/
+	float: left;
+	height: 30%;
+	overflow: auto;
+        background: #d3dfeb;
+        align-content: center;
+        
+        
+            
+        
+}
+#cc3{
+    
+        width: 100%;		/*welcome message is 50% width of centreContent div*/
+	float: left;
+	height: 30%;
+	overflow: auto;
+       background: #042356;
+        align-content: center;
 }
