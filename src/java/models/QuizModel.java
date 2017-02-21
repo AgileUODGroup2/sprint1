@@ -132,7 +132,6 @@ public java.util.LinkedList<Quiz> getCompletedQuizzes(int staffID) {
     String query = "SELECT * FROM completedquiz WHERE Staff_ID = ?";
     return getQuizzes(query, staffID);
 }
-<<<<<<< HEAD
 
 public Quiz getQuizDetails(int quizID) {
 
@@ -171,7 +170,6 @@ public Quiz getQuizDetails(int quizID) {
 
     }
 
-=======
 public java.util.LinkedList<StudentQuiz> getStudentQuizzes(String query, int matricNo) {
     
     db = new DatabaseConnection();
@@ -199,7 +197,6 @@ public java.util.LinkedList<StudentQuiz> getStudentQuizzes(String query, int mat
         System.out.println(e.getMessage());
     }
     return quizzes;
->>>>>>> origin/master
 }
 
 public java.util.LinkedList<StudentQuiz> getCompletedStudentQuizzes(int matricNo) {
