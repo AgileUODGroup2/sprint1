@@ -39,7 +39,7 @@
         <div id="cc1">
             
             <h2>Your Profile</h2>
-            <h3>Staff ID: &nbsp;<%=lg.getUsername()%> </h3>
+            <h3>Staff ID:<%=lg.getUsername()%></h3>
             <h3>First Name:&nbsp;<%=lg.getFirstName()%></h3>
             <h3>Last Name:&nbsp;<%=lg.getLastName()%></h3>
             <br>
