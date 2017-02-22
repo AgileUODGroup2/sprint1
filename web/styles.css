@@ -455,4 +455,26 @@ a:link{
 }
 
 
-      
+   #result{
+    
+        width: 40%;		/*welcome message is 50% width of centreContent div*/
+	float: right;
+	height: 30%;
+	overflow: auto;
+        background: #042356;
+  
+       
+
+}   
+
+#quizprofile{
+        display:inline-block;
+	width: 45%;		/*welcome message is 50% width of centreContent div*/
+	float: left;
+	height: 30%;
+
+        background: #042356;
+        
+        
+        
+}
