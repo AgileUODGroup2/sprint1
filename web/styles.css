@@ -12,8 +12,9 @@ h1{
     font-family: candara;
     font-family: segoe marker;
     font-size: 130px;
-    color: White;
+    color: white;
     text-align: center;
+    margin: -2px;
 }
 h2{
     color: white;
@@ -30,7 +31,7 @@ h3{
     font-family: candara;
     font-size: 30px;
     font-weight: bold;
-     margin:10px;
+    margin:10px;
     margin: 2%;
 }
 
@@ -39,7 +40,7 @@ h4{
     font-family: candara;
     text-align: left;
     font-size: 15px;
-     margin:10px;
+    margin:10px;
 }
 h5{
     color: white;
@@ -189,6 +190,18 @@ label {
     font-size: 1.4em;
     color: white; 
     font-family: 'Raleway',sans-serif; 
+    margin-left: 30%;
+}
+label1 {
+    float: left;
+    text-align: right;
+    margin-right: 15px;
+    width: 150px;
+    padding-top: 10px;
+    font-size: 1.4em;
+    color: white; 
+    font-family: 'Raleway',sans-serif; 
+    margin-left: 30%;
 }
 
 
@@ -237,6 +250,10 @@ input[type=submit] {
     border-radius: 8px;
     display:block;
 
+}
+select1{
+    
+    
 }
 select1{
     
@@ -304,11 +321,35 @@ button {
 
 }
 
+#fifth-button{
+    background-color: #b71010;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 20px;
+    border: 1px solid #042356;
+    border-radius: 25px;
+    margin: auto;
+    width: 80%;
+    
+}
+
 .centerContent1{
 
 	width: 70%;
 	margin: 0 auto;				/*Sets div to centre of page and is 70% width of the page*/
 	background: #042356;			/*Gives the content div a slightly transparent black bacground*/
+}
+.cent1{
+
+	width: 70%;			/*Sets div to centre of page and is 70% width of the page*/
+	background: #b71010;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: left;
 }
 
 
@@ -358,3 +399,4 @@ button {
         margin-top: 30px;
 
 }
+      
