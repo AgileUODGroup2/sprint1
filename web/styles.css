@@ -170,6 +170,15 @@ a:active {
     background-color: white;
 
 }
+chart_div{
+    width: 60%;		/*welcome message is 50% width of centreContent div*/
+	float: left;
+	height: 30%;
+	overflow: auto;
+        display:inline-block;
+        margin:0 auto;
+    
+}
 
 div.main{
     max-width: 70%;
