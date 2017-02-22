@@ -32,10 +32,10 @@ public class register extends HttpServlet {
 protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-    String First_Name = request.getParameter("First_Name");
-    String Last_Name = request.getParameter("Last_Name");
-    String Password = request.getParameter("Password");
-    String Staff_ID = request.getParameter("Staff_ID");
+    String First_Name = request.getParameter("firstName");
+    String Last_Name = request.getParameter("lastName");
+    String Password = request.getParameter("password");
+    String Staff_ID = request.getParameter("staffID");
 
 
     int Staff_IDnew = Integer.parseInt(Staff_ID);
@@ -45,6 +45,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
     System.out.println("Result: " + Staff_ID + First_Name + Last_Name + Password);
     registerModel register = new registerModel();
     register.register(Staff_IDnew, First_Name,Last_Name, Password );
+    response.sendRedirect("index.jsp");
     
 }
 

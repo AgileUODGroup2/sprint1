@@ -191,4 +191,46 @@ public class user {
         return nameArr;
         
     }
+
+    public java.util.Vector<String> getStaffModules(int staffID) {
+
+        DatabaseConnection db = new DatabaseConnection();
+        java.util.Vector<String> modules = new java.util.Vector<>();
+        String query = "SELECT Module_ID FROM staff_enrolment WHERE Staff_ID = ? GROUP BY Module_ID";
+        
+        try (Connection con = db.connectToDatabase();
+                PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setInt(1, staffID);
+            try (ResultSet rs = ps.executeQuery()) {
+                while(rs.next()) {
+                    modules.add(rs.getString("Module_ID"));
+                }
+            }
+        } catch (SQLException e) {
+            System.out.print(e.getMessage());
+        }
+        return modules;
+        
+    }
+
+    public java.util.Vector<String> getStudentModules(int matricNo) {
+
+        DatabaseConnection db = new DatabaseConnection();
+        java.util.Vector<String> modules = new java.util.Vector<>();
+        String query = "SELECT Module_ID FROM student_enrolment WHERE Matriculation_Number = ? GROUP BY Module_ID";
+        
+        try (Connection con = db.connectToDatabase();
+                PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setInt(1, matricNo);
+            try (ResultSet rs = ps.executeQuery()) {
+                while(rs.next()) {
+                    modules.add(rs.getString("Module_ID"));
+                }
+            }
+        } catch (SQLException e) {
+            System.out.print(e.getMessage());
+        }
+        return modules;
+        
+    }
 }

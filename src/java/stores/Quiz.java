@@ -20,6 +20,7 @@ public class Quiz {
     int numberOfQuestions;
     private int averageScore;
     private int staffID;
+    private int[] gradeDivide;
 
     public void setQuizID(int quizID) {
         this.quizID = quizID;
@@ -41,6 +42,9 @@ public class Quiz {
     }
     public void setNumberOfQuestions(int numberOfQuestions) {
         this.numberOfQuestions = numberOfQuestions;
+    }
+    public void setGradeDivide(int[] gradeDivide){
+        this.gradeDivide=gradeDivide;
     }
     
     public int getQuizID() {
@@ -75,5 +79,8 @@ public class Quiz {
     }
     public void setStaffID(int staffID) {
         this.staffID = staffID;
+    }
+    public int[] getGradeDivide(){
+        return gradeDivide;
     }
 }

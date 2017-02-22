@@ -9,45 +9,47 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <body bgcolor=#d3dfeb>
+                <link rel="stylesheet" type="text/css" href="styles.css">
         <title>Register</title>
     </head>
-    <body>
-        <form method="post" action="register">
-            <center>
-            <table border="1" width="30%" cellpadding="5">
-                <thead>
-                    <tr>
-                        <th colspan="2">Enter Information Here</th>
-                    </tr>
-                </thead>
-                <tbody>
-                        <tr>
-                        <td>Staff ID</td>
-                        <td><input type="text" name="Staff_ID" value="" /></td>
-                    </tr>
-                    <tr>
-                        <td>First Name</td>
-                        <td><input type="text" name="First_Name" value="" /></td>
-                    </tr>
-                    <tr>
-                        <td>Last Name</td>
-                        <td><input type="text" name="Last_Name" value="" /></td>
-                    </tr>
-                  
-                    <tr>
-                        <td>Password</td>
-                        <td><input type="password" name="Password" value="" /></td>
-                    </tr>
-                    <tr>
-                        <td><input type="submit" value="Submit" /></td>
-                       
-                    </tr>
-                    <tr>
-                        
-                    </tr>
-                </tbody>
-            </table>
-            </center>
+        <div class="navBar">
+            <ul>
+               <li><a href="index.jsp">QUIZ MASTER</a></li>
+             </ul>
+        </div>
+        <img src="logo123.png" width="115px" style="position: absolute; left:0; top: 0;">
+        <img src="logo123.png" width="115px" style="position: absolute; right:0; top: 0;">
+    </div>
+    <div class="navBar1">
+            <ul>
+                <li><a>Register</a></li>
+            </ul>
+    </div>
+    <br>
+    <div class="centerContent1">
+        <form method="post" action="register" style="max-width: 100%; display: blobk;">
+            <br>
+    <h6> Please enter the details of the staff member you wish to register in the form below</h6>
+    <br>
+    </div>
+    <div class="cent1">
+    <h8><label1 for = "staffID">Staff ID: </label1></h8>
+    <input type="text" name="staffID" id="staffID" style="width:250px; height: 30px;">
+                        <br>
+    <h8><label1 for = "firstName">First Name: </label1></h8>
+    <input type="text" name="firstName" id="firstName" style="width:250px; height: 30px;">
+                        <br>
+    <h8><label1 for = "lastName">Last Name: </label1></h8>
+    <input type="text" name="lastName" id="lastName" style="width:250px; height: 30px;">
+                        <br>
+    <h8><label1 for = "password">Password: </label1></h8>
+    <input type="password" name="password" id="password" style="width:250px; height: 30px;">
+                        <br>    
+                        <br>
+    <input type="submit" value="Submit" style="margin: auto;"> 
         </form>
+    </div>
     </body>
 </html>
+ 

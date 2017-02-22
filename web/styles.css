@@ -12,14 +12,27 @@ h1{
     font-family: candara;
     font-family: segoe marker;
     font-size: 130px;
-    color: White;
+    color: white;
     text-align: center;
+    margin: -2px;
+}
+h2{
+    color: white;
+    font-family: candara;
+    font-size: 40px;
+    font-weight: bold;
+    margin:10px;
+   
+   
 }
 
 h3{
     color: white;
     font-family: candara;
-    font-size: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    margin:10px;
+    margin: 2%;
 }
 
 h4{
@@ -27,8 +40,56 @@ h4{
     font-family: candara;
     text-align: left;
     font-size: 15px;
+    margin:10px;
+}
+h5{
+    color: white;
+    font-family: candara;
+    font-size: 20px;
+    text-align: center;
+}
+h6{
+      color: red;
+    font-family: candara;
+    font-size: 30px;
+    font-weight: bold;
+     margin:10px;
+    margin: 2%;
 }
 
+h7{
+      color: white;
+    font-family: candara;
+    font-size: 40px;
+    text-align: center;
+    font-weight: bold;
+    display: block;
+    margin: auto;
+}
+
+a{
+    font-family: candara;
+    font-size: 15px;
+}
+/* unvisited link */
+a:link {
+    color: white;
+}
+
+/* visited link */
+a:visited {
+    color: white;
+}
+
+/* mouse over link */
+a:hover {
+    color: #1E90FF;
+}
+
+/* selected link */
+a:active {
+    color: white;
+}
 
 .navBar{
     height: 90px;;
@@ -38,8 +99,6 @@ h4{
     text-align: center;
     text-color: white;
     white-space: nowrap; 
-
-
 }
 
 .navBar ul{
@@ -61,7 +120,7 @@ h4{
     margin: 0;
     font-family: segoe marker;
     color: white;
-    font-size: 55px;
+    font-size: 60px;
     font-weight: bold;
 }
 
@@ -131,6 +190,18 @@ label {
     font-size: 1.4em;
     color: white; 
     font-family: 'Raleway',sans-serif; 
+    margin-left: 30%;
+}
+label1 {
+    float: left;
+    text-align: right;
+    margin-right: 15px;
+    width: 150px;
+    padding-top: 10px;
+    font-size: 1.4em;
+    color: white; 
+    font-family: 'Raleway',sans-serif; 
+    margin-left: 30%;
 }
 
 
@@ -180,11 +251,19 @@ input[type=submit] {
     display:block;
 
 }
+select1{
+    
+    
+}
+select1{
+    
+    
+}
 
 span { display: block; margin: 0 0 3px; font-size: 1.2em; font-weight: bold; }
 
 button {
-    background-color: #042356;
+    background-color: yellow;
     border: none;
     color: white;
     padding: 15px 32px;
@@ -194,58 +273,130 @@ button {
     font-size: 16px;
 }
 
-
-
-#div1{
-   width: 40%;
-   margin: 40%;
-   color: #042356;
-   padding: 0% 0%;
-   position: relative;
-   top: -1400px;
-   left: 130px;
-}
 
 #sec-button{
-      background-color: #25619f;
-    border: none;
+    background-color: #042356;
     color: white;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
+    display: block;
+    font-size: 20px;
+    border: 2px solid #042356;
+    border-radius: 25px;
+    margin: auto;
+    width: 80%;
+
 }
 #third-button{
     background-color: #b71010;
-    border: none;
     color: white;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
-   display:inline-block;
-    font-size: 16px;
+    display: block;
+    font-size: 20px;
+    border: 1px solid #042356;
+    
+    margin: auto;
+    width: 80%;
+    
+    
 }
 
 
+
+#fourth-button{
+    background-color: #25619f;;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 20px;
+    border: 1px solid #042356;
+    margin: auto;
+    width: 80%;
+    
+
+}
+
+#fifth-button{
+    background-color: #b71010;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 20px;
+    border: 1px solid #042356;
+    border-radius: 25px;
+    margin: auto;
+    width: 80%;
+    
+}
 
 .centerContent1{
+
 	width: 70%;
 	margin: 0 auto;				/*Sets div to centre of page and is 70% width of the page*/
-	text-align: left;
-	padding: 20px;
-	color: #FFFFFF;
-	font-family: Calibri;
-	font-size: 25px;
-	background: #d3dfeb;			/*Gives the content div a slightly transparent black bacground*/
+	background: #042356;			/*Gives the content div a slightly transparent black bacground*/
 }
+.cent1{
+
+	width: 70%;			/*Sets div to centre of page and is 70% width of the page*/
+	background: #b71010;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: left;
+}
+
+
+#cen1{
+       width: 100%;
+       background-color: #042356;
+       align-items: center;
+}
+#cen2{
+       width: 100%;
+       background-color: #042356;
+       display: block;
+       margin: auto;
+}
+
 #cc1{
-        width: 100%;
-	margin: 0 auto;				/*Sets div to centre of page and is 70% width of the page*/
-	text-align: left;
-	padding: 20px;
-	color: #FFFFFF;
-	font-family: Calibri;
-	font-size: 25px;
-	background: grey;	
+        
+	width: 60%;		/*welcome message is 50% width of centreContent div*/
+	float: left;
+	height: 30%;
+	overflow: auto;
+        background: #042356;
+        
+        
+        
 }
+
+
+#cc2{
+        width: 40%;		/*welcome message is 50% width of centreContent div*/
+	float: left;
+	height: 30%;
+	overflow: auto;
+        background: #d3dfeb;
+       
+       
+          
+}
+#cc3{
+    
+        width: 100%;		/*welcome message is 50% width of centreContent div*/
+	float: left;
+	height: 30%;
+	overflow: auto;
+        background: #25619f;
+        align-content: center;
+        margin-top: 30px;
+
+}
+      

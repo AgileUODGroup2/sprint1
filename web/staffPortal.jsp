@@ -20,46 +20,70 @@
         
     </head>
     <body bgcolor="d3dfeb">
-
-
         <div class="navBar">
             <ul>
-                  
                 <li><a href="index.jsp">QUIZ MASTER </a></li>
-                 
-            </ul>
+             </ul>
         </div>
         <img src="logo123.png" width="115px" style="position: absolute; left:0; top: 0;">
+        <img src="logo123.png" width="115px" style="position: absolute; right:0; top: 0;">
 
         <div class="navBar1">
             <ul>
                 <li><a> Staff Portal - Welcome <%=lg.getFirstName()%>!</a></li>
             </ul>
         </div>
-<div class="centerContent1">
-    <div id="cc1">
-  <form method="get" action="staffModules.jsp">
-            <button type="submit">My Modules</button>
-        </form>
-
-        <a href="createQuiz"><button>Create Quiz</button></a>
-        <br>
+            <br>
+            <br>
+            <br>
+            <div class="centerContent1">
+                 
+        <div id="cc1">
+            <img src="pic1.png" style="display: inline-block; float:right; width:33%;">
+            <h2>Your Profile</h2>
+            <h3>Staff ID:<%=lg.getUsername()%></h3>
+            <h3>First Name:&nbsp;<%=lg.getFirstName()%></h3>
+            <h3>Last Name:&nbsp;<%=lg.getLastName()%></h3>
+            <br>
+            
+            
+       </div>
+          
+            
+ 
+        <div id="cc2">
+             <br>
+             <br>
+            <a href="editProfile.jsp"><button id="fourth-button">Edit Profile</button></a>
+          
+            <a href ="staffModules.jsp"><button id="fourth-button">My Modules</button></a>
+            
+              <a href="logout.jsp"><button id="third-button">Log Out</button></a>
+    <br>
+            <br>
+            <br>
+       
+          
         </div>
-        <a href="completedQuiz"><button id="sec-button">Completed Quizzes</button></a>
-        <br>
-        <a href="liveQuiz"><button id="sec-button">Live Quizzes</button></a>
-        <br>
-       
-        <a href="unfinishedQuiz"><button id="sec-button">Unfinished Quizzes</button></a>
-        <br>
-        <a href="logout.jsp"><button id="third-button">Log Out</button></a>
-       
-        <h2>Profile</h2>
-        <h4>Staff ID: </h4><p><%=lg.getUsername()%><p>
-        <h4>First Name: </h4><p><%=lg.getFirstName()%></p>
-        <h4>Last Name: </h4><p><%=lg.getLastName()%></p>
-        <a href="editProfile.jsp">Edit Profile</a>
-        
+            <br>
+            <br>
+            <br>
+            <br>
+        <div id ="cc3"
+             <p><h7>My Quizzes </h7></p>
+        <p><a href="createQuiz"><button id="sec-button">Create Quiz</button></a></p>
+              
+        <p><a href="completedQuiz"><button id="sec-button">Completed Quizzes</button></a></p>
+                
+        <p><a href="liveQuiz"><button id="sec-button">Live Quizzes</button></a></p>
+               
+                <a href="unfinishedQuiz"><button id="sec-button">Unfinished Quizzes</button></a>
+                <br>
+                <br>
+                <br>
+        </div>
+          
+         
        </div>
         
     </body>
