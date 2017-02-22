@@ -21,10 +21,9 @@ public class testModel {
 
 public String getStaffDetails()
 {
-    Connection conn = null;
     try{
         DatabaseConnection db = new DatabaseConnection();
-        conn = db.connectToDatabase();
+        Connection conn = db.connectToDatabase();
         System.out.println("Database connected: "+conn);
         Statement st = conn.createStatement();
         String query = "SELECT * from staff";
@@ -44,11 +43,7 @@ public String getStaffDetails()
              }
         catch(SQLException err){
             System.out.println(err.getMessage());
-    }finally{
-        if (conn != null) {
-            try { conn.close(); } catch (Exception e) { /* handle close exception, quite usually ignore */ } 
         }
-    }
     return null;
 }
 

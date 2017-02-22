@@ -19,10 +19,10 @@ public class wholeStudentListModel {
     
     public String getWholeStudentList(){
         
-    Connection conn = null;
+    
    try{
         DatabaseConnection db = new DatabaseConnection();
-        conn = db.connectToDatabase();
+        Connection conn = db.connectToDatabase();
         Statement st = conn.createStatement();
         String query = "SELECT * FROM student";
         
@@ -43,11 +43,7 @@ public class wholeStudentListModel {
              }
         catch(SQLException err){
             System.out.println(err.getMessage());
-    }finally{
-        if (conn != null) {
-            try { conn.close(); } catch (Exception e) { /* handle close exception, quite usually ignore */ } 
         }
-    }
     return null;
  }
 }

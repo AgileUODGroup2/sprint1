@@ -21,10 +21,7 @@ public class EditQuiz {
     //
     public void AlterQuizTitle(String question, int questionID, int quizID) throws SQLException{
         db = new DatabaseConnection();
-        Connection conn = null;
-        try{
-            conn = db.connectToDatabase();
-            
+        try (Connection conn = db.connectToDatabase()) {
             
             //Create and prepare query
             String query = "UPDATE Question_Bank SET Question=? WHERE Question_ID=? AND Quiz_ID=?";
@@ -40,19 +37,13 @@ public class EditQuiz {
         }
         catch(SQLException err){
             System.out.println(err.getMessage());
-        }finally {
-            if (conn != null) {
-                try { conn.close(); } catch (Exception e) { /* This is always ignored*/ } 
-            }
         }
     }
     
     //Pass (A, B, C, D) depending on what answer is being changed
     public void AlterQuestionAnswers(char option, String edit, int questionID, int quizID) throws SQLException{
         db = new DatabaseConnection();
-        Connection conn = null;
-        try{
-            conn = db.connectToDatabase();
+        try (Connection conn = db.connectToDatabase()) {
             
             //Create and prepare query
             String query = "UPDATE Question_Bank SET " + option + "=? WHERE Question_ID=? AND Quiz_ID=?";
@@ -65,23 +56,16 @@ public class EditQuiz {
             
             //Execute Query
             preparedStmt.executeUpdate();
-            conn.close();
         }
         catch(SQLException err){
             System.out.println(err.getMessage());
-        }finally {
-            if (conn != null) {
-                try { conn.close(); } catch (Exception e) { /* This is always ignored*/ } 
-            }
         }
     }
     
     //
     public void AlterQuestionAnswersDescription(String desc, int questionID, int quizID) throws SQLException{
         db = new DatabaseConnection();
-        Connection conn = null;
-        try{
-            conn = db.connectToDatabase();
+        try (Connection conn = db.connectToDatabase()) {
             
             //Create and prepare query
             String query = "UPDATE Question_Bank SET Answer_Desc=? WHERE Question_ID=? AND Quiz_ID=?";
@@ -94,23 +78,16 @@ public class EditQuiz {
             
             //Execute Query
             preparedStmt.executeUpdate();
-            conn.close();
         }
         catch(SQLException err){
             System.out.println(err.getMessage());
-        }finally {
-            if (conn != null) {
-                try { conn.close(); } catch (Exception e) { /* This is always ignored*/ } 
-            }
         }
     }
     
     //
     public void AlterQuestionAnswer(String answer, int questionID, int quizID) throws SQLException{
         db = new DatabaseConnection();
-        Connection conn = null;
-        try{
-            conn = db.connectToDatabase();
+        try (Connection conn = db.connectToDatabase()) {
             
             //Create and prepare query
             String query = "UPDATE Question_Bank SET Answer=? WHERE Question_ID=? AND Quiz_ID=?";
@@ -123,23 +100,16 @@ public class EditQuiz {
             
             //Execute Query
             preparedStmt.executeUpdate();
-            conn.close();
         }
         catch(SQLException err){
             System.out.println(err.getMessage());
-        }finally {
-            if (conn != null) {
-                try { conn.close(); } catch (Exception e) { /* This is always ignored*/ } 
-            }
         }
     }
     
     //
     public void DeleteQuestion(int questionID, int quizID){
         db = new DatabaseConnection();
-        Connection conn = null;
-        try{
-            conn = db.connectToDatabase();
+        try (Connection conn = db.connectToDatabase()) {
             
             //Create and prepare query
             String query =  "DELETE FROM Question_Bank " +
@@ -153,14 +123,9 @@ public class EditQuiz {
             
             //Execute Query
             preparedStmt.executeUpdate();
-            conn.close();
         }
         catch(SQLException err){
             System.out.println(err.getMessage());
-        }finally {
-            if (conn != null) {
-                try { conn.close(); } catch (Exception e) { /* This is always ignored*/ } 
-            }
         }
     }
     
