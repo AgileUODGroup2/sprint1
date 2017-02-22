@@ -60,12 +60,11 @@ background: url(“arrow.gif”) no-repeat scroll 319px 5px #58B14C;
 float: left;}
 </style>
 
-
 <div id=”mainselection”>
 
 
-            
-            <select name="module" style="align-content: center;  display: inline;">
+
+            <select name="module">
             <%
                 for(int i=0; i<modules.size(); i++) {
                     %> <option value="<%=modules.get(i)%>"><%=modules.get(i)%></option> <%
@@ -73,7 +72,7 @@ float: left;}
             %>
             <input type="submit" value="Filter by Module" />
             </select>
-        </form>
+        
             </div>     
         <%
             if (type.equals("Completed Quizzes")) {
