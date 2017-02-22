@@ -10,29 +10,38 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="styles.css">
         <title>Edit Profile</title>
                 <%LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");%>
     </head>
-    <body>
-        <h3><%=lg.getUsername()%> - Edit Profile</h3>
-        
+    <body bgcolor="d3dfeb">
+        <div class="navBar">
+            <ul>
+                <li><a href="index.jsp">QUIZ MASTER </a></li>
+             </ul>
+        </div>
+        <img src="logo123.png" width="115px" style="position: absolute; left:0; top: 0;">
+        <img src="logo123.png" width="115px" style="position: absolute; right:0; top: 0;">
+
+        <div class="navBar1">
+            <ul>
+                <li><a> Edit Profile - <%=lg.getFirstName()%></a></li>
+            </ul>
+        </div>
+            
+       <div class="main"> 
         <form method="POST" action="edit-profile/<%=lg.getUsername()%>">
-            <label>
-                First Name
-                <input name="firstName" type="text" value=<%=lg.getFirstName()%>>
-            </label>
-            <label>
-                Last Name
-                <input name="lastName" type="text" value=<%=lg.getLastName()%>>
-            </label>
-            <label>
-                Password
+            <label for ="firstName"> First Name:  </label>
+                <input name="firstName" type="text" value=<%=lg.getFirstName()%>
+            <br>
+                <label for ="lastName"> Last Name: </label>
+                <input name="lastName" type="text" value=<%=lg.getLastName()%>
+            <br>
+                <label for ="password"> Password: </label>
                 <input name="password" type="password">
-            </label>
-            <label>
-                Confirm Password
+            <br>
+            <label for="rePassword"> Confirm Password: </label>
                 <input name="rePassword" type="password">
-            </label>
             <% 
                 if(lg.isStaff()){
                     %>
@@ -48,6 +57,7 @@
                 <input type="submit" value="Submit">
             </label>
         </form>
+       </div>
             <button onclick="goBack()">Cancel</button>
             <script>function goBack(){ window.history.back();}</script>
     </body>
