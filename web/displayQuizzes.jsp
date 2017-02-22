@@ -65,7 +65,7 @@ float: left;}
 
 
             
-            <select name="module" style="align-content: center;">
+            <select name="module" style="align-content: center;  display: inline;">
             <%
                 for(int i=0; i<modules.size(); i++) {
                     %> <option value="<%=modules.get(i)%>"><%=modules.get(i)%></option> <%

@@ -7,10 +7,24 @@ and open the template in the editor.
     Created on : 17-Feb-2017, 20:14:10
     Author     : daniellewilliams
 */
+@font-face {
+     font-family: 'segoe marker';
+     src: 
+         url('fonts/SegoeMarker.ttf')
+         format('truetype');
+    }
+    
+ @font-face {
+     font-family: 'candara';
+     src: 
+         url('fonts/Candara.ttf')
+         format('truetype');
+    }
+    
 
 h1{
-    font-family: candara;
-    font-family: segoe marker;
+    
+    font-family: 'segoe marker';
     font-size: 130px;
     color: white;
     text-align: center;
@@ -18,7 +32,7 @@ h1{
 }
 h2{
     color: white;
-    font-family: candara;
+    font-family: 'candara';
     font-size: 40px;
     font-weight: bold;
     margin:10px;
@@ -28,7 +42,7 @@ h2{
 
 h3{
     color: white;
-    font-family: candara;
+    font-family: 'candara';
     font-size: 30px;
     font-weight: bold;
     margin:10px;
@@ -37,20 +51,20 @@ h3{
 
 h4{
     color: white;
-    font-family: candara;
+    font-family: 'candara';
     text-align: left;
     font-size: 15px;
     margin:10px;
 }
 h5{
     color: white;
-    font-family: candara;
+    font-family: 'candara';
     font-size: 20px;
     text-align: center;
 }
 h6{
       color: red;
-    font-family: candara;
+    font-family: 'candara';
     font-size: 30px;
     font-weight: bold;
      margin:10px;
@@ -59,7 +73,7 @@ h6{
 
 h7{
       color: white;
-    font-family: candara;
+    font-family: 'candara';
     font-size: 40px;
     text-align: center;
     font-weight: bold;
@@ -68,7 +82,7 @@ h7{
 }
 
 a{
-    font-family: candara;
+    font-family: 'candara';
     font-size: 15px;
 }
 /* unvisited link */
@@ -118,7 +132,7 @@ a:active {
     display: block;
     padding: 10px 15px; 
     margin: 0;
-    font-family: segoe marker;
+    font-family: 'segoe marker';
     color: white;
     font-size: 60px;
     font-weight: bold;
@@ -205,7 +219,7 @@ label1 {
 }
 
 
-input[type=text], select {
+input[type=text] {
     width: 75%;
     padding: 6px 10px;
     margin: 8px 0;
@@ -216,9 +230,10 @@ input[type=text], select {
     font-size: 1.2em;
     color: black; 
     font-family: 'Raleway',sans-serif; 
+    
 }
 
-input[type=password], select {
+input[type=password] {
     width: 50%;
     padding: 6px 10px;
     margin: 8px 0;
@@ -232,14 +247,14 @@ input[type=password], select {
 }
 
     
-input[type=radio], select {
+input[type=radio] {
     font-size: 1.2em;
     color: white; 
     font-family: 'Raleway',sans-serif; 
 }
 
 input[type=submit] {
-    background-color: #1E90FF; /* Green */
+    background-color: #25619f; /* Green */
     border: none;
     color: white;
     padding: 15px 32px;
@@ -249,16 +264,23 @@ input[type=submit] {
     font-size: 16px;
     border-radius: 8px;
     display:block;
+     margin: auto;
 
 }
-select1{
-    
-    
+
+select {
+    background-color: #25619f;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 20px;
+    border: 1px solid #042356;
+    margin: auto;
+    width: 25%;
 }
-select1{
-    
-    
-}
+
 
 span { display: block; margin: 0 0 3px; font-size: 1.2em; font-weight: bold; }
 
@@ -272,6 +294,8 @@ button {
     display: inline-block;
     font-size: 16px;
 }
+
+
 
 
 #sec-button{
@@ -303,11 +327,13 @@ button {
     
     
 }
-
+.push{
+    clear:both;
+}
 
 
 #fourth-button{
-    background-color: #25619f;;
+    background-color: #25619f;
     color: white;
     padding: 15px 32px;
     text-align: center;
@@ -319,6 +345,10 @@ button {
     width: 80%;
     
 
+}
+
+a:link{
+    text-decoration: none;
 }
 
 #fifth-button{

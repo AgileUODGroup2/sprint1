@@ -66,25 +66,33 @@
         
         <br>
         <br>
-         <div id="cc3" style="background: black;">
-             <br>
-             <br>
-             
-              <p><a href="incompleteQuizzes"><button id="fourth-button" style="Background:red; height: 140px;"> Incomplete Quizzes</button></a></p>
-              
-        <p><a href="pendingdQuizzes"><button id="fourth-button" style="Background:orange; height: 140px">Pending Quizzes</button></a></p>
-                
-        <p><a href="completedQuizzes"><button id="fourth-button" style="Background:green; height: 140px">Completed Quizzes</button></a></p>
-               
-              
-                <br>
-                <br>
-                
-                
-       
         
-         </div>
-       
+         <div id="cc3" style="background: black;">
+             <p><h7>My Quizzes </h7></p>
+     
+
+             
+              <p><a href="incompleteQuizzes"><button id="fourth-button" style="Background:#b71010; height: 155px; font-size: 40px; "> Incomplete Quizzes</button></a></p>
+              
+               <p><a href="pendingdQuizzes"><button id="fourth-button" style="Background:orange; height: 155px; font-size: 40px;">Pending Quizzes</button></a></p>
+                
+               <p><a href="completedQuizzes"><button id="fourth-button" style="Background:green; height: 155px; font-size: 40px; text-decoration: none;">Completed Quizzes</button></a></p>
+               
+               <br>
+        <br>
+      
+   
         </div>
+        
+           
+            </div>
+ 
+   
+        
+          <div class="push">
+                
+              <br>
+              <br>
+            </div>     
     </body>
 </html>
