@@ -19,7 +19,8 @@
 
     </head>
     <body bgcolor="d3dfeb">
-
+    <img src="logo123.png" width="115px" style="position: absolute; left:0; top: 0;">
+        <img src="logo123.png" width="115px" style="position: absolute; right:0; top: 0;">
 
         <div class="navBar">
             <ul>
