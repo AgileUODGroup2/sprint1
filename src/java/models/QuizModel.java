@@ -217,7 +217,7 @@ public void makeQuizLive(int QuizID){ //change to session variables
      try{
         db = new DatabaseConnection();
         Connection conn = db.connectToDatabase();
- 
+        
         String query = "UPDATE quiz set Quiz_Status = 'Live' WHERE Quiz_ID = ?";
         
         PreparedStatement preparedStmt = conn.prepareStatement(query);
@@ -232,26 +232,88 @@ public void makeQuizLive(int QuizID){ //change to session variables
         }
  }
 
-public void filterByRecent(){ //change to session variables
-  
-     try{
-        db = new DatabaseConnection();
+public java.util.LinkedList<Quiz> getFilterByRecent(){ 
+    
+    
+   db = new DatabaseConnection();
         Connection conn = db.connectToDatabase();
- 
-        String query =  "SELECT * FROM quiz WHERE Quiz_Status = 'Live' ORDER BY Date_Created";
-        
-        PreparedStatement preparedStmt = conn.prepareStatement(query);
+       java.util.LinkedList<Quiz> recentFilter = new java.util.LinkedList<>();
        
-      //  preparedStmt.setInt(1,QuizID);
+     try{
+       
         
-        preparedStmt.executeUpdate();
-        conn.close();
+        String query =  "SELECT * FROM quiz WHERE Quiz_Status = 'Live' ORDER BY Date_Created";
+        PreparedStatement preparedStmt = conn.prepareStatement(query);
+      
+       try (ResultSet rs = preparedStmt.executeQuery()){
+           while (rs.next()){
+            Quiz rq = new Quiz();
+            rq.setQuizID(rs.getInt("Quiz_ID"));
+            recentFilter.add(rq);
+            rq.setModuleID(rs.getString("Module_ID"));
+            recentFilter.add(rq);
+            rq.setStaffName(rs.getString("Staff_Name"));
+            recentFilter.add(rq);
+            rq.setDateCreated(rs.getDate("Date_Created"));
+            recentFilter.add(rq);
+            rq.setQuizName(rs.getString("Quiz_Name"));
+            recentFilter.add(rq);
+            rq.setNumberOfQuestions(rs.getInt("Num_Of_Questions"));
+            recentFilter.add(rq);
+            rq.setStatus(rs.getString("Quiz_Status"));
+            recentFilter.add(rq);
+            rq.setStaffID(rs.getInt("Staff_ID"));
+            recentFilter.add(rq);
+            
+           }
+       }
+       
         }
     catch(SQLException err){
             System.out.println(err.getMessage());
+              
         }
- }
+  
+      return recentFilter;
+    }
 
+public Quiz getFilterByRecentQuiz(){ 
+ 
+            
+            Quiz rq = new Quiz();
+  db = new DatabaseConnection();
+        
+        
+      String query =  "SELECT * FROM quiz WHERE Quiz_Status = 'Live' ORDER BY Date_Created";
+    
+     try {Connection conn = db.connectToDatabase();
+            PreparedStatement preparedStmt = conn.prepareStatement(query);
+       try (ResultSet rs = preparedStmt.executeQuery()){
+           while (rs.next()){
+            
+            rq.setQuizID(rs.getInt("Quiz_ID"));
+            rq.setModuleID(rs.getString("Module_ID"));
+            rq.setStaffName(rs.getString("Staff_Name"));
+            rq.setDateCreated(rs.getDate("Date_Created"));
+            rq.setQuizName(rs.getString("Quiz_Name"));
+            rq.setNumberOfQuestions(rs.getInt("Num_Of_Questions"));
+            rq.setStatus(rs.getString("Quiz_Status"));
+            rq.setStaffID(rs.getInt("Staff_ID"));
+       
+        }
+            
+           }
+       }
+       
+      
+    catch(SQLException err){
+            System.out.println(err.getMessage());
+              
+        }
+  
+      return rq;
+    }
 
+ 
 }
 

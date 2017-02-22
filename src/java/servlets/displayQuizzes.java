@@ -44,7 +44,7 @@ public class displayQuizzes extends HttpServlet {
             case "completedQuiz":
                 quizList = qm.getCompletedQuizzes(staffID);
                 rd = request.getRequestDispatcher("/displayQuizzes.jsp");
-                request.setAttribute("QuizType", "Completed Quizzes");
+                request.setAttribute("QuizType", "Completed Quizzes");     
                 break;
             case "liveQuiz":
                 quizList = qm.getLiveQuizzes(staffID);

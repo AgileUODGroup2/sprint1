@@ -38,7 +38,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)t
  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         RequestDispatcher rd=request.getRequestDispatcher("specificQuiz.jsp");
-	    rd.forward(request,response);
+	 rd.forward(request,response);
     }
     
 }
