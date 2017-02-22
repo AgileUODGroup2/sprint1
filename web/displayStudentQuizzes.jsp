@@ -13,11 +13,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <%String type = (String) session.getAttribute("QuizType");%>
-        <title>Quiz Master - <%=type%></title>
+        <link rel="stylesheet" type="text/css" href="styles.css" />
+        <title>Quiz Master</title>
     </head>
     <body>
-        <h1><%=type%></h1>
+        <h1><%String type = (String) session.getAttribute("QuizType");%><%=type%></h1>
         
         <%
             LoggedIn student = (LoggedIn) session.getAttribute("LoggedIn");
