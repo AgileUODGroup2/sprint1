@@ -26,12 +26,21 @@
                 <li><a>ERROR</a></li>
             </ul>
         </div>
-    
+    <br>
+    <br>
     <div class="centerContent1">
         
-        <h6> There has been an error trying to log you in, please try again</h6>
+        <br>
+        <br>
+        <h7> There has been an error trying to log you in, please try again</h7>
+        <br>
+        <br>        
+        <img src="stop.png" width=500px; style="display: block; margin: auto;">
+        <br>
+        <br>
         <a href="index.jsp"><button id="fifth-button">Try Again</button></a>
-        <img src="logo123.png" width=500px; style="display: block; margin: auto;">
+        <br>
+        <br>
     </div>
     
     
