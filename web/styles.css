@@ -429,6 +429,30 @@ a:link{
         margin-top: 30px;
 
 }
+#graph{
+    
+        width: 100%;		/*welcome message is 50% width of centreContent div*/
+	float: left;
+	height: 30%;
+
+
+        align-content: center;
+        margin-top: 30px;
+
+}
+
+#table{
+    width: 100%;		/*welcome message is 50% width of centreContent div*/
+	float: left;
+	height: 30%;
+
+}
+
+
+
+.push{
+    clear:both;
+}
 
 
       

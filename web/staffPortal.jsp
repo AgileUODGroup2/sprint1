@@ -69,7 +69,7 @@
             <br>
             <br>
             <br>
-        <div id ="cc3"
+        <div id ="cc3">
              <p><h7>My Quizzes </h7></p>
         <p><a href="createQuiz"><button id="sec-button">Create Quiz</button></a></p>
               

@@ -18,20 +18,20 @@
     </head>
     <body bgcolor="d3dfeb">
          <% LoggedIn lg =(LoggedIn) session.getAttribute("LoggedIn"); %>
-        
+         <img src="logo123.png" width="115px" style="position: absolute; left:0; top: 0;">
+        <img src="logo123.png" width="115px" style="position: absolute; right:0; top: 0;">
       <div class="navBar">
           <ul>
                  <li><a href="index.jsp">QUIZ MASTER </a></li>
           </ul>
       </div>
-      <img src="logo123.png" width="115px" style="position: absolute; left:0; top: 0;">
-        <img src="logo123.png" width="115px" style="position: absolute; right:0; top: 0;">
-        
-        
-        <div class="navBar1">
+     
+       <div class="navBar1">
+            <ul>
              <li><a>Your <%String type = (String) session.getAttribute("QuizType");%><%=type%></a></li>
-             </div>
-             <br>
+            </ul>
+       </div>
+            <br>
             <br>
             <br>
             <div class="centerContent1">
