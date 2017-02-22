@@ -22,7 +22,6 @@
             Quiz quiz = (Quiz) request.getAttribute("Quiz");
             
             int[] tempDivide = {2, 6, 5, 3, 5, 5, 4, 3, 3, 4};
-            //int[] tempDivide = {1, 0, 0, 10, 10, 30, 40, 10, 5, 0};
             
             Gson gsonResults = new Gson();
             
@@ -92,10 +91,6 @@
         <%String type = (String) session.getAttribute("QuizType");%>
     </head>
     
-    <body>
-        <h2><%=quiz.getQuizName()%></h2>
-        <h3>Class Average is <%=quiz.getAverageScore()%>%</h3>
-        <div id="chart_div"></div>
         
     <body bgcolor="d3dfeb">
         <div class="navBar">
@@ -118,22 +113,30 @@
                 if(type == "Completed Quizzes")
                 {
                     %>
-                                    <div id="cc1">  
+                    <br>
+                    <br>
+                    <div id="cc1">  
                         <h2>Quiz Profile</h2>
 
                         <h3>Quiz ID: <%=quiz.getQuizID()%></h3>
-                        <h3>Module ID: <%=quiz.getModuleID()%></h3>
                         <h3>Date Created: <%=quiz.getDateCreated()%></h3>
                         <h3>Number of Q's: <%=quiz.getNumberOfQuestions()%></h3>
                         <h3>Quiz Status: <%=quiz.getStatus()%></h3>
-
+                        <br>
+                        <h3>Class Average: <%=quiz.getAverageScore()%></h3>
 
                         </div>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <div id="cc2">
                         <a href="editProfile.jsp"><button id="fourth-button">Edit Quiz</button></a>
 
                                     <a href ="studentModules.jsp"><button id="fourth-button">Make Live</button></a>
 
                                     <a href="logout.jsp"><button id="third-button">Filter</button></a>
+                        </div>
                     
                     <%
                 }
@@ -143,27 +146,33 @@
                        
                       
                       
-                                <div id="chart_div" style ="align-content: center; margin:0;"> </div>
+                              
 
-                        <h3>Class Average is <%=quiz.getAverageScore()%>%</h3>
+                    
+                        <br>
+                        <br>
                         
-                         <div id="cc1">  
+                            
+        <div id="cc1">  
         <h2>Quiz Profile</h2>
         
         <h3>Quiz ID: <%=quiz.getQuizID()%></h3>
-        <h3>Module ID: <%=quiz.getModuleID()%></h3>
         <h3>Date Created: <%=quiz.getDateCreated()%></h3>
         <h3>Number of Q's: <%=quiz.getNumberOfQuestions()%></h3>
         <h3>Quiz Status: <%=quiz.getStatus()%></h3>
+        <br>
+        <h3>Class Average: <%=quiz.getAverageScore()%></h3>
        
         
         </div>
+        
+        <div id="cc2">
         <a href="editProfile.jsp"><button id="fourth-button">Edit Quiz</button></a>
             
-                      <a href="logout.jsp"><button id="third-button">Filter</button></a>   
-                    <br>
-
-                    <%
+                      <a href="logout.jsp"><button id="third-button">Filter</button></a>
+        </div>
+        <div id="table">
+       <%
                         if(!quizResult.isEmpty()) {
                             %>
                                 <table border="1">
@@ -192,16 +201,36 @@
                             %>
                                     </tbody>
                                     </table>
+                                    
+        </div>         
+        <div id="graph">
+        
+        <div id="chart_div"> </div>         
+        </div>
+                    
                             <%
                         }
-        
+   
                 }
-                else if(type == "Incomplete Quizzes")
+                else if(type == "Unfinished Quizzes")
                 {
                     %>
+                    <div id="cc1">  
+                        <h2>Quiz Profile</h2>
+
+                        <h3>Quiz ID: <%=quiz.getQuizID()%></h3>
+                        <h3>Date Created: <%=quiz.getDateCreated()%></h3>
+                        <h3>Number of Q's: <%=quiz.getNumberOfQuestions()%></h3>
+                        <h3>Quiz Status: <%=quiz.getStatus()%></h3>
+
+                         <h3>Class Average: <%=quiz.getAverageScore()%></h3>
+                        </div>
+                        <div id="cc2">
+                        
                     <a href="editProfile.jsp"><button id="fourth-button">Edit Quiz</button></a>
             
-                    <a href="logout.jsp"><button id="third-button">Filter</button></a> 
+                    <a href="logout.jsp"><button id="third-button">Filter</button></a>
+                    </div>
                     <%
                 }
         %>
