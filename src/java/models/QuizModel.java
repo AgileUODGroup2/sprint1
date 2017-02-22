@@ -25,7 +25,7 @@ public class QuizModel {
     DatabaseConnection db;
 
 public void createQuiz(String moduleID, String staffName, String dateCreated, String quizName,String available, String staffID ){
-        
+
     try{
         db = new DatabaseConnection();
         Connection conn = db.connectToDatabase();
@@ -51,7 +51,7 @@ public void createQuiz(String moduleID, String staffName, String dateCreated, St
 public void UpdateQuestionAmmount(int quizID){
     db = new DatabaseConnection();
         try (Connection conn = db.connectToDatabase()) {
-            
+
             //Create and prepare query
             String query =  "UPDATE Quiz " +
                             "SET Num_Of_Questions=(" +
@@ -60,16 +60,41 @@ public void UpdateQuestionAmmount(int quizID){
                             ")"+
                             "WHERE Quiz_ID=?";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
-            
+
             preparedStmt.setInt(1, quizID);
             System.out.println(preparedStmt);
-            
+
             //Execute Query
             preparedStmt.executeUpdate();
         }
         catch(SQLException err){
             System.out.println(err.getMessage());
         }
+}
+
+public int getQuizNumberOfQuestions(int quizID)
+{
+    try{
+        db = new DatabaseConnection();
+        Connection conn = db.connectToDatabase();
+        int result =0;
+        Statement st = conn.createStatement();
+        String query = "SELECT Num_Of_Questions FROM quiz WHERE Quiz_ID=?;";
+
+        PreparedStatement ps = conn.prepareStatement(query);
+        ps.setInt(1, quizID);
+
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()){      
+        }
+        st.close();
+        return result;
+    }
+    catch(SQLException err){
+        System.out.println(err.getMessage());
+     }
+
+    return 0;  
 }
 
 public int getQuizId()
@@ -80,30 +105,29 @@ public int getQuizId()
         int result =0;
         Statement st = conn.createStatement();
         String query = "SELECT * FROM quiz ORDER BY Quiz_ID;";
-    
+
         ResultSet rs = st.executeQuery(query);
             while (rs.next())
             {
                 int quizID = rs.getInt("Quiz_ID");
                 System.out.println(quizID);
                 
-                result = quizID;
-                
+                result = quizID; 
             }
-            
+
             st.close();
             return result;
              }
         catch(SQLException err){
             System.out.println(err.getMessage());
         }
+    
     return 0;
-            
 }
 
 public void addQuestion(String[] array)
 {
-    
+
     try{
         db = new DatabaseConnection();
         Connection conn = db.connectToDatabase();
@@ -158,7 +182,10 @@ public java.util.LinkedList<Quiz> getCompletedQuizzes(int staffID) {
     String query = "SELECT * FROM completedquiz WHERE Staff_ID = ?";
     return getQuizzes(query, staffID);
 }
-
+public java.util.LinkedList<Quiz> getAllQuizzes(int staffID) {
+    String query = "SELECT * FROM quiz WHERE Staff_ID = ?";
+    return getQuizzes(query, staffID);
+}
 public java.util.LinkedList<Quiz> getUnfinishedQuizzesMod(int staffID, String module) {
     String query = "SELECT * FROM unfinishedquiz WHERE Module_ID ='"+module+"' AND Staff_ID = ?";
     return getQuizzes(query, staffID);

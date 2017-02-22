@@ -4,6 +4,7 @@
     Author     : erincoey
 --%>
 
+<%@page import="stores.LoggedIn"%>
 <%@page import="stores.Quiz"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -13,15 +14,29 @@
         <link rel="stylesheet" type="text/css" href="styles.css" />
         <title>Add Questions</title>
     </head>
-    <body>
-        <h1 style="color:black; font-size:50px;">Add Questions</h1>
+     <%LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");%>
+   
+    <body bgcolor="d3dfeb">
+        <div class="navBar">
+            <ul>
+                <li><a href="index.jsp">QUIZ MASTER </a></li>
+             </ul>
+        </div>
+        <img src="logo123.png" width="115px" style="position: absolute; left:0; top: 0;">
+        <img src="logo123.png" width="115px" style="position: absolute; right:0; top: 0;">
+
+        <div class="navBar1">
+            <ul>
+                <li><a> Create Quiz - Add Questions</a></li>
+            </ul>
+        </div>
+
         
         <div class ="main">
             
             <% 
                     Quiz quiz = (Quiz) session.getAttribute("Quiz");
             %>
-            <h1 style="font-size:50px;"><%=quiz.getQuizID()%> </h1>
             
 		<form method="post"  action="addQuestions">
                         <label for = "question">Question: </label>

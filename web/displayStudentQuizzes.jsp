@@ -61,20 +61,22 @@
          %>
          
          
-         <table><tr><td><%=q.getModuleID()%></td><td><a href="result/<%=q.getQuizID()%>"><%=q.getQuizName()%></a></td></tr>
-             <tr><td></td><td><%=q.getStaffName()%></td></tr</table><br>
-             
-             
-             <%         }
-                    } else {
+         
+              <a href="result/<%=q.getQuizID() %>"><button id="third-button" style="text-align: left; width:40%;">Quiz Name:<%=q.getQuizName()%> <br> Quiz ID:<%=q.getQuizID()%> <br> Module ID:<%=q.getModuleID()%> <br><br> </button></a><%
+                            }
+                    }
+                 
+                    else {
                       while(it.hasNext()) {
                             StudentQuiz q = (StudentQuiz) it.next();
             %>
 
-            <table><tr><td><%=q.getModuleID()%></td><td><a href="edit/<%=q.getQuizID()%>"><%=q.getQuizName()%></a></td></tr>
-             <tr><td></td><td><%=q.getStaffName()%></td></tr</table><br>
+            <a href="result/<%=q.getQuizID() %>"><button id="third-button" style="text-align: left; width:40%;">Quiz Name:<%=q.getQuizName()%> <br> Quiz ID:<%=q.getQuizID()%> <br> Module ID:<%=q.getModuleID()%> <br><br> </button></a><%
             
-            <%          }
+           
+                    
+                    }
+                        
                     }
                     request.setAttribute("StudentQuizList", null);
                 } else {%>

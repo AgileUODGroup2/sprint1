@@ -96,7 +96,7 @@ float: left;}
                     Iterator<Quiz> it = quizList.iterator();
                     while(it.hasNext()) {
                         Quiz q = (Quiz) it.next();
-         %> <a href="result/<%=q.getQuizID()%>"<button id="third-button" style="text-align: left; width:40%;">Quiz Name:<%=q.getQuizName()%> <br> Quiz ID:<%=q.getQuizID()%> <br> Module ID:<%=q.getModuleID()%> <br><br> </button><%
+         %> <a href="result/<%=q.getQuizID() %>"<button id="third-button" style="text-align: left; width:40%;">Quiz Name:<%=q.getQuizName()%> <br> Quiz ID:<%=q.getQuizID()%> <br> Module ID:<%=q.getModuleID()%> <br><br> </button></a><%
                     }
                 } else { %>
                 <h7>No quizzes to show</h7>
