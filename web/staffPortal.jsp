@@ -55,10 +55,9 @@
              <br>
              <br>
             <a href="editProfile.jsp"><button id="fourth-button">Edit Profile</button></a>
-        <form method="get" action="staffModules.jsp">
           
-        <button id="fourth-button">My Modules</button>
-        </form>
+            <a href ="staffModules.jsp"><button id="fourth-button">My Modules</button></a>
+            
               <a href="logout.jsp"><button id="third-button">Log Out</button></a>
     <br>
             <br>
