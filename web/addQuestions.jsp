@@ -14,14 +14,14 @@
         <title>Add Questions</title>
     </head>
     <body>
-        <h1>Add Questions</h1>
+        <h1 style="color:black; font-size:50px;">Add Questions</h1>
         
         <div class ="main">
             
             <% 
                     Quiz quiz = (Quiz) session.getAttribute("Quiz");
             %>
-            <h1><%=quiz.getQuizID()%> </h1>
+            <h1 style="font-size:50px;"><%=quiz.getQuizID()%> </h1>
             
 		<form method="post"  action="addQuestions">
                         <label for = "question">Question: </label>
@@ -34,30 +34,34 @@
                         <input type="text" name="answerB" id="answerB">
                         <br>
                         <label for = "answerC">c: </label>
-                        <input type="text" name="answerC" id="answerC" ><br>
+                        <input type="text" name="answerC" id="answerC" >
                         <br>
                         <label for = "answerD">d: </label>
                         <input type="text" name="answerD" id="answerD">
-                        <br><br><br>
+                        <br>
                         
-                        <label for = "correctAnswer">Correct Answer: </label>
-                        <input type="radio" name="correctAnswer" value="A"> A
+                        <label for = "correctAnswer" style ="width:200px;">Correct Answer: </label>
+                        <br>
+                        <input type="radio" name="correctAnswer" value="A" checked> A
                         <input type="radio" name="correctAnswer" value="B"> B
                         <input type="radio" name="correctAnswer" value="C"> C
                         <input type="radio" name="correctAnswer" value="D"> D
                         <br>
                         <br>
-                        <br>
-                        <br>
-                        <br>
+
                         <label for = "answerDesc">Answer Description: </label>
                         <textarea name="answerDesc" cols="70" rows="4"></textarea>
+                        <br>
+                        <br>
+                        <br>
+                         
+                        <input type="submit" value="Add Another Question" name="addQuestion" > 
                         <br>
                         <input type="submit" value="Submit" name ="submit" >  
                         <br>
                         <input type="submit" value="Save" name="save"> 
                         <br> 
-                        <input type="submit" value="Add Another Question" name="addQuestion" > 
+                        <input type="submit" value="Cancel" name="cancel" > 
                    
                 </form>
 			</div>
