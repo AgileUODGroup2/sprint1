@@ -19,10 +19,10 @@ public class registerModel {
     
 
 public void register(int Staff_ID,  String First_Name, String Last_Name, String Password ){
-        
+    Connection conn = null;
     try{
         DatabaseConnection db = new DatabaseConnection();
-        Connection conn = db.connectToDatabase();
+        conn = db.connectToDatabase();
         
         String query = "INSERT INTO staff (Staff_ID, First_Name, Last_Name, Password)"+"values(?,?,?,?)";
         System.out.println("Result: " + Staff_ID + First_Name + Last_Name + Password);
@@ -38,7 +38,11 @@ public void register(int Staff_ID,  String First_Name, String Last_Name, String 
         }
     catch(SQLException err){
             System.out.println(err.getMessage());
+    }finally{
+        if (conn != null) {
+            try { conn.close(); } catch (Exception e) { /* handle close exception, quite usually ignore */ } 
         }
+    }
 }
 
 }

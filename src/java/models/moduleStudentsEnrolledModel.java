@@ -26,11 +26,11 @@ public class moduleStudentsEnrolledModel {
   
    public String getStudentsEnrolled(int Module_ID){
         
-    
-  try{
+    Connection conn = null;
+    try{
       DatabaseConnection db = new DatabaseConnection();
         db = new DatabaseConnection();
-        Connection conn = db.connectToDatabase();
+        conn = db.connectToDatabase();
         Statement st = conn.createStatement();
  
         String query = "SELECT * FROM student_enrolment WHERE Module_ID = 210101";  //change to session variable
@@ -89,6 +89,10 @@ public class moduleStudentsEnrolledModel {
              }
         catch(SQLException err){
             System.out.println(err.getMessage());
+        }finally{
+            if (conn != null) {
+                try { conn.close(); } catch (Exception e) { /* handle close exception, quite usually ignore */ } 
+            }
         }
     return null;
  }

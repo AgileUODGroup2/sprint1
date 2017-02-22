@@ -26,9 +26,11 @@ public class QuizModel {
 
 public void createQuiz(String moduleID, String staffName, String dateCreated, String quizName,String available, String staffID ){
 
+    Connection conn = null;
+    
     try{
         db = new DatabaseConnection();
-        Connection conn = db.connectToDatabase();
+        conn = db.connectToDatabase();
         
         String query = "INSERT INTO quiz (Module_ID, Staff_Name, Date_Created, Quiz_Name,Quiz_Status,Staff_ID)"+"values(?,?,?,?,?,?)";
         System.out.println("Result: "+moduleID+staffName+dateCreated+quizName);
@@ -40,11 +42,14 @@ public void createQuiz(String moduleID, String staffName, String dateCreated, St
         preparedStmt.setString(5,available);
         preparedStmt.setString(6,staffID);
         preparedStmt.executeUpdate();
-        conn.close();
-        }
+    }
     catch(SQLException err){
-            System.out.println(err.getMessage());
+        System.out.println(err.getMessage());
+    }finally{
+        if (conn != null) {
+            try { conn.close(); } catch (Exception e) { /* handle close exception, quite usually ignore */ } 
         }
+    }
 }
 
 //Call this function to update Num_Of_Questions column 
@@ -74,9 +79,10 @@ public void UpdateQuestionAmmount(int quizID){
 
 public int getQuizNumberOfQuestions(int quizID)
 {
+    Connection conn = null;
     try{
         db = new DatabaseConnection();
-        Connection conn = db.connectToDatabase();
+        conn = db.connectToDatabase();
         int result =0;
         Statement st = conn.createStatement();
         String query = "SELECT Num_Of_Questions FROM quiz WHERE Quiz_ID=?;";
@@ -92,16 +98,21 @@ public int getQuizNumberOfQuestions(int quizID)
     }
     catch(SQLException err){
         System.out.println(err.getMessage());
-     }
+    }finally{
+        if (conn != null) {
+            try { conn.close(); } catch (Exception e) { /* handle close exception, quite usually ignore */ } 
+        }
+    }
 
     return 0;  
 }
 
 public int getQuizId()
 {
+    Connection conn = null;
     try{
         db = new DatabaseConnection();
-        Connection conn = db.connectToDatabase();
+        conn = db.connectToDatabase();
         int result =0;
         Statement st = conn.createStatement();
         String query = "SELECT * FROM quiz ORDER BY Quiz_ID;";
@@ -120,17 +131,21 @@ public int getQuizId()
              }
         catch(SQLException err){
             System.out.println(err.getMessage());
+    }finally{
+        if (conn != null) {
+            try { conn.close(); } catch (Exception e) { /* handle close exception, quite usually ignore */ } 
         }
+    }
     
     return 0;
 }
 
 public void addQuestion(String[] array)
 {
-
+    Connection conn = null;
     try{
         db = new DatabaseConnection();
-        Connection conn = db.connectToDatabase();
+        conn = db.connectToDatabase();
         for (int i =0; i<array.length; i++)
         {
             
@@ -142,7 +157,11 @@ public void addQuestion(String[] array)
         }
     catch(SQLException err){
             System.out.println(err.getMessage());
+    }finally{
+        if (conn != null) {
+            try { conn.close(); } catch (Exception e) { /* handle close exception, quite usually ignore */ } 
         }
+    }
     
 }
 
@@ -292,10 +311,10 @@ public java.util.LinkedList<StudentQuiz> getPendingStudentQuizzesMod(int matricN
 }
 
 public void makeQuizLive(int QuizID){ //change to session variables
-    
+    Connection conn = null;
      try{
         db = new DatabaseConnection();
-        Connection conn = db.connectToDatabase();
+        conn = db.connectToDatabase();
         
         String query = "UPDATE quiz set Quiz_Status = 'Live' WHERE Quiz_ID = ?";
         
@@ -308,7 +327,11 @@ public void makeQuizLive(int QuizID){ //change to session variables
         }
     catch(SQLException err){
             System.out.println(err.getMessage());
+    }finally{
+        if (conn != null) {
+            try { conn.close(); } catch (Exception e) { /* handle close exception, quite usually ignore */ } 
         }
+    }
  }
 
 public java.util.LinkedList<Quiz> getFilterByRecent(){ 
@@ -351,16 +374,21 @@ public java.util.LinkedList<Quiz> getFilterByRecent(){
     catch(SQLException err){
             System.out.println(err.getMessage());
               
+    }finally{
+        if (conn != null) {
+            try { conn.close(); } catch (Exception e) { /* handle close exception, quite usually ignore */ } 
         }
+    }
   
       return recentFilter;
-    }
+}
 
 public void updateQuizStatus(int quizID)
 {
+    Connection conn = null;
     try{
         db = new DatabaseConnection();
-        Connection conn = db.connectToDatabase();
+        conn = db.connectToDatabase();
  
         String query = "UPDATE quiz set Quiz_Status = 'Completed' WHERE Quiz_ID = ?";
         
@@ -373,7 +401,11 @@ public void updateQuizStatus(int quizID)
         }
     catch(SQLException err){
             System.out.println(err.getMessage());
+    }finally{
+        if (conn != null) {
+            try { conn.close(); } catch (Exception e) { /* handle close exception, quite usually ignore */ } 
         }
+    }
 }
 public Quiz getFilterByRecentQuiz(){ 
  
