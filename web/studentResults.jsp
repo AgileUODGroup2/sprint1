@@ -73,6 +73,7 @@
         // Instantiate and draw our chart, passing in some options.
         var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
         chart.draw(data, options);
+        options.chartArea = { left: '8%', top: '8%', width: "70%", height: "70%" };
       }
     </script>
 
