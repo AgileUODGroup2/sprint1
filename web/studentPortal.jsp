@@ -35,14 +35,56 @@
             </ul>
         </div>
             
-            <br><br><a href="incompleteQuizzes">Incomplete Quizzes</a> <a href="pendingdQuizzes">Pending Quizzes</a> <a href="completedQuizzes">Completed Quizzes</a> 
-            <br><br>
-        <a href ="studentModules.jsp"><button id="fourth-button">My Modules</button></a>    
-        <h2>Profile</h2>
-        <h4>Matriculation Number: </h4><p><%=lg.getUsername()%><p>
-        <h4>First Name: </h4><p><%=lg.getFirstName()%></p>
-        <h4>Last Name: </h4><p><%=lg.getLastName()%></p>
-        <a href="editProfile.jsp">Edit Profile</a>
-
+            <br>
+            <br>
+            <div class="centerContent1">
+                 
+        <div id="cc1">
+         <img src="pic1.png" style="display: inline-block; float:right; width:33%;">   
+        <h2>Your Profile</h2>
+        
+        <h3>Matriculation Number: <%=lg.getUsername()%></h3>
+        <h3>First Name: <%=lg.getFirstName()%></h3>
+        <h3>Last Name: <%=lg.getLastName()%></h3>
+        
+        </div>
+        
+         <div id="cc2">
+             <br>
+             <br>
+            <a href="editProfile.jsp"><button id="fourth-button">Edit Profile</button></a>
+          
+            <a href ="studentModules.jsp"><button id="fourth-button">My Modules</button></a>
+            
+              <a href="logout.jsp"><button id="third-button">Log Out</button></a>
+    <br>
+            <br>
+            <br>
+       
+          
+        </div>
+        
+        <br>
+        <br>
+         <div id="cc3" style="background: black;">
+             <br>
+             <br>
+             
+              <p><a href="incompleteQuizzes"><button id="fourth-button" style="Background:red; height: 140px;"> Incomplete Quizzes</button></a></p>
+              
+        <p><a href="pendingdQuizzes"><button id="fourth-button" style="Background:orange; height: 140px">Pending Quizzes</button></a></p>
+                
+        <p><a href="completedQuizzes"><button id="fourth-button" style="Background:green; height: 140px">Completed Quizzes</button></a></p>
+               
+              
+                <br>
+                <br>
+                
+                
+       
+        
+         </div>
+       
+        </div>
     </body>
 </html>
