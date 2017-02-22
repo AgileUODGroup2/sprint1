@@ -16,7 +16,7 @@
         <%
             LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
         %>
-
+ 
     </head>
     <body bgcolor="9BD5E8">
 
