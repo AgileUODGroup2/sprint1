@@ -21,13 +21,11 @@
             java.util.LinkedList<StudentResult> quizResult = (java.util.LinkedList<StudentResult>) request.getAttribute("Results");
             Quiz quiz = (Quiz) request.getAttribute("Quiz");
             
-            int[] tempDivide = {2, 6, 5, 3, 5, 5, 4, 3, 3, 4};
+            //int[] tempDivide = {2, 6, 5, 3, 5, 5, 4, 3, 3, 4};
+            //String json = gsonResults.toJson(tempDivide);
             
             Gson gsonResults = new Gson();
-            
-            //Serialisation
-            //String json = gsonResults.toJson(quiz.getGradeDivide());
-            String json = gsonResults.toJson(tempDivide);
+            String json = gsonResults.toJson(quiz.getGradeDivide());
         %>
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -190,8 +188,7 @@
                                     </tbody>
                                     </table>
                                     
-        </div>         
-        <div id="graph">
+        </div>
         
         <div id="chart_div"> </div>         
         </div>
