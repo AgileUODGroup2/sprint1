@@ -50,11 +50,7 @@ public class user {
          }
          catch(SQLException e) {
              System.out.println(e.getMessage());
-        }finally{
-            if (conn != null) {
-                try { conn.close(); } catch (Exception e) { /* handle close exception, quite usually ignore */ } 
-            }
-        }
+         }
          return null;
     }
     
