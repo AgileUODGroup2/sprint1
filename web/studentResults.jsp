@@ -22,6 +22,7 @@
             Quiz quiz = (Quiz) request.getAttribute("Quiz");
             
             int[] tempDivide = {2, 6, 5, 3, 5, 5, 4, 3, 3, 4};
+            //int[] tempDivide = {1, 0, 0, 10, 10, 30, 40, 10, 5, 0};
             
             Gson gsonResults = new Gson();
             
@@ -37,48 +38,65 @@
             var parsed = JSON.parse('<%=json%>');
             var arr = $.map(parsed, function(el) { return el});
 
-      // Load the Visualization API and the corechart package.
-      google.charts.load('current', {'packages':['corechart']});
+            // Load the Visualization API and the corechart package.
+            google.charts.load('current', {'packages':['corechart']});
 
-      // Set a callback to run when the Google Visualization API is loaded.
-      google.charts.setOnLoadCallback(drawChart);
+            // Set a callback to run when the Google Visualization API is loaded.
+            google.charts.setOnLoadCallback(drawChart);
 
-      // Callback that creates and populates a data table,
-      // instantiates the pie chart, passes in the data and
-      // draws it.
-      function drawChart() {
+            // Callback that creates and populates a data table,
+            // instantiates the pie chart, passes in the data and
+            // draws it.
+            function drawChart() {
 
-        // Create the data table.
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Topping');
-        data.addColumn('number', 'Students');
-        data.addRows([
-          ['0 - 10', arr[0]],
-          ['10 - 20', arr[1]],
-          ['20 - 30', arr[2]],
-          ['30 - 40', arr[3]],
-          ['40 - 50', arr[4]],
-          ['50 - 60', arr[5]],
-          ['60 - 70', arr[6]],
-          ['70 - 80', arr[7]],
-          ['80 - 90', arr[8]],
-          ['90 - 100', arr[9]]
-        ]);
+              // Create the data table.
+              var data = new google.visualization.DataTable();
+              data.addColumn('string', 'Grade');
+              data.addColumn('number', 'Students');
+              data.addRows([
+                ['0-10', arr[0]],
+                ['10-20', arr[1]],
+                ['20-30', arr[2]],
+                ['30-40', arr[3]],
+                ['40-50', arr[4]],
+                ['50-60', arr[5]],
+                ['60-70', arr[6]],
+                ['70-80', arr[7]],
+                ['80-90', arr[8]],
+                ['90-100', arr[9]]
+              ]);
 
-        // Set chart options
-        var options = {'title':'Student Grade',
-                       'width':800,
-                       'height':700};
+              // Set chart options
+              var options = {'width':800,
+                              hAxis: {
+                                  title: 'Score (%)',
+                                  textStyle: {
+                                      fontSize: 10
+                                  }
+                              },
+                              vAxis: {
+                                  title: 'Number of Students',
+                                  textStyle: {
+                                      fontSize: 10
+                                  }
+                              },
+                             'height':700};
 
-        // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-        options.chartArea = { left: '8%', top: '8%', width: "70%", height: "70%" };
-      }
+              // Instantiate and draw our chart, passing in some options.
+              var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+              chart.draw(data, options);
+            }
     </script>
+
 
         <%String type = (String) session.getAttribute("QuizType");%>
     </head>
+    
+    <body>
+        <h2><%=quiz.getQuizName()%></h2>
+        <h3>Class Average is <%=quiz.getAverageScore()%>%</h3>
+        <div id="chart_div"></div>
+        
     <body bgcolor="d3dfeb">
         <div class="navBar">
             <ul>
