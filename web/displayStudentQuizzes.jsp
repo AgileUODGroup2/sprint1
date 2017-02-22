@@ -43,7 +43,8 @@
             user studentUser = new user();
             java.util.Vector<String> modules = studentUser.getStudentModules(matricNo);
         %>
-        <form method="POST" action="filterByModuleStudent"><select name="module">
+        <form method="POST" action="filterByModuleStudent">
+            <select name="module">
             <%
                 for(int i=0; i<modules.size(); i++) {
                     %> <option value="<%=modules.get(i)%>"><%=modules.get(i)%></option> <%
