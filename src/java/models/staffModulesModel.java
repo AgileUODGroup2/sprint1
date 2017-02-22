@@ -20,10 +20,10 @@ public class staffModulesModel {
     
     public String getStaffModules(int Staff_ID){
         
-    
+    Connection conn = null;
    try{
         DatabaseConnection db = new DatabaseConnection();
-        Connection conn = db.connectToDatabase();
+        conn = db.connectToDatabase();
         Statement st = conn.createStatement();
         
         String query = "SELECT * FROM staff_enrolment WHERE Staff_ID = 1";
@@ -43,7 +43,11 @@ public class staffModulesModel {
              }
         catch(SQLException err){
             System.out.println(err.getMessage());
+    }finally{
+        if (conn != null) {
+            try { conn.close(); } catch (Exception e) { /* handle close exception, quite usually ignore */ } 
         }
+    }
     return null;
  }
 }
