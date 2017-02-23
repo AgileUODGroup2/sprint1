@@ -24,6 +24,7 @@ import models.registerModel;
  */
 public class userTest {
     DatabaseConnection db;
+    user instance = new user();
     
     public userTest() {
     }
@@ -79,14 +80,27 @@ public class userTest {
         
         boolean state = false;
         
-        user instance = new user();
-        
         String result = instance.login("89898989", "JUnit_Test_Password");
         
         if("Staff".equals(result) || "Student".equals(result))
             state = true;
         
         assertTrue("Something wrong with Login/Register", state);
+    }
+    
+    public void testUpdateFirstName(){
+        
+        System.out.println("TEST: Update Last Name");
+        
+        boolean state;
+        
+        instance.updateLastName(true, 89898989, "TestChangeSecondName");
+        
+        String[] testDetails = instance.getStaffDetails(89898989);
+                
+        state = "TestChangeSecondName".equals(testDetails[1]);
+        
+        assertTrue("Something wrong with Changing second name", state);
     }
     
 }
