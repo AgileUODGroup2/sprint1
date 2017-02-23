@@ -32,8 +32,6 @@
                 <li><a> Create Quiz</a></li>
             </ul>
         </div>
-
-        <h2> Quiz Details: </h2>
         
         <%
            String date = new SimpleDateFormat("YYYY-MM-dd").format(new Date());

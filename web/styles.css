@@ -63,16 +63,16 @@ h5{
     text-align: center;
 }
 h6{
-      color: red;
+    color: red;
     font-family: 'candara';
     font-size: 30px;
     font-weight: bold;
-     margin:10px;
+    margin:10px;
     margin: 2%;
 }
 
 h7{
-      color: white;
+    color: white;
     font-family: 'candara';
     font-size: 40px;
     text-align: center;
@@ -455,4 +455,26 @@ a:link{
 }
 
 
-      
+   #result{
+    
+        width: 40%;		/*welcome message is 50% width of centreContent div*/
+	float: right;
+	height: 30%;
+	overflow: auto;
+        background: #042356;
+  
+       
+
+}   
+
+#quizprofile{
+        display:inline-block;
+	width: 45%;		/*welcome message is 50% width of centreContent div*/
+	float: left;
+	height: 30%;
+
+        background: #042356;
+        
+        
+        
+}
