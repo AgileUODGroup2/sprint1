@@ -38,7 +38,7 @@
             <button id="fourth-button">* Answer 3 *</button><br>
             <button id="fourth-button">* Answer 4 *</button><br><br>
             
-            <button id="fourth-button" style="width:20%;"> Next Question --> </button>
+            <button id="fourth-button" style="width:20%;"> Next Question -> </button>
              <button id="fourth-button" style="width:20%;"> Exit Quiz </button><br><br>
             
             
