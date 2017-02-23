@@ -35,9 +35,9 @@
             <br>
             <br>
             <div class="centerContent1">
-             
+                <br>
                 <h7> Welcome <%=lg.getFirstName()%>!</h7>
-                 
+                <br>
         <%
             LoggedIn staff = (LoggedIn) session.getAttribute("LoggedIn");
             int staffID = staff.getID();
@@ -46,23 +46,7 @@
         %>
         <form method="POST" action="filterByModule">
         
-            <style>
-select { border:0; color:#EEE; background:white;
-font-size:20px; font-weight:bold; padding:2px 10px; color: black; width:378px;
-*width:350px; *background:#58B14C; -webkit-appearance: none;  }
-
-#mainselection { overflow:hidden; width:350px;
--moz-border-radius: 9px 9px 9px 9px;
--webkit-border-radius: 9px 9px 9px 9px;
-border-radius: 9px 9px 9px 9px;
-box-shadow: 1px 1px 11px #330033;
-background: url(“arrow.gif”) no-repeat scroll 319px 5px #58B14C;
-float: left;}
-</style>
-
-<div id=”mainselection”>
-
-
+     
 
             <select name="module">
             <%
@@ -72,8 +56,9 @@ float: left;}
             %>
             <input type="submit" value="Filter by Module" />
             </select>
-        
-            </div>     
+</form>
+            <br>
+               
         <%
             if (type.equals("Completed Quizzes")) {
         %>
@@ -95,7 +80,7 @@ float: left;}
                     Iterator<Quiz> it = quizList.iterator();
                     while(it.hasNext()) {
                         Quiz q = (Quiz) it.next();
-         %> <a href="result/<%=q.getQuizID() %>"<button id="third-button" style="text-align: left; width:40%;">Quiz Name:<%=q.getQuizName()%> <br> Quiz ID:<%=q.getQuizID()%> <br> Module ID:<%=q.getModuleID()%> <br><br> </button></a><%
+%> <a href="result/<%=q.getQuizID() %>"<button id="third-button" style="text-align: left; width:40%;">Quiz Name: <%=q.getQuizName()%> <br> Quiz ID: <%=q.getQuizID()%> <br> Module ID: <%=q.getModuleID()%> <br><br> </button></a><%
                     }
                 } else { %>
                 <h7>No quizzes to show</h7>
