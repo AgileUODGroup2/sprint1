@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import stores.LoggedIn;
+import stores.QuestionBank;
 import stores.Quiz;
 import stores.StudentQuiz;
 
@@ -165,6 +166,37 @@ public void addQuestion(String[] array)
     
 }
 
+public java.util.LinkedList<QuestionBank> getQuestionsAndAnswers(int quizID) throws SQLException
+{
+    db = new DatabaseConnection();
+    java.util.LinkedList<QuestionBank> questionList= new java.util.LinkedList<>();
+    String query = "SELECT * FROM question_bank WHERE Quiz_ID = ?";
+    
+    try (Connection conn = db.connectToDatabase();
+            PreparedStatement ps = conn.prepareStatement(query))
+    {
+        ps.setInt(1,quizID);
+        try (ResultSet rs = ps.executeQuery()) {
+            while(rs.next()) {
+                QuestionBank questions = new QuestionBank();
+                questions.setQuizID(rs.getInt("Quiz_ID"));
+                questions.setQuestionID(rs.getInt("Question_ID"));
+                questions.setQuestion(rs.getString("Question"));
+                questions.setA(rs.getString("A"));
+                questions.setB(rs.getString("B"));
+                questions.setC(rs.getString("C"));
+                questions.setD(rs.getString("D"));
+                questions.setCorrectAnswer(rs.getString("Answer"));
+                questions.setAnswerDesc(rs.getString("Answer_Desc"));
+                questionList.add(questions);
+            }
+            } catch (SQLException e) {
+        System.out.println(e.getMessage());
+    }
+    return questionList;
+    }
+    
+}
 public java.util.LinkedList<Quiz> getQuizzes(String query, int staffID) {
     
     db = new DatabaseConnection();

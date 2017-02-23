@@ -4,9 +4,9 @@
  * and open the template in the editor.
  */
 package servlets;
+
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,34 +17,39 @@ import models.QuizModel;
 import models.ResultModel;
 import stores.LoggedIn;
 import stores.Quiz;
+import stores.Result;
+import stores.StudentResult;
 
 /**
  *
- * @author ashawittchen
+ * @author erincoey
  */
-@WebServlet(name ="makeLive", urlPatterns = {"/makeLive/*"})
-public class makeLive extends HttpServlet{
 
-@Override    
-protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+@WebServlet(name = "displayQuestionsAndAnswers", urlPatterns = {"/displayQuestionsAndAnswers/*"})
+
+public class displayQuestionsAndAnswers extends HttpServlet{
     
-   
-}
-   
-    
- @Override
- protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
- 
-         String uri = request.getRequestURI();
+
+@Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String uri = request.getRequestURI();
         System.out.println(uri);
         int i = uri.lastIndexOf("/");
         String strQuizID = uri.substring(i+1);
         int quizID = Integer.parseInt(strQuizID);
         System.out.println("Quiz ID: "+quizID);
         display(quizID, request, response);
+
     }
- 
- private void display(int quizID, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+      
+        
+    }
+   private void display(int quizID, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         ResultModel rm = new ResultModel();
         QuizModel qm = new QuizModel();
@@ -56,12 +61,10 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)t
         Quiz quiz = qm.getQuizDetails(quizID);
       
             
-            RequestDispatcher rd = request.getRequestDispatcher("/makeLive.jsp"); // SET CORRECT REDIRECT LOCATION
+            RequestDispatcher rd = request.getRequestDispatcher("/displayQuestionsAndAnswers.jsp"); // SET CORRECT REDIRECT LOCATION
             
             request.setAttribute("Quiz", quiz);
             rd.forward(request, response);
         
     }
-    
 }
-
