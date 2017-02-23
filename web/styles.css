@@ -490,7 +490,17 @@ button10 {
 }
 
 
-
+#questions{
+        
+	width: 50%;		/*welcome message is 50% width of centreContent div*/
+	float: left;
+	height: 30%;
+	overflow: auto;
+        background: #042356;
+        
+        
+        
+}
 .push{
     clear:both;
 }

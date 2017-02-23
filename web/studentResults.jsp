@@ -18,6 +18,7 @@
         <title>Student Results</title>
        
         <%
+            String contextPath = request.getContextPath();
             java.util.LinkedList<StudentResult> quizResult = (java.util.LinkedList<StudentResult>) request.getAttribute("Results");
             Quiz quiz = (Quiz) request.getAttribute("Quiz");
             
@@ -123,7 +124,7 @@
                             <br>
                             <br>
                             <br>
-                        <a href="editQuiz.jsp"><button id="fourth-button">Edit Quiz</button></a>
+                         <form method="GET" action=<%=contextPath + "/displayQuestionsAndAnswers/" + quiz.getQuizID()%>><input type="submit" value="View Q's and A's" /></form>
 
                         <a href ="/AC31007Quiz/makeLive.jsp"><button id="fourth-button">Make Live</button></a>
 
@@ -155,10 +156,9 @@
         </div>
         
         <div id="cc2">
-           
-        <a href="editProfile.jsp"><button id="fourth-button">Edit Quiz</button></a>
             
-                      <a href="logout.jsp"><button id="third-button">Filter</button></a>
+        <a href="logout.jsp"><button id="third-button">Filter</button></a>
+        <form method="GET" action=<%=contextPath + "/displayQuestionsAndAnswers/" + quiz.getQuizID()%>><input type="submit" value="View Q's and A's" /></form>
         </div>
         <br>
         <br>
@@ -218,9 +218,10 @@
                         </div>
                         <div id="cc2">
                         
-                    <a href="editProfile.jsp"><button id="fourth-button">Edit Quiz</button></a>
+
             
                     <a href="logout.jsp"><button id="third-button">Filter</button></a>
+                     <form method="GET" action=<%=contextPath + "/displayQuestionsAndAnswers/" + quiz.getQuizID()%>><input type="submit" value="View Q's and A's" /></form>
                     </div>
    
                     <%

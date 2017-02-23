@@ -41,7 +41,6 @@
         
         <div id="result">
         <h2>Your Results</h2>
-        <h3>Quiz Result: <%=quizResult.getQuizID()%> </h3>
         <h3>Score: <%=quizResult.getScore()%></h3>
         <h3>Attempts: <%=quizResult.getAttempts()%></h3>
         <h3>Date Completed: <%=quizResult.getDate()%></h3>
