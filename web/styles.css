@@ -86,6 +86,10 @@ h8{
     font-family: candara;
     font-size: 25px;
 }
+h9{
+    font-family: candara;
+    color: white;
+}
 
 a{
     font-family: 'candara';
@@ -372,6 +376,20 @@ a:link{
     width: 80%;
     
 }
+button10 {
+    background-color: #25619f;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-family: candara;
+    font-size: 20px;
+    border: 1px solid #042356;
+    border-radius: 25px;
+    margin: auto;
+    width: 20%;
+}
 
 .centerContent1{
 
@@ -450,8 +468,10 @@ a:link{
 
 #table{
     width: 100%;		/*welcome message is 50% width of centreContent div*/
-	float: left;
-	height: 30%;
+    margin: auto;
+    display: block;
+    height: 30%;
+    
 
 }
 
