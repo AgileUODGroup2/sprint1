@@ -41,7 +41,11 @@
                     <br>
                     <Br>
                     <div class="centerContent1">
-        <table border="0" cellpadding="10">
+                        <br>
+                        <h7> Here is a list of your Modules</h7>
+                        <br>
+                        <br>
+        <table border="0" cellpadding="10" style="display: block; margin: auto; margin-left: 30%; font-family: candara; color: white; font-size: 25px;">
             <thead>
                 <tr>
                     <th>Module Name</th>
@@ -82,6 +86,17 @@
                 %>
 </tbody>
         </table>
+<br>
+<br>
+<button10 onclick="goBack()">Return to Portal</button10>
+
+<script>
+function goBack() {
+    window.history.back();
+}
+</script>
+<br>
+<br>
                     </div>
     </body>
 </html>
