@@ -90,6 +90,13 @@ h9{
     font-family: candara;
     color: white;
 }
+h10{
+    color: white;
+    font-family: candara;
+    font-size: 30px;
+    display: inline-block;
+    margin: 2%;
+}
 
 a{
     font-family: 'candara';
@@ -402,7 +409,7 @@ button10 {
 
 	width: 70%;
 	margin: 0 auto;				/*Sets div to centre of page and is 70% width of the page*/
-	background: #042356;			/*Gives the content div a slightly transparent black bacground*/
+	background: #042356;
 }
 .cent1{
 
