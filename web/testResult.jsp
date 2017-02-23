@@ -54,7 +54,9 @@
         <br>
         <br>
         <div id="graph">
-         <a href="/AC31007Quiz/takeQuiz.jsp"><button id="third-button">Take Quiz</button></a>
+         
+            <a href="/AC31007Quiz/quizInstructions.jsp"><button id="third-button">Click here for quiz instructions</button></a><br>
+         <a href="/AC31007Quiz/takeQuiz.jsp"><button id="third-button" style="font-weight:bold;">Take Quiz</button></a>
         </div>
         </div>
 </body>
