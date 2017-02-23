@@ -88,6 +88,7 @@ public class userTest {
         assertTrue("Something wrong with Login/Register", state);
     }
     
+    @Test
     public void testUpdateFirstName(){
         
         System.out.println("TEST: Update Last Name");
@@ -97,7 +98,9 @@ public class userTest {
         instance.updateLastName(true, 89898989, "TestChangeSecondName");
         
         String[] testDetails = instance.getStaffDetails(89898989);
-                
+        
+        System.out.println(testDetails[1]);
+        
         state = "TestChangeSecondName".equals(testDetails[1]);
         
         assertTrue("Something wrong with Changing second name", state);
