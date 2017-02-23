@@ -76,7 +76,7 @@ public class userTest {
     @Test
     public void testLogin() {
         
-        System.out.println("TEST: Login");
+        System.out.println("\nTEST: Login");
         
         boolean state = false;
         
@@ -88,18 +88,19 @@ public class userTest {
         assertTrue("Something wrong with Login/Register", state);
     }
     
+     /**
+     * Test update last name, of class user.
+     */
     @Test
-    public void testUpdateFirstName(){
+    public void testUpdateLastName(){
         
-        System.out.println("TEST: Update Last Name");
+        System.out.println("\nTEST: Update Last Name");
         
         boolean state;
         
         instance.updateLastName(true, 89898989, "TestChangeSecondName");
         
         String[] testDetails = instance.getStaffDetails(89898989);
-        
-        System.out.println(testDetails[1]);
         
         state = "TestChangeSecondName".equals(testDetails[1]);
         
