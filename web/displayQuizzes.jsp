@@ -47,13 +47,15 @@
         <form method="POST" action="filterByModule">
         
      
-
+            
             <select name="module">
+                <br>
             <%
                 for(int i=0; i<modules.size(); i++) {
                     %> <option value="<%=modules.get(i)%>"><%=modules.get(i)%></option> <%
                 } 
             %>
+            <br>
             <input type="submit" value="Filter by Module" />
             </select>
 </form>

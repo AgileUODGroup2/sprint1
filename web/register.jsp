@@ -27,27 +27,39 @@
             </ul>
     </div>
     <br>
-    <div class="centerContent1">
-        <form method="post" action="register" style="max-width: 100%; display: blobk;">
-            <br>
-    <h6> Please enter the details of the staff member you wish to register in the form below</h6>
     <br>
-    </div>
-    <div class="cent1">
-    <h8><label1 for = "staffID">Staff ID: </label1></h8>
-    <input type="text" name="staffID" id="staffID" style="width:250px; height: 30px;">
+    <br>
+    <div class="centerContent1" style="display: block; text-align: center;">
+        <form method="post" action="register" style="display: inline-block; margin: auto; text-align: left;">
+            <br>
+            <br>
+    <h7> Please enter your staff details below</h7>
+    <br>
+    <br>
+    <label for = "staffID">Staff ID: </label>
+    <input type="text" name="staffID" id="staffID" style="width:40%; height: 30px;">
                         <br>
-    <h8><label1 for = "firstName">First Name: </label1></h8>
-    <input type="text" name="firstName" id="firstName" style="width:250px; height: 30px;">
+    <label for = "firstName">First Name: </label>
+    <input type="text" name="firstName" id="firstName" style="width:40%; height: 30px;">
                         <br>
-    <h8><label1 for = "lastName">Last Name: </label1></h8>
-    <input type="text" name="lastName" id="lastName" style="width:250px; height: 30px;">
+    <label for = "lastName">Last Name: </label>
+    <input type="text" name="lastName" id="lastName" style="width:40%; height: 30px;">
                         <br>
-    <h8><label1 for = "password">Password: </label1></h8>
-    <input type="password" name="password" id="password" style="width:250px; height: 30px;">
+    <label for = "password">Password: </label>
+    <input type="password" name="password" id="password" style="width:40%; height: 30px;">
                         <br>    
                         <br>
     <input type="submit" value="Submit" style="margin: auto;"> 
+    <button10 onclick="goBack()">Return to Log In</button10>
+
+<script>
+function goBack() {
+    window.history.back();
+}
+</script>
+    <br>
+    <br>
+    
         </form>
     </div>
     </body>

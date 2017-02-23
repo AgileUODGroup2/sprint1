@@ -24,7 +24,7 @@ and open the template in the editor.
 
 h1{
     
-    font-family: 'segoe marker';
+    font-family: candara;
     font-size: 130px;
     color: white;
     text-align: center;
@@ -142,7 +142,7 @@ a:active {
     display: block;
     padding: 10px 15px; 
     margin: 0;
-    font-family: 'segoe marker';
+    font-family: candara;
     color: white;
     font-size: 60px;
     font-weight: bold;
@@ -213,7 +213,7 @@ label {
     padding-top: 10px;
     font-size: 1.4em;
     color: white; 
-    font-family: 'Raleway',sans-serif; 
+    font-family: candara; 
     margin-left: 30%;
 }
 label1 {
@@ -224,7 +224,7 @@ label1 {
     padding-top: 10px;
     font-size: 1.4em;
     color: white; 
-    font-family: 'Raleway',sans-serif; 
+    font-family: candara; 
     margin-left: 30%;
 }
 
@@ -239,7 +239,7 @@ input[type=text] {
     box-sizing: border-box;
     font-size: 1.2em;
     color: black; 
-    font-family: 'Raleway',sans-serif; 
+    font-family: candara; 
     
 }
 
@@ -253,7 +253,7 @@ input[type=password] {
     box-sizing: border-box;
     font-size: 0.9em;
     color: black; 
-    font-family: 'Raleway',sans-serif; 
+    font-family: candara; 
 }
 
     
@@ -275,6 +275,7 @@ input[type=submit] {
     border-radius: 8px;
     display:block;
     margin: auto;
+    font-family: candara;
 
 }
 
@@ -304,6 +305,7 @@ button {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+    font-family: candara;
 }
 
 
@@ -321,6 +323,7 @@ button {
     border-radius: 25px;
     margin: auto;
     width: 80%;
+    font-family: candara;
 
 }
 #third-button{
@@ -332,9 +335,9 @@ button {
     display: block;
     font-size: 20px;
     border: 1px solid #042356;
-    
     margin: auto;
     width: 80%;
+    font-family: candara;
     
     
 }
@@ -354,6 +357,7 @@ button {
     border: 1px solid #042356;
     margin: auto;
     width: 80%;
+    font-family: candara;
     
 
 }
@@ -374,6 +378,7 @@ a:link{
     border-radius: 25px;
     margin: auto;
     width: 80%;
+    font-family: candara;
     
 }
 button10 {
