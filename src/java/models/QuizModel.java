@@ -235,7 +235,7 @@ public Quiz getQuizDetails(int quizID) {
                 while(rs.next()) {
                     
                     quiz.setQuizID(rs.getInt("Quiz_ID"));
-                    //quiz.setModuleID(rs.getInt("Module_ID")); Servlet error when un-commented?
+                    quiz.setModuleID(rs.getString("Module_ID"));
                     //quiz.setStaffName(rs.getString("Staff_Name")); Not needed?
                     quiz.setDateCreated(rs.getDate("Date_Created"));
                     quiz.setQuizName(rs.getString("Quiz_Name"));

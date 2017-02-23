@@ -11,7 +11,7 @@
     <%
 
         Result quizResult = (Result) request.getAttribute("Result"); // Result of a single quiz for a specific Matriculation Number
-        Quiz quiz = (Quiz) request.getAttribute("StudentQuizList");
+        Quiz quiz = (Quiz) request.getAttribute("Quiz");
     %>
 
 </head>
@@ -34,12 +34,12 @@
          
         <h2>Quiz Profile</h2>
         
-        <h3> Ask viivi about getting quiz details in here </h3>
+        <h3> <%=quiz.getQuizID()%> </h3>
        
         
         </div>
         
-        <div id="result">  
+        <div id="result">
         <h2>Your Results</h2>
         <h3>Quiz Result: <%=quizResult.getQuizID()%> </h3>
         <h3>Score: <%=quizResult.getScore()%></h3>
