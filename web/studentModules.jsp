@@ -15,12 +15,32 @@
 <!DOCTYPE html>
 <html>
     <head>
+                 <link rel="stylesheet" type="text/css" href="styles.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
     <body>
-     <p>Displaying Modules student  are enrolled on </p>
+   
+         <% LoggedIn lg =(LoggedIn) session.getAttribute("LoggedIn"); %>
+    </head>
+     <body bgcolor="d3dfeb">
+        <div class="navBar">
+            <ul>
+                <li><a href="index.jsp">QUIZ MASTER </a></li>
+             </ul>
+        </div>
+        <img src="logo123.png" width="115px" style="position: absolute; left:0; top: 0;">
+        <img src="logo123.png" width="115px" style="position: absolute; right:0; top: 0;">
 
+        <div class="navBar1">
+            <ul>
+                <li><a> <%=lg.getFirstName()%>'s Modules
+                    </a></li>
+            </ul>
+        </div>
+                    <br>
+                    <Br>
+                    <div class="centerContent1">
         <table border="0" cellpadding="10">
             <thead>
                 <tr>
@@ -33,7 +53,7 @@
 
 
                 <%
-                    LoggedIn lg =(LoggedIn) session.getAttribute("LoggedIn"); 
+                    
                     int staffID = lg.getID();
                     DatabaseConnection db = new DatabaseConnection();
                     Connection conn = db.connectToDatabase();
@@ -62,5 +82,6 @@
                 %>
 </tbody>
         </table>
+                    </div>
     </body>
 </html>
