@@ -36,6 +36,8 @@
             <br>
             <div class="centerContent1">
                 <br>
+                <h7> Welcome <%=lg.getFirstName()%>!</h7>
+                <br>
                 <br>
         <%
             LoggedIn student = (LoggedIn) session.getAttribute("LoggedIn");
@@ -44,7 +46,9 @@
             java.util.Vector<String> modules = studentUser.getStudentModules(matricNo);
         %>
         <form method="POST" action="filterByModuleStudent">
+            
             <select name="module">
+             
             <%
                 for(int i=0; i<modules.size(); i++) {
                     %> <option value="<%=modules.get(i)%>"><%=modules.get(i)%></option> <%
@@ -53,7 +57,7 @@
             <input type="submit" value="Filter by Module" />
             </select>
         </form>
-            
+            <br>
         <%
             if (type.equals("Completed Quizzes")) {
         %>
@@ -61,15 +65,14 @@
         <%
             } else if (type.equals("Incomplete Quizzes")) {
         %>
-        
-        <form method="GET" action="incompleteQuizzes"><input type="submit" value="Reset" /></form>
+        <br>
+        <form method="GET" action="incompleteQuizzes"><input type="submit" value="Reset "/></form>
         
         <%
             } else {
         %>
         <form method="GET" action="pendingdQuizzes"><input type="submit" value="Reset" /></form>
-        
-        
+             
          <% }   java.util.LinkedList<StudentQuiz> quizList = (java.util.LinkedList<StudentQuiz>) session.getAttribute("StudentQuizList");
                 Iterator<StudentQuiz> it = quizList.iterator();
                 if (quizList != null && !quizList.isEmpty()) {
@@ -77,9 +80,8 @@
                         while(it.hasNext()) {
                             StudentQuiz q = (StudentQuiz) it.next();
          %>
-         
-         
-         
+         <br>
+                  
               <a href="result/<%=q.getQuizID() %>"><button id="third-button" style="text-align: left; width:40%;">Quiz Name:<%=q.getQuizName()%> <br> Quiz ID:<%=q.getQuizID()%> <br> Module ID:<%=q.getModuleID()%> <br><br> </button></a><%
                             }
                     }
@@ -88,7 +90,7 @@
                       while(it.hasNext()) {
                             StudentQuiz q = (StudentQuiz) it.next();
             %>
-
+              <br>
             <a href="result/<%=q.getQuizID() %>"><button id="third-button" style="text-align: left; width:40%;">Quiz Name:<%=q.getQuizName()%> <br> Quiz ID:<%=q.getQuizID()%> <br> Module ID:<%=q.getModuleID()%> <br><br> </button></a><%
             
            
