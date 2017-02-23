@@ -32,7 +32,7 @@
                 <br>
                 <br>
                 <br>
-                <input type="submit" value="login" id="button" style="display: block; margin: auto;">
+                <input type="submit" value="login" id="#third-button" style="display: block; margin: auto;">
                 </br>
                 </form>
                 <h5><a href="register.jsp" style="font-size: 25px;">If you do not have an account, please click here to register</a></h5>
