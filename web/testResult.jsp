@@ -29,19 +29,23 @@
                 <li><a>Your Quiz </a></li>
             </ul>
         </div>
-        <br><br><br>
-            <div id="quizprofile">  
+        <br><br>
+        <div class="centerContent1">
+      
+        
+          
          
         <h2>Quiz Profile</h2>
         
-        <h3> <%=quiz.getQuizID()%> </h3>
+        <h3> Quiz ID: <%=quiz.getQuizID()%> </h3>
+        <h3> Quiz ID: <%=quiz.getQuizName()%> </h3>
+        <h3> Quiz ID: <%=quiz.getModuleID()%> </h3>
        
+     
         
-        </div>
-        
-        <div id="result">
+        <div id="cc3">
         <h2>Your Results</h2>
-        <h3>Quiz Result: <%=quizResult.getQuizID()%> </h3>
+       
         <h3>Score: <%=quizResult.getScore()%></h3>
         <h3>Attempts: <%=quizResult.getAttempts()%></h3>
         <h3>Date Completed: <%=quizResult.getDate()%></h3>
@@ -50,7 +54,8 @@
         <br>
         <br>
         <div id="graph">
-         <a href="/AC31007Quiz/takeQuiz.jsp"><button id="fourth-button">Take Quiz</button></a>
+         <a href="/AC31007Quiz/takeQuiz.jsp"><button id="third-button">Take Quiz</button></a>
+        </div>
         </div>
 </body>
 </html>
