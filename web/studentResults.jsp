@@ -59,11 +59,15 @@
                 ['90 - 100%', arr[9]]
               ]);
 
-              var options = {title: "Grade Distribution",
-                            backgroundColor: '#e5ecf3',
+              var options = {title:'Grade Distribution',
+                            backgroundColor:'#d3dfeb',
+                            colors:['#1c2888','#2b2b87','#3a2e87','#483187','#573486','#663785','#753b85','#843e84','#934184','#a14484'],
+                            fontName:'Verdana',
+                            pieSliceText:'value',
                             pieHole:0.4,
                             'width':800,
-                            'height':800};
+                            'height':800,
+                            'chartArea':{'width':'100%','height':'80%'}};
 
               var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
               chart.draw(data, options);
@@ -185,7 +189,7 @@
                                     </table>
                                     
         </div>
-        <div id="chart_div"> </div>
+        <div id="chart_div"></div>
                     
                             <%
                         }

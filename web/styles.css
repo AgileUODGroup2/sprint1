@@ -473,22 +473,20 @@ button10 {
         width: 100%;		/*welcome message is 50% width of centreContent div*/
 	float: left;
 	height: 30%;
-        width:800px;
-        height:800px;
-
-
-        align-content: center;
+        /*width:800px;
+        height:800px;*/
         margin-top: 30px;
 
 }
 
 #table{
  
-        width: 100%;		/*welcome message is 50% width of centreContent div*/
+        width: 60%;		/*welcome message is 50% width of centreContent div*/
 	float: left;
-        align-content: center;
+	height: 30%;
+	overflow: auto;
+        background: #042356;
         margin-top: 30px;
-
 }
 
 
