@@ -26,13 +26,13 @@
             <div id="cen2" style="margin: auto; display: inline-block;">
                 <form method="POST"  action="login">
                 <h5 style="font-size: 30px;">Username</h5>
-                <input type="text" name="username" style="width:350px; height: 30px; display: block; margin: auto;">
+                <input type="text" name="username" style="width:350px; height: 30px; display: block; margin: auto; margin-top: -2.5%;">
                 <h5 style="font-size: 30px;">Password</h5>
-                <input type="password" name="password" style="width:350px; height: 30px; display: block; margin: auto;">
+                <input type="password" name="password" style="width:350px; height: 30px; display: block; margin: auto; margin-top: -2.5%;">
                 <br>
                 <br>
                 <br>
-                <input type="submit" value="login" id="#third-button" style="display: block; margin: auto;">
+                <input type="submit" value="login" id="second-button" style="display: block; margin: auto; -webkit-appearance: none;">
                 </br>
                 </form>
                 <h5><a href="register.jsp" style="font-size: 25px;">If you do not have an account, please click here to register</a></h5>

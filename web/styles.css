@@ -276,6 +276,7 @@ input[type=submit] {
     display:block;
     margin: auto;
     font-family: candara;
+    -webkit-appearance: none;
 
 }
 
@@ -291,6 +292,7 @@ select {
     border: 1px solid #042356;
     margin: auto;
     width: 25%;
+    
 }
 
 

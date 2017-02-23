@@ -28,7 +28,7 @@
      
        <div class="navBar1">
             <ul>
-             <li><a>Your <%String type = (String) session.getAttribute("QuizType");%><%=type%></a></li>
+             <li><a>Welcome <%=lg.getFirstName()%>!</a></li>
             </ul>
        </div>
             <br>
@@ -36,7 +36,7 @@
             <br>
             <div class="centerContent1">
                 <br>
-                <h7> Welcome <%=lg.getFirstName()%>!</h7>
+                <h7> Your <%String type = (String) session.getAttribute("QuizType");%><%=type%></h7>
                 <br>
         <%
             LoggedIn staff = (LoggedIn) session.getAttribute("LoggedIn");

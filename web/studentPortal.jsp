@@ -42,11 +42,11 @@
         <div id="cc1">
          <img src="pic1.png" style="display: inline-block; float:right; width:33%;">   
         <h2>Your Profile</h2>
-        
-        <h3>Matriculation Number: <%=lg.getUsername()%></h3>
+        <h3>Matric Number: <%=lg.getUsername()%></h3>
         <h3>First Name: <%=lg.getFirstName()%></h3>
         <h3>Last Name: <%=lg.getLastName()%></h3>
-        
+        <br>
+        <br>
         </div>
         
          <div id="cc2">
