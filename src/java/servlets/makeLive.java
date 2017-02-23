@@ -26,18 +26,19 @@ public class makeLive extends HttpServlet{
 @Override    
 protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
     
-
+   Quiz quiz = (Quiz) request.getAttribute("Quiz");
    QuizModel makeLive = new QuizModel();
-    makeLive.makeQuizLive(10); // change to session variables
+   System.out.println("Make live: " + quiz.getQuizID());
+    makeLive.makeQuizLive(quiz.getQuizID()); // change to session variables
     
-    response.sendRedirect("specificQuiz.jsp");
+    response.sendRedirect("makeLive.jsp");
 }
    
     
  @Override
  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        RequestDispatcher rd=request.getRequestDispatcher("specificQuiz.jsp");
+ 
+        RequestDispatcher rd=request.getRequestDispatcher("makeLive.jsp");
 	 rd.forward(request,response);
     }
     

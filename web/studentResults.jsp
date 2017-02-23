@@ -123,11 +123,11 @@
                             <br>
                             <br>
                             <br>
-                        <a href="editProfile.jsp"><button id="fourth-button">Edit Quiz</button></a>
+                        <a href="editQuiz.jsp"><button id="fourth-button">Edit Quiz</button></a>
 
-                                    <a href ="studentModules.jsp"><button id="fourth-button">Make Live</button></a>
+                        <a href ="/AC31007Quiz/makeLive.jsp"><button id="fourth-button">Make Live</button></a>
 
-                                    <a href="logout.jsp"><button id="third-button">Filter</button></a>
+                        <a href="logout.jsp"><button id="third-button">Filter</button></a>
                         </div>
          </div>
                     
