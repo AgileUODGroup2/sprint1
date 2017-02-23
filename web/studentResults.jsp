@@ -124,11 +124,9 @@
                             <br>
                             <br>
                             <br>
+                         <form method="GET" action=<%=contextPath + "/makeLive/" + quiz.getQuizID()%>><input type="submit" value="Make Live" /></form>
                          <form method="GET" action=<%=contextPath + "/displayQuestionsAndAnswers/" + quiz.getQuizID()%>><input type="submit" value="View Q's and A's" /></form>
-
-                        <a href ="/AC31007Quiz/makeLive.jsp"><button id="fourth-button">Make Live</button></a>
-
-                        <a href="logout.jsp"><button id="third-button">Filter</button></a>
+                         <a href="logout.jsp"><button id="third-button">Filter</button></a>
                         </div>
          </div>
                     

@@ -41,11 +41,10 @@
         </div>
         <br>
         <br>
-           
+        <div id="centreContent">   
         <div id="cc1">
             
         <h2>Quiz Profile</h2>
-        
         
         <h3> Quiz ID: <%=quiz.getQuizID()%> </h3>
         <h3> Quiz Name: <%=quiz.getQuizName()%> </h3>

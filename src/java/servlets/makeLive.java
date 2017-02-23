@@ -14,32 +14,53 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.QuizModel;
+import models.ResultModel;
+import stores.LoggedIn;
 import stores.Quiz;
 
 /**
  *
  * @author ashawittchen
  */
-@WebServlet(name ="makeLive", urlPatterns = {"/makeLive"})
+@WebServlet(name ="makeLive", urlPatterns = {"/makeLive/*"})
 public class makeLive extends HttpServlet{
 
 @Override    
 protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
     
-   Quiz quiz = (Quiz) request.getAttribute("Quiz");
-   QuizModel makeLive = new QuizModel();
-   System.out.println("Make live: " + quiz.getQuizID());
-    makeLive.makeQuizLive(quiz.getQuizID()); // change to session variables
-    
-    response.sendRedirect("makeLive.jsp");
+   
 }
    
     
  @Override
  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
  
-        RequestDispatcher rd=request.getRequestDispatcher("makeLive.jsp");
-	 rd.forward(request,response);
+         String uri = request.getRequestURI();
+        System.out.println(uri);
+        int i = uri.lastIndexOf("/");
+        String strQuizID = uri.substring(i+1);
+        int quizID = Integer.parseInt(strQuizID);
+        System.out.println("Quiz ID: "+quizID);
+        display(quizID, request, response);
+    }
+ 
+ private void display(int quizID, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        ResultModel rm = new ResultModel();
+        QuizModel qm = new QuizModel();
+
+        
+        HttpSession session = request.getSession(true);
+        LoggedIn lg =(LoggedIn)session.getAttribute("LoggedIn");
+        
+        Quiz quiz = qm.getQuizDetails(quizID);
+      
+            
+            RequestDispatcher rd = request.getRequestDispatcher("/makeLive.jsp"); // SET CORRECT REDIRECT LOCATION
+            
+            request.setAttribute("Quiz", quiz);
+            rd.forward(request, response);
+        
     }
     
 }
