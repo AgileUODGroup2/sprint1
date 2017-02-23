@@ -50,13 +50,7 @@
                         <br>    
                         <br>
     <input type="submit" value="Submit" style="margin: auto;"> 
-    <button10 onclick="goBack()">Return to Log In</button10>
-
-<script>
-function goBack() {
-    window.history.back();
-}
-</script>
+   
     <br>
     <br>
     

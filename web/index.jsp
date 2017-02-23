@@ -14,15 +14,13 @@
           <br>
           <br>
           <br>
-            <h1 style="font-size: 150px;">Quiz Master</h1>
+            <h1 style="font-size: 125px;">Quiz Master</h1>
    
    
    <div id="cen1">
        <br>
        <br>
-       
-       <br>
-       <img src="homelogo.png" style="display: block; margin: auto; width: 350px;">
+       <img src="homelogo.png" style="display: block; margin: auto; width: 300px;">
    </div>
    
             <div id="cen2" style="margin: auto; display: inline-block;">
@@ -37,7 +35,7 @@
                 <input type="submit" value="login" id="button" style="display: block; margin: auto;">
                 </br>
                 </form>
-                <h5><a href="register.jsp" style="font-size: 20px;">If you do not have an account, please click here to register</a></h5>
+                <h5><a href="register.jsp" style="font-size: 25px;">If you do not have an account, please click here to register</a></h5>
            
    </div>
        </div>
