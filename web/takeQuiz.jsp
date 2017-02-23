@@ -29,10 +29,20 @@
             <ul>
                 <li><a> Get ready to start your quiz!</a></li>
             </ul>
+        </div><br><br>
+        <div class="centerContent1">
+            <br><br><br>
+            <button id="third-button">* Input Question *</button><br><br>
+            <button id="fourth-button">* Answer 1 *</button><br>
+            <button id="fourth-button">* Answer 2 *</button><br>
+            <button id="fourth-button">* Answer 3 *</button><br>
+            <button id="fourth-button">* Answer 4 *</button><br><br>
+            
+            <button id="fourth-button" style="width:20%;"> Next Question --> </button>
+             <button id="fourth-button" style="width:20%;"> Exit Quiz </button><br><br>
+            
+            
+        
         </div>
-        
-        <h3>If you need instructions, please watch the video below:</h3>
-        
-        <a href="/AC31007Quiz/takeQuiz.jsp"><button id="fourth-button">Start</button></a>
     </body>
 </html>
