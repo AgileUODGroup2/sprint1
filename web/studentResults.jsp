@@ -129,6 +129,7 @@
 
                                     <a href="logout.jsp"><button id="third-button">Filter</button></a>
                         </div>
+         </div>
                     
                     <%
                 }
@@ -159,12 +160,14 @@
             
                       <a href="logout.jsp"><button id="third-button">Filter</button></a>
         </div>
-        
+        <br>
+        <br>
+    
         <div id="table">
        <%
                         if(!quizResult.isEmpty()) {
                             %>
-                                <table border="1">
+                                <table border="0" cellpadding="10" style=" margin: auto; font-family: candara; color: white; font-size: 25px; background-color:#042356;">
                                 <tbody>
                                 <tr>
                                     <td>Matriculation Number</td>
@@ -192,9 +195,9 @@
                                     </table>
                                     
         </div>
-        
+        <div id ="graph">
         <div id="chart_div"> </div>         
-
+        </div>
                     
                             <%
                         }

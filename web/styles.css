@@ -481,11 +481,11 @@ button10 {
 }
 
 #table{
-    width: 100%;		/*welcome message is 50% width of centreContent div*/
-    margin: auto;
-    display: block;
-    height: 30%;
-    
+ 
+        width: 100%;		/*welcome message is 50% width of centreContent div*/
+	float: left;
+        align-content: center;
+        margin-top: 30px;
 
 }
 
