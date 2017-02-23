@@ -41,6 +41,7 @@ public class DisplayResult extends HttpServlet {
         int i = uri.lastIndexOf("/");
         String strQuizID = uri.substring(i+1);
         int quizID = Integer.parseInt(strQuizID);
+        System.out.println("Quiz ID: "+quizID);
         displayResult(quizID, request, response);
 
     }
@@ -70,10 +71,10 @@ public class DisplayResult extends HttpServlet {
         HttpSession session = request.getSession(true);
         LoggedIn lg =(LoggedIn)session.getAttribute("LoggedIn");
         
+        Quiz quiz = qm.getQuizDetails(quizID);
+        quiz.setAverageScore(rm.getQuizAverage(quizID));
+        
         if(lg.isStaff()){
-            Quiz quiz = qm.getQuizDetails(quizID);
-            quiz.setAverageScore(rm.getQuizAverage(quizID));
-            
             java.util.LinkedList<StudentResult> quizResult = rm.getQuizResults(quizID);
             quiz.setGradeDivide(calculateGraphGrades(quizResult));
             
@@ -90,6 +91,7 @@ public class DisplayResult extends HttpServlet {
             
             RequestDispatcher rd = request.getRequestDispatcher("/testResult.jsp"); // SET CORRECT REDIRECT LOCATION
             request.setAttribute("Result", quizResult);
+            request.setAttribute("Quiz", quiz);
             rd.forward(request, response);
         }
     }
