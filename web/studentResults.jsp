@@ -16,7 +16,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="/AC31007Quiz/styles.css">
         <title>Student Results</title>
-        
+       
         <%
             java.util.LinkedList<StudentResult> quizResult = (java.util.LinkedList<StudentResult>) request.getAttribute("Results");
             Quiz quiz = (Quiz) request.getAttribute("Quiz");
@@ -96,15 +96,17 @@
                 <li><a><%=quiz.getQuizName()%> </a></li>
             </ul>
         </div>
+           <br>
+           <br>
+         <div class="centerContent1">
         
-        
-           
+          
         <%
                 if(type == "Completed Quizzes")
                 {
                     %>
-                    <br>
-                    <br>
+               
+                 
                     <div id="cc1">  
                         <h2>Quiz Profile</h2>
 
@@ -112,15 +114,15 @@
                         <h3>Date Created: <%=quiz.getDateCreated()%></h3>
                         <h3>Number of Q's: <%=quiz.getNumberOfQuestions()%></h3>
                         <h3>Quiz Status: <%=quiz.getStatus()%></h3>
-                        <br>
                         <h3>Class Average: <%=quiz.getAverageScore()%></h3>
 
                         </div>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
+                      
+                   
                         <div id="cc2">
+                            <br>
+                            <br>
+                            <br>
                         <a href="editProfile.jsp"><button id="fourth-button">Edit Quiz</button></a>
 
                                     <a href ="studentModules.jsp"><button id="fourth-button">Make Live</button></a>
@@ -135,8 +137,7 @@
                                 %>
 
                     
-                        <br>
-                        <br>
+                    
                         
                             
         <div id="cc1">  
@@ -153,10 +154,12 @@
         </div>
         
         <div id="cc2">
+           
         <a href="editProfile.jsp"><button id="fourth-button">Edit Quiz</button></a>
             
                       <a href="logout.jsp"><button id="third-button">Filter</button></a>
         </div>
+        
         <div id="table">
        <%
                         if(!quizResult.isEmpty()) {
@@ -191,7 +194,7 @@
         </div>
         
         <div id="chart_div"> </div>         
-        </div>
+
                     
                             <%
                         }
@@ -216,10 +219,11 @@
             
                     <a href="logout.jsp"><button id="third-button">Filter</button></a>
                     </div>
+   
                     <%
                 }
         %>
-         
+</div>
     
     </body>
 </html>
