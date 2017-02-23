@@ -12,6 +12,7 @@
 
         Result quizResult = (Result) request.getAttribute("Result"); // Result of a single quiz for a specific Matriculation Number
         Quiz quiz = (Quiz) request.getAttribute("Quiz");
+        String contextPath = request.getContextPath();
     %>
 
 </head>
@@ -55,8 +56,9 @@
         <br>
         <div id="graph">
          
+            <form method="GET" action="<%=contextPath + "/takeQuiz/" + quiz.getQuizID()%>"><input type="submit" value="Take Quiz" /></form>
             <a href="/AC31007Quiz/quizInstructions.jsp"><button id="third-button">Click here for quiz instructions</button></a><br>
-         <a href="/AC31007Quiz/takeQuiz.jsp"><button id="third-button" style="font-weight:bold;">Take Quiz</button></a>
+         
         </div>
         </div>
 </body>
