@@ -22,7 +22,7 @@ public class staffModulesModel {
         
     try(Connection conn = db.connectToDatabase(); Statement st = conn.createStatement()){
         String query = "SELECT * FROM staff_enrolment WHERE Staff_ID = 1";
-        ResultSet rs = st.executeQuery(query);
+        try(ResultSet rs = st.executeQuery(query)){
             while (rs.next())
             {
                Staff_ID= rs.getInt("Staff_ID");
@@ -31,7 +31,8 @@ public class staffModulesModel {
                String result = Staff_ID + " " + Module_ID;
                System.out.println(Staff_ID + " " + Module_ID);
                return result;
-            }      
+            }   
+        }
     }
     catch(SQLException err){
         System.out.println(err.getMessage());
