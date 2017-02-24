@@ -21,28 +21,24 @@ and open the template in the editor.
          format('truetype');
     }
     
+h1, h2, h3, h4, h5, h6, h7, h8, h9, h10 {
+    font-family: candara;
+    color: white;
+}
 
 h1{
-    
-    font-family: candara;
     font-size: 130px;
-    color: white;
     text-align: center;
     margin: -2px;
 }
+
 h2{
-    color: white;
-    font-family: 'candara';
     font-size: 40px;
     font-weight: bold;
     margin:10px;
-   
-   
 }
 
 h3{
-    color: white;
-    font-family: 'candara';
     font-size: 30px;
     font-weight: bold;
     margin:10px;
@@ -50,21 +46,16 @@ h3{
 }
 
 h4{
-    color: white;
-    font-family: 'candara';
     text-align: left;
     font-size: 15px;
     margin:10px;
 }
 h5{
-    color: white;
-    font-family: 'candara';
     font-size: 20px; 
     text-align: center;
 }
 h6{
     color: red;
-    font-family: 'candara';
     font-size: 30px;
     font-weight: bold;
     margin:10px;
@@ -72,8 +63,6 @@ h6{
 }
 
 h7{
-    color: white;
-    font-family: 'candara';
     font-size: 40px;
     text-align: center;
     font-weight: bold;
@@ -82,17 +71,10 @@ h7{
 }
 
 h8{
-    color: white;
-    font-family: candara;
     font-size: 25px;
 }
-h9{
-    font-family: candara;
-    color: white;
-}
+
 h10{
-    color: white;
-    font-family: candara;
     font-size: 30px;
     display: inline-block;
     margin: 2%;
@@ -155,7 +137,6 @@ a:active {
     font-weight: bold;
 }
 
-
 .navBar1{
     height: 50px;
     width: 100%;
@@ -169,7 +150,6 @@ a:active {
 .navBar1 ul{
     margin: 0;
     padding: 0;
-
 }
 
 .navBar1 li{
@@ -179,8 +159,7 @@ a:active {
 }
 
 .navBar1 a{
-    text-decoration: none; 
-
+    text-decoration: none;
     display: block;
     padding: 10px 15px; 
     margin: 0;
@@ -188,7 +167,6 @@ a:active {
     font-weight: bold;
     color: white;
     font-size: 22px;
-
 }
 
 .navBar1 a:hover{
@@ -199,7 +177,6 @@ a:active {
         -1px 1px 0 #000,
         1px 1px 0 #000;
     background-color: white;
-
 }
 
 div.main{
@@ -223,20 +200,13 @@ label {
     font-family: candara; 
     margin-left: 30%;
 }
-label1 {
-    float: left;
-    text-align: right;
-    margin-right: 15px;
-    width: 150px;
-    padding-top: 10px;
-    font-size: 1.4em;
-    color: white; 
+
+input {
     font-family: candara; 
-    margin-left: 30%;
+    color: white;
 }
 
-
-input[type=text] {
+input[type=text], input[type=password] {
     width: 75%;
     padding: 6px 10px;
     margin: 8px 0;
@@ -246,34 +216,20 @@ input[type=text] {
     box-sizing: border-box;
     font-size: 1.2em;
     color: black; 
-    font-family: candara; 
-    
 }
 
 input[type=password] {
     width: 50%;
-    padding: 6px 10px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
     font-size: 0.9em;
-    color: black; 
-    font-family: candara; 
 }
-
-    
+ 
 input[type=radio] {
     font-size: 20px;
-    font-family: candara; 
-    color: white;
 }
 
 input[type=submit] {
     background-color: #25619f; /* Green */
     border: none;
-    color: white;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
@@ -282,11 +238,8 @@ input[type=submit] {
     border-radius: 8px;
     display:block;
     margin: auto;
-    font-family: candara;
     -webkit-appearance: none;
-
 }
-
 
 select {
     background-color: #25619f;
@@ -299,9 +252,7 @@ select {
     border: 1px solid #042356;
     margin: auto;
     width: 25%;
-    
 }
-
 
 span { display: block; margin: 0 0 3px; font-size: 1.2em; font-weight: bold; }
 
@@ -316,59 +267,35 @@ button {
     font-size: 16px;
     font-family: candara;
 }
-
-
-
-
 #sec-button{
     background-color: #042356;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
     display: block;
     font-size: 20px;
     border: 2px solid #042356;
     border-radius: 25px;
     margin: auto;
     width: 80%;
-    font-family: candara;
 
 }
 #third-button{
     background-color: #b71010;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
     display: block;
     font-size: 20px;
     border: 1px solid #042356;
     margin: auto;
     width: 80%;
-    font-family: candara;
-    
-    
 }
 .push{
     clear:both;
 }
 
-
 #fourth-button{
     background-color: #25619f;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
     display: block;
     font-size: 20px;
     border: 1px solid #042356;
     margin: auto;
     width: 80%;
-    font-family: candara;
-    
-
 }
 
 a:link{
@@ -377,19 +304,14 @@ a:link{
 
 #fifth-button{
     background-color: #b71010;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
     display: block;
     font-size: 20px;
     border: 1px solid #042356;
     border-radius: 25px;
     margin: auto;
     width: 80%;
-    font-family: candara;
-    
 }
+
 button10 {
     background-color: #25619f;
     color: white;
@@ -406,13 +328,12 @@ button10 {
 }
 
 .centerContent1{
-
 	width: 70%;
 	margin: 0 auto;				/*Sets div to centre of page and is 70% width of the page*/
 	background: #042356;
 }
-.cent1{
 
+.cent1{
 	width: 70%;			/*Sets div to centre of page and is 70% width of the page*/
 	background: #b71010;
         display: block;
@@ -420,7 +341,6 @@ button10 {
         margin-right: auto;
         text-align: left;
 }
-
 
 #cen1{
        width: 100%;
@@ -435,17 +355,12 @@ button10 {
 }
 
 #cc1{
-        
 	width: 60%;		/*welcome message is 50% width of centreContent div*/
 	float: left;
 	height: 30%;
 	overflow: auto;
         background: #042356;
-        
-        
-        
 }
-
 
 #cc2{
         width: 40%;		/*welcome message is 50% width of centreContent div*/
@@ -453,12 +368,8 @@ button10 {
 	height: 30%;
 	overflow: auto;
         background: #d3dfeb;
-       
-       
-          
 }
 #cc3{
-    
         width: 100%;		/*welcome message is 50% width of centreContent div*/
 	float: left;
 	height: 30%;
@@ -466,21 +377,16 @@ button10 {
         background: #25619f;
         align-content: center;
         margin-top: 30px;
-
 }
+
 #chart_div{
-    
         width: 100%;		/*welcome message is 50% width of centreContent div*/
 	float: left;
 	height: 30%;
-        /*width:800px;
-        height:800px;*/
         margin-top: 30px;
-
 }
 
 #table{
- 
         width: 60%;		/*welcome message is 50% width of centreContent div*/
 	float: left;
 	height: 30%;
@@ -489,33 +395,20 @@ button10 {
         margin-top: 30px;
 }
 
-
 #questions{
-        
 	width: 50%;		/*welcome message is 50% width of centreContent div*/
 	float: left;
 	height: 30%;
 	overflow: auto;
         background: #042356;
-        
-        
-        
-}
-.push{
-    clear:both;
 }
 
-
-   #result{
-    
+#result{
         width: 40%;		/*welcome message is 50% width of centreContent div*/
 	float: right;
 	height: 30%;
 	overflow: auto;
         background: #042356;
-  
-       
-
 }   
 
 #quizprofile{
@@ -523,9 +416,5 @@ button10 {
 	width: 45%;		/*welcome message is 50% width of centreContent div*/
 	float: left;
 	height: 30%;
-
         background: #042356;
-        
-        
-        
 }
