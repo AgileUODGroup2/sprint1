@@ -37,7 +37,8 @@ public class filterByModuleStudent extends HttpServlet {
         String moduleID = request.getParameter("module");
         
         QuizModel qm = new QuizModel();
-        java.util.LinkedList<Quiz> quizList = new java.util.LinkedList<Quiz>();
+        // Refactor to remove diamond operator and simplify instantiation of the LinkedList
+        java.util.LinkedList<Quiz> quizList = new java.util.LinkedList<>();
         RequestDispatcher rd = null;
         switch (type) {
             case "Completed Quizzes":
