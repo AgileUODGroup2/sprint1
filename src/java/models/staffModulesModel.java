@@ -6,10 +6,10 @@
 package models;
 
 import java.sql.Connection;
-import lib.database.DatabaseConnection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import lib.database.DatabaseConnection;
 /**
  *
  * @author ashawittchen
