@@ -15,13 +15,10 @@ import lib.database.DatabaseConnection;
  */
 public class wholeStudentListModel {
     
+    DatabaseConnection db = new DatabaseConnection();
+    
     public String getWholeStudentList(){
-        
-    Connection conn = null;
-   try{
-        DatabaseConnection db = new DatabaseConnection();
-        conn = db.connectToDatabase();
-        Statement st = conn.createStatement();
+    try(Connection conn = db.connectToDatabase(); Statement st = conn.createStatement()){
         String query = "SELECT * FROM student";
         
         ResultSet rs = st.executeQuery(query);
@@ -35,16 +32,9 @@ public class wholeStudentListModel {
                System.out.println(Matriculation_Number + " " + First_Name + " " + Last_Name);
                return result;
             }
-           
-            st.close();
-           
-             }
-        catch(SQLException err){
-            System.out.println(err.getMessage());
-    }finally{
-        if (conn != null) {
-            try { conn.close(); } catch (Exception e) { /* handle close exception, quite usually ignore */ } 
-        }
+    }
+    catch(SQLException err){
+        System.out.println(err.getMessage());
     }
     return null;
  }
