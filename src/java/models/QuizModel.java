@@ -144,10 +144,9 @@ public void addQuestion(String[] array)
     try{
         db = new DatabaseConnection();
         conn = db.connectToDatabase();
-        for (int i =0; i<array.length; i++)
-        {
-            
-            PreparedStatement preparedStmt = conn.prepareStatement(array[i]);
+        // Refactor antiquated for loop to JDK 5 enhanced for loop 
+        for (String array1 : array) {
+            PreparedStatement preparedStmt = conn.prepareStatement(array1);
             preparedStmt.executeUpdate();
         }
         
