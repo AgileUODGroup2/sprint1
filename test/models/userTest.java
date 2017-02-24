@@ -45,12 +45,13 @@ public class userTest {
         registerModel model = new registerModel();
         model.register(89898989, "JUnit_Test_Name", "JUnit_Test_LastName", "JUnit_Test_Password");
         
+        
     }
     
     //This is run after the test
     @After
     public void tearDown() throws SQLException {
-        
+       
         //connect
         db = new DatabaseConnection();
         
@@ -60,15 +61,22 @@ public class userTest {
             String query =  "DELETE FROM Staff WHERE Password=?;";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             
+            PreparedStatement preparedStmt2 = conn.prepareStatement(query); //2nd statement needed to delete the row after password changes from the testUpdatePassword()
+            
             //Sort Inputs
             preparedStmt.setString(1, "JUnit_Test_Password");
+            
+            preparedStmt2.setString(1, "TestChangePassword");
             
             //Execute
             preparedStmt.executeUpdate();
             
+            preparedStmt2.executeUpdate();
+            
         }
         
     }
+      
 
     /**
      * Test of login method, of class user.
@@ -91,7 +99,7 @@ public class userTest {
      /**
      * Test update last name, of class user.
      */
-    @Test
+     @Test
     public void testUpdateLastName(){
         
         System.out.println("\nTEST: Update Last Name");
@@ -107,4 +115,146 @@ public class userTest {
         assertTrue("Something wrong with Changing second name", state);
     }
     
+    @Test 
+    public void testUpdateFirstName() {
+      
+        System.out.println("\nTest: Update First Name");
+        
+        boolean state;
+        
+        instance.updateFirstName(true, 89898989, "TestChangeFirstName");
+        
+       String[] test = instance.getStaffDetails(89898989);
+      
+       state = "TestChangeFirstName".equals(test[0]);
+       
+       assertTrue("Update first name test passed", state);
+ 
+    }
+    
+    @Test 
+    public void testUpdatePassword(){
+     
+      System.out.println("\nTest: Update Password");
+        
+        boolean state;
+        
+        instance.updatePassword(true, 89898989, "TestChangePassword");
+        
+       String[] test = instance.getStaffDetails(89898989);
+       state = "TestChangePassword".equals(test[2]);
+       
+       System.out.println("State: " + state);
+       assertTrue("Update password test passed", state);
+    
+    }
+    
+    @Test
+    public void testGetStudentDetails() throws SQLException{
+        
+        System.out.println("\nTest: Get Student Details");
+        
+            
+        boolean firstname;
+        boolean lastname;
+        boolean state = false;
+        
+        
+      instance.getStudentDetails(1);
+        
+       String[] test = instance.getStudentDetails(1);
+  
+      firstname = "John".equals(test[0]);
+      lastname = "Smith".equals(test[1]);
+  
+ 
+      if ((firstname == true) && (lastname == true))
+      {
+          state = true;
+      }
+      assertTrue("true", state);
+    }
+  
+    @Test
+    public void testGetStaffDetails(){
+        
+         System.out.println("\nTest: Get Staff Details");
+      
+        boolean firstname;
+        boolean lastname;
+        boolean state = false;
+        
+        
+      instance.getStaffDetails(1);
+        
+       String[] test = instance.getStaffDetails(1);
+  
+      firstname = "Rachel".equals(test[0]);
+      lastname = "Menzies".equals(test[1]);
+  
+ 
+      if ((firstname == true) && (lastname == true))
+      {
+          state = true;
+      }
+      assertTrue("true", state);
+    }
+    
+    @Test
+    public void testGetStaffModules() {
+        
+         System.out.println("\nTest: Get Staff Modules");
+        
+       boolean module1;
+       boolean module2; 
+       boolean state = false;
+        
+       java.util.Vector <String> modulesTest = instance.getStaffModules(1);
+       
+       module1 = "AC22006".equals(modulesTest.get(0));
+       module2 = "AC31009".equals(modulesTest.get(1));
+      
+      if ((module1 == true) && (module2 == true))
+      {
+          state = true;
+      }
+      
+      System.out.println("state: " + state);
+      assertTrue("true", state);
+ 
+    }
+    
+     @Test
+    public void testGetStudentModules() {
+        
+         System.out.println("\nTest: Get Staff Modules");
+        
+       boolean module1;
+       boolean module2; 
+       boolean state = false;
+        
+       java.util.Vector <String> modulesTest = instance.getStudentModules(2);
+       
+       module1 = "AC11002".equals(modulesTest.get(0));
+       module2 = "AC21007".equals(modulesTest.get(1));
+      
+      if ((module1 == true) && (module2 == true))
+      {
+          state = true;
+      }
+      
+      System.out.println("state: " + state);
+      assertTrue("true", state);
+ 
+    }
+        
+   
 }
+  
+    
+ 
+    
+    
+    
+  
+  
