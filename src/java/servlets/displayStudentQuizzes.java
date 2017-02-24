@@ -38,7 +38,8 @@ public class displayStudentQuizzes extends HttpServlet {
         int staffID = user.getID();
         
         QuizModel qm = new QuizModel();
-        java.util.LinkedList<StudentQuiz> quizList = new java.util.LinkedList<StudentQuiz>();
+        // Refactor to remove diamond operator and simplify instantiation of the LinkedList
+        java.util.LinkedList<StudentQuiz> quizList = new java.util.LinkedList<>();
         RequestDispatcher rd = null;
         switch (type) {
             case "completedQuizzes":

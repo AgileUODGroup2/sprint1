@@ -23,6 +23,7 @@ import models.registerModel;
 
 public class register extends HttpServlet {
     
+    @Override
     public void init(ServletConfig config) throws ServletException {
         // TODO Auto-generated method stub
         

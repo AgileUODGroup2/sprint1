@@ -85,29 +85,29 @@ public class login extends HttpServlet {
     user us = new user();
     String result = us.login(username, password);
     System.out.println("Here is the result: "+result);
-    if (result.equals ("Staff"))
-    {
-        lg.setAsStaff(true);
-        String[] name = us.getStaffDetails(Integer.parseInt(username));
-        lg.setFirstName(name[0]);
-        lg.setLastName(name[1]);
-        response.sendRedirect("staffPortal.jsp");
-    }
-    else if (result.equals ("Student"))
-    {
-        try {
-            String[] name = us.getStudentDetails(Integer.parseInt(username));
-            lg.setFirstName(name[0]);
-            lg.setLastName(name[1]);
-            response.sendRedirect("studentPortal.jsp");
-        } catch (SQLException ex) {
-            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+    // Refactor String comparison into Switch case
+    String[] name;
+        switch (result) {
+            case "Staff":
+                lg.setAsStaff(true);
+                name = us.getStaffDetails(Integer.parseInt(username));
+                lg.setFirstName(name[0]);
+                lg.setLastName(name[1]);
+                response.sendRedirect("staffPortal.jsp");
+                break;
+            case "Student":
+                try {
+                    name = us.getStudentDetails(Integer.parseInt(username));
+                    lg.setFirstName(name[0]);
+                    lg.setLastName(name[1]);
+                    response.sendRedirect("studentPortal.jsp");
+                } catch (SQLException ex) {
+                    Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+                }       break;
+            default:
+                response.sendRedirect("failedLogin");
+                break;
         }
-    }
-    else
-    {
-            response.sendRedirect("failedLogin");
-    }
     }
     
     /**
