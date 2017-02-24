@@ -25,6 +25,7 @@ import stores.testStore;
 
 public class testServlet extends HttpServlet {
     
+    @Override
     public void init(ServletConfig config) throws ServletException {
         // TODO Auto-generated method stub
         
