@@ -7,6 +7,9 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -93,10 +96,14 @@ public class login extends HttpServlet {
     }
     else if (result.equals ("Student"))
     {
-        String[] name = us.getStudentDetails(Integer.parseInt(username));
-        lg.setFirstName(name[0]);
-        lg.setLastName(name[1]);
-        response.sendRedirect("studentPortal.jsp");
+        try {
+            String[] name = us.getStudentDetails(Integer.parseInt(username));
+            lg.setFirstName(name[0]);
+            lg.setLastName(name[1]);
+            response.sendRedirect("studentPortal.jsp");
+        } catch (SQLException ex) {
+            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     else
     {
