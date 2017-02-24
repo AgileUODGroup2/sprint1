@@ -54,13 +54,16 @@
         </div>
         <br>
         <br>
-        <div id="graph">
-            <br>
-            <br>
-            <form method="GET" action="<%=contextPath + "/takeQuiz/" + quiz.getQuizID()%>"><input type="submit" value="Take Quiz" /></form>
-            <a href="/AC31007Quiz/quizInstructions.jsp"><button id="third-button">Click here for quiz instructions</button></a><br>
+      
+        <div id="cc3" style="background-color: #d3dfeb;">
+           
+   
          
+            <form method="GET" action="<%=contextPath + "/takeQuiz/" + quiz.getQuizID()%>"><input type="submit" value="Take Quiz" /></form>
+            <br>
+            <a href="/AC31007Quiz/quizInstructions.jsp"><button id="third-button">Click here for quiz instructions</button></a><br>
         </div>
         </div>
+        
 </body>
 </html>
