@@ -17,8 +17,6 @@ import models.QuizModel;
 import models.ResultModel;
 import stores.LoggedIn;
 import stores.Quiz;
-import stores.Result;
-import stores.StudentResult;
 
 /**
  *

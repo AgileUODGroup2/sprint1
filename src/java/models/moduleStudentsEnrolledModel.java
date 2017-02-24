@@ -4,17 +4,11 @@
  * and open the template in the editor.
  */
 package models;
-import java.util.*;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import lib.database.DatabaseConnection;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import stores.moduleStudentsEnrolledStore;
 
 /**
  *

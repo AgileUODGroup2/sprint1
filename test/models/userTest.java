@@ -8,7 +8,6 @@ package models;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.Vector;
 import lib.database.DatabaseConnection;
 import org.junit.After;
 import org.junit.AfterClass;

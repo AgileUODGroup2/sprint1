@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package stores;
-import java.sql.*;
 /**
  *
  * @author ashawittchen

@@ -5,15 +5,12 @@
  */
 package models;
 
-import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import lib.database.DatabaseConnection;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import stores.LoggedIn;
 import stores.QuestionBank;
 import stores.Quiz;
 import stores.StudentQuiz;

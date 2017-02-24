@@ -5,7 +5,6 @@
  */
 package models;
 
-import java.sql.Date;
 import java.text.DecimalFormat;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -16,7 +15,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import stores.Result;
 import stores.StudentResult;
 
 /**
