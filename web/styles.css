@@ -59,7 +59,7 @@ h4{
 h5{
     color: white;
     font-family: 'candara';
-    font-size: 20px;
+    font-size: 20px; 
     text-align: center;
 }
 h6{
@@ -468,25 +468,25 @@ button10 {
         margin-top: 30px;
 
 }
-#graph{
+#chart_div{
     
         width: 100%;		/*welcome message is 50% width of centreContent div*/
 	float: left;
 	height: 30%;
-
-
-        align-content: center;
+        /*width:800px;
+        height:800px;*/
         margin-top: 30px;
 
 }
 
 #table{
  
-        width: 100%;		/*welcome message is 50% width of centreContent div*/
+        width: 60%;		/*welcome message is 50% width of centreContent div*/
 	float: left;
-        align-content: center;
+	height: 30%;
+	overflow: auto;
+        background: #042356;
         margin-top: 30px;
-
 }
 
 

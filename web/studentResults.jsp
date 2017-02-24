@@ -22,11 +22,12 @@
             java.util.LinkedList<StudentResult> quizResult = (java.util.LinkedList<StudentResult>) request.getAttribute("Results");
             Quiz quiz = (Quiz) request.getAttribute("Quiz");
             
-            //int[] tempDivide = {2, 6, 5, 3, 5, 5, 4, 3, 3, 4};
-            //String json = gsonResults.toJson(tempDivide);
-            
             Gson gsonResults = new Gson();
-            String json = gsonResults.toJson(quiz.getGradeDivide());
+            
+            int[] tempDivide = {2, 6, 5, 3, 5, 5, 4, 3, 3, 4};
+            String json = gsonResults.toJson(tempDivide);
+            
+            //String json = gsonResults.toJson(quiz.getGradeDivide());
         %>
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -46,34 +47,29 @@
               data.addColumn('string', 'Grade');
               data.addColumn('number', 'Students');
               data.addRows([
-                ['0-10', arr[0]],
-                ['10-20', arr[1]],
-                ['20-30', arr[2]],
-                ['30-40', arr[3]],
-                ['40-50', arr[4]],
-                ['50-60', arr[5]],
-                ['60-70', arr[6]],
-                ['70-80', arr[7]],
-                ['80-90', arr[8]],
-                ['90-100', arr[9]]
+                ['0 - 10%', arr[0]],
+                ['10 - 20%', arr[1]],
+                ['20 - 30%', arr[2]],
+                ['30 - 40%', arr[3]],
+                ['40 - 50%', arr[4]],
+                ['50 - 60%', arr[5]],
+                ['60 - 70%', arr[6]],
+                ['70 - 80%', arr[7]],
+                ['80 - 90%', arr[8]],
+                ['90 - 100%', arr[9]]
               ]);
 
-              var options = {'width':800,
-                              hAxis: {
-                                  title: 'Score (%)',
-                                  textStyle: {
-                                      fontSize: 10
-                                  }
-                              },
-                              vAxis: {
-                                  title: 'Number of Students',
-                                  textStyle: {
-                                      fontSize: 10
-                                  }
-                              },
-                             'height':700};
+              var options = {title:'Grade Distribution',
+                            backgroundColor:'#d3dfeb',
+                            colors:['#1c2888','#2b2b87','#3a2e87','#483187','#573486','#663785','#753b85','#843e84','#934184','#a14484'],
+                            fontName:'Verdana',
+                            pieSliceText:'value',
+                            pieHole:0.4,
+                            'width':800,
+                            'height':800,
+                            'chartArea':{'width':'100%','height':'80%'}};
 
-              var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+              var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
               chart.draw(data, options);
             }
     </script>
@@ -124,11 +120,9 @@
                             <br>
                             <br>
                             <br>
+                         <form method="GET" action=<%=contextPath + "/makeLive/" + quiz.getQuizID()%>><input type="submit" value="Make Live" /></form>
                          <form method="GET" action=<%=contextPath + "/displayQuestionsAndAnswers/" + quiz.getQuizID()%>><input type="submit" value="View Q's and A's" /></form>
-
-                        <a href ="/AC31007Quiz/makeLive.jsp"><button id="fourth-button">Make Live</button></a>
-
-                        <a href="logout.jsp"><button id="third-button">Filter</button></a>
+                         <a href="logout.jsp"><button id="third-button">Filter</button></a>
                         </div>
          </div>
                     
@@ -195,9 +189,7 @@
                                     </table>
                                     
         </div>
-        <div id ="graph">
-        <div id="chart_div"> </div>         
-        </div>
+        <div id="chart_div"></div>
                     
                             <%
                         }
@@ -227,7 +219,6 @@
                     <%
                 }
         %>
-</div>
     
     </body>
 </html>
