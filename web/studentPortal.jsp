@@ -59,24 +59,20 @@
               <a href="logout.jsp"><button id="third-button">Log Out</button></a>
     <br>
             <br>
-            <br>
+          
        
           
         </div>
         
-        <br>
-        <br>
         
-         <div id="cc3" style="background: black;">
+         <div id="cc3" style="background: black; display: block; width: 50%; margin-left: 25%;">
              <p><h7>My Quizzes </h7></p>
      
-
-             
-              <p><a href="incompleteQuizzes"><button id="fourth-button" style="Background:#b71010; height: 155px; font-size: 40px; "> Incomplete Quizzes</button></a></p>
+              <p><a href="incompleteQuizzes"><button id="fourth-button" style="Background:#b71010; width: 195px; height: 195px; font-size: 30px; border-radius: 360px; "> Incomplete Quizzes</button></a></p>
               
-               <p><a href="pendingdQuizzes"><button id="fourth-button" style="Background:orange; height: 155px; font-size: 40px;">Pending Quizzes</button></a></p>
+               <p><a href="pendingdQuizzes"><button id="fourth-button" style="Background:orange;  width: 195px; height: 195px; font-size: 30px; border-radius: 360px;">Pending Quizzes</button></a></p>
                 
-               <p><a href="completedQuizzes"><button id="fourth-button" style="Background:green; height: 155px; font-size: 40px; text-decoration: none;">Completed Quizzes</button></a></p>
+               <p><a href="completedQuizzes"><button id="fourth-button" style="Background:green; width: 195px; height: 195px; font-size: 30px; text-decoration: none; border-radius: 360px;">Completed Quizzes</button></a></p>
                
                <br>
         <br>
