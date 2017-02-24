@@ -136,7 +136,7 @@ public class user {
         }
     }
 
-    public String[] getStudentDetails(int matriculationNo) {
+    public String[] getStudentDetails(int matriculationNo) throws SQLException {
 
         DatabaseConnection db = new DatabaseConnection();
         
@@ -154,6 +154,7 @@ public class user {
                     
                     nameArr[0] = rs.getString("First_Name");
                     nameArr[1] = rs.getString("Last_Name");
+                    
                 }
             }
 
@@ -170,8 +171,8 @@ public class user {
 
         DatabaseConnection db = new DatabaseConnection();
         
-        String nameArr[] = new String[2];
-        String query = "SELECT First_Name, Last_Name FROM staff WHERE Staff_ID = ?";
+        String nameArr[] = new String[3];
+        String query = "SELECT First_Name, Last_Name, Password FROM staff WHERE Staff_ID = ?";
         
         try (Connection con = db.connectToDatabase(); ) {
 
@@ -184,6 +185,9 @@ public class user {
                     
                     nameArr[0] = rs.getString("First_Name");
                     nameArr[1] = rs.getString("Last_Name");
+                    nameArr[2] = rs.getString("Password"); 
+                    
+                   
                 }
             }
 
