@@ -16,16 +16,12 @@ import lib.database.DatabaseConnection;
  */
 public class testModel {
     
-
+    DatabaseConnection db = new DatabaseConnection();
 
 public String getStaffDetails()
 {
-    Connection conn = null;
-    try{
-        DatabaseConnection db = new DatabaseConnection();
-        conn = db.connectToDatabase();
+    try(Connection conn = db.connectToDatabase(); Statement st = conn.createStatement()){
         System.out.println("Database connected: "+conn);
-        Statement st = conn.createStatement();
         String query = "SELECT * from staff";
     
         ResultSet rs = st.executeQuery(query);
@@ -40,13 +36,9 @@ public String getStaffDetails()
                 return result;
             }
             st.close();
-             }
-        catch(SQLException err){
+    }
+    catch(SQLException err){
             System.out.println(err.getMessage());
-    }finally{
-        if (conn != null) {
-            try { conn.close(); } catch (Exception e) { /* handle close exception, quite usually ignore */ } 
-        }
     }
     return null;
 }

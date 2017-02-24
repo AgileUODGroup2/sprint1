@@ -20,16 +20,11 @@ import stores.StudentQuiz;
  * @author erincoey
  */
 public class QuizModel {
-    DatabaseConnection db;
+    
+    DatabaseConnection db = new DatabaseConnection();
 
 public void createQuiz(String moduleID, String staffName, String dateCreated, String quizName,String available, String staffID ){
-
-    Connection conn = null;
-    
-    try{
-        db = new DatabaseConnection();
-        conn = db.connectToDatabase();
-        
+    try(Connection conn = db.connectToDatabase()){
         String query = "INSERT INTO quiz (Module_ID, Staff_Name, Date_Created, Quiz_Name,Quiz_Status,Staff_ID)"+"values(?,?,?,?,?,?)";
         System.out.println("Result: "+moduleID+staffName+dateCreated+quizName);
         PreparedStatement preparedStmt = conn.prepareStatement(query);
@@ -43,18 +38,12 @@ public void createQuiz(String moduleID, String staffName, String dateCreated, St
     }
     catch(SQLException err){
         System.out.println(err.getMessage());
-    }finally{
-        if (conn != null) {
-            try { conn.close(); } catch (Exception e) { /* handle close exception, quite usually ignore */ } 
-        }
     }
 }
 
 //Call this function to update Num_Of_Questions column 
 public void UpdateQuestionAmmount(int quizID){
-    db = new DatabaseConnection();
         try (Connection conn = db.connectToDatabase()) {
-
             //Create and prepare query
             String query =  "UPDATE Quiz " +
                             "SET Num_Of_Questions=(" +
@@ -77,10 +66,7 @@ public void UpdateQuestionAmmount(int quizID){
 
 public int getQuizNumberOfQuestions(int quizID)
 {
-    Connection conn = null;
-    try{
-        db = new DatabaseConnection();
-        conn = db.connectToDatabase();
+    try(Connection conn = db.connectToDatabase()){
         int result =0;
         Statement st = conn.createStatement();
         String query = "SELECT Num_Of_Questions FROM quiz WHERE Quiz_ID=?;";
@@ -91,31 +77,22 @@ public int getQuizNumberOfQuestions(int quizID)
         ResultSet rs = ps.executeQuery();
         while (rs.next()){      
         }
-        st.close();
         return result;
     }
     catch(SQLException err){
         System.out.println(err.getMessage());
-    }finally{
-        if (conn != null) {
-            try { conn.close(); } catch (Exception e) { /* handle close exception, quite usually ignore */ } 
-        }
     }
-
     return 0;  
 }
 
 public int getQuizId()
 {
-    Connection conn = null;
-    try{
-        db = new DatabaseConnection();
-        conn = db.connectToDatabase();
+    try(Connection conn = db.connectToDatabase()){
         int result =0;
-        Statement st = conn.createStatement();
-        String query = "SELECT * FROM quiz ORDER BY Quiz_ID;";
-
-        ResultSet rs = st.executeQuery(query);
+        try (Statement st = conn.createStatement()) {
+            String query = "SELECT * FROM quiz ORDER BY Quiz_ID;";
+            
+            ResultSet rs = st.executeQuery(query);
             while (rs.next())
             {
                 int quizID = rs.getInt("Quiz_ID");
@@ -123,43 +100,27 @@ public int getQuizId()
                 
                 result = quizID; 
             }
-
-            st.close();
-            return result;
-             }
-        catch(SQLException err){
-            System.out.println(err.getMessage());
-    }finally{
-        if (conn != null) {
-            try { conn.close(); } catch (Exception e) { /* handle close exception, quite usually ignore */ } 
         }
+            return result;
     }
-    
+    catch(SQLException err){
+        System.out.println(err.getMessage());
+    }
     return 0;
 }
 
 public void addQuestion(String[] array)
 {
-    Connection conn = null;
-    try{
-        db = new DatabaseConnection();
-        conn = db.connectToDatabase();
+    try(Connection conn = db.connectToDatabase()){
         // Refactor antiquated for loop to JDK 5 enhanced for loop 
         for (String array1 : array) {
             PreparedStatement preparedStmt = conn.prepareStatement(array1);
             preparedStmt.executeUpdate();
         }
-        
-        conn.close();
-        }
-    catch(SQLException err){
-            System.out.println(err.getMessage());
-    }finally{
-        if (conn != null) {
-            try { conn.close(); } catch (Exception e) { /* handle close exception, quite usually ignore */ } 
-        }
     }
-    
+    catch(SQLException err){
+        System.out.println(err.getMessage());
+    }
 }
 
 public java.util.LinkedList<QuestionBank> getQuestionsAndAnswers(int quizID) throws SQLException
@@ -247,12 +208,8 @@ public java.util.LinkedList<Quiz> getCompletedQuizzesMod(int staffID, String mod
 }
 
 public Quiz getQuizDetails(int quizID) {
-
-        DatabaseConnection db = new DatabaseConnection();
-        
         Quiz quiz = new Quiz();
         String query = "SELECT * FROM quiz WHERE Quiz_ID = ?";
-        
         try (Connection con = db.connectToDatabase(); ) {
 
             PreparedStatement ps = con.prepareStatement(query);
@@ -285,7 +242,6 @@ public Quiz getQuizDetails(int quizID) {
 
 public java.util.LinkedList<StudentQuiz> getStudentQuizzes(String query, int matricNo) {
     
-    db = new DatabaseConnection();
     java.util.LinkedList<StudentQuiz> quizzes = new java.util.LinkedList<>();
     try (Connection con = db.connectToDatabase();
         PreparedStatement ps = con.prepareStatement(query)) {
@@ -339,10 +295,7 @@ public java.util.LinkedList<StudentQuiz> getPendingStudentQuizzesMod(int matricN
 }
 
 public void makeQuizLive(int QuizID){ //change to session variables
-    Connection conn = null;
-     try{
-        db = new DatabaseConnection();
-        conn = db.connectToDatabase();
+    try(Connection conn = db.connectToDatabase()){
         
         String query = "UPDATE quiz set Quiz_Status = 'Live' WHERE Quiz_ID = ?";
         
@@ -351,31 +304,20 @@ public void makeQuizLive(int QuizID){ //change to session variables
         preparedStmt.setInt(1,QuizID);
         
         preparedStmt.executeUpdate();
-        conn.close();
-        }
+    }
     catch(SQLException err){
             System.out.println(err.getMessage());
-    }finally{
-        if (conn != null) {
-            try { conn.close(); } catch (Exception e) { /* handle close exception, quite usually ignore */ } 
-        }
     }
  }
 
 public java.util.LinkedList<Quiz> getFilterByRecent(){ 
     
-    
-   db = new DatabaseConnection();
-        Connection conn = db.connectToDatabase();
-       java.util.LinkedList<Quiz> recentFilter = new java.util.LinkedList<>();
-       
-     try{
-       
-        
+    java.util.LinkedList<Quiz> recentFilter = new java.util.LinkedList<>();
+    try(Connection conn = db.connectToDatabase()){
         String query =  "SELECT * FROM quiz WHERE Quiz_Status = 'Live' ORDER BY Date_Created";
         PreparedStatement preparedStmt = conn.prepareStatement(query);
       
-       try (ResultSet rs = preparedStmt.executeQuery()){
+        try (ResultSet rs = preparedStmt.executeQuery()){
            while (rs.next()){
             Quiz rq = new Quiz();
             rq.setQuizID(rs.getInt("Quiz_ID"));
@@ -394,30 +336,18 @@ public java.util.LinkedList<Quiz> getFilterByRecent(){
             recentFilter.add(rq);
             rq.setStaffID(rs.getInt("Staff_ID"));
             recentFilter.add(rq);
-            
            }
        }
-       
-        }
-    catch(SQLException err){
-            System.out.println(err.getMessage());
-              
-    }finally{
-        if (conn != null) {
-            try { conn.close(); } catch (Exception e) { /* handle close exception, quite usually ignore */ } 
-        }
     }
-  
-      return recentFilter;
+    catch(SQLException err){
+        System.out.println(err.getMessage()); 
+    }
+    return recentFilter;
 }
 
 public void updateQuizStatus(int quizID)
 {
-    Connection conn = null;
-    try{
-        db = new DatabaseConnection();
-        conn = db.connectToDatabase();
- 
+    try(Connection conn = db.connectToDatabase()){
         String query = "UPDATE quiz set Quiz_Status = 'Completed' WHERE Quiz_ID = ?";
         
         PreparedStatement preparedStmt = conn.prepareStatement(query);
@@ -425,30 +355,18 @@ public void updateQuizStatus(int quizID)
         preparedStmt.setInt(1,quizID);
         
         preparedStmt.executeUpdate();
-        conn.close();
-        }
+    }
     catch(SQLException err){
             System.out.println(err.getMessage());
-    }finally{
-        if (conn != null) {
-            try { conn.close(); } catch (Exception e) { /* handle close exception, quite usually ignore */ } 
-        }
     }
 }
 public Quiz getFilterByRecentQuiz(){ 
- 
-            
-            Quiz rq = new Quiz();
-  db = new DatabaseConnection();
-        
-        
-      String query =  "SELECT * FROM quiz WHERE Quiz_Status = 'Live' ORDER BY Date_Created";
-    
-     try {Connection conn = db.connectToDatabase();
+    Quiz rq = new Quiz();
+    String query =  "SELECT * FROM quiz WHERE Quiz_Status = 'Live' ORDER BY Date_Created";
+    try {Connection conn = db.connectToDatabase();
             PreparedStatement preparedStmt = conn.prepareStatement(query);
-       try (ResultSet rs = preparedStmt.executeQuery()){
+        try (ResultSet rs = preparedStmt.executeQuery()){
            while (rs.next()){
-            
             rq.setQuizID(rs.getInt("Quiz_ID"));
             rq.setModuleID(rs.getString("Module_ID"));
             rq.setStaffName(rs.getString("Staff_Name"));
@@ -457,21 +375,14 @@ public Quiz getFilterByRecentQuiz(){
             rq.setNumberOfQuestions(rs.getInt("Num_Of_Questions"));
             rq.setStatus(rs.getString("Quiz_Status"));
             rq.setStaffID(rs.getInt("Staff_ID"));
-       
+            }
         }
-            
-           }
-       }
-       
-      
-    catch(SQLException err){
-            System.out.println(err.getMessage());
-              
-        }
-  
-      return rq;
     }
-
+    catch(SQLException err){
+        System.out.println(err.getMessage());
+    }
+    return rq;
+}
  
 }
 

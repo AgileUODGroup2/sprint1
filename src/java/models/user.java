@@ -17,15 +17,13 @@ import lib.database.DatabaseConnection;
  */
 public class user {
     
+    DatabaseConnection db = new DatabaseConnection();
     
     public String login(String username, String password){
 
-         DatabaseConnection db = new DatabaseConnection();
-         Connection conn = db.connectToDatabase();
-
          String checkStaff = "select * from staff where Staff_ID=? and Password=?";
          String checkStudent = "select * from student where Matriculation_Number=? and Password=?";
-         try{       
+         try(Connection conn = db.connectToDatabase()){       
             PreparedStatement ps = conn.prepareStatement(checkStaff);
             PreparedStatement ps2 = conn.prepareStatement(checkStudent);
             ps.setString(1,username);
@@ -35,32 +33,23 @@ public class user {
             ResultSet theResult = ps.executeQuery();
             ResultSet theResult2 = ps2.executeQuery();
             if(theResult.next()){
-                conn.close();
                 System.out.println("Staff logged in");
                 return "Staff";
             } else if(theResult2.next()) {
-                conn.close();
                 System.out.println("Student logged in");
                 return"Student";
             } else {
-                conn.close();
                 System.out.println("No one logged in");
                 return "failed";
             }
          }
          catch(SQLException e) {
              System.out.println(e.getMessage());
-        }finally{
-            if (conn != null) {
-                try { conn.close(); } catch (Exception e) { /* handle close exception, quite usually ignore */ } 
-            }
         }
          return null;
     }
     
     public void updateFirstName(boolean isStaff, int userID, String firstName){
-        
-        DatabaseConnection db = new DatabaseConnection();
         
         String query = "";
         
@@ -86,8 +75,6 @@ public class user {
     
     public void updateLastName(boolean isStaff, int userID, String lastName){
         
-        DatabaseConnection db = new DatabaseConnection();
-        
         String query = "";
         
         if(isStaff) {
@@ -112,8 +99,6 @@ public class user {
     
     public void updatePassword(boolean isStaff, int userID, String password){
         
-        DatabaseConnection db = new DatabaseConnection();
-        
         String query = "";
         
         if(isStaff) {
@@ -137,8 +122,6 @@ public class user {
     }
 
     public String[] getStudentDetails(int matriculationNo) throws SQLException {
-
-        DatabaseConnection db = new DatabaseConnection();
         
         String nameArr[] = new String[2];
         String query = "SELECT First_Name, Last_Name FROM student WHERE Matriculation_Number = ?";
@@ -157,19 +140,13 @@ public class user {
                     
                 }
             }
-
-
         } catch (SQLException e) {
             System.out.print(e.getMessage());
         }
-
         return nameArr;
-
     }
 
     public String[] getStaffDetails(int staffID) {
-
-        DatabaseConnection db = new DatabaseConnection();
         
         String nameArr[] = new String[3];
         String query = "SELECT First_Name, Last_Name, Password FROM staff WHERE Staff_ID = ?";
@@ -190,19 +167,13 @@ public class user {
                    
                 }
             }
-
-
         } catch (SQLException e) {
             System.out.print(e.getMessage());
         }
-
         return nameArr;
-        
     }
 
     public java.util.Vector<String> getStaffModules(int staffID) {
-
-        DatabaseConnection db = new DatabaseConnection();
         java.util.Vector<String> modules = new java.util.Vector<>();
         String query = "SELECT Module_ID FROM staff_enrolment WHERE Staff_ID = ? GROUP BY Module_ID";
         
@@ -218,12 +189,9 @@ public class user {
             System.out.print(e.getMessage());
         }
         return modules;
-        
     }
 
     public java.util.Vector<String> getStudentModules(int matricNo) {
-
-        DatabaseConnection db = new DatabaseConnection();
         java.util.Vector<String> modules = new java.util.Vector<>();
         String query = "SELECT Module_ID FROM student_enrolment WHERE Matriculation_Number = ? GROUP BY Module_ID";
         

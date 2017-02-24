@@ -16,14 +16,11 @@ import lib.database.DatabaseConnection;
  */
 public class staffModulesModel {
     
+    DatabaseConnection db = new DatabaseConnection();
+    
     public String getStaffModules(int Staff_ID){
         
-    Connection conn = null;
-   try{
-        DatabaseConnection db = new DatabaseConnection();
-        conn = db.connectToDatabase();
-        Statement st = conn.createStatement();
-        
+    try(Connection conn = db.connectToDatabase(); Statement st = conn.createStatement()){
         String query = "SELECT * FROM staff_enrolment WHERE Staff_ID = 1";
         ResultSet rs = st.executeQuery(query);
             while (rs.next())
@@ -34,17 +31,10 @@ public class staffModulesModel {
                String result = Staff_ID + " " + Module_ID;
                System.out.println(Staff_ID + " " + Module_ID);
                return result;
-            }
-           
-            st.close();
-           
-             }
-        catch(SQLException err){
-            System.out.println(err.getMessage());
-    }finally{
-        if (conn != null) {
-            try { conn.close(); } catch (Exception e) { /* handle close exception, quite usually ignore */ } 
-        }
+            }      
+    }
+    catch(SQLException err){
+        System.out.println(err.getMessage());
     }
     return null;
  }

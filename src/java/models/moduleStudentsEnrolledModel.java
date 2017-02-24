@@ -16,17 +16,10 @@ import java.sql.Statement;
  */
 public class moduleStudentsEnrolledModel {
     
-    
-  
+   DatabaseConnection db = new DatabaseConnection();
+            
    public String getStudentsEnrolled(int Module_ID){
-        
-    Connection conn = null;
-    try{
-      DatabaseConnection db = new DatabaseConnection();
-        db = new DatabaseConnection();
-        conn = db.connectToDatabase();
-        Statement st = conn.createStatement();
- 
+    try(Connection conn = db.connectToDatabase(); Statement st = conn.createStatement()){
         String query = "SELECT * FROM student_enrolment WHERE Module_ID = 210101";  //change to session variable
         //LinkedList students = new LinkedList();    
         ResultSet rs = st.executeQuery(query);
@@ -76,18 +69,11 @@ public class moduleStudentsEnrolledModel {
                return result;
              */
             }
-            }
-            st.close();
-           
-           
-             }
-        catch(SQLException err){
-            System.out.println(err.getMessage());
-        }finally{
-            if (conn != null) {
-                try { conn.close(); } catch (Exception e) { /* handle close exception, quite usually ignore */ } 
-            }
-        }
+        }  
+    }
+    catch(SQLException err){
+        System.out.println(err.getMessage());
+    }
     return null;
  }
         

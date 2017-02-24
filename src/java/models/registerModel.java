@@ -16,13 +16,10 @@ import lib.database.DatabaseConnection;
  */
 public class registerModel {
     
+    DatabaseConnection db = new DatabaseConnection();
 
 public void register(int Staff_ID,  String First_Name, String Last_Name, String Password ){
-    Connection conn = null;
-    try{
-        DatabaseConnection db = new DatabaseConnection();
-        conn = db.connectToDatabase();
-        
+    try(Connection conn = db.connectToDatabase()){
         String query = "INSERT INTO staff (Staff_ID, First_Name, Last_Name, Password)"+"values(?,?,?,?)";
         System.out.println("Result: " + Staff_ID + First_Name + Last_Name + Password);
         PreparedStatement preparedStmt = conn.prepareStatement(query);
@@ -33,14 +30,9 @@ public void register(int Staff_ID,  String First_Name, String Last_Name, String 
      
         
         preparedStmt.executeUpdate();
-        conn.close();
-        }
+    }
     catch(SQLException err){
             System.out.println(err.getMessage());
-    }finally{
-        if (conn != null) {
-            try { conn.close(); } catch (Exception e) { /* handle close exception, quite usually ignore */ } 
-        }
     }
 }
 

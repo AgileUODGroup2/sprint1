@@ -19,7 +19,6 @@ public class ResultModel {
     
     public java.util.LinkedList<Result> getResultsForDates(Date date1, Date date2) {
         java.util.LinkedList<Result> results = new java.util.LinkedList<>();
-        
         String query = "SELECT * FROM student_quiz WHERE (Date_Completed BETWEEN ? AND ?)";
         
         try (Connection con = db.connectToDatabase();
@@ -45,18 +44,13 @@ public class ResultModel {
         return results;
     }
     
-    //Glen - Returns all quiz results by Matriculation_Number in descending order
+    
     public java.util.LinkedList<Result> getResultsByMatriculationDESC() {
-        
         java.util.LinkedList<Result> results = new java.util.LinkedList<>();
         String query = "SELECT * FROM Student_Quiz ORDER BY Matriculation_Number DESC";
-          
         DatabaseConnection dConn = new DatabaseConnection();
-        
-        try (Connection conn = dConn.connectToDatabase()) {
-            
+        try (Connection conn = dConn.connectToDatabase()){
             PreparedStatement preparedStmt = conn.prepareStatement(query);
-            
             try (ResultSet set = preparedStmt.executeQuery()) {
                 while(set.next()) {
                     Result res = new Result();
@@ -69,20 +63,15 @@ public class ResultModel {
                     results.add(res);
                  }
             }
-               
         } catch(SQLException err) {
             System.out.println(err.getMessage());
         }
-        
         return results;
     }
     
     public Result getQuizResult(int matriculationNo, int quizID) {
-
         Result studentResult = new Result();
-
         String query = "SELECT * FROM student_quiz WHERE Quiz_ID = ? AND Matriculation_Number = ?";
-
         try (Connection con = db.connectToDatabase(); ) {
 
             PreparedStatement ps = con.prepareStatement(query);
@@ -100,14 +89,10 @@ public class ResultModel {
                     studentResult.setDate(rs.getDate("Date_Completed"));
                 }
             }
-
-
         } catch (SQLException e) {
             System.out.print(e.getMessage());
         }
-
         return studentResult;
-
     }
     
     public int getQuizAverage(int quizID) {
@@ -166,7 +151,6 @@ public class ResultModel {
             
             try (ResultSet rs = ps.executeQuery()) {
                 while(rs.next()) {
-                    
                     StudentResult result = new StudentResult();
                     result.setMatriculationNumber(rs.getInt("Matriculation_Number"));
                     result.setStudentName(rs.getString("Student_Name"));
