@@ -85,8 +85,8 @@
                 <li><a href="/AC31007Quiz/index.jsp">QUIZ MASTER </a></li>
              </ul>
         </div>
-        <img src="/AC31007Quiz/logo123.png" width="115px" style="position: absolute; left:0; top: 0;">
-        <img src="/AC31007Quiz/logo123.png" width="115px" style="position: absolute; right:0; top: 0;">
+        <img src="/AC31007Quiz/logo123.png" width="115" style="position: absolute; left:0; top: 0;">
+        <img src="/AC31007Quiz/logo123.png" width="115" style="position: absolute; right:0; top: 0;">
 
         <div class="navBar1">
             <ul>

@@ -101,7 +101,7 @@ public class EditQuiz {
     
     //
     public void DeleteQuestion(int questionID, int quizID){
-        try(Connection conn = db.connectToDatabase(); ) {
+        try(Connection conn = db.connectToDatabase();) {
             //Create and prepare query
             String query =  "DELETE FROM Question_Bank " +
                             "WHERE Question_ID=? " +
