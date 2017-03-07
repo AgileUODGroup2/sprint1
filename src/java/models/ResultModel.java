@@ -69,30 +69,30 @@ public class ResultModel {
         return results;
     }
     
-    public Result getQuizResult(int matriculationNo, int quizID) {
-        Result studentResult = new Result();
-        String query = "SELECT * FROM student_quiz WHERE Quiz_ID = ? AND Matriculation_Number = ?";
-        try (Connection con = db.connectToDatabase(); ) {
-
-            PreparedStatement ps = con.prepareStatement(query);
-
+    public java.util.LinkedList<Result> getQuizResult(int matriculationNo, int quizID) {
+        java.util.LinkedList<Result> studentResults = new java.util.LinkedList<>();
+        String query = "SELECT * FROM attempts WHERE Quiz_ID = ? AND Matriculation_Number = ? ORDER BY AttemptNo DESC";
+        
+        System.out.println("Getting attempts for "+quizID+" and "+matriculationNo);
+        try (Connection con = db.connectToDatabase();
+                PreparedStatement ps = con.prepareStatement(query);) {
             ps.setInt(1, quizID);
             ps.setInt(2, matriculationNo);
 
             try (ResultSet rs = ps.executeQuery()) {
                 while(rs.next()) {
-
+                    Result studentResult = new Result();
                     studentResult.setQuizID(rs.getInt("Quiz_ID"));
-                    studentResult.setCompleted(rs.getBoolean("Has_Completed"));
-                    studentResult.setAttempts(rs.getInt("Attempted_Count"));
+                    studentResult.setAttempts(rs.getInt("AttemptNo"));
                     studentResult.setScore(rs.getInt("Score"));
                     studentResult.setDate(rs.getDate("Date_Completed"));
+                    studentResults.add(studentResult);
                 }
             }
         } catch (SQLException e) {
             System.out.print(e.getMessage());
         }
-        return studentResult;
+        return studentResults;
     }
     
     public int getQuizAverage(int quizID) {
