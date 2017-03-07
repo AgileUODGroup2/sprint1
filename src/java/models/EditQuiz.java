@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import lib.database.DatabaseConnection;
+import stores.QuestionBank;
 
 /**
  *
@@ -111,6 +112,33 @@ public class EditQuiz {
             //Inputs to Query
             preparedStmt.setInt(1, questionID);
             preparedStmt.setInt(2, quizID);
+            
+            //Execute Query
+            preparedStmt.executeUpdate();
+        }
+        catch(SQLException err){
+            System.out.println(err.getMessage());
+        }
+    }
+    
+    public void EditWholeQuiz(QuestionBank qBank){
+        try(Connection conn = db.connectToDatabase();) {
+            //Create and prepare query
+            String query =     "UPDATE Question_Bank"
+                             + "SET Question=?, A=?, B=?, C=?, D=?, Answer=?, Answer_Desc=?"
+                             + "WHERE Quesiton_ID=?;";
+            
+            PreparedStatement preparedStmt = conn.prepareStatement(query);
+            
+            //Inputs to Query
+            preparedStmt.setString(1, qBank.getAnswer());
+            preparedStmt.setString(2, qBank.getA());
+            preparedStmt.setString(3, qBank.getB());
+            preparedStmt.setString(4, qBank.getC());
+            preparedStmt.setString(5, qBank.getD());
+            preparedStmt.setString(6, qBank.getAnswer());
+            preparedStmt.setString(7, qBank.getAnswerDesc());
+            preparedStmt.setInt(8, qBank.getQuestionID());
             
             //Execute Query
             preparedStmt.executeUpdate();
