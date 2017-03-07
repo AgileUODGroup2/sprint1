@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.EditQuiz;
+import models.QuestionModel;
 import models.QuizModel;
-import stores.LoggedIn;
 import stores.QuestionBank;
 import stores.Quiz;
 
@@ -28,14 +28,15 @@ public class editQuiz extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        LoggedIn staff = (LoggedIn) session.getAttribute("LoggedIn");
-        int staffID = staff.getID();
+        String uri = request.getRequestURI();
+        int i = uri.lastIndexOf("/");
+        String strQuestionID = uri.substring(i+1);
+        int questionID = Integer.parseInt(strQuestionID);
         
-        QuizModel qm = new QuizModel();
-        java.util.LinkedList<Quiz> quizList = qm.getAllQuizzes(staffID);
+        QuestionModel qm = new QuestionModel();
+        QuestionBank question = qm.getQuestion(questionID);
         
-        request.setAttribute("QuizList", quizList);
+        request.setAttribute("Question", question);
     }
     
     
