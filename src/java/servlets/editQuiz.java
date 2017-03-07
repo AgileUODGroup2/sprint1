@@ -37,6 +37,9 @@ public class editQuiz extends HttpServlet {
         QuestionBank question = qm.getQuestion(questionID);
         
         request.setAttribute("Question", question);
+        RequestDispatcher rd = request.getRequestDispatcher("/editQuiz.jsp");
+        rd.forward(request, response);
+        
     }
     
     
@@ -44,14 +47,10 @@ public class editQuiz extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
         QuestionBank qBank = new QuestionBank();
-        EditQuiz editQuiz = new EditQuiz(); 
+        EditQuiz editQuiz = new EditQuiz();
+        String contextPath = request.getContextPath();
         
-        //Get Question ID from the URL
-        String uri = request.getRequestURI();               //Get the url
-        int i = uri.lastIndexOf("/");                       //Get the position of the last occurence of "/"
-        String strQuestionID = uri.substring(i+1);          //Get the string at position one to the left of the last "/"
-        int questionID = Integer.parseInt(strQuestionID);   //Convert it to an Integer
-        System.out.println("Question ID: " + questionID);
+        int questionID = Integer.parseInt(request.getParameter("QuestionID"));
         
         //Set the question ID to the current question
         qBank.setQuestionID(questionID);
@@ -62,8 +61,13 @@ public class editQuiz extends HttpServlet {
         String b            = request.getParameter("b");
         String c            = request.getParameter("c");
         String d            = request.getParameter("d");
-        String answer       = request.getParameter("answer");
+        String answer       = request.getParameter("Answer");
         String answerDesc   = request.getParameter("answerDesc");
+        int quizID          = Integer.parseInt(request.getParameter("QuizID"));
+        
+        System.out.println("Question: "+question+" A: "+a+" B: "+b+" Answer Desc: "+answerDesc);
+        
+        
         
         //Fill model with parameters
         qBank.setQuestion(question);
@@ -77,8 +81,7 @@ public class editQuiz extends HttpServlet {
         //Change question in database
         editQuiz.EditWholeQuiz(qBank);
         
-        RequestDispatcher rd = request.getRequestDispatcher("");
-        rd.forward(request, response);
+        response.sendRedirect(contextPath+"/displayQuestionsAndAnswers/"+quizID);
     }
     
 

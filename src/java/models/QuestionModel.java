@@ -22,21 +22,23 @@ public class QuestionModel {
     public QuestionBank getQuestion(int questionID) {
         db = new DatabaseConnection();
         QuestionBank question = new QuestionBank();
+        question.setQuestionID(questionID);
         String query = "SELECT * FROM question_bank WHERE Question_ID = ?";
-
+        
         try (Connection conn = db.connectToDatabase();
                 PreparedStatement ps = conn.prepareStatement(query)) {
             ps.setInt(1,questionID);
             try (ResultSet rs = ps.executeQuery()) {
-                question.setQuizID(rs.getInt("Quiz_ID"));
-                question.setQuestionID(rs.getInt("Question_ID"));
-                question.setQuestion(rs.getString("Question"));
-                question.setA(rs.getString("A"));
-                question.setB(rs.getString("B"));
-                question.setC(rs.getString("C"));
-                question.setD(rs.getString("D"));
-                question.setCorrectAnswer(rs.getString("Answer"));
-                question.setAnswerDesc(rs.getString("Answer_Desc"));
+                while(rs.next()) {
+                    question.setQuizID(rs.getInt("Quiz_ID"));
+                    question.setQuestion(rs.getString("Question"));
+                    question.setA(rs.getString("A"));
+                    question.setB(rs.getString("B"));
+                    question.setC(rs.getString("C"));
+                    question.setD(rs.getString("D"));
+                    question.setCorrectAnswer(rs.getString("Answer"));
+                    question.setAnswerDesc(rs.getString("Answer_Desc"));
+                }
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }

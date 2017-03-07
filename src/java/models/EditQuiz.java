@@ -124,14 +124,14 @@ public class EditQuiz {
     public void EditWholeQuiz(QuestionBank qBank){
         try(Connection conn = db.connectToDatabase();) {
             //Create and prepare query
-            String query =     "UPDATE Question_Bank"
-                             + "SET Question=?, A=?, B=?, C=?, D=?, Answer=?, Answer_Desc=?"
-                             + "WHERE Quesiton_ID=?;";
+            String query =     "UPDATE Question_Bank "
+                             + "SET Question=?, A=?, B=?, C=?, D=?, Answer=?, Answer_Desc=? "
+                             + "WHERE Question_ID=?;";
             
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             
             //Inputs to Query
-            preparedStmt.setString(1, qBank.getAnswer());
+            preparedStmt.setString(1, qBank.getQuestion());
             preparedStmt.setString(2, qBank.getA());
             preparedStmt.setString(3, qBank.getB());
             preparedStmt.setString(4, qBank.getC());
