@@ -86,10 +86,10 @@ public class DisplayResult extends HttpServlet {
         else
         {
             int matriculationNo = Integer.parseInt(lg.getUsername());
-            Result quizResult = rm.getQuizResult(matriculationNo, quizID);
+            java.util.LinkedList<Result> quizResults = rm.getQuizResult(matriculationNo, quizID);
             
             RequestDispatcher rd = request.getRequestDispatcher("/testResult.jsp"); // SET CORRECT REDIRECT LOCATION
-            request.setAttribute("Result", quizResult);
+            request.setAttribute("Results", quizResults);
             request.setAttribute("Quiz", quiz);
             rd.forward(request, response);
         }
