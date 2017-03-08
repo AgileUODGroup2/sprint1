@@ -48,7 +48,7 @@ public class displayQuizzes extends HttpServlet {
                 session.setAttribute("QuizType", "Completed Quizzes");
                 break;
             case "liveQuiz":
-                quizList = qm.getLiveQuizzes(staffID);
+                quizList = qm.getLiveQuizzes(staffID);     
                 rd = request.getRequestDispatcher("/displayQuizzes.jsp");
                 session.setAttribute("QuizType", "Live Quizzes");
                 break;
