@@ -41,10 +41,11 @@
         <%
             QuizModel quizModel = new QuizModel();
             java.util.LinkedList<QuestionBank> questionList = new java.util.LinkedList<>();
+           
             int quizID = quiz.getQuizID();
             
             questionList = quizModel.getQuestionsAndAnswers(quizID);
-            
+            // Collections.shuffle(questionList);
             if (questionList != null) {
                     Iterator<QuestionBank> it = questionList.iterator();
                     while(it.hasNext()) {
