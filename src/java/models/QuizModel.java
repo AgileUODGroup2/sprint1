@@ -215,6 +215,8 @@ public java.util.LinkedList<Quiz> getArchived(int staffID) {
     return getQuizzes(query, staffID);
 }
 
+
+
 public Quiz getQuizDetails(int quizID) {
         Quiz quiz = new Quiz();
         String query = "SELECT * FROM quiz WHERE Quiz_ID = ?";
