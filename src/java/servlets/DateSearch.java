@@ -10,14 +10,14 @@ import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import models.ResultModel;
-import stores.Result;
+import stores.StudentResult;
 
 /**
  *
@@ -35,6 +35,12 @@ public class DateSearch extends HttpServlet {
         String month2 = request.getParameter("month2");
         String year1 = request.getParameter("year1");
         String year2 = request.getParameter("year2");
+        
+        HttpSession session = request.getSession();
+        
+        String path = request.getContextPath();
+        
+        int quizID = Integer.parseInt(request.getParameter("QuizID"));
         
         if (day1.equals("31") || day2.equals("31")) {
             String[] months = {"4","6","9","11"};
@@ -73,13 +79,11 @@ public class DateSearch extends HttpServlet {
         
         
         ResultModel rm = new ResultModel();
-        java.util.LinkedList<Result> resultList;
-        resultList = rm.getResultsForDates(date1, date2);
+        java.util.LinkedList<StudentResult> resultList;
+        resultList = rm.getResultsForDates(date1, date2, quizID);
         
-        RequestDispatcher rd = request.getRequestDispatcher("/quizResults.jsp");
-        request.setAttribute("ResultList", resultList);
-        rd.forward(request, response);
-        
+        session.setAttribute("Results", resultList);
+        response.sendRedirect(path+"/result/"+quizID);
     }
 
 }

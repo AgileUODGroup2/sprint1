@@ -40,8 +40,23 @@ public class DisplayResult extends HttpServlet {
         int i = uri.lastIndexOf("/");
         String strQuizID = uri.substring(i+1);
         int quizID = Integer.parseInt(strQuizID);
-        System.out.println("Quiz ID: "+quizID);
-        displayResult(quizID, request, response);
+        HttpSession session = request.getSession();
+        
+        if (session.getAttribute("Results") == null) {
+            System.out.println("Request attribute Results is null");
+            displayResult(quizID, request, response);
+        } else {
+            ResultModel rm = new ResultModel();
+            QuizModel qm = new QuizModel();
+            Quiz quiz = qm.getQuizDetails(quizID);
+            quiz.setAverageScore(rm.getQuizAverage(quizID));
+            
+            RequestDispatcher rd = request.getRequestDispatcher("/studentResults.jsp");
+            request.setAttribute("Results", session.getAttribute("Results"));
+            request.setAttribute("Quiz", quiz);
+            session.removeAttribute("Results");
+            rd.forward(request, response);
+        }
 
     }
     
@@ -77,7 +92,7 @@ public class DisplayResult extends HttpServlet {
             java.util.LinkedList<StudentResult> quizResult = rm.getQuizResults(quizID);
             quiz.setGradeDivide(calculateGraphGrades(quizResult));
             
-            RequestDispatcher rd = request.getRequestDispatcher("/studentResults.jsp"); // SET CORRECT REDIRECT LOCATION
+            RequestDispatcher rd = request.getRequestDispatcher("/studentResults.jsp");
             
             request.setAttribute("Results", quizResult);
             request.setAttribute("Quiz", quiz);
@@ -88,7 +103,7 @@ public class DisplayResult extends HttpServlet {
             int matriculationNo = Integer.parseInt(lg.getUsername());
             java.util.LinkedList<Result> quizResults = rm.getQuizResult(matriculationNo, quizID);
             
-            RequestDispatcher rd = request.getRequestDispatcher("/testResult.jsp"); // SET CORRECT REDIRECT LOCATION
+            RequestDispatcher rd = request.getRequestDispatcher("/testResult.jsp"); 
             request.setAttribute("Results", quizResults);
             request.setAttribute("Quiz", quiz);
             rd.forward(request, response);

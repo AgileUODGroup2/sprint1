@@ -17,21 +17,26 @@ import stores.StudentResult;
 public class ResultModel {
     DatabaseConnection db = new DatabaseConnection();
     
-    public java.util.LinkedList<Result> getResultsForDates(Date date1, Date date2) {
-        java.util.LinkedList<Result> results = new java.util.LinkedList<>();
-        String query = "SELECT * FROM student_quiz WHERE (Date_Completed BETWEEN ? AND ?)";
+    public java.util.LinkedList<StudentResult> getResultsForDates(Date date1, Date date2, int quizID) {
+        java.util.LinkedList<StudentResult> results = new java.util.LinkedList<>();
+        String query = "SELECT Quiz.Quiz_ID, CONCAT_WS(' ', Student.First_Name, Student.Last_Name) AS Student_Name, student_quiz.Matriculation_Number, " +
+                        "Student_Quiz.Has_Completed, Student_Quiz.Attempted_Count, Student_Quiz.Score, Student_Quiz.Date_Completed FROM Student_Quiz, Quiz, Student " +
+                        "WHERE Student_Quiz.Quiz_ID=Quiz.Quiz_ID AND Quiz.Quiz_ID = ? AND Student.Matriculation_Number = Student_Quiz.Matriculation_Number " +
+                        "AND Has_Completed = 'Completed' AND (student_quiz.Date_Completed BETWEEN ? AND ?) ORDER BY Student_Name";
         
         try (Connection con = db.connectToDatabase();
                 PreparedStatement ps = con.prepareStatement(query)) {
-            ps.setDate(1, date1);
-            ps.setDate(2,date2);
+            ps.setInt(1, quizID);
+            ps.setDate(2,date1);
+            ps.setDate(3,date2);
             try (ResultSet rs = ps.executeQuery()) {
                 while(rs.next()) {
-                    Result res = new Result();
-                    res.setMatricNo(rs.getInt("Matriculation_Number"));
+                    StudentResult res = new StudentResult();
+                    res.setMatriculationNumber(rs.getInt("Matriculation_Number"));
+                    res.setStudentName("Student_Name");
                     res.setQuizID(rs.getInt("Quiz_ID"));
-                    res.setCompleted(rs.getBoolean("Has_Completed"));
-                    res.setAttempts(rs.getInt("Attempted_Count"));
+                    res.setHasCompleted(rs.getBoolean("Has_Completed"));
+                    res.setAttemptedCount(rs.getInt("Attempted_Count"));
                     res.setScore(rs.getInt("Score"));
                     res.setDate(rs.getDate("Date_Completed"));
                     

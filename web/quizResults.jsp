@@ -56,7 +56,7 @@
     %> <option value="<%=i%>"><%=i%></option> <%
     } %>
     </select>
-    <input type="submit" value="Search" />
+    <input type="submit" value="Filter" />
 </form>
     
 <%
