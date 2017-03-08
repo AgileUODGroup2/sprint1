@@ -62,6 +62,7 @@
             if (type.equals("Completed Quizzes")) {
         %>
         <form method="GET" action="completedQuizzes"><input type="submit" value="Reset" /></form>
+        <a href="studentStats.jsp"><button id="fourth-button">View Stats</button></a>
         <%
             } else if (type.equals("Incomplete Quizzes")) {
         %>

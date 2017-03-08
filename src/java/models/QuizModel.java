@@ -207,6 +207,11 @@ public java.util.LinkedList<Quiz> getCompletedQuizzesMod(int staffID, String mod
     return getQuizzes(query, staffID);
 }
 
+public java.util.LinkedList<Quiz> getArchived(int staffID) {
+    String query = "SELECT * FROM archived WHERE Staff_ID != ?";
+    return getQuizzes(query, staffID);
+}
+
 public Quiz getQuizDetails(int quizID) {
         Quiz quiz = new Quiz();
         String query = "SELECT * FROM quiz WHERE Quiz_ID = ?";

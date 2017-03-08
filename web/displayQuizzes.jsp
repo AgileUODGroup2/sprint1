@@ -64,7 +64,9 @@
         <%
             if (type.equals("Completed Quizzes")) {
         %>
-        <form method="GET" action="completedQuiz"><input type="submit" value="Reset" /></form>
+        <form method="GET" action="completedQuiz"><input type="submit" value="Reset" />
+            
+        </form>
         <br>
         <%
             } else if (type.equals("Live Quizzes")) {
@@ -73,16 +75,22 @@
         <form method="GET" action="liveQuiz"><input type="submit" value="Reset" /></form>
         <br>
         <%
-            } else {
+            } else if (type.equals("Unfinished Quizzes")){
         %>
         <form method="GET" action="unfinishedQuiz"><input type="submit" value="Reset" /></form>
         <br>
+        <%
+            }  if (type.equals("Archived")) {
+        %>
+        <form method="GET" action="Archived"><input type="submit" value="Reset" /></form>
+        <br>
+        
          <% }java.util.LinkedList<Quiz> quizList = (java.util.LinkedList<Quiz>) request.getAttribute("QuizList");
                 if (quizList != null) {
                     Iterator<Quiz> it = quizList.iterator();
                     while(it.hasNext()) {
                         Quiz q = (Quiz) it.next();
-%> <a href="result/<%=q.getQuizID() %>"<button id="third-button" style="text-align: left; width:40%;">Quiz Name: <%=q.getQuizName()%> <br> Quiz ID: <%=q.getQuizID()%> <br> Module ID: <%=q.getModuleID()%> <br><br> </button></a><%
+%> <a href="result/<%=q.getQuizID() %>"<button id="third-button" style="text-align: left; width:40%;">Quiz Name: <%=q.getQuizName()%> <br>Date Created: <%=q.getDateCreated()%><br> Quiz ID: <%=q.getQuizID()%> <br> Module ID: <%=q.getModuleID()%> <br><br> </button></a><%
                     }
                 } else { %>
                 <h7>No quizzes to show</h7>

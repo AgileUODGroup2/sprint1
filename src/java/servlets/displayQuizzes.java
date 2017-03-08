@@ -21,7 +21,7 @@ import stores.Quiz;
  *
  * @author viivipursiainen
  */
-@WebServlet(urlPatterns = {"/liveQuiz", "/unfinishedQuiz", "/completedQuiz"})
+@WebServlet(urlPatterns = {"/liveQuiz", "/unfinishedQuiz", "/completedQuiz", "/archived"})
 public class displayQuizzes extends HttpServlet {
 
     @Override
@@ -56,6 +56,12 @@ public class displayQuizzes extends HttpServlet {
                 quizList = qm.getUnfinishedQuizzes(staffID);
                 rd = request.getRequestDispatcher("/displayQuizzes.jsp");
                 session.setAttribute("QuizType", "Unfinished Quizzes");
+                break;
+            case "archived":
+                quizList = qm.getArchived(staffID);
+                rd = request.getRequestDispatcher("/displayQuizzes.jsp");
+                session.setAttribute("QuizType", "Archived Quizzes");
+                
                 break;
             default:
                 rd = request.getRequestDispatcher("/index.jsp");

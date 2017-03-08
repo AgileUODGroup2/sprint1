@@ -80,11 +80,14 @@
                 
         <p><a href="liveQuiz"><button id="sec-button">Live Quizzes</button></a></p>
                
-                <a href="unfinishedQuiz"><button id="sec-button">Unfinished Quizzes</button></a>
+        <p><a href="unfinishedQuiz"><button id="sec-button">Unfinished Quizzes</button></a></p>
+        
+        <p><a href="archived"><button id="sec-button">Archived Quizzes</button></a></p>
                 <br>
                 <br>
-                <br>
+             
         </div>
+            <br><br><br>
           
            
        </div>
