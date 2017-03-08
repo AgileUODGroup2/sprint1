@@ -7,15 +7,18 @@ package servlets;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import models.user;
 
 @WebServlet(name = "EditProfile", urlPatterns = {
         "/edit-profile/*"
 })
+@MultipartConfig(maxFileSize = 16177216)
 public class EditProfile extends HttpServlet {
     
     @Override
@@ -32,6 +35,8 @@ public class EditProfile extends HttpServlet {
         String lastName = request.getParameter("lastName");
         String password = request.getParameter("password");
         String rePassword = request.getParameter("rePassword");
+        
+        Part profileImage = request.getPart("profileImage");
         
         boolean isStaff;
         
@@ -54,6 +59,9 @@ public class EditProfile extends HttpServlet {
         }
         if (password.equals(rePassword) && !password.equals("")){
             us.updatePassword(isStaff, userID, password);
+        }
+        if (profileImage != null){
+            us.updateProfileImage(isStaff, userID, profileImage);
         }
         
         

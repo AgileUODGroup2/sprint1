@@ -15,12 +15,13 @@
         
         <%
             LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
+            String contextPath = request.getContextPath();
         %>
  
     </head>
     <body bgcolor="d3dfeb">
-    <img src="logo123.png" width="115px" style="position: absolute; left:0; top: 0;">
-        <img src="logo123.png" width="115px" style="position: absolute; right:0; top: 0;">
+    <img src="logo123.png" width="115" style="position: absolute; left:0; top: 0;">
+        <img src="logo123.png" width="115" style="position: absolute; right:0; top: 0;">
 
         <div class="navBar">
             <ul>
@@ -40,7 +41,7 @@
             <div class="centerContent1">
                  
         <div id="cc1">
-         <img src="pic1.png" style="display: inline-block; float:right; width:33%;">   
+         <img src="<%=contextPath + "/student-img/" + lg.getID()%>" style="display: inline-block; float:right; width:33%;">   
         <h2>Your Profile</h2>
         <h3>Matric Number: <%=lg.getUsername()%></h3>
         <h3>First Name: <%=lg.getFirstName()%></h3>

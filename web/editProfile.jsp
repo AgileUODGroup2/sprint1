@@ -20,8 +20,8 @@
                 <li><a href="index.jsp">QUIZ MASTER </a></li>
              </ul>
         </div>
-        <img src="logo123.png" width="115px" style="position: absolute; left:0; top: 0;">
-        <img src="logo123.png" width="115px" style="position: absolute; right:0; top: 0;">
+        <img src="logo123.png" width="115" style="position: absolute; left:0; top: 0;">
+        <img src="logo123.png" width="115" style="position: absolute; right:0; top: 0;">
 
         <div class="navBar1">
             <ul>
@@ -36,7 +36,7 @@
            <br>
            <h7>Please update your details and click submit</h7>
            <br>
-        <form method="POST" style="display: inline-block; margin: auto; text-align: left;" action="edit-profile/<%=lg.getUsername()%>">
+        <form method="POST" style="display: inline-block; margin: auto; text-align: left;" action="edit-profile/<%=lg.getUsername()%>" enctype="multipart/form-data">
             <br>
             <br>
             <label for ="firstName"> First Name:  </label>
@@ -61,6 +61,9 @@
                    <%
                 }
             %>
+            <br>
+            <label for="profileImage"> Upload Profile Image: </label>
+                <input name="profileImage" style="width: 30%;" type="file" accept=".jpg, .jpeg, .png">
             <br>
             <br>
             <br>

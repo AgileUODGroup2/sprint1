@@ -218,6 +218,23 @@
    
                     <%
                 }
+
+
+
+       else if(type == "Archived Quizzes")
+                {
+                    %>
+                   
+                        <div id="cc2">
+                        
+
+            
+                    <a href="logout.jsp"><button id="third-button">Filter</button></a>
+                     <form method="GET" action=<%=contextPath + "/displayQuestionsAndAnswers/" + quiz.getQuizID()%>><input type="submit" value="View Q's and A's" /></form>
+                    </div>
+   
+                    <%
+                }
         %>
     
     </body>

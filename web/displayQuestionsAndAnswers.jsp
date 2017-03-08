@@ -68,13 +68,14 @@
         <div id="cc3">
         <%
             QuizModel quizModel = new QuizModel();
+            String contextPath = request.getContextPath();
             java.util.LinkedList<QuestionBank> quizList = (java.util.LinkedList<QuestionBank>) quizModel.getQuestionsAndAnswers(quiz.getQuizID());
                 if (quizList != null) {
                     Iterator<QuestionBank> it = quizList.iterator();
                     while(it.hasNext()) {
                         QuestionBank q = (QuestionBank) it.next();
 %> 
-                    <h2> Question: <%=q.getQuestion() %> </h2>
+                    <h2> Question: <%=q.getQuestion() %>  <a href="<%=contextPath%>/edit/<%=q.getQuestionID()%>">EDIT</a></h2>
                     <h4>A: <%=q.getA()%></h4>
                     <h4>B: <%=q.getB()%></h4>
                     <h4>C: <%=q.getC()%></h4>

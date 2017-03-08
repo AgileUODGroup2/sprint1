@@ -5,10 +5,14 @@
  */
 package models;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.servlet.http.Part;
 import lib.database.DatabaseConnection;
 
 /**
@@ -119,6 +123,90 @@ public class user {
         } catch (SQLException e) {
             System.out.print(e.getMessage());
         }
+    }
+    
+    public void updateProfileImage(boolean isStaff, int userID, Part profileImage) throws IOException{
+        
+        Connection con = db.connectToDatabase();
+        
+        String query = "";
+        
+        if(isStaff) {
+            query = "UPDATE staff SET Profile_Image = ? WHERE Staff_ID = ?";
+        } else {
+            query = "UPDATE student SET Profile_Image = ? WHERE Matriculation_Number = ?";
+        }
+        
+        //http://www.thejavaprogrammer.com/save-retrieve-image-mysql-database-using-servlet-jsp/
+        
+        try{
+
+            PreparedStatement ps = con.prepareStatement(query);
+            
+            InputStream is = profileImage.getInputStream();
+            ps.setBlob(1, is);
+            ps.setInt(2, userID);
+            
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.print(e.getMessage());
+        } finally {
+            if(con != null){
+                try{
+                    con.close();
+                } catch(Exception e){
+                    System.out.print(e.getMessage());
+                }
+            }
+        }
+        
+    }
+    
+    public byte[] getProfileImage(boolean isStaff, int userID) {
+        
+        Connection con = db.connectToDatabase();
+        
+        String query = "";
+        
+        if(isStaff) {
+            query = "SELECT Profile_Image FROM staff WHERE Staff_ID = ?";
+        } else {
+            query = "SELECT Profile_Image FROM student WHERE Matriculation_Number = ?";
+        }
+        
+        //http://www.thejavaprogrammer.com/save-retrieve-image-mysql-database-using-servlet-jsp/
+        try {
+
+            PreparedStatement ps = con.prepareStatement(query);
+
+            ps.setInt(1, userID);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while(rs.next()) {
+                    
+                    Blob blob = rs.getBlob("Profile_Image");
+                    byte byteArray[] = blob.getBytes(1, (int)blob.length());
+                    
+                    return byteArray;
+                    
+                }
+            }
+        } catch (SQLException e) {
+            System.out.print(e.getMessage());
+        } finally {
+            if(con != null){
+                try{
+                    con.close();
+                } catch(Exception e){
+                    System.out.print(e.getMessage());
+                }
+            }
+        }
+        
+        //CHANGE THIS
+        return null;
+        
     }
 
     public String[] getStudentDetails(int matriculationNo) throws SQLException {

@@ -16,7 +16,10 @@
         
 
         
-        <% LoggedIn lg =(LoggedIn) session.getAttribute("LoggedIn"); %>
+        <% 
+            LoggedIn lg =(LoggedIn) session.getAttribute("LoggedIn"); 
+            String contextPath = request.getContextPath();
+        %>
         
     </head>
     <body bgcolor="d3dfeb">
@@ -25,8 +28,8 @@
                 <li><a href="index.jsp">QUIZ MASTER </a></li>
              </ul>
         </div>
-        <img src="logo123.png" width="115px" style="position: absolute; left:0; top: 0;">
-        <img src="logo123.png" width="115px" style="position: absolute; right:0; top: 0;">
+        <img src="logo123.png" width="115" style="position: absolute; left:0; top: 0;">
+        <img src="logo123.png" width="115" style="position: absolute; right:0; top: 0;">
 
         <div class="navBar1">
             <ul>
@@ -39,7 +42,7 @@
             <div class="centerContent1">
                  
         <div id="cc1">
-            <img src="pic1.png" style="display: inline-block; float:right; width:33%;">
+            <img src="<%=contextPath + "/staff-img/" + lg.getID()%>" style="display: inline-block; float:right; width:33%;">
             <h2>Your Profile</h2>
             <h3>Staff ID:&nbsp;<%=lg.getUsername()%></h3>
             <h3>First Name:&nbsp;<%=lg.getFirstName()%></h3>
@@ -77,11 +80,14 @@
                 
         <p><a href="liveQuiz"><button id="sec-button">Live Quizzes</button></a></p>
                
-                <a href="unfinishedQuiz"><button id="sec-button">Unfinished Quizzes</button></a>
+        <p><a href="unfinishedQuiz"><button id="sec-button">Unfinished Quizzes</button></a></p>
+        
+        <p><a href="archived"><button id="sec-button">Archived Quizzes</button></a></p>
                 <br>
                 <br>
-                <br>
+             
         </div>
+            <br><br><br>
           
            
        </div>

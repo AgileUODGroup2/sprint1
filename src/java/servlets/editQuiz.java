@@ -6,14 +6,17 @@
 package servlets;
 
 import java.io.IOException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import models.EditQuiz;
+import models.QuestionModel;
 import models.QuizModel;
-import stores.LoggedIn;
+import stores.QuestionBank;
 import stores.Quiz;
 
 /**
@@ -25,21 +28,63 @@ public class editQuiz extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        LoggedIn staff = (LoggedIn) session.getAttribute("LoggedIn");
-        int staffID = staff.getID();
+        String uri = request.getRequestURI();
+        int i = uri.lastIndexOf("/");
+        String strQuestionID = uri.substring(i+1);
+        int questionID = Integer.parseInt(strQuestionID);
         
-        QuizModel qm = new QuizModel();
-        java.util.LinkedList<Quiz> quizList = qm.getAllQuizzes(staffID);
+        QuestionModel qm = new QuestionModel();
+        QuestionBank question = qm.getQuestion(questionID);
         
-        request.setAttribute("QuizList", quizList);
+        request.setAttribute("Question", question);
+        RequestDispatcher rd = request.getRequestDispatcher("/editQuiz.jsp");
+        rd.forward(request, response);
+        
     }
+    
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        for (int i=0; i< 10; i++) {
-            
-        }
+        
+        QuestionBank qBank = new QuestionBank();
+        EditQuiz editQuiz = new EditQuiz();
+        String contextPath = request.getContextPath();
+        
+        int questionID = Integer.parseInt(request.getParameter("QuestionID"));
+        
+        //Set the question ID to the current question
+        qBank.setQuestionID(questionID);
+        
+        //Get parameters to edit
+        String question     = request.getParameter("question");
+        String a            = request.getParameter("a");
+        String b            = request.getParameter("b");
+        String c            = request.getParameter("c");
+        String d            = request.getParameter("d");
+        String answer       = request.getParameter("Answer");
+        String answerDesc   = request.getParameter("answerDesc");
+        int quizID          = Integer.parseInt(request.getParameter("QuizID"));
+        
+        System.out.println("Question: "+question+" A: "+a+" B: "+b+" Answer Desc: "+answerDesc);
+        
+        
+        
+        //Fill model with parameters
+        qBank.setQuestion(question);
+        qBank.setA(a);
+        qBank.setB(b);
+        qBank.setC(c);
+        qBank.setD(d);
+        qBank.setCorrectAnswer(answer);
+        qBank.setAnswerDesc(answerDesc);
+        
+        //Change question in database
+        editQuiz.EditWholeQuiz(qBank);
+        
+        response.sendRedirect(contextPath+"/displayQuestionsAndAnswers/"+quizID);
     }
+    
+
+
     
 }
