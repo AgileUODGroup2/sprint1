@@ -6,6 +6,7 @@
 package models;
 
 import java.sql.Connection;
+import java.util.Collections;
 import java.sql.PreparedStatement;
 import lib.database.DatabaseConnection;
 import java.sql.ResultSet;
@@ -147,6 +148,8 @@ public java.util.LinkedList<QuestionBank> getQuestionsAndAnswers(int quizID) thr
                 questions.setAnswerDesc(rs.getString("Answer_Desc"));
                 questionList.add(questions);
             }
+            
+             Collections.shuffle(questionList);
             } catch (SQLException e) {
         System.out.println(e.getMessage());
     }
@@ -205,7 +208,7 @@ public java.util.LinkedList<Quiz> getLiveQuizzesMod(int staffID, String module) 
 public java.util.LinkedList<Quiz> getCompletedQuizzesMod(int staffID, String module) {
     String query = "SELECT * FROM completedquiz WHERE Module_ID ='"+module+"' AND Staff_ID = ?";
     return getQuizzes(query, staffID);
-}
+}    
 
 public Quiz getQuizDetails(int quizID) {
         Quiz quiz = new Quiz();
@@ -261,6 +264,7 @@ public java.util.LinkedList<StudentQuiz> getStudentQuizzes(String query, int mat
             
                 quizzes.add(q);
             }
+           
         }
     } catch (SQLException e) {
         System.out.println(e.getMessage());
