@@ -41,7 +41,8 @@
         <br>
         <div class="centerContent1">
         <form method="post" action="<%=request.getContextPath()%>/takeQuiz" style="display: inline-block; margin: auto; text-align: left;">
-        <%
+        
+            <%
             QuizModel quizModel = new QuizModel();
             java.util.LinkedList<QuestionBank> questionList = new java.util.LinkedList<>();
            
@@ -54,10 +55,8 @@
             int i = 1;
 
             if (questionList != null) {
-                        
-                        Iterator<QuestionBank> it = questionList.iterator();
-                    while(it.hasNext()) {
-                        QuestionBank q = (QuestionBank) it.next();
+                  
+                        QuestionBank q = questionList.get(0);
             
 %> 
             
@@ -83,7 +82,7 @@
             
                  <%
                  i++;
-}}
+}
 
 %>
 <input type="hidden" value="<%=i%>" name="counter">
