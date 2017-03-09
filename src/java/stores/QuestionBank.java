@@ -5,6 +5,8 @@
  */
 package stores;
 
+import javax.servlet.http.Part;
+
 /**
  *
  * @author erincoey
@@ -18,7 +20,8 @@ public class QuestionBank {
     String c;
     String d;
     String answer;
-    String answerDesc;   
+    String answerDesc;
+    Part media;
     
     public void QuestionBank(){
         
@@ -106,4 +109,13 @@ public class QuestionBank {
     {
         return answerDesc;
     }
+
+    public Part getMedia() {
+        return media;
+    }
+
+    public void setMedia(Part media) {
+        this.media = media;
+    }
+    
 }

@@ -37,42 +37,63 @@
                 <li><a> Get ready to start your quiz!</a></li>
             </ul>
         </div>
-        
+        <br>
+        <br>
+        <div class="centerContent1">
+        <form method="post" action="<%=request.getContextPath()%>/takeQuiz" style="display: inline-block; margin: auto; text-align: left;">
         <%
             QuizModel quizModel = new QuizModel();
             java.util.LinkedList<QuestionBank> questionList = new java.util.LinkedList<>();
            
             int quizID = quiz.getQuizID();
-            
+            int numOfQuestions = quiz.getNumberOfQuestions();
+            int counter = quiz.getCounter();
+            System.out.println("Counter: " + counter);
             questionList = quizModel.getQuestionsAndAnswers(quizID);
-            // Collections.shuffle(questionList);
+
+            int i = 1;
+
             if (questionList != null) {
-                    Iterator<QuestionBank> it = questionList.iterator();
+                        
+                        Iterator<QuestionBank> it = questionList.iterator();
                     while(it.hasNext()) {
                         QuestionBank q = (QuestionBank) it.next();
+            
 %> 
             
-     
+        
             
             
-        <br>
-        <br>
-        <div class="centerContent1">
-            <br><br><br>
-            <button id="third-button">* <%=q.getQuestion()%>*</button><br><br>
-            <button id="fourth-button">* <%=q.getA()%> *</button><br>
-            <button id="fourth-button">* <%=q.getB()%>*</button><br>
-            <button id="fourth-button">* <%=q.getC()%> *</button><br>
-            <button id="fourth-button">* <%=q.getD()%> *</button><br><br>
             
-            <button id="fourth-button" style="width:20%;"> Next Question -> </button>
-             <button id="fourth-button" style="width:20%;"> Exit Quiz </button><br><br>
+            <br>
+           
+             
+                 <h2><%=q.getQuestion()%></h2>
+                
+             <input type="radio" name="answer<%=i%>" value="A"> <h8><%=q.getA()%></h8>
+             <br>
+             <input type="radio" name="answer<%=i%>" value="B"> <h8><%=q.getB()%></h8>
+             <br>
+             <input type="radio" name="answer<%=i%>" value="C"> <h8><%=q.getC()%></h8>
+             <br>
+             <input type="radio" name="answer<%=i%>" value="D"> <h8><%=q.getD()%></h8>
+             <br>
+              
+             
             
-            
-             <%
-                 }
-}
+                 <%
+                 i++;
+}}
+
 %>
+<input type="hidden" value="<%=i%>" name="counter">
+<input type="submit" value="Submit" style="margin: auto;">
+ </form>
+<br>
+<br>
+<br>
+             
+        
         </div>
     </body>
 </html>

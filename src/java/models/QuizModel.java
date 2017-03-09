@@ -5,6 +5,8 @@
  */
 package models;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.util.Collections;
 import java.sql.PreparedStatement;
@@ -12,6 +14,7 @@ import lib.database.DatabaseConnection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.servlet.http.Part;
 import stores.QuestionBank;
 import stores.Quiz;
 import stores.StudentQuiz;
@@ -110,18 +113,49 @@ public int getQuizId()
     return 0;
 }
 
-public void addQuestion(String[] array)
+public void addQuestion(String[] array, Part[] parts) throws IOException
 {
-    try(Connection conn = db.connectToDatabase()){
+    int i = 0;
+    String query = "UPDATE question_bank SET Media = ? WHERE Question_ID = ?";
+    Connection conn = db.connectToDatabase();
+    
+    try{
         // Refactor antiquated for loop to JDK 5 enhanced for loop 
         for (String array1 : array) {
-            PreparedStatement preparedStmt = conn.prepareStatement(array1);
+            PreparedStatement preparedStmt = conn.prepareStatement(array1, Statement.RETURN_GENERATED_KEYS);
             preparedStmt.executeUpdate();
+            
+            ResultSet rs = preparedStmt.getGeneratedKeys();
+            int questionID = 0;
+            if(rs.next()){
+                questionID = rs.getInt(1);
+            }
+            
+            // Insert Image into DB
+            preparedStmt = conn.prepareStatement(query);
+            if(parts[i] == null){
+                // Do nothing
+            } else {
+                InputStream is = parts[i].getInputStream();
+                preparedStmt.setBlob(1, is);
+                preparedStmt.setInt(2, questionID);
+                preparedStmt.executeUpdate();
+            }
+            
+            i++;
         }
     }
     catch(SQLException err){
         System.out.println(err.getMessage());
-    }
+    } finally {
+            if(conn != null){
+                try{
+                    conn.close();
+                } catch(Exception e){
+                    System.out.print(e.getMessage());
+                }
+            }
+        }
 }
 
 public java.util.LinkedList<QuestionBank> getQuestionsAndAnswers(int quizID) throws SQLException
@@ -147,6 +181,7 @@ public java.util.LinkedList<QuestionBank> getQuestionsAndAnswers(int quizID) thr
                 questions.setCorrectAnswer(rs.getString("Answer"));
                 questions.setAnswerDesc(rs.getString("Answer_Desc"));
                 questionList.add(questions);
+                
             }
             
              Collections.shuffle(questionList);
