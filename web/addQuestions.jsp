@@ -43,18 +43,18 @@
                         <input type="text" name="question" id="question">
                         <br>
                         <label for="media"> Upload Image: </label>
-                        <input name="media" type="file" accept=".jpg, .jpeg, .png">
+                        <input name="media" type="file" accept=".jpg, .jpeg, .png" id="media">
                         <br><br>
-			<label for = "answerA">a: </label>
+			<label for = "answerA">A: </label>
                         <input type="text" name="answerA" id="answerA" >
                         <br>
-			<label for = "answerB">b: </label>
+			<label for = "answerB">B: </label>
                         <input type="text" name="answerB" id="answerB">
                         <br>
-                        <label for = "answerC">c: </label>
+                        <label for = "answerC">C: </label>
                         <input type="text" name="answerC" id="answerC" >
                         <br>
-                        <label for = "answerD">d: </label>
+                        <label for = "answerD">D: </label>
                         <input type="text" name="answerD" id="answerD">
                         <br>
                         
@@ -68,7 +68,7 @@
                         <br>
 
                         <label for = "answerDesc">Answer Description: </label>
-                        <textarea name="answerDesc" cols="70" rows="4"></textarea>
+                        <textarea name="answerDesc" cols="70" rows="4" id="answerDesc"></textarea>
                         <br>
                         <br>
                         <br>
