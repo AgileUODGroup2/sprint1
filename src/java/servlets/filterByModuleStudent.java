@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import models.QuizModel;
 import stores.LoggedIn;
 import stores.Quiz;
+import stores.StudentQuiz;
 
 /**
  *
@@ -29,8 +30,6 @@ public class filterByModuleStudent extends HttpServlet {
         HttpSession session = request.getSession();
         String type = (String) session.getAttribute("QuizType");
         
-        System.out.println("Type is: "+type);
-        
         LoggedIn student = (LoggedIn) session.getAttribute("LoggedIn");
         int matricNo = student.getID();
         
@@ -38,19 +37,19 @@ public class filterByModuleStudent extends HttpServlet {
         
         QuizModel qm = new QuizModel();
         // Refactor to remove diamond operator and simplify instantiation of the LinkedList
-        java.util.LinkedList<Quiz> quizList = new java.util.LinkedList<>();
+        java.util.LinkedList<StudentQuiz> quizList = new java.util.LinkedList<>();
         RequestDispatcher rd = null;
         switch (type) {
             case "Completed Quizzes":
-                quizList = qm.getCompletedQuizzesMod(matricNo, moduleID);
+                quizList = qm.getCompletedStudentQuizzesMod(matricNo, moduleID);
                 rd = request.getRequestDispatcher("/displayStudentQuizzes.jsp");
                 break;
             case "Pending Quizzes":
-                quizList = qm.getLiveQuizzesMod(matricNo, moduleID);
+                quizList = qm.getPendingStudentQuizzesMod(matricNo, moduleID);
                 rd = request.getRequestDispatcher("/displayStudentQuizzes.jsp");
                 break;
             case "Incomplete Quizzes":
-                quizList = qm.getUnfinishedQuizzesMod(matricNo, moduleID);
+                quizList = qm.getIncompleteStudentQuizzesMod(matricNo, moduleID);
                 rd = request.getRequestDispatcher("/displayStudentQuizzes.jsp");
                 break;
             default:
@@ -58,7 +57,7 @@ public class filterByModuleStudent extends HttpServlet {
                 break;
         }
         
-        request.setAttribute("StudentQuizList", quizList);
+        session.setAttribute("StudentQuizList", quizList);
         rd.forward(request, response);
     }
 }
