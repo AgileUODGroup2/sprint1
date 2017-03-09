@@ -104,7 +104,56 @@ public class QuizModelTest {
          
                System.out.println("result: " + result);
                assertEquals("Should equal true", expected, result);
- }    
+ } 
+
+    /**
+     * Test for archived quizzes
+     */  
+     @Test 
+    public void testGetQuizzes()throws SQLException { // Specifically get archived quizzes test
+        
+        boolean expected;
+        boolean result = true;
+        int[] archivedTest = new int[2];
+        int count = 0;
+        boolean quizID1;
+        boolean quizID2;
+        
+    
+      System.out.println("\nTest: Get Archived Quizzes");
+      qm.getQuizzes("SELECT * FROM archived WHERE Module_ID IN (select Module_ID from staff_enrolment where Staff_ID =?)",1);
+
+      java.util.LinkedList<Quiz> quizzesTest = qm.getQuizzes("SELECT * FROM archived WHERE Module_ID IN (select Module_ID from staff_enrolment where Staff_ID =?)",1);
+        if (quizzesTest != null) {
+            Iterator<Quiz> it = quizzesTest.iterator();
+                while(it.hasNext()) {
+                    Quiz q = (Quiz) it.next();
+                    System.out.println("Quiz Name: " + q.getQuizName());
+                    System.out.println("Date Created: " + q.getDateCreated());
+                    System.out.println("Quiz ID: " + q.getQuizID());
+                    archivedTest[count]=q.getQuizID();
+                    count++;
+                    System.out.println("Module ID: " + q.getModuleID());          
+                }
+        }
+    System.out.println("Count 1:  " + archivedTest[0]);      
+    quizID1 = ( 8 == archivedTest[0]);
+    System.out.println("quizID1: " + quizID1);
+    System.out.println("Count 2:  " + archivedTest[1]);  
+    quizID2 = ( 25 == archivedTest[1]);
+    System.out.println("quizID2: " + quizID2);
+    
+    if (quizID1 == quizID2){
+        expected = true;
+        
+    }
+    else {
+        expected = false; 
+    }
+    assertEquals("Should equal true", expected, result);
+    System.out.println(" ");
+    
+    }
 }
 
    
