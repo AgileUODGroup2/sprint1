@@ -137,7 +137,7 @@ public class user {
             query = "UPDATE student SET Profile_Image = ? WHERE Matriculation_Number = ?";
         }
         
-        //http://www.thejavaprogrammer.com/save-retrieve-image-mysql-database-using-servlet-jsp/
+        // Java image to MySQL database query based on code found here: http://www.thejavaprogrammer.com/save-retrieve-image-mysql-database-using-servlet-jsp/
         
         try{
 
@@ -175,7 +175,7 @@ public class user {
             query = "SELECT Profile_Image FROM student WHERE Matriculation_Number = ?";
         }
         
-        //http://www.thejavaprogrammer.com/save-retrieve-image-mysql-database-using-servlet-jsp/
+        // Java image to MySQL database query based on code found here: http://www.thejavaprogrammer.com/save-retrieve-image-mysql-database-using-servlet-jsp/
         try {
 
             PreparedStatement ps = con.prepareStatement(query);

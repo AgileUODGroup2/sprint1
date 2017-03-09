@@ -22,8 +22,8 @@
                 <li><a href="index.jsp">QUIZ MASTER </a></li>
              </ul>
         </div>
-        <img src="logo123.png" width="115px" style="position: absolute; left:0; top: 0;">
-        <img src="logo123.png" width="115px" style="position: absolute; right:0; top: 0;">
+        <img src="logo123.png" width="115" style="position: absolute; left:0; top: 0;">
+        <img src="logo123.png" width="115" style="position: absolute; right:0; top: 0;">
 
         <div class="navBar1">
             <ul>
@@ -38,9 +38,12 @@
                     Quiz quiz = (Quiz) session.getAttribute("Quiz");
             %>
             
-		<form method="post"  action="addQuestions">
+		<form method="post"  action="addQuestions" enctype="multipart/form-data">
                         <label for = "question">Question: </label>
                         <input type="text" name="question" id="question">
+                        <br>
+                        <label for="media"> Upload Image: </label>
+                        <input name="media" type="file" accept=".jpg, .jpeg, .png">
                         <br><br>
 			<label for = "answerA">a: </label>
                         <input type="text" name="answerA" id="answerA" >
