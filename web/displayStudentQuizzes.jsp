@@ -43,6 +43,7 @@
             LoggedIn student = (LoggedIn) session.getAttribute("LoggedIn");
             int matricNo = student.getID();
             user studentUser = new user();
+            String path = request.getContextPath();
             java.util.Vector<String> modules = studentUser.getStudentModules(matricNo);
         %>
         <form method="POST" action="filterByModuleStudent">
@@ -61,18 +62,33 @@
         <%
             if (type.equals("Completed Quizzes")) {
         %>
-        <form method="GET" action="completedQuizzes"><input type="submit" value="Reset" /></form>
+        <a href="<%=path%>/completedQuizzes">Reset</a> <br />
+        <form method="POST" action="orderByDate">
+            <input type="submit" value="Order By Date" />
+            <input type="hidden" value="studentcompleted" name="table" />
+            <input type="hidden" value="<%=matricNo%>" name="MatricNo" />
+        </form>
         <a href="studentStats.jsp"><button id="fourth-button">View Stats</button></a>
         <%
             } else if (type.equals("Incomplete Quizzes")) {
         %>
         <br>
-        <form method="GET" action="incompleteQuizzes"><input type="submit" value="Reset "/></form>
+        <a href="<%=path%>/incompleteQuizzes">Reset</a> <br />
+        <form method="POST" action="orderByDate">
+            <input type="submit" value="Order By Date" />
+            <input type="hidden" value="studentincomplete" name="table" />
+            <input type="hidden" value="<%=matricNo%>" name="MatricNo" />
+        </form>
         
         <%
             } else {
         %>
-        <form method="GET" action="pendingdQuizzes"><input type="submit" value="Reset" /></form>
+        <a href="<%=path%>/pendingdQuizzes">Reset</a> <br />
+        <form method="POST" action="orderByDate">
+            <input type="submit" value="Order By Date" />
+            <input type="hidden" value="studentpending" name="table" />
+            <input type="hidden" value="<%=matricNo%>" name="MatricNo" />
+        </form>
              
          <% }   java.util.LinkedList<StudentQuiz> quizList = (java.util.LinkedList<StudentQuiz>) session.getAttribute("StudentQuizList");
                 Iterator<StudentQuiz> it = quizList.iterator();
