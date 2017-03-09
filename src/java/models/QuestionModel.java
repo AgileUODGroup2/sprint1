@@ -5,6 +5,7 @@
  */
 package models;
 
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,6 +20,7 @@ import stores.QuestionBank;
 public class QuestionModel {
     
     DatabaseConnection db = new DatabaseConnection();
+    
     public QuestionBank getQuestion(int questionID) {
         db = new DatabaseConnection();
         QuestionBank question = new QuestionBank();
@@ -47,4 +49,45 @@ public class QuestionModel {
         }
         return question;
     }
+    
+    public byte[] getQuestionMedia(int questionID) {
+        
+        Connection con = db.connectToDatabase();
+        
+        String query = "SELECT Media FROM question_bank WHERE Question_ID = ?";
+        
+        // Java image to MySQL database query based on code found here: http://www.thejavaprogrammer.com/save-retrieve-image-mysql-database-using-servlet-jsp/
+        try {
+
+            PreparedStatement ps = con.prepareStatement(query);
+
+            ps.setInt(1, questionID);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while(rs.next()) {
+                    
+                    Blob blob = rs.getBlob("Media");
+                    byte byteArray[] = blob.getBytes(1, (int)blob.length());
+                    
+                    return byteArray;
+                    
+                }
+            }
+        } catch (SQLException e) {
+            System.out.print(e.getMessage());
+        } finally {
+            if(con != null){
+                try{
+                    con.close();
+                } catch(Exception e){
+                    System.out.print(e.getMessage());
+                }
+            }
+        }
+        
+        //CHANGE THIS
+        return null;
+        
+    }
+    
 }
