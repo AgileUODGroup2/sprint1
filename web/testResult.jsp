@@ -70,7 +70,7 @@
            
    
          
-            <form method="GET" action="<%=contextPath + "/takeQuiz/" + quiz.getQuizID()%>"><input type="submit" value="Take Quiz" /></form>
+            <form method="GET" action="<%=contextPath + "/chooseQuizType/" + quiz.getQuizID()%>"><input type="submit" value="Take Quiz" /></form>
             <br>
             <a href="/AC31007Quiz/quizInstructions.jsp"><button id="third-button">Click here for quiz instructions</button></a><br>
         </div>
