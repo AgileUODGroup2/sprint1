@@ -81,12 +81,13 @@ public class editQuiz extends HttpServlet {
         qBank.setD(d);
         qBank.setCorrectAnswer(answer);
         qBank.setAnswerDesc(answerDesc);
-        qBank.setMedia(questionMedia);
         
         //Change question in database
         editQuiz.EditWholeQuiz(qBank);
         
         if(questionMedia != null){
+            qBank.setMedia(questionMedia);
+            qBank.setHasMedia(true);
             editQuiz.updateQuestionMedia(questionID, questionMedia);
         }
         

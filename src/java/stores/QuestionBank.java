@@ -22,6 +22,7 @@ public class QuestionBank {
     String answer;
     String answerDesc;
     Part media;
+    boolean hasMedia;
     
     public void QuestionBank(){
         
@@ -116,6 +117,14 @@ public class QuestionBank {
 
     public void setMedia(Part media) {
         this.media = media;
+    }
+
+    public boolean HasMedia() {
+        return hasMedia;
+    }
+
+    public void setHasMedia(boolean hasMedia) {
+        this.hasMedia = hasMedia;
     }
     
 }

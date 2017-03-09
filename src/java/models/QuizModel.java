@@ -182,6 +182,10 @@ public java.util.LinkedList<QuestionBank> getQuestionsAndAnswers(int quizID) thr
                 questions.setAnswerDesc(rs.getString("Answer_Desc"));
                 questionList.add(questions);
                 
+                if(rs.getBlob("Media") != null){
+                    questions.setHasMedia(true);
+                }
+                
             }
             
              Collections.shuffle(questionList);
