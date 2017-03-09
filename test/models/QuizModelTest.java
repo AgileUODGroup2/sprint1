@@ -5,7 +5,7 @@
  */
 package models;
 
-
+import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -54,8 +54,77 @@ public class QuizModelTest {
     }
     
     @After
-    public void tearDown() {
+    public void tearDown() throws SQLException {
+     
+        //connect
+        db = new DatabaseConnection();
+        
+        try(Connection conn = db.connectToDatabase()) {
+            
+            //Create and prepare query
+            String query =  "DELETE FROM quiz WHERE Quiz_Name = ?;";
+            PreparedStatement preparedStmt = conn.prepareStatement(query);
+            
+            //Sort Inputs
+            preparedStmt.setString(1, "TestQuiz");
+            
+            //Execute
+            preparedStmt.executeUpdate();
+            
+          
+        }
+      
     }
+    
+    /**
+     * Test for Create a Quiz
+     */
+    
+    @Test 
+    public void testCreateQuiz() throws SQLException{
+        
+        boolean expected = true;
+        boolean result;
+        Quiz q = new Quiz();
+        
+        System.out.println("\nTest: Create a quiz");
+        qm.createQuiz("AC31009", "Rachel", "2014-01-01", "TestQuiz", "TestStatus", "1");
+        //connect
+        db = new DatabaseConnection();
+         java.util.LinkedList<Quiz> quizzes = new java.util.LinkedList<>();
+        try(Connection conn = db.connectToDatabase()) {
+            
+            //Create and prepare query
+            String query =  "SELECT * FROM quiz WHERE Quiz_Name = ?;";
+            PreparedStatement preparedStmt = conn.prepareStatement(query);
+       
+            //Sort Inputs
+            preparedStmt.setString(1, "TestQuiz");
+            
+          try (ResultSet rs = preparedStmt.executeQuery()) {   
+              while(rs.next()) {
+              
+                q.setQuizID(rs.getInt("Quiz_ID"));
+                System.out.println("Quiz ID: " + q.getQuizID());
+                q.setQuizName(rs.getString("Quiz_Name"));
+                System.out.println("Quiz Name: " + q.getQuizName());
+            
+                quizzes.add(q);
+                
+            }
+        }
+    } catch (SQLException e) {
+        System.out.println(e.getMessage());
+            
+            
+        
+     }
+     
+       result = "TestQuiz".equals(q.getQuizName());
+       System.out.println("Result: "+ result);
+       assertEquals("Should equal true", expected, result);
+       
+   }
 
    /**
     * Test for randomising questions in quizzes 
@@ -93,7 +162,7 @@ public class QuizModelTest {
                 System.out.println("test array" + test[2]);
                 System.out.println("test array" + test[3]);
                 System.out.println("test array" + test[4]);
-                System.out.println(" ");
+                
                if ((test[0] == 1) && (test[1] == 2) && (test[2] == 3) && (test[3] == 4) && (test[4] == 5)){
                    result = false;
                }
@@ -104,6 +173,7 @@ public class QuizModelTest {
          
                System.out.println("result: " + result);
                assertEquals("Should equal true", expected, result);
+               System.out.println(" ");
  } 
 
     /**
