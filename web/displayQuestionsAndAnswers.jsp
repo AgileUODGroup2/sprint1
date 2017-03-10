@@ -99,13 +99,13 @@ $(document).ready(function () {
 	var min=9; 	
 
 	//max font size
-	var max=16;	
+	var max=70;	
 	
 	//grab the default font size
 	var reset = $('p').css('fontSize'); 
 	
 	//font resize these elements
-	var elm = $('p.intro, p.ending');  
+	var elm = $('h3, h2, h4');  
 	
 	//set the default font size and remove px from the value
 	var size = str_replace(reset, 'px', ''); 
@@ -160,9 +160,25 @@ function str_replace(haystack, needle, replacement) {
 	return temp.join(replacement);
 }
 </script>
+<style type="text/css">
+body {
+	font-size:30px; 
+	font-family:Candara;
+}
 
+a {
+	color:#c00; 
+	text-decoration:none;
+}
+
+a:hover {
+	color:#f00; 
+	text-decoration:underline;
+}
+
+</style>
 </head>
-<body>
+
 
 <a href="#" class="fontSizePlus">A+</a> | 
 <a href="#" class="fontReset">Reset</a> | 
@@ -170,10 +186,9 @@ function str_replace(haystack, needle, replacement) {
 
 <p class="intro"> HELLO WORLD</p>
 
+
 <script type="text/javascript" src="http://www.queness.com/js/bsa.js"></script>
 
-</body>
-</html>
 
     </body>
 </html>

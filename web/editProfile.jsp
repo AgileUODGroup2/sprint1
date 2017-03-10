@@ -6,23 +6,11 @@
 
 <%@page import="stores.LoggedIn"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ include file='cssStructure.jsp' %>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" type="text/css" href="styles.css">
-        <title>Edit Profile</title>
-                <%LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");%>
-    </head>
-    <body bgcolor="d3dfeb">
-        <div class="navBar">
-            <ul>
-                <li><a href="index.jsp">QUIZ MASTER </a></li>
-             </ul>
-        </div>
-        <img src="logo123.png" width="115" style="position: absolute; left:0; top: 0;">
-        <img src="logo123.png" width="115" style="position: absolute; right:0; top: 0;">
-
+        <title> Edit Profile </title>
         <div class="navBar1">
             <ul>
                 <li><a> Edit Profile - <%=lg.getFirstName()%></a></li>
