@@ -163,11 +163,18 @@ public class EditQuiz {
 
             PreparedStatement ps = con.prepareStatement(query);
             
-            InputStream is = questionImage.getInputStream();
-            ps.setBlob(1, is);
-            ps.setInt(2, questionID);
+            if (questionImage != null){
+                InputStream is = questionImage.getInputStream();
+                ps.setBlob(1, is);
+                ps.setInt(2, questionID);
             
-            ps.executeUpdate();
+                ps.executeUpdate();
+            } else {
+                ps.setNull(1, java.sql.Types.BLOB);
+                ps.setInt(2, questionID);
+                
+                ps.executeUpdate();
+            }
 
         } catch (SQLException e) {
             System.out.print(e.getMessage());

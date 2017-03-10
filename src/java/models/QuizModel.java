@@ -158,23 +158,6 @@ public void addQuestion(String[] array, Part[] parts) throws IOException
         }
 }
 
-public void deleteMedia(int questionID){
-    db = new DatabaseConnection();
-    String query = "UPDATE question_bank SET Media = NULL WHERE Question_ID = ?";
-    
-    try (Connection con = db.connectToDatabase(); ) {
-
-            PreparedStatement ps = con.prepareStatement(query);
-
-            ps.setInt(1, questionID);
-            
-            ps.executeUpdate();
-
-        } catch (SQLException e) {
-            System.out.print(e.getMessage());
-        }
-}
-
 public java.util.LinkedList<QuestionBank> getQuestionsAndAnswers(int quizID) throws SQLException
 {
     db = new DatabaseConnection();

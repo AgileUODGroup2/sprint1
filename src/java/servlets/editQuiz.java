@@ -51,8 +51,9 @@ public class editQuiz extends HttpServlet {
         } else if(command.matches("delete")){
             // Insert code for deleting a Quiz (From question_bank and quiz tables)
         } else if(command.matches("delete-media")){
-            QuizModel q = new QuizModel();
-            q.deleteMedia(questionID);
+            EditQuiz q = new EditQuiz();
+            Part tempPart = null;
+            q.updateQuestionMedia(questionID, tempPart);
             response.sendRedirect(request.getContextPath() + "/edit/" + questionID);
         }
         
