@@ -86,7 +86,9 @@
 
 %>
 <input type="hidden" value="<%=i%>" name="counter">
-<input type="submit" value="Submit" style="margin: auto;">
+<input type="submit" value="Next Question" style="margin: auto;">
+<br>
+<input type="submit" value="Save" style="margin: auto;">
  </form>
 <br>
 <br>
