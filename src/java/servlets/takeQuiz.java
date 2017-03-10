@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import models.QuestionModel;
 import models.QuizModel;
 import models.ResultModel;
 import stores.LoggedIn;
@@ -45,25 +46,34 @@ public class takeQuiz extends HttpServlet{
         int i = Integer.parseInt(counter);
         String path = request.getContextPath();
         
-        String[] parameters = new String[i];
+        String[] studentAnswers = new String[i];
+        int[] qIDs = new int[i];
 
-        for(int x=1; x<=i; x++)
-        {
-            String parameter = "answer"+x;
-            parameters[x-1] = parameter;
-            System.out.println(parameter);
-        }
-        for(int x=1; x<=i; x++)
-        {
-            System.out.println(parameters[x-1]);
-            System.out.println(request.getParameter(parameters[x-1]));
+        for(int x=1; x<=i; x++) {
+            studentAnswers[x-1] = request.getParameter("answer"+x);
+            qIDs[x-1] = Integer.parseInt(request.getParameter("questionID"+x));
         }
         
+        int score = calculateResult(studentAnswers, qIDs);
         
+        // record results into student_quiz and attempts
         
         response.sendRedirect(path+"/studentPortal.jsp");
        
       
+    }
+    
+    private int calculateResult(String[] studentAnswers, int[] quizIDs) {
+        QuestionModel qm = new QuestionModel();
+        int questions = quizIDs.length;
+        String[] rightAnswers = qm.getRightAnswers(quizIDs);
+        int right = 0;
+        for (int i=0; i<questions;i++) {
+            if(studentAnswers[i].equals(rightAnswers[i])) {
+                right ++;
+            }
+        }
+        return right/questions;
     }
    private void display(int quizID, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

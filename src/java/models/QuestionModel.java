@@ -90,4 +90,26 @@ public class QuestionModel {
         
     }
     
+    public String[] getRightAnswers(int[] quizIDs) {
+        String[] rightAnswers = new String[quizIDs.length];
+        
+        String query = "SELECT Answer FROM question_bank WHERE Question_ID = ?";
+        
+        try (Connection conn = db.connectToDatabase()) {
+            for (int i=0; i<quizIDs.length; i++) {
+                PreparedStatement ps = conn.prepareStatement(query);
+                ps.setInt(1, quizIDs[i]);
+                
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    rightAnswers[i] = rs.getString("Answer");
+                }
+            }
+        } catch (SQLException e) {
+            e.getMessage();
+        }
+        
+        return rightAnswers;
+    }
+    
 }

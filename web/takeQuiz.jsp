@@ -47,8 +47,6 @@
            
             int quizID = quiz.getQuizID();
             int numOfQuestions = quiz.getNumberOfQuestions();
-            //int counter = quiz.getCounter();
-            //System.out.println("Counter: " + counter);
             questionList = quizModel.getQuestionsAndAnswers(quizID);
 
             int i = 0;
@@ -85,6 +83,7 @@
              <input type="radio" name="answer<%=i%>" value="C"> <h8><%=q.getC()%></h8>
              <br>
              <input type="radio" name="answer<%=i%>" value="D"> <h8><%=q.getD()%></h8>
+             <input type="hidden" name="questionID<%=i%>" value="<%=q.getQuestionID()%>" />
              <br>
               
              

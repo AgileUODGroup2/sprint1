@@ -44,6 +44,16 @@
     
         </form>
     </div>
+    <br>
+    <br>
+    
+    <button10 onclick="goBack()">Return to Log In</button10>
+
+<script>
+function goBack() {
+    window.history.back();
+}
+</script>
     </body>
 </html>
  
