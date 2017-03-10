@@ -8,11 +8,13 @@ package servlets;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 import models.EditQuiz;
 import models.QuestionModel;
 import models.QuizModel;
@@ -24,6 +26,7 @@ import stores.Quiz;
  * @author viivipursiainen
  */
 @WebServlet(urlPatterns = {"/edit", "/edit/*"})
+@MultipartConfig(maxFileSize = 16177216)
 public class editQuiz extends HttpServlet {
 
     @Override
@@ -64,6 +67,7 @@ public class editQuiz extends HttpServlet {
         String answer       = request.getParameter("Answer");
         String answerDesc   = request.getParameter("answerDesc");
         int quizID          = Integer.parseInt(request.getParameter("QuizID"));
+        Part questionMedia  = request.getPart("media");
         
         System.out.println("Question: "+question+" A: "+a+" B: "+b+" Answer Desc: "+answerDesc);
         
@@ -80,6 +84,12 @@ public class editQuiz extends HttpServlet {
         
         //Change question in database
         editQuiz.EditWholeQuiz(qBank);
+        
+        if(questionMedia != null){
+            qBank.setMedia(questionMedia);
+            qBank.setHasMedia(true);
+            editQuiz.updateQuestionMedia(questionID, questionMedia);
+        }
         
         response.sendRedirect(contextPath+"/displayQuestionsAndAnswers/"+quizID);
     }

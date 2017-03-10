@@ -26,11 +26,11 @@
     <body bgcolor="d3dfeb">
         <div class="navBar">
             <ul>
-                <li><a href="index.jsp">QUIZ MASTER </a></li>
+                <li><a href="<%=request.getContextPath() + "/studentPortal.jsp"%>">QUIZ MASTER </a></li>
              </ul>
         </div>
-        <img src="/AC31007Quiz/logo123.png" width="115px" style="position: absolute; left:0; top: 0;">
-        <img src="/AC31007Quiz/logo123.png" width="115px" style="position: absolute; right:0; top: 0;">
+        <img src="/AC31007Quiz/logo123.png" width="115" style="position: absolute; left:0; top: 0;">
+        <img src="/AC31007Quiz/logo123.png" width="115" style="position: absolute; right:0; top: 0;">
 
         <div class="navBar1">
             <ul>
@@ -51,12 +51,13 @@
             //System.out.println("Counter: " + counter);
             questionList = quizModel.getQuestionsAndAnswers(quizID);
 
-            int i = 1;
+            int i = 0;
 
             if (questionList != null) {
                         
                         Iterator<QuestionBank> it = questionList.iterator();
                     while(it.hasNext()) {
+                        i++;
                         QuestionBank q = (QuestionBank) it.next();
             
 %> 
@@ -69,7 +70,14 @@
            
              
                  <h2><%=q.getQuestion()%></h2>
-                
+                 <%
+                     System.out.println("Qestion - " + q.getQuestionID());
+                     if(q.HasMedia()){
+                 %><img src="<%=request.getContextPath() + "/question-img/" + q.getQuestionID()%>" width="200" style="display: inline-block;">
+                 <%
+                     }
+                 %>
+             <br>   
              <input type="radio" name="answer<%=i%>" value="A"> <h8><%=q.getA()%></h8>
              <br>
              <input type="radio" name="answer<%=i%>" value="B"> <h8><%=q.getB()%></h8>
@@ -82,7 +90,6 @@
              
             
                  <%
-                 i++;
 }}
 
 %>

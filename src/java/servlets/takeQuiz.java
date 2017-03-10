@@ -43,24 +43,25 @@ public class takeQuiz extends HttpServlet{
         
         String counter = request.getParameter("counter");
         int i = Integer.parseInt(counter);
+        String path = request.getContextPath();
         
         String[] parameters = new String[i];
 
-        for(int x=0; x<i; x++)
+        for(int x=1; x<=i; x++)
         {
             String parameter = "answer"+x;
-            parameters[x] = parameter;
+            parameters[x-1] = parameter;
             System.out.println(parameter);
         }
-        for(int x=0; x<i; x++)
+        for(int x=1; x<=i; x++)
         {
-            System.out.println(parameters[x]);
-            System.out.println(request.getParameter(parameters[x]));
+            System.out.println(parameters[x-1]);
+            System.out.println(request.getParameter(parameters[x-1]));
         }
         
         
         
-        response.sendRedirect("/AC31007Quiz/studentPortal.jsp");
+        response.sendRedirect(path+"/studentPortal.jsp");
        
       
     }
