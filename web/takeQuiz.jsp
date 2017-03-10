@@ -51,12 +51,13 @@
             //System.out.println("Counter: " + counter);
             questionList = quizModel.getQuestionsAndAnswers(quizID);
 
-            int i = 1;
+            int i = 0;
 
             if (questionList != null) {
                         
                         Iterator<QuestionBank> it = questionList.iterator();
                     while(it.hasNext()) {
+                        i++;
                         QuestionBank q = (QuestionBank) it.next();
             
 %> 
@@ -89,7 +90,6 @@
              
             
                  <%
-                 i++;
 }}
 
 %>
