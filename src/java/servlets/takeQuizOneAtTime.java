@@ -29,7 +29,6 @@ public class takeQuizOneAtTime extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String uri = request.getRequestURI();
-        System.out.println(uri);
         int i = uri.lastIndexOf("/");
         String strQuizID = uri.substring(i+1);
         int quizID = Integer.parseInt(strQuizID);
@@ -41,58 +40,61 @@ public class takeQuizOneAtTime extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
+        QuizModel qm = new QuizModel();
+        
+        String y = request.getParameter("quizID");
+        int  quizID = Integer.parseInt(y);
+        String z = request.getParameter("questionNo");
+        int questionNo = Integer.parseInt(z);
+        
+        questionNo++;
+        System.out.println("New Question No: " + questionNo);
+        
+        Quiz quiz = qm.getQuizDetails(quizID);
+        int oldCounter = quiz.getCounter();
+        
+        System.out.println("Old Counter: " + oldCounter);
+        quiz.setCounter(questionNo);
+        
+        int newCounter = quiz.getCounter();
+        System.out.println("new Counter: " + newCounter);
+
         String counter = request.getParameter("counter");
         int i = Integer.parseInt(counter);
         
         String[] parameters = new String[i];
 
-        for(int x=0; x<i; x++)
+        for(int x=1; x<i; x++)
         {
             String parameter = "answer"+x;
             parameters[x] = parameter;
-            System.out.println(parameter);
         }
-        for(int x=0; x<i; x++)
+        for(int x=1; x<i; x++)
         {
             System.out.println(parameters[x]);
             System.out.println(request.getParameter(parameters[x]));
         }
         
+        HttpSession session = request.getSession();
+        session.setAttribute("Quiz", quiz);
         
+        String contextPath = request.getContextPath();
+        String url = contextPath+ "/takeQuizOneAtTime/"+quizID;
+        System.out.println(url);
+
         
-        response.sendRedirect("/AC31007Quiz/studentPortal.jsp");
-       
-      
+        response.sendRedirect(url);
     }
    private void display(int quizID, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        ResultModel rm = new ResultModel();
+       
         QuizModel qm = new QuizModel();
-//        String test;
-        
-        HttpSession session = request.getSession(true);
-        LoggedIn lg =(LoggedIn)session.getAttribute("LoggedIn");
-        
-//        String button = request.getParameter("button");
-//        if (button=="One Question at a time")
-//        {
-//            test = "oneQuestion";
-//            System.out.println("test: " + test);
-//            request.setAttribute("test", test);
-//        }
-//        else if(button == "All questions")
-//        {
-//            test = "allQuestions";
-//            System.out.println("test: " + test);
-//            request.setAttribute("test", test);
-//        }
-        Quiz quiz = qm.getQuizDetails(quizID);
-      
+         HttpSession session = request.getSession();
+        Quiz quiz = (Quiz) session.getAttribute("Quiz");
+        //System.out.println("Request Counter: " + quiz.getCounter());
+        RequestDispatcher rd = request.getRequestDispatcher("/takeQuizOneAtTime.jsp"); 
             
-            RequestDispatcher rd = request.getRequestDispatcher("/takeQuizOneAtTime.jsp"); 
-            
-            request.setAttribute("Quiz", quiz);
-            rd.forward(request, response);
+        request.setAttribute("Quiz", quiz);
+        rd.forward(request, response);
         
     }
     
