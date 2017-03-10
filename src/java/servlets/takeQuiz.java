@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import models.QuestionModel;
 import models.QuizModel;
 import models.ResultModel;
 import stores.LoggedIn;
@@ -53,11 +54,26 @@ public class takeQuiz extends HttpServlet{
             qIDs[x-1] = Integer.parseInt(request.getParameter("questionID"+x));
         }
         
+        int score = calculateResult(studentAnswers, qIDs);
         
+        // record results into student_quiz and attempts
         
         response.sendRedirect(path+"/studentPortal.jsp");
        
       
+    }
+    
+    private int calculateResult(String[] studentAnswers, int[] quizIDs) {
+        QuestionModel qm = new QuestionModel();
+        int questions = quizIDs.length;
+        String[] rightAnswers = qm.getRightAnswers(quizIDs);
+        int right = 0;
+        for (int i=0; i<questions;i++) {
+            if(studentAnswers[i].equals(rightAnswers[i])) {
+                right ++;
+            }
+        }
+        return right/questions;
     }
    private void display(int quizID, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
