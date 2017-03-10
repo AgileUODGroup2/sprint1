@@ -45,18 +45,12 @@ public class takeQuiz extends HttpServlet{
         int i = Integer.parseInt(counter);
         String path = request.getContextPath();
         
-        String[] parameters = new String[i];
+        String[] studentAnswers = new String[i];
+        int[] qIDs = new int[i];
 
-        for(int x=1; x<=i; x++)
-        {
-            String parameter = "answer"+x;
-            parameters[x-1] = parameter;
-            System.out.println(parameter);
-        }
-        for(int x=1; x<=i; x++)
-        {
-            System.out.println(parameters[x-1]);
-            System.out.println(request.getParameter(parameters[x-1]));
+        for(int x=1; x<=i; x++) {
+            studentAnswers[x-1] = request.getParameter("answer"+x);
+            qIDs[x-1] = Integer.parseInt(request.getParameter("questionID"+x));
         }
         
         
