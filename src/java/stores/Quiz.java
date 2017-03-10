@@ -12,6 +12,7 @@ import java.sql.*;
  */
 public class Quiz {
     int quizID;
+    int counter;
     String moduleID;
     String staffName;
     Date dateCreated;
@@ -22,6 +23,12 @@ public class Quiz {
     private int staffID;
     private int[] gradeDivide;
 
+    public void setCounter(int counter) {
+        this.counter = counter;
+    }
+    public int getCounter() {
+        return counter;
+    }
     public void setQuizID(int quizID) {
         this.quizID = quizID;
     }

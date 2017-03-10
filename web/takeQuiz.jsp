@@ -71,7 +71,7 @@
              
                  <h2><%=q.getQuestion()%></h2>
                  <%
-                     System.out.println("Qestion - " + q.getQuestionID());
+                     System.out.println("Question - " + q.getQuestionID());
                      if(q.HasMedia()){
                  %><img src="<%=request.getContextPath() + "/question-img/" + q.getQuestionID()%>" width="200" style="display: inline-block;">
                  <%

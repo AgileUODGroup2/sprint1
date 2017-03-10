@@ -35,7 +35,7 @@ public class chooseQuizType extends HttpServlet{
         String strQuizID = uri.substring(i+1);
         int quizID = Integer.parseInt(strQuizID);
         System.out.println("Quiz ID: "+quizID);
-            display(quizID, request, response);
+        display(quizID, request, response);
 
     }
     
@@ -43,34 +43,19 @@ public class chooseQuizType extends HttpServlet{
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
  
     }
+    
+    
    private void display(int quizID, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        ResultModel rm = new ResultModel();
         QuizModel qm = new QuizModel();
-//        String test;
-        
-        HttpSession session = request.getSession(true);
-        LoggedIn lg =(LoggedIn)session.getAttribute("LoggedIn");
-        
-//        String button = request.getParameter("button");
-//        if (button=="One Question at a time")
-//        {
-//            test = "oneQuestion";
-//            System.out.println("test: " + test);
-//            request.setAttribute("test", test);
-//        }
-//        else if(button == "All questions")
-//        {
-//            test = "allQuestions";
-//            System.out.println("test: " + test);
-//            request.setAttribute("test", test);
-//        }
         Quiz quiz = qm.getQuizDetails(quizID);
-      
+        
             
             RequestDispatcher rd = request.getRequestDispatcher("/chooseQuizType.jsp"); 
+            quiz.setCounter(0);
+            HttpSession session = request.getSession();
             
-            request.setAttribute("Quiz", quiz);
+            session.setAttribute("Quiz", quiz);
             rd.forward(request, response);
         
     }
