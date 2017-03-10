@@ -33,7 +33,7 @@ public class ResultModel {
                 while(rs.next()) {
                     StudentResult res = new StudentResult();
                     res.setMatriculationNumber(rs.getInt("Matriculation_Number"));
-                    res.setStudentName("Student_Name");
+                    res.setStudentName(rs.getString("Student_Name"));
                     res.setQuizID(rs.getInt("Quiz_ID"));
                     res.setHasCompleted(rs.getBoolean("Has_Completed"));
                     res.setAttemptedCount(rs.getInt("Attempted_Count"));

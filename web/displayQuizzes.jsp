@@ -9,23 +9,11 @@
 <%@page import="java.util.Iterator"%>
 <%@page import="stores.Quiz"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ include file='cssStructure.jsp' %>
+       
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-           <link rel="stylesheet" type="text/css" href="styles.css">
-        <title>JSP Page</title>
-    </head>
-    <body bgcolor="d3dfeb">
-         <% LoggedIn lg =(LoggedIn) session.getAttribute("LoggedIn"); %>
-         <img src="logo123.png" width="115px" style="position: absolute; left:0; top: 0;">
-        <img src="logo123.png" width="115px" style="position: absolute; right:0; top: 0;">
-      <div class="navBar">
-          <ul>
-                 <li><a href="index.jsp">QUIZ MASTER </a></li>
-          </ul>
-      </div>
-     
        <div class="navBar1">
             <ul>
              <li><a>Welcome <%=lg.getFirstName()%>!</a></li>
@@ -98,5 +86,14 @@
                 <br>
                 <br>
             </div>
+                <br>
+                <br>
+                 <button10 onclick="goBack()">Return to Portal</button10>
+                <script>
+                    function goBack() {
+                        window.history.back();
+                    
+                    }
+                    </script>
     </body>
 </html>

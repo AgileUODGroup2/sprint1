@@ -24,8 +24,8 @@
  
     </head>
     <body bgcolor="d3dfeb">
-    <img src="/AC31007Quiz/logo123.png" width="115px" style="position: absolute; left:0; top: 0;">
-        <img src="/AC31007Quiz/logo123.png" width="115px" style="position: absolute; right:0; top: 0;">
+    <img src="<%=request.getContextPath() +"/logo123.png"%>" width="115" style="position: absolute; left:0; top: 0;">
+        <img src="<%=request.getContextPath() +"/logo123.png"%>" width="115" style="position: absolute; right:0; top: 0;">
 
         <div class="navBar">
             <ul>
@@ -62,7 +62,6 @@
             <br>
             <br>
             <br>
-        <a href="editProfile.jsp"><button id="fourth-button">Edit Quiz</button></a>
         
         </div>
         <div id="cc3">
@@ -76,6 +75,7 @@
                         QuestionBank q = (QuestionBank) it.next();
 %> 
                     <h2> Question: <%=q.getQuestion() %>  <a href="<%=contextPath%>/edit/<%=q.getQuestionID()%>">EDIT</a></h2>
+                    <img src="<%=contextPath + "/question-img/" + q.getQuestionID()%>" width="200" style="display: inline-block;">
                     <h4>A: <%=q.getA()%></h4>
                     <h4>B: <%=q.getB()%></h4>
                     <h4>C: <%=q.getC()%></h4>
@@ -99,13 +99,13 @@ $(document).ready(function () {
 	var min=9; 	
 
 	//max font size
-	var max=16;	
+	var max=70;	
 	
 	//grab the default font size
 	var reset = $('p').css('fontSize'); 
 	
 	//font resize these elements
-	var elm = $('p.intro, p.ending');  
+	var elm = $('h3, h2, h4');  
 	
 	//set the default font size and remove px from the value
 	var size = str_replace(reset, 'px', ''); 
@@ -160,9 +160,11 @@ function str_replace(haystack, needle, replacement) {
 	return temp.join(replacement);
 }
 </script>
+<style type="text/css">
 
+</style>
 </head>
-<body>
+
 
 <a href="#" class="fontSizePlus">A+</a> | 
 <a href="#" class="fontReset">Reset</a> | 
@@ -170,10 +172,9 @@ function str_replace(haystack, needle, replacement) {
 
 <p class="intro"> HELLO WORLD</p>
 
+
 <script type="text/javascript" src="http://www.queness.com/js/bsa.js"></script>
 
-</body>
-</html>
 
     </body>
 </html>

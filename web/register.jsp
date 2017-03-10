@@ -5,22 +5,10 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+ <%@ include file='cssStructure.jsp' %>
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <body bgcolor=#d3dfeb>
-                <link rel="stylesheet" type="text/css" href="styles.css">
-        <title>Register</title>
-    </head>
-        <div class="navBar">
-            <ul>
-               <li><a href="index.jsp">QUIZ MASTER</a></li>
-             </ul>
-        </div>
-        <img src="logo123.png" width="115px" style="position: absolute; left:0; top: 0;">
-        <img src="logo123.png" width="115px" style="position: absolute; right:0; top: 0;">
-    </div>
+
+<title>Register</title>
     <div class="navBar1">
             <ul>
                 <li><a>Register</a></li>

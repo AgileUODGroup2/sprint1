@@ -12,26 +12,12 @@
 <%@page import="lib.database.DatabaseConnection"%>
 <%@page import="models.staffModulesModel"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ include file='cssStructure.jsp' %>
 <!DOCTYPE html>
 <html>
     <head>
-                 <link rel="stylesheet" type="text/css" href="styles.css">
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-   
-         <% LoggedIn lg =(LoggedIn) session.getAttribute("LoggedIn"); %>
-    </head>
-     <body bgcolor="d3dfeb">
-        <div class="navBar">
-            <ul>
-                <li><a href="index.jsp">QUIZ MASTER </a></li>
-             </ul>
-        </div>
-        <img src="logo123.png" width="115px" style="position: absolute; left:0; top: 0;">
-        <img src="logo123.png" width="115px" style="position: absolute; right:0; top: 0;">
-
+        <title> Student Modules </title>    
+        
         <div class="navBar1">
             <ul>
                 <li><a> <%=lg.getFirstName()%>'s Modules

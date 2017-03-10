@@ -18,8 +18,7 @@
         <title>Take Quiz</title>
     </head>
       <%
-            LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
-            Quiz quiz = (Quiz) request.getAttribute("Quiz");
+           Quiz quiz = (Quiz) session.getAttribute("Quiz");
         %>
         
    
@@ -40,23 +39,23 @@
         <br>
         <br>
         <div class="centerContent1">
-        <form method="post" action="<%=request.getContextPath()%>/takeQuiz" style="display: inline-block; margin: auto; text-align: left;">
-        <%
+        <form method="post" action="<%=request.getContextPath()%>/takeQuizOneAtTime" style="display: inline-block; margin: auto; text-align: left;">
+        
+            <%
             QuizModel quizModel = new QuizModel();
             java.util.LinkedList<QuestionBank> questionList = new java.util.LinkedList<>();
            
             int quizID = quiz.getQuizID();
             int numOfQuestions = quiz.getNumberOfQuestions();
+            int counter = quiz.getCounter();
+            System.out.println("Counter: " + counter);
             questionList = quizModel.getQuestionsAndAnswers(quizID);
 
-            int i = 0;
+            int x = 1;
 
             if (questionList != null) {
-                        
-                        Iterator<QuestionBank> it = questionList.iterator();
-                    while(it.hasNext()) {
-                        i++;
-                        QuestionBank q = (QuestionBank) it.next();
+                  
+                        QuestionBank q = questionList.get(counter);
             
 %> 
             
@@ -68,32 +67,28 @@
            
              
                  <h2><%=q.getQuestion()%></h2>
-                 <%
-                     System.out.println("Question - " + q.getQuestionID());
-                     if(q.HasMedia()){
-                 %><img src="<%=request.getContextPath() + "/question-img/" + q.getQuestionID()%>" width="200" style="display: inline-block;">
-                 <%
-                     }
-                 %>
-             <br>   
-             <input type="radio" name="answer<%=i%>" value="A"> <h8><%=q.getA()%></h8>
+             <input type ="hidden" name="quizID" value="<%=quizID%>">
+             <input type ="hidden" name="questionNo" value="<%=counter%>">
+             <input type="radio" name="answer<%=x%>" value="A"> <h8><%=q.getA()%></h8>
              <br>
-             <input type="radio" name="answer<%=i%>" value="B"> <h8><%=q.getB()%></h8>
+             <input type="radio" name="answer<%=x%>" value="B"> <h8><%=q.getB()%></h8>
              <br>
-             <input type="radio" name="answer<%=i%>" value="C"> <h8><%=q.getC()%></h8>
+             <input type="radio" name="answer<%=x%>" value="C"> <h8><%=q.getC()%></h8>
              <br>
-             <input type="radio" name="answer<%=i%>" value="D"> <h8><%=q.getD()%></h8>
-             <input type="hidden" name="questionID<%=i%>" value="<%=q.getQuestionID()%>" />
+             <input type="radio" name="answer<%=x%>" value="D"> <h8><%=q.getD()%></h8>
              <br>
               
              
             
                  <%
-}}
-
+                 x++;
+}
+                //request.setAttribute("Quiz", quiz);
 %>
-<input type="hidden" value="<%=i%>" name="counter">
-<input type="submit" value="Submit" style="margin: auto;">
+<input type="hidden" value="<%=x%>" name="counter">
+<input type="submit" value="Next Question" style="margin: auto;">
+<br>
+<input type="submit" value="Save" style="margin: auto;">
  </form>
 <br>
 <br>

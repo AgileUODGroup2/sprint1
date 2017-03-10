@@ -5,9 +5,12 @@
  */
 package models;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import javax.servlet.http.Part;
 import lib.database.DatabaseConnection;
 import stores.QuestionBank;
 
@@ -146,6 +149,45 @@ public class EditQuiz {
         catch(SQLException err){
             System.out.println(err.getMessage());
         }
+    }
+    
+    public void updateQuestionMedia(int questionID, Part questionImage) throws IOException{
+        
+        Connection con = db.connectToDatabase();
+        
+        String query = "UPDATE question_bank SET Media = ? WHERE Question_ID = ?";
+        
+        // Java image to MySQL database query based on code found here: http://www.thejavaprogrammer.com/save-retrieve-image-mysql-database-using-servlet-jsp/
+        
+        try{
+
+            PreparedStatement ps = con.prepareStatement(query);
+            
+            if (questionImage != null){
+                InputStream is = questionImage.getInputStream();
+                ps.setBlob(1, is);
+                ps.setInt(2, questionID);
+            
+                ps.executeUpdate();
+            } else {
+                ps.setNull(1, java.sql.Types.BLOB);
+                ps.setInt(2, questionID);
+                
+                ps.executeUpdate();
+            }
+
+        } catch (SQLException e) {
+            System.out.print(e.getMessage());
+        } finally {
+            if(con != null){
+                try{
+                    con.close();
+                } catch(Exception e){
+                    System.out.print(e.getMessage());
+                }
+            }
+        }
+        
     }
     
 }

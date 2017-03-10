@@ -7,32 +7,18 @@
 <%@page import="stores.LoggedIn"%>
 <%@page import="stores.Quiz"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ include file='cssStructure.jsp' %>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" type="text/css" href="styles.css" />
-        <title>Add Questions</title>
-    </head>
-     <%LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");%>
-   
-    <body bgcolor="d3dfeb">
-        <div class="navBar">
-            <ul>
-                <li><a href="index.jsp">QUIZ MASTER </a></li>
-             </ul>
-        </div>
-        <img src="logo123.png" width="115" style="position: absolute; left:0; top: 0;">
-        <img src="logo123.png" width="115" style="position: absolute; right:0; top: 0;">
-
+      
         <div class="navBar1">
             <ul>
-                <li><a> Create Quiz - Add Questions</a></li>
+                <li><a> Create Quiz</a></li>
             </ul>
-        </div>
-
+        </div><br><br>
         
-        <div class ="main">
+        <div class ="centerContent1">
             
             <% 
                     Quiz quiz = (Quiz) session.getAttribute("Quiz");
@@ -43,18 +29,18 @@
                         <input type="text" name="question" id="question">
                         <br>
                         <label for="media"> Upload Image: </label>
-                        <input name="media" type="file" accept=".jpg, .jpeg, .png">
+                        <input name="media" type="file" accept=".jpg, .jpeg, .png" id="media">
                         <br><br>
-			<label for = "answerA">a: </label>
+			<label for = "answerA">A: </label>
                         <input type="text" name="answerA" id="answerA" >
                         <br>
-			<label for = "answerB">b: </label>
+			<label for = "answerB">B: </label>
                         <input type="text" name="answerB" id="answerB">
                         <br>
-                        <label for = "answerC">c: </label>
+                        <label for = "answerC">C: </label>
                         <input type="text" name="answerC" id="answerC" >
                         <br>
-                        <label for = "answerD">d: </label>
+                        <label for = "answerD">D: </label>
                         <input type="text" name="answerD" id="answerD">
                         <br>
                         
@@ -68,7 +54,7 @@
                         <br>
 
                         <label for = "answerDesc">Answer Description: </label>
-                        <textarea name="answerDesc" cols="70" rows="4"></textarea>
+                        <textarea name="answerDesc" cols="70" rows="4" id="answerDesc"></textarea>
                         <br>
                         <br>
                         <br>

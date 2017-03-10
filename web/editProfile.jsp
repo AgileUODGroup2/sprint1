@@ -6,23 +6,11 @@
 
 <%@page import="stores.LoggedIn"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ include file='cssStructure.jsp' %>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" type="text/css" href="styles.css">
-        <title>Edit Profile</title>
-                <%LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");%>
-    </head>
-    <body bgcolor="d3dfeb">
-        <div class="navBar">
-            <ul>
-                <li><a href="index.jsp">QUIZ MASTER </a></li>
-             </ul>
-        </div>
-        <img src="logo123.png" width="115" style="position: absolute; left:0; top: 0;">
-        <img src="logo123.png" width="115" style="position: absolute; right:0; top: 0;">
-
+        <title> Edit Profile </title>
         <div class="navBar1">
             <ul>
                 <li><a> Edit Profile - <%=lg.getFirstName()%></a></li>
@@ -39,17 +27,25 @@
         <form method="POST" style="display: inline-block; margin: auto; text-align: left;" action="edit-profile/<%=lg.getUsername()%>" enctype="multipart/form-data">
             <br>
             <br>
-            <label for ="firstName"> First Name:  </label>
-                <input name="firstName" style="width: 30%;" type="text" value=<%=lg.getFirstName()%>
+            <label for="firstName"> First Name:  </label>
+                <input id="firstName" name="firstName" style="width: 30%;" type="text" value=<%=lg.getFirstName()%>
             <br>
-                <label for ="lastName"> Last Name: </label>
-                <input name="lastName" style="width: 30%;" type="text" value=<%=lg.getLastName()%>
+                <label for="lastName"> Last Name: </label>
+                <input id="lastName" name="lastName" style="width: 30%;" type="text" value=<%=lg.getLastName()%>
             <br>
-                <label for ="password"> Password: </label>
-                <input name="password" style="width: 30%;" type="password">
+                <label for="password"> Password: </label>
+                <input id="password" name="password" style="width: 30%;" type="password">
             <br>
             <label for="rePassword"> Confirm Password: </label>
-                <input name="rePassword" style="width: 30%;" type="password">
+                <input id="rePassword" name="rePassword" style="width: 30%;" type="password">
+                <br>
+                
+               
+                <label for="profileImage" style="display: block; margin-right: 80%;"> Upload Profile Image: </label>
+                 <div style="margin-left: 45%; margin-top: 1%;">
+                <input id="profileImage" name="profileImage" style="width: 30%; display: block;" type="file" accept=".jpg, .jpeg, .png">
+                </div>
+                
             <% 
                 if(lg.isStaff()){
                     %>
@@ -62,13 +58,18 @@
                 }
             %>
             <br>
-            <label for="profileImage"> Upload Profile Image: </label>
-                <input name="profileImage" style="width: 30%;" type="file" accept=".jpg, .jpeg, .png">
+            
             <br>
             <br>
             <br>
                 <input type="submit" style="float-left: 50%;" value="Submit">
-            
+                <button10 onclick="goBack()">Return to Portal</button10>
+                <script>
+                    function goBack() {
+                        window.history.back();
+                    
+                    }
+                    </script>
         </form>
             <br>
             <br>
