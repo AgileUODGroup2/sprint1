@@ -8,19 +8,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" type="text/css" href="styles.css">
-        <title>Log in Error</title>
-    </head>
-    <body bgcolor="d3dfeb">
-        <div class="navBar">
-            <ul>
-               <li><a href="index.jsp">QUIZ MASTER </a></li>
-             </ul>
-        </div>
-        <img src="logo123.png" width="115px" style="position: absolute; left:0; top: 0;">
-        <img src="logo123.png" width="115px" style="position: absolute; right:0; top: 0;">
-    </div>
+          <%@ include file='cssStructure.jsp' %>
+       
     <div class="navBar1">
             <ul>
                 <li><a>ERROR</a></li>
