@@ -63,15 +63,17 @@ public class QuizModelTest {
             
             //Create and prepare query
             String query =  "DELETE FROM quiz WHERE Quiz_Name = ?;";
+            
             PreparedStatement preparedStmt = conn.prepareStatement(query);
+            PreparedStatement preparedStmt2 = conn.prepareStatement(query);
             
             //Sort Inputs
             preparedStmt.setString(1, "TestQuiz");
+            preparedStmt2.setString(1, "UpdateQuestionAmount");
             
             //Execute
             preparedStmt.executeUpdate();
-            
-          
+            preparedStmt2.executeUpdate();
         }
       
     }
@@ -79,7 +81,7 @@ public class QuizModelTest {
     /**
      * Test for Create a Quiz
      */
-    
+   
     @Test 
     public void testCreateQuiz() throws SQLException{
         
@@ -115,9 +117,7 @@ public class QuizModelTest {
         }
     } catch (SQLException e) {
         System.out.println(e.getMessage());
-            
-            
-        
+    
      }
      
        result = "TestQuiz".equals(q.getQuizName());
@@ -125,6 +125,140 @@ public class QuizModelTest {
        assertEquals("Should equal true", expected, result);
        
    }
+   
+    
+   /**
+    * Test for updating the question amount for a quiz 
+    */ 
+   /* @Test
+    public void testUpdateQuestionAmmount(){ //come back to this test!!!
+        
+    Quiz q = new Quiz();
+    
+    System.out.println("\nTest: Update question amount");
+    
+    qm.createQuiz("AC31009", "Rachel", "2014-01-01", "UpdateQuestionAmount", "TestStatus", "1");
+     
+      db = new DatabaseConnection();
+         java.util.LinkedList<Quiz> quizzes = new java.util.LinkedList<>();
+        try(Connection conn = db.connectToDatabase()) {
+            
+            //Create and prepare query
+            String query =  "SELECT * FROM quiz WHERE Quiz_Name = ?;";
+            PreparedStatement preparedStmt = conn.prepareStatement(query);
+       
+            //Sort Inputs
+            preparedStmt.setString(1, "UpdateQuestionAmount");
+            
+          try (ResultSet rs = preparedStmt.executeQuery()) {   
+              while(rs.next()) {
+              
+                q.setQuizID(rs.getInt("Quiz_ID"));
+                System.out.println("Quiz ID: " + q.getQuizID());
+                q.setQuizName(rs.getString("Quiz_Name"));
+                System.out.println("Quiz Name: " + q.getQuizName());
+            
+                quizzes.add(q);
+                
+            }
+        }
+    } catch (SQLException e) {
+        System.out.println(e.getMessage());
+    
+     }
+        
+        qm.UpdateQuestionAmmount(q.getQuizID());
+        
+    }
+    */
+    
+   /*
+    * Test for getting the number of questions in a quiz
+    */
+    @Test
+    public void testGetQuizNumberOfQuestions(){
+        
+        boolean state;
+        Quiz q = new Quiz();
+        
+        
+        System.out.println("\nTest: Get Number of Question in a quiz");    
+           
+        db = new DatabaseConnection();
+        java.util.LinkedList<Quiz> quizzes = new java.util.LinkedList<>();
+        try(Connection conn = db.connectToDatabase()) {
+            
+            //Create and prepare query
+            String query =  "SELECT Num_Of_Questions FROM quiz WHERE Quiz_ID=?;";
+            PreparedStatement preparedStmt = conn.prepareStatement(query);
+       
+            //Sort Inputs
+            preparedStmt.setInt(1, 1);
+            
+          try (ResultSet rs = preparedStmt.executeQuery()) {   
+              while(rs.next()) {
+              
+               q.setNumberOfQuestions(rs.getInt("Num_Of_Questions"));
+                System.out.println("Number of question in quiz: " + q.getNumberOfQuestions());
+                 quizzes.add(q);
+                
+            }
+        }
+    } catch (SQLException e) {
+        System.out.println(e.getMessage());
+    
+     }
+     state = ( 5 == q.getNumberOfQuestions());
+     System.out.println("State: "+state);
+     assertTrue("true", state);
+      
+   }
+      
+   /**
+    * Test of to get Quiz ID
+    */ 
+    @Test
+    public void testGetQuizID() throws SQLException {
+        
+        int count = 0;
+        int result = 18;
+        Quiz q = new Quiz();
+      
+        System.out.println("\nTest: get Quiz ID ");
+        
+        //boolean result;
+        boolean expected = true;
+        boolean state;
+        //int result = qm.getQuizId();
+         db = new DatabaseConnection();
+        java.util.LinkedList<Quiz> quizzes = new java.util.LinkedList<>();
+        try(Connection conn = db.connectToDatabase()) {
+            
+            //Create and prepare query
+            String query =  "SELECT * FROM quiz ORDER BY Quiz_ID;";
+            PreparedStatement preparedStmt = conn.prepareStatement(query);
+            
+          try (ResultSet rs = preparedStmt.executeQuery()) {   
+              while(rs.next()) {
+              
+               q.setQuizID(rs.getInt("Quiz_ID"));
+               System.out.println("Quiz ID: " + q.getQuizID());
+               count++;
+               quizzes.add(q);
+                
+            }
+        }
+    } catch (SQLException e) {
+        System.out.println(e.getMessage());
+    
+     }
+        
+      state = (result == count);         
+      System.out.println(count);
+      System.out.println("State: " + state);
+      assertEquals("Should equal true", expected, state);
+      System.out.println(" "); 
+    }
 
    /**
     * Test for randomising questions in quizzes 
