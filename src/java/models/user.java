@@ -143,11 +143,17 @@ public class user {
 
             PreparedStatement ps = con.prepareStatement(query);
             
-            InputStream is = profileImage.getInputStream();
-            ps.setBlob(1, is);
-            ps.setInt(2, userID);
-            
-            ps.executeUpdate();
+            if(profileImage != null){
+                InputStream is = profileImage.getInputStream();
+                ps.setBlob(1, is);
+                ps.setInt(2, userID);  
+                ps.executeUpdate();
+            }else{
+                ps.setNull(1, java.sql.Types.BLOB);
+                ps.setInt(2, userID);
+                
+                ps.executeUpdate();
+            }
 
         } catch (SQLException e) {
             System.out.print(e.getMessage());
