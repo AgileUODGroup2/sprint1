@@ -80,7 +80,7 @@ public int getQuizNumberOfQuestions(int quizID)
 
         ResultSet rs = ps.executeQuery();
         while (rs.next()){      
-        }
+        }        
         return result;
     }
     catch(SQLException err){
@@ -89,7 +89,7 @@ public int getQuizNumberOfQuestions(int quizID)
     return 0;  
 }
 
-public int getQuizId()
+public int getQuizId() throws SQLException
 {
     try(Connection conn = db.connectToDatabase()){
         int result =0;
