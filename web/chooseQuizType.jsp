@@ -18,7 +18,7 @@
       <%
             LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
             String contextPath = request.getContextPath();
-            Quiz quiz = (Quiz) request.getAttribute("Quiz");
+            Quiz quiz = (Quiz) session.getAttribute("Quiz");
         %>
         
    

@@ -38,6 +38,14 @@
             <br>
             <label for="rePassword"> Confirm Password: </label>
                 <input id="rePassword" name="rePassword" style="width: 30%;" type="password">
+                <br>
+                
+               
+                <label for="profileImage" style="display: block; margin-right: 80%;"> Upload Profile Image: </label>
+                 <div style="margin-left: 45%; margin-top: 1%;">
+                <input id="profileImage" name="profileImage" style="width: 30%; display: block;" type="file" accept=".jpg, .jpeg, .png">
+                </div>
+                
             <% 
                 if(lg.isStaff()){
                     %>
@@ -50,13 +58,18 @@
                 }
             %>
             <br>
-            <label for="profileImage"> Upload Profile Image: </label>
-                <input id="profileImage" name="profileImage" style="width: 30%;" type="file" accept=".jpg, .jpeg, .png">
+            
             <br>
             <br>
             <br>
                 <input type="submit" style="float-left: 50%;" value="Submit">
-            
+                <button10 onclick="goBack()">Return to Portal</button10>
+                <script>
+                    function goBack() {
+                        window.history.back();
+                    
+                    }
+                    </script>
         </form>
             <br>
             <br>

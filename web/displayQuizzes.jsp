@@ -86,5 +86,14 @@
                 <br>
                 <br>
             </div>
+                <br>
+                <br>
+                 <button10 onclick="goBack()">Return to Portal</button10>
+                <script>
+                    function goBack() {
+                        window.history.back();
+                    
+                    }
+                    </script>
     </body>
 </html>

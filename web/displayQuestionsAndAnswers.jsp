@@ -161,20 +161,6 @@ function str_replace(haystack, needle, replacement) {
 }
 </script>
 <style type="text/css">
-body {
-	font-size:30px; 
-	font-family:Candara;
-}
-
-a {
-	color:#c00; 
-	text-decoration:none;
-}
-
-a:hover {
-	color:#f00; 
-	text-decoration:underline;
-}
 
 </style>
 </head>
