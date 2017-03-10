@@ -34,19 +34,19 @@ public class DisplayImage extends HttpServlet{
         int i = uri.lastIndexOf("/");
         String strID = uri.substring(i+1);
         int imageID = Integer.parseInt(strID);
-        System.out.println("Image ID: "+imageID);
         
-        String str = uri.substring(uri.indexOf("/") + 1, uri.lastIndexOf("/"));
+        String command = uri.substring(uri.indexOf("/") + 1, uri.lastIndexOf("/"));
+        command = command.substring(command.lastIndexOf("/") + 1);
         
         boolean isStaff = false;
         
-        if(str.contains("staff-img")){
+        if(command.matches("staff-img")){
             isStaff = true;
             displayProfileImage(isStaff, imageID, request, response);
-        } else if(str.contains("student-img")){
+        } else if(command.matches("student-img")){
             isStaff = false;
             displayProfileImage(isStaff, imageID, request, response);
-        } else if(str.contains("question-img")){
+        } else if(command.matches("question-img")){
             displayQuestionImage(imageID, request, response);
         }
     }

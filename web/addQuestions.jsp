@@ -7,32 +7,18 @@
 <%@page import="stores.LoggedIn"%>
 <%@page import="stores.Quiz"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ include file='cssStructure.jsp' %>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" type="text/css" href="styles.css" />
-        <title>Add Questions</title>
-    </head>
-     <%LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");%>
-   
-    <body bgcolor="d3dfeb">
-        <div class="navBar">
-            <ul>
-                <li><a href="index.jsp">QUIZ MASTER </a></li>
-             </ul>
-        </div>
-        <img src="logo123.png" width="115" style="position: absolute; left:0; top: 0;">
-        <img src="logo123.png" width="115" style="position: absolute; right:0; top: 0;">
-
+      
         <div class="navBar1">
             <ul>
-                <li><a> Create Quiz - Add Questions</a></li>
+                <li><a> Create Quiz</a></li>
             </ul>
-        </div>
-
+        </div><br><br>
         
-        <div class ="main">
+        <div class ="centerContent1">
             
             <% 
                     Quiz quiz = (Quiz) session.getAttribute("Quiz");
