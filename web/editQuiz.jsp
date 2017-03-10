@@ -38,6 +38,7 @@
             <input type="text" name="answerDesc" value="<%=ans.getAnswerDesc()%>" /> <br /><br />
             Supplementary Image: </br>
             <input id="media" name="media" style="width: 30%;" type="file" accept=".jpg, .jpeg, .png">
+            <a href="<%=request.getContextPath() + "/delete-media/" + ans.getQuestionID()%>">Delete Image</a>
             <br/><br/>
             <input type="hidden" name="QuizID" value="<%=ans.getQuizID()%>" />
             <input type="hidden" name="QuestionID" value="<%=ans.getQuestionID()%>" />

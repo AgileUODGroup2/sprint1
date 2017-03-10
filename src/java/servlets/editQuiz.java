@@ -25,7 +25,7 @@ import stores.Quiz;
  *
  * @author viivipursiainen
  */
-@WebServlet(urlPatterns = {"/edit", "/edit/*"})
+@WebServlet(urlPatterns = {"/edit", "/edit/*", "/delete/*", "/delete-media/*"})
 @MultipartConfig(maxFileSize = 16177216)
 public class editQuiz extends HttpServlet {
 
@@ -36,12 +36,25 @@ public class editQuiz extends HttpServlet {
         String strQuestionID = uri.substring(i+1);
         int questionID = Integer.parseInt(strQuestionID);
         
-        QuestionModel qm = new QuestionModel();
-        QuestionBank question = qm.getQuestion(questionID);
+        String command = uri.substring(uri.indexOf("/") + 1, uri.lastIndexOf("/"));
+        command = command.substring(command.lastIndexOf("/") + 1);
         
-        request.setAttribute("Question", question);
-        RequestDispatcher rd = request.getRequestDispatcher("/editQuiz.jsp");
-        rd.forward(request, response);
+        if(command.contains("edit")){
+            
+            QuestionModel qm = new QuestionModel();
+            QuestionBank question = qm.getQuestion(questionID);
+        
+            request.setAttribute("Question", question);
+            RequestDispatcher rd = request.getRequestDispatcher("/editQuiz.jsp");
+            
+            rd.forward(request, response);
+        } else if(command.matches("delete")){
+            // Insert code for deleting a Quiz (From question_bank and quiz tables)
+        } else if(command.matches("delete-media")){
+            QuizModel q = new QuizModel();
+            q.deleteMedia(questionID);
+            response.sendRedirect(request.getContextPath() + "/edit/" + questionID);
+        }
         
     }
     
@@ -89,7 +102,7 @@ public class editQuiz extends HttpServlet {
             qBank.setMedia(questionMedia);
             qBank.setHasMedia(true);
             editQuiz.updateQuestionMedia(questionID, questionMedia);
-        }
+        } //else if(questionMedia = null)
         
         response.sendRedirect(contextPath+"/displayQuestionsAndAnswers/"+quizID);
     }
