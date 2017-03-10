@@ -41,7 +41,8 @@
         <br>
         <div class="centerContent1">
         <form method="post" action="<%=request.getContextPath()%>/takeQuiz" style="display: inline-block; margin: auto; text-align: left;">
-        <%
+        
+            <%
             QuizModel quizModel = new QuizModel();
             java.util.LinkedList<QuestionBank> questionList = new java.util.LinkedList<>();
            
@@ -51,14 +52,11 @@
             //System.out.println("Counter: " + counter);
             questionList = quizModel.getQuestionsAndAnswers(quizID);
 
-            int i = 0;
+            int i = 1;
 
             if (questionList != null) {
-                        
-                        Iterator<QuestionBank> it = questionList.iterator();
-                    while(it.hasNext()) {
-                        i++;
-                        QuestionBank q = (QuestionBank) it.next();
+                  
+                        QuestionBank q = questionList.get(0);
             
 %> 
             
@@ -70,14 +68,7 @@
            
              
                  <h2><%=q.getQuestion()%></h2>
-                 <%
-                     System.out.println("Qestion - " + q.getQuestionID());
-                     if(q.HasMedia()){
-                 %><img src="<%=request.getContextPath() + "/question-img/" + q.getQuestionID()%>" width="200" style="display: inline-block;">
-                 <%
-                     }
-                 %>
-             <br>   
+                
              <input type="radio" name="answer<%=i%>" value="A"> <h8><%=q.getA()%></h8>
              <br>
              <input type="radio" name="answer<%=i%>" value="B"> <h8><%=q.getB()%></h8>
@@ -90,7 +81,8 @@
              
             
                  <%
-}}
+                 i++;
+}
 
 %>
 <input type="hidden" value="<%=i%>" name="counter">

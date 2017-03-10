@@ -9,11 +9,13 @@ import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 import models.QuizModel;
 import stores.QuestionBank;
 import stores.Quiz;
@@ -23,7 +25,7 @@ import stores.Quiz;
  * @author erincoey
  */
 @WebServlet(name ="addQuestions", urlPatterns = {"/addQuestions"})
-
+@MultipartConfig(maxFileSize = 16177216)
 public class addQuestions extends HttpServlet {
     
     @Override
@@ -40,6 +42,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
         String save = request.getParameter("save");
         String addQuestion = request.getParameter("addQuestion");
         String cancel = request.getParameter("cancel");
+        
         String question = request.getParameter("question");
         String answerA = request.getParameter("answerA");
         String answerB = request.getParameter("answerB");
@@ -47,6 +50,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
         String answerD = request.getParameter("answerD");
         String correctAnswer = request.getParameter("correctAnswer");
         String answerDesc = request.getParameter("answerDesc");
+        Part questionMedia = request.getPart("media");
         
         
         System.out.println("Question: "+question+" "+answerA+" "+answerB+" "+answerC+ " " + answerD+ " " + correctAnswer + " "+ answerDesc);
@@ -59,8 +63,8 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
                 HttpSession session = request.getSession();
                 java.util.LinkedList<QuestionBank> questionList = (java.util.LinkedList<QuestionBank>) session.getAttribute("QuestionBank");
 
-                String[] array;
-                array = new String[questionList.size()];
+                String[] array = new String[questionList.size()];
+                Part[] parts = new Part[questionList.size()];
 
                 System.out.println("LinkedList contains: ");
                    for(int i=0; i< questionList.size(); i++)
@@ -69,10 +73,15 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
                      System.out.println(result.getQuery());
 
                      array[i] = result.getQuery();
+                     if (result.getMedia() == null){
+                         parts[i] = null;
+                     } else {
+                         parts[i] = result.getMedia();
+                     }
 
                   }
                    QuizModel quizModel = new QuizModel();
-                   quizModel.addQuestion(array);
+                   quizModel.addQuestion(array, parts);
 
              }
             else if(question!=null)
@@ -91,6 +100,11 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
             questionBank.setD(answerD);
             questionBank.setCorrectAnswer(correctAnswer);
             questionBank.setAnswerDesc(answerDesc);
+            
+            if (questionMedia != null)
+            {
+                questionBank.setMedia(questionMedia);
+            }
 
             String test = questionBank.getQuestion();
             System.out.println("Test: "+ test);
@@ -111,8 +125,8 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
             
                 
 
-                String[] array;
-                array = new String[questionList.size()];
+                String[] array = new String[questionList.size()];
+                Part[] parts = new Part[questionList.size()];
 
                 System.out.println("LinkedList contains: ");
                    for(int i=0; i< questionList.size(); i++)
@@ -121,10 +135,15 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
                      System.out.println(result.getQuery());
 
                      array[i] = result.getQuery();
+                     if (result.getMedia() == null){
+                         parts[i] = null;
+                     } else {
+                         parts[i] = result.getMedia();
+                     }
 
                   }
                    QuizModel quizModel = new QuizModel();
-                   quizModel.addQuestion(array);
+                   quizModel.addQuestion(array, parts);
                    System.out.println("Quiz ID: " +quizID);
                    quizModel.updateQuizStatus(quizID);
                    quizModel.UpdateQuestionAmmount(quizID);
@@ -141,8 +160,8 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
                 HttpSession session = request.getSession();
                 java.util.LinkedList<QuestionBank> questionList = (java.util.LinkedList<QuestionBank>) session.getAttribute("QuestionBank");
 
-                String[] array;
-                array = new String[questionList.size()];
+                String[] array = new String[questionList.size()];
+                Part[] parts = new Part[questionList.size()];
 
                 System.out.println("LinkedList contains: ");
                    for(int i=0; i< questionList.size(); i++)
@@ -151,10 +170,15 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
                      System.out.println(result.getQuery());
 
                      array[i] = result.getQuery();
+                     if (result.getMedia() == null){
+                         parts[i] = null;
+                     } else {
+                         parts[i] = result.getMedia();
+                     }
 
                   }
                    QuizModel quizModel = new QuizModel();
-                   quizModel.addQuestion(array);
+                   quizModel.addQuestion(array, parts);
              }
             else if(question!=null)
             {
@@ -172,6 +196,10 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
             questionBank.setD(answerD);
             questionBank.setCorrectAnswer(correctAnswer);
             questionBank.setAnswerDesc(answerDesc);
+            if (questionMedia != null)
+            {
+                questionBank.setMedia(questionMedia);
+            }
 
             String test = questionBank.getQuestion();
             System.out.println("Test: "+ test);
@@ -192,9 +220,9 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
             
                 
 
-                String[] array;
-                array = new String[questionList.size()];
-
+                String[] array = new String[questionList.size()];
+                Part[] parts = new Part[questionList.size()];
+                
                 System.out.println("LinkedList contains: ");
                    for(int i=0; i< questionList.size(); i++)
                    {
@@ -202,10 +230,15 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
                      System.out.println(result.getQuery());
 
                      array[i] = result.getQuery();
+                     if (result.getMedia() == null){
+                         parts[i] = null;
+                     } else {
+                         parts[i] = result.getMedia();
+                     }
 
                   }
                    QuizModel quizModel = new QuizModel();
-                   quizModel.addQuestion(array);
+                   quizModel.addQuestion(array, parts);
                    quizModel.UpdateQuestionAmmount(quizID);
             }
             
@@ -230,6 +263,10 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
             questionBank.setD(answerD);
             questionBank.setCorrectAnswer(correctAnswer);
             questionBank.setAnswerDesc(answerDesc);
+            if (questionMedia != null)
+            {
+                questionBank.setMedia(questionMedia);
+            }
 
             String test = questionBank.getQuestion();
             System.out.println("Test: "+ test);

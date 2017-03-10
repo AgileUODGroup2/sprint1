@@ -22,8 +22,9 @@ import stores.Quiz;
  *
  * @author erincoey
  */
-@WebServlet(name = "takeQuiz", urlPatterns = {"/takeQuiz/*"})
-public class takeQuiz extends HttpServlet{
+@WebServlet(name = "chooseQuizType", urlPatterns = {"/chooseQuizType/*"})
+public class chooseQuizType extends HttpServlet{
+
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -40,30 +41,7 @@ public class takeQuiz extends HttpServlet{
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
-        String counter = request.getParameter("counter");
-        int i = Integer.parseInt(counter);
-        String path = request.getContextPath();
-        
-        String[] parameters = new String[i];
-
-        for(int x=1; x<=i; x++)
-        {
-            String parameter = "answer"+x;
-            parameters[x-1] = parameter;
-            System.out.println(parameter);
-        }
-        for(int x=1; x<=i; x++)
-        {
-            System.out.println(parameters[x-1]);
-            System.out.println(request.getParameter(parameters[x-1]));
-        }
-        
-        
-        
-        response.sendRedirect(path+"/studentPortal.jsp");
-       
-      
+ 
     }
    private void display(int quizID, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -90,11 +68,13 @@ public class takeQuiz extends HttpServlet{
         Quiz quiz = qm.getQuizDetails(quizID);
       
             
-            RequestDispatcher rd = request.getRequestDispatcher("/takeQuiz.jsp"); 
+            RequestDispatcher rd = request.getRequestDispatcher("/chooseQuizType.jsp"); 
             
             request.setAttribute("Quiz", quiz);
             rd.forward(request, response);
         
     }
     
+
+ 
 }

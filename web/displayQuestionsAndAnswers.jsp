@@ -24,8 +24,8 @@
  
     </head>
     <body bgcolor="d3dfeb">
-    <img src="/AC31007Quiz/logo123.png" width="115px" style="position: absolute; left:0; top: 0;">
-        <img src="/AC31007Quiz/logo123.png" width="115px" style="position: absolute; right:0; top: 0;">
+    <img src="<%=request.getContextPath() +"/logo123.png"%>" width="115" style="position: absolute; left:0; top: 0;">
+        <img src="<%=request.getContextPath() +"/logo123.png"%>" width="115" style="position: absolute; right:0; top: 0;">
 
         <div class="navBar">
             <ul>
@@ -62,7 +62,6 @@
             <br>
             <br>
             <br>
-        <a href="editProfile.jsp"><button id="fourth-button">Edit Quiz</button></a>
         
         </div>
         <div id="cc3">
@@ -76,6 +75,7 @@
                         QuestionBank q = (QuestionBank) it.next();
 %> 
                     <h2> Question: <%=q.getQuestion() %>  <a href="<%=contextPath%>/edit/<%=q.getQuestionID()%>">EDIT</a></h2>
+                    <img src="<%=contextPath + "/question-img/" + q.getQuestionID()%>" width="200" style="display: inline-block;">
                     <h4>A: <%=q.getA()%></h4>
                     <h4>B: <%=q.getB()%></h4>
                     <h4>C: <%=q.getC()%></h4>
