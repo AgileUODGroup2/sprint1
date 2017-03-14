@@ -6,6 +6,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.util.Calendar;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import models.AttemptModel;
 import models.QuestionModel;
 import models.QuizModel;
 import models.ResultModel;
@@ -44,7 +47,13 @@ public class takeQuiz extends HttpServlet{
         
         String counter = request.getParameter("counter");
         int i = Integer.parseInt(counter);
+        int quizID = Integer.parseInt(request.getParameter("quizID"));
         String path = request.getContextPath();
+        
+        HttpSession session = request.getSession();
+        LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
+        int matricNo = lg.getID();
+        Date date = new Date(Calendar.getInstance().getTime().getTime());
         
         String[] studentAnswers = new String[i];
         int[] qIDs = new int[i];
@@ -56,24 +65,35 @@ public class takeQuiz extends HttpServlet{
         
         int score = calculateResult(studentAnswers, qIDs);
         
-        // record results into student_quiz and attempts
+        System.out.println("Score: "+score);
+        
+        QuizModel qm = new QuizModel();
+        qm.addNewAttempt(matricNo, quizID, score, date);
+        
+        AttemptModel am = new AttemptModel();
+        am.addNewAttempt(matricNo, quizID, date, score);
         
         response.sendRedirect(path+"/studentPortal.jsp");
-       
-      
     }
     
     private int calculateResult(String[] studentAnswers, int[] quizIDs) {
         QuestionModel qm = new QuestionModel();
         int questions = quizIDs.length;
+        System.out.println("Number of questions: "+questions);
         String[] rightAnswers = qm.getRightAnswers(quizIDs);
         int right = 0;
         for (int i=0; i<questions;i++) {
             if(studentAnswers[i].equals(rightAnswers[i])) {
                 right ++;
+                System.out.println("How many right: "+right);
             }
         }
-        return right/questions;
+        System.out.println("Division: "+(double)right/questions);
+        Double answer = new Double((right/questions) * 100);
+        System.out.println("Double: "+answer);
+        int answer2 = answer.intValue();
+        System.out.println("Int: "+answer2);
+        return answer2;
     }
    private void display(int quizID, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

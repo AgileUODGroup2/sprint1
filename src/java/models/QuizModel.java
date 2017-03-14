@@ -8,6 +8,7 @@ package models;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
+import java.sql.Date;
 import java.util.Collections;
 import java.sql.PreparedStatement;
 import lib.database.DatabaseConnection;
@@ -379,6 +380,46 @@ public void updateQuizStatus(int quizID)
     catch(SQLException err){
             System.out.println(err.getMessage());
     }
+}
+
+public void addNewAttempt(int matricNo, int quizID, int score, Date date) {
+    
+    String query = null;
+    if (check(matricNo,quizID).equals("Completed")) {
+        query = "UPDATE student_quiz SET Score=?, Date_Completed=?, Attempted_Count=Attempted_Count+1 WHERE Matriculation_Number=? AND Quiz_ID=?";
+    } else {
+        query = "UPDATE student_quiz SET Score=?, Date_Completed=?, Attempted_Count=Attempted_Count+1, Has_Completed='Completed' WHERE Matriculation_Number=? AND Quiz_ID=?";
+    }
+    
+    try (Connection conn = db.connectToDatabase();
+            PreparedStatement ps = conn.prepareStatement(query);) {
+        ps.setInt(1, score);
+        ps.setDate(2, date);
+        ps.setInt(3,matricNo);
+        ps.setInt(4, quizID);
+        ps.executeUpdate();
+    } catch (SQLException e) {
+        System.out.println(e.getMessage());
+    }
+}
+
+private String check(int matricNo, int quizID) {
+    String check = "SELECT Has_Completed from student_quiz WHERE Matriculation_Number=? AND Quiz_ID=?";
+    
+    try (Connection con = db.connectToDatabase();
+            PreparedStatement ps = con.prepareStatement(check);) {
+        ps.setInt(1,matricNo);
+        ps.setInt(2,quizID);
+        
+        try (ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                return rs.getString("Has_Completed");
+            }
+        }
+    } catch (SQLException e) {
+        System.out.println(e.getMessage());
+    }
+    return null;
 }
  
 }

@@ -27,24 +27,25 @@ public class user {
 
          String checkStaff = "select * from staff where Staff_ID=? and Password=?";
          String checkStudent = "select * from student where Matriculation_Number=? and Password=?";
-         try(Connection conn = db.connectToDatabase()){       
-            PreparedStatement ps = conn.prepareStatement(checkStaff);
-            PreparedStatement ps2 = conn.prepareStatement(checkStudent);
+         try(Connection conn = db.connectToDatabase();
+                 PreparedStatement ps = conn.prepareStatement(checkStaff);
+                 PreparedStatement ps2 = conn.prepareStatement(checkStudent);){
             ps.setString(1,username);
             ps.setString(2,password);
             ps2.setString(1,username);
             ps2.setString(2,password);
-            ResultSet theResult = ps.executeQuery();
-            ResultSet theResult2 = ps2.executeQuery();
-            if(theResult.next()){
-                System.out.println("Staff logged in");
-                return "Staff";
-            } else if(theResult2.next()) {
-                System.out.println("Student logged in");
-                return"Student";
-            } else {
-                System.out.println("No one logged in");
-                return "failed";
+            try (ResultSet theResult = ps.executeQuery();
+                    ResultSet theResult2 = ps2.executeQuery();) {
+                if(theResult.next()){
+                    System.out.println("Staff logged in");
+                    return "Staff";
+                } else if(theResult2.next()) {
+                    System.out.println("Student logged in");
+                    return"Student";
+                } else {
+                    System.out.println("No one logged in");
+                    return "failed";
+                }
             }
          }
          catch(SQLException e) {
@@ -63,9 +64,8 @@ public class user {
             query = "UPDATE student SET First_Name = ? WHERE Matriculation_Number = ?";
         }
         
-        try (Connection con = db.connectToDatabase(); ) {
-
-            PreparedStatement ps = con.prepareStatement(query);
+        try (Connection con = db.connectToDatabase();
+                PreparedStatement ps = con.prepareStatement(query);) {
 
             ps.setString(1, firstName);
             ps.setInt(2, userID);
@@ -87,9 +87,8 @@ public class user {
             query = "UPDATE student SET Last_Name = ? WHERE Matriculation_Number = ?";
         }
         
-        try (Connection con = db.connectToDatabase(); ) {
-
-            PreparedStatement ps = con.prepareStatement(query);
+        try (Connection con = db.connectToDatabase();
+                PreparedStatement ps = con.prepareStatement(query);) {
 
             ps.setString(1, lastName);
             ps.setInt(2, userID);
@@ -111,9 +110,8 @@ public class user {
             query = "UPDATE student SET Password = ? WHERE Matriculation_Number = ?";
         }
         
-        try (Connection con = db.connectToDatabase(); ) {
-
-            PreparedStatement ps = con.prepareStatement(query);
+        try (Connection con = db.connectToDatabase();
+                PreparedStatement ps = con.prepareStatement(query); ) {
 
             ps.setString(1, password);
             ps.setInt(2, userID);
@@ -127,7 +125,7 @@ public class user {
     
     public void updateProfileImage(boolean isStaff, int userID, Part profileImage) throws IOException{
         
-        Connection con = db.connectToDatabase();
+        
         
         String query = "";
         
@@ -139,10 +137,9 @@ public class user {
         
         // Java image to MySQL database query based on code found here: http://www.thejavaprogrammer.com/save-retrieve-image-mysql-database-using-servlet-jsp/
         
-        try{
+        try(Connection con = db.connectToDatabase();
+                PreparedStatement ps = con.prepareStatement(query);){
 
-            PreparedStatement ps = con.prepareStatement(query);
-            
             if(profileImage != null){
                 InputStream is = profileImage.getInputStream();
                 ps.setBlob(1, is);
@@ -151,20 +148,10 @@ public class user {
             }else{
                 ps.setNull(1, java.sql.Types.BLOB);
                 ps.setInt(2, userID);
-                
                 ps.executeUpdate();
             }
-
         } catch (SQLException e) {
             System.out.print(e.getMessage());
-        } finally {
-            if(con != null){
-                try{
-                    con.close();
-                } catch(Exception e){
-                    System.out.print(e.getMessage());
-                }
-            }
         }
         
     }

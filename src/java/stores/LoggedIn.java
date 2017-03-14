@@ -16,6 +16,7 @@ public class LoggedIn {
     boolean staff;
     String firstName;
     String lastName;
+    int matricNo;
     
     public void LoggedIn(){
         
