@@ -37,8 +37,7 @@ public class takeQuiz extends HttpServlet{
         int i = uri.lastIndexOf("/");
         String strQuizID = uri.substring(i+1);
         int quizID = Integer.parseInt(strQuizID);
-        System.out.println("Quiz ID: "+quizID);
-            display(quizID, request, response);
+        display(quizID, request, response);
 
     }
     
@@ -63,21 +62,29 @@ public class takeQuiz extends HttpServlet{
             qIDs[x-1] = Integer.parseInt(request.getParameter("questionID"+x));
         }
         
-        int score = calculateResult(studentAnswers, qIDs);
+        QuestionModel questionM = new QuestionModel();
+        String[] rightAnswers = questionM.getRightAnswers(qIDs);
+        
+        int score = calculateResult(studentAnswers, rightAnswers);
         
         QuizModel qm = new QuizModel();
         qm.addNewAttempt(matricNo, quizID, score, date);
+        Quiz quiz = qm.getQuizDetails(quizID);
         
         AttemptModel am = new AttemptModel();
         am.addNewAttempt(matricNo, quizID, date, score);
         
-        response.sendRedirect(path+"/studentPortal.jsp");
+        request.setAttribute("StudentAnswers",studentAnswers);
+        request.setAttribute("RightAnswers",rightAnswers);
+        request.setAttribute("QuestionIDs",qIDs);
+        request.setAttribute("Quiz", quiz);
+        
+        RequestDispatcher rd = request.getRequestDispatcher("/showAnswers.jsp");
+        rd.forward(request, response);
     }
     
-    private int calculateResult(String[] studentAnswers, int[] quizIDs) {
-        QuestionModel qm = new QuestionModel();
-        int questions = quizIDs.length;
-        String[] rightAnswers = qm.getRightAnswers(quizIDs);
+    private int calculateResult(String[] studentAnswers, String[] rightAnswers) {
+        int questions = rightAnswers.length;
         int right = 0;
         for (int i=0; i<questions;i++) {
             if(studentAnswers[i].equals(rightAnswers[i])) {
@@ -92,30 +99,14 @@ public class takeQuiz extends HttpServlet{
         ResultModel rm = new ResultModel();
         QuizModel qm = new QuizModel();
         
-        HttpSession session = request.getSession(true);
+        HttpSession session = request.getSession();
         LoggedIn lg =(LoggedIn)session.getAttribute("LoggedIn");
         
-//        String button = request.getParameter("button");
-//        if (button=="One Question at a time")
-//        {
-//            test = "oneQuestion";
-//            System.out.println("test: " + test);
-//            request.setAttribute("test", test);
-//        }
-//        else if(button == "All questions")
-//        {
-//            test = "allQuestions";
-//            System.out.println("test: " + test);
-//            request.setAttribute("test", test);
-//        }
         Quiz quiz = qm.getQuizDetails(quizID);
-      
-            
-            RequestDispatcher rd = request.getRequestDispatcher("/takeQuiz.jsp"); 
-            
-            request.setAttribute("Quiz", quiz);
-            rd.forward(request, response);
         
+        RequestDispatcher rd = request.getRequestDispatcher("/takeQuiz.jsp");
+        request.setAttribute("Quiz", quiz);
+        rd.forward(request, response);
     }
     
 }

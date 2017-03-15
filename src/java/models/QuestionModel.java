@@ -28,9 +28,9 @@ public class QuestionModel {
         String query = "SELECT * FROM question_bank WHERE Question_ID = ?";
         
         try (Connection conn = db.connectToDatabase();
-                PreparedStatement ps = conn.prepareStatement(query)) {
+                PreparedStatement ps = conn.prepareStatement(query);) {
             ps.setInt(1,questionID);
-            try (ResultSet rs = ps.executeQuery()) {
+            try (ResultSet rs = ps.executeQuery();) {
                 while(rs.next()) {
                     question.setQuizID(rs.getInt("Quiz_ID"));
                     question.setQuestion(rs.getString("Question"));
