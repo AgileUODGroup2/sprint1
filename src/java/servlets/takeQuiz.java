@@ -65,8 +65,6 @@ public class takeQuiz extends HttpServlet{
         
         int score = calculateResult(studentAnswers, qIDs);
         
-        System.out.println("Score: "+score);
-        
         QuizModel qm = new QuizModel();
         qm.addNewAttempt(matricNo, quizID, score, date);
         
@@ -79,27 +77,20 @@ public class takeQuiz extends HttpServlet{
     private int calculateResult(String[] studentAnswers, int[] quizIDs) {
         QuestionModel qm = new QuestionModel();
         int questions = quizIDs.length;
-        System.out.println("Number of questions: "+questions);
         String[] rightAnswers = qm.getRightAnswers(quizIDs);
         int right = 0;
         for (int i=0; i<questions;i++) {
             if(studentAnswers[i].equals(rightAnswers[i])) {
                 right ++;
-                System.out.println("How many right: "+right);
             }
         }
-        System.out.println("Division: "+(double)right/questions);
-        Double answer = new Double((right/questions) * 100);
-        System.out.println("Double: "+answer);
-        int answer2 = answer.intValue();
-        System.out.println("Int: "+answer2);
-        return answer2;
+        int answer = right*100/questions;
+        return answer;
     }
    private void display(int quizID, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         ResultModel rm = new ResultModel();
         QuizModel qm = new QuizModel();
-//        String test;
         
         HttpSession session = request.getSession(true);
         LoggedIn lg =(LoggedIn)session.getAttribute("LoggedIn");
