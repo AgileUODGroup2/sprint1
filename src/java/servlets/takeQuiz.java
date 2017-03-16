@@ -95,7 +95,7 @@ public class takeQuiz extends HttpServlet{
         qm.addNewAttempt(matricNo, quizID, score, date);
         Quiz quiz = qm.getQuizDetails(quizID);
         
-        AttemptModel am = new AttemptModel();
+         AttemptModel am = new AttemptModel();
         am.addNewAttempt(matricNo, quizID, date, score);
         
         request.setAttribute("StudentAnswers",studentAnswers);
@@ -119,6 +119,7 @@ public class takeQuiz extends HttpServlet{
         int answer = right*100/questions;
         return answer;
     }
+    
    private void display(int quizID, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         ResultModel rm = new ResultModel();

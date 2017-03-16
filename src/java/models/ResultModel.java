@@ -73,7 +73,7 @@ public class ResultModel {
         }
         return results;
     }
-    
+     
     public java.util.LinkedList<Result> getQuizResult(int matriculationNo, int quizID) {
         java.util.LinkedList<Result> studentResults = new java.util.LinkedList<>();
         String query = "SELECT * FROM attempts WHERE Quiz_ID = ? AND Matriculation_Number = ? ORDER BY AttemptNo DESC";
