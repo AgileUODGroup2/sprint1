@@ -43,16 +43,12 @@ public class takeQuiz extends HttpServlet{
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
         String counter = request.getParameter("counter");
         int i = Integer.parseInt(counter);
-        int quizID = Integer.parseInt(request.getParameter("quizID"));
-        String path = request.getContextPath();
         
         HttpSession session = request.getSession();
         LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
         int matricNo = lg.getID();
-        Date date = new Date(Calendar.getInstance().getTime().getTime());
         
         String[] studentAnswers = new String[i];
         int[] qIDs = new int[i];
@@ -61,6 +57,34 @@ public class takeQuiz extends HttpServlet{
             studentAnswers[x-1] = request.getParameter("answer"+x);
             qIDs[x-1] = Integer.parseInt(request.getParameter("questionID"+x));
         }
+        
+        String submit = request.getParameter("submit");
+        if (submit.equals("Save")) {
+            save(request,response,studentAnswers,qIDs, matricNo);
+        } else {
+            submit(request,response,studentAnswers,qIDs, matricNo);
+        }
+    }
+    
+    private void save(HttpServletRequest request, HttpServletResponse response, String[] studentAnswers, int[] qIDs, int matricNo) throws ServletException, IOException {
+        QuestionModel questionM = new QuestionModel();
+        
+        for (int j=0; j<studentAnswers.length;j++) {
+            if (studentAnswers[j] != null) {
+                questionM.storeAnswer(studentAnswers[j],qIDs[j],matricNo);
+            }
+        }
+        
+        int quizID = Integer.parseInt(request.getParameter("quizID"));
+        QuizModel qm = new QuizModel();
+        qm.updateStudentQuizStatus(matricNo, quizID, "Incomplete");
+        RequestDispatcher rd = request.getRequestDispatcher("/studentPortal.jsp");
+        rd.forward(request, response);
+    }
+    
+    private void submit(HttpServletRequest request, HttpServletResponse response, String[] studentAnswers, int[] qIDs, int matricNo) throws ServletException, IOException {
+        int quizID = Integer.parseInt(request.getParameter("quizID"));
+        Date date = new Date(Calendar.getInstance().getTime().getTime());
         
         QuestionModel questionM = new QuestionModel();
         String[] rightAnswers = questionM.getRightAnswers(qIDs);
@@ -88,7 +112,7 @@ public class takeQuiz extends HttpServlet{
         int questions = rightAnswers.length;
         int right = 0;
         for (int i=0; i<questions;i++) {
-            if(studentAnswers[i].equals(rightAnswers[i])) {
+            if(studentAnswers[i] != null && studentAnswers[i].equals(rightAnswers[i])) {
                 right ++;
             }
         }

@@ -366,16 +366,34 @@ public java.util.LinkedList<StudentQuiz> orderByDate(int matricNo, String table)
     return getStudentQuizzes(query, matricNo);
 }
 
-public void updateQuizStatus(int quizID)
+public void updateQuizStatus(int quizID, String status)
 {
     try(Connection conn = db.connectToDatabase()){
-        String query = "UPDATE quiz set Quiz_Status = 'Completed' WHERE Quiz_ID = ?";
+        String query = "UPDATE quiz set Quiz_Status = ? WHERE Quiz_ID = ?";
         
         PreparedStatement preparedStmt = conn.prepareStatement(query);
-       
-        preparedStmt.setInt(1,quizID);
+        
+        preparedStmt.setString(1,status);
+        preparedStmt.setInt(2,quizID);
         
         preparedStmt.executeUpdate();
+    }
+    catch(SQLException err){
+            System.out.println(err.getMessage());
+    }
+}
+
+public void updateStudentQuizStatus(int matricNo, int quizID, String status) {
+    String query = "UPDATE student_quiz set Has_Completed = ? WHERE Quiz_ID = ? and Matriculation_Number=?";
+    
+    try(Connection conn = db.connectToDatabase();
+            PreparedStatement ps = conn.prepareStatement(query);){
+        
+        ps.setString(1,status);
+        ps.setInt(2,quizID);
+        ps.setInt(3,matricNo);
+        
+        ps.executeUpdate();
     }
     catch(SQLException err){
             System.out.println(err.getMessage());

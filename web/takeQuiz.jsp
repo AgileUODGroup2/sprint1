@@ -94,7 +94,7 @@
 %>
 <input type="hidden" value="<%=i%>" name="counter">
 <input type="hidden" value="<%=quiz.getQuizID()%>" name="quizID" />
-<input type="submit" value="Submit" style="margin: auto;">
+<input type="submit" value="Submit" name="submit" style="margin: auto;"> <input type="submit" value="Save" name="submit" />
  </form>
 <br>
 <br>
