@@ -50,14 +50,18 @@ public class chooseQuizType extends HttpServlet{
         QuizModel qm = new QuizModel();
         Quiz quiz = qm.getQuizDetails(quizID);
         
-            
             RequestDispatcher rd = request.getRequestDispatcher("/chooseQuizType.jsp"); 
             quiz.setCounter(0);
             HttpSession session = request.getSession();
             
-            session.setAttribute("Quiz", quiz);
-            rd.forward(request, response);
+            int i = quiz.getNumberOfQuestions();
+            String[] studentAnswers = new String[i];
+            int[] qIDs = new int[i];
         
+            session.setAttribute("Quiz", quiz);
+            session.setAttribute("StudentAnswers", studentAnswers);
+            session.setAttribute("QuestionIDs", qIDs);
+            rd.forward(request, response);
     }
     
 
