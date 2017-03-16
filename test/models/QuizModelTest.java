@@ -48,7 +48,6 @@ public class QuizModelTest {
     
     @Before
     public void setUp() {
-        //QuizModel qm = new QuizModel();
         
         
     }
@@ -180,7 +179,7 @@ public class QuizModelTest {
         
         boolean state;
         Quiz q = new Quiz();
-        
+        qm.getQuizNumberOfQuestions(1);
         
         System.out.println("\nTest: Get Number of Question in a quiz");    
            
@@ -218,7 +217,7 @@ public class QuizModelTest {
     * Test of to get Quiz ID
     */ 
     @Test
-    public void testGetQuizID() throws SQLException {
+    public void testGetQuizID()  {
         
         int count = 0;
         int result = 18;
@@ -340,23 +339,46 @@ public class QuizModelTest {
                     System.out.println("Module ID: " + q.getModuleID());          
                 }
         }
-    System.out.println("Count 1:  " + archivedTest[0]);      
-    quizID1 = ( 8 == archivedTest[0]);
-    System.out.println("quizID1: " + quizID1);
-    System.out.println("Count 2:  " + archivedTest[1]);  
-    quizID2 = ( 25 == archivedTest[1]);
-    System.out.println("quizID2: " + quizID2);
+     System.out.println("Count 1:  " + archivedTest[0]);      
+     quizID1 = ( 8 == archivedTest[0]);
+     System.out.println("quizID1: " + quizID1);
+     System.out.println("Count 2:  " + archivedTest[1]);  
+     quizID2 = ( 25 == archivedTest[1]);
+     System.out.println("quizID2: " + quizID2);
     
-    if (quizID1 == quizID2){
+     if (quizID1 == quizID2){
         expected = true;
         
-    }
-    else {
+     }
+     else {
         expected = false; 
-    }
-    assertEquals("Should equal true", expected, result);
-    System.out.println(" ");
+     }
+     assertEquals("Should equal true", expected, result);
+     System.out.println(" ");
     
+   }
+    
+    /**
+     * Test for getQuizDetails
+     */
+    @Test
+    public void testGetQuizDetails(){
+        System.out.println("\nTest: Get Quiz Details");
+        
+        boolean QuizID, ModuleID, DateCreated, QuizName, NumberOfQuestions, Status, Quiz, StaffID; 
+            
+        Quiz q =  qm.getQuizDetails(1);
+        
+        System.out.println("Quiz ID: "+q.getQuizID());
+        System.out.println("Module ID: "+q.getModuleID());
+        System.out.println("Date Created: "+q.getDateCreated()); 
+        System.out.println("Quiz Name: "+q.getQuizName());
+        System.out.println("Number of questions: "+q.getNumberOfQuestions());
+        System.out.println("Status: "+q.getStatus());
+        System.out.println("Quiz ID: "+q.getQuizID());
+        System.out.println("Staff ID: "+q.getStaffID());
+                
+           
     }
 }
 
