@@ -69,9 +69,30 @@
              
                  <h2><%=q.getQuestion()%></h2>
                  <%
-                     System.out.println("Question - " + q.getQuestionID());
                      if(q.HasMedia()){
-                 %><img src="<%=request.getContextPath() + "/question-img/" + q.getQuestionID()%>" width="200" style="display: inline-block;">
+                         //Adapted source - https://www.w3schools.com/howto/howto_css_modal_images.asp
+                 %>
+                 
+                 <img class="qImage" id="<%="img" + q.getQuestionID()%>" src="<%=request.getContextPath() + "/question-img/" + q.getQuestionID()%>" width="200" style="display: inline-block;">
+                
+                 <div id="myModal" class="modal">
+                        <span class="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
+                        <img class="modal-content" id="modalImage">
+                </div>
+                 
+                 <script>
+                    var modal = document.getElementById('myModal');
+                    var img = document.getElementById('<%="img" + q.getQuestionID()%>');
+                    var modalImg = document.getElementById("modalImage");
+                    img.onclick = function(){
+                        modal.style.display = "block";
+                        modalImg.src = this.src;
+                    }
+                    var span = document.getElementsByClassName("close")[0];
+                    span.onclick = function() {
+                      modal.style.display = "none";
+                    }
+                 </script>
                  <%
                      }
                  %>
