@@ -145,7 +145,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
                    QuizModel quizModel = new QuizModel();
                    quizModel.addQuestion(array, parts);
                    System.out.println("Quiz ID: " +quizID);
-                   quizModel.updateQuizStatus(quizID);
+                   quizModel.updateQuizStatus(quizID, "Completed");
                    quizModel.UpdateQuestionAmmount(quizID);
             }
             
