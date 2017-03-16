@@ -78,6 +78,7 @@ public class takeQuiz extends HttpServlet{
         request.setAttribute("RightAnswers",rightAnswers);
         request.setAttribute("QuestionIDs",qIDs);
         request.setAttribute("Quiz", quiz);
+        request.setAttribute("Score", score);
         
         RequestDispatcher rd = request.getRequestDispatcher("/showAnswers.jsp");
         rd.forward(request, response);

@@ -43,6 +43,8 @@
         <br>
         <br>
         <div class="centerContent1">
+            
+            <h1> Your Score is <%=request.getAttribute("Score")%> </h1>
         
         <%
             QuestionModel qm = new QuestionModel();
