@@ -17,8 +17,9 @@
         <link rel="stylesheet" type="text/css" href="/AC31007Quiz/styles.css">
         <title>Take Quiz</title>
     </head>
-      <%
-           Quiz quiz = (Quiz) session.getAttribute("Quiz");
+        <%
+            Quiz quiz = (Quiz) session.getAttribute("Quiz");
+            String[] studentAnswers = (String[]) session.getAttribute("StudentAnswers");
         %>
         
    
@@ -45,50 +46,97 @@
             QuizModel quizModel = new QuizModel();
             java.util.LinkedList<QuestionBank> questionList = new java.util.LinkedList<>();
            
+            //ID of current quiz
             int quizID = quiz.getQuizID();
+            
+            //numbers of questions in current quiz
             int numOfQuestions = quiz.getNumberOfQuestions();
-            int counter = quiz.getCounter();
-            System.out.println("Counter: " + counter);
+            
+            //current question the student is on
+            int questionNumber = quiz.getCounter();
+            
+            //return full list of questions
             questionList = quizModel.getQuestionsAndAnswers(quizID);
-
-            int x = 1;
-
+            
             if (questionList != null) {
-                  
-                        QuestionBank q = questionList.get(counter);
+                
+                QuestionBank q = questionList.get(questionNumber);
+                String sAnswer = studentAnswers[questionNumber];
+                System.out.println("The students answer for this question is: " + sAnswer);
+            %>
             
+                <br>
+
+                <h2><%=q.getQuestion()%></h2>
+                <input type ="hidden" name="quizID" value="<%=quizID%>">
+                <input type ="hidden" name="questionNo" value="<%=questionNumber%>">
+                <input type ="hidden" name="numOfQuestions" value="<%=numOfQuestions%>">
+
+                <%if(sAnswer == "A"){%>
+                    <%System.out.println(sAnswer + " Doesn't equal A");%>
+                    <input type="radio" name="answer" value="A" checked> <h8><%=q.getA()%></h8>
+                    <br>
+                <%}else{%>
+                    <input type="radio" name="answer" value="A"> <h8><%=q.getA()%></h8>
+                    <br>
+                <%}%>
+
+                <%if(sAnswer == "B"){%>
+                    <input type="radio" name="answer" value="B" checked> <h8><%=q.getB()%></h8>
+                    <br>
+                <%}else{%>
+                    <input type="radio" name="answer" value="B"> <h8><%=q.getB()%></h8>
+                    <br>
+                <%}%>
+
+                <%if(sAnswer == "C"){%>
+                    <input type="radio" name="answer" value="C" checked> <h8><%=q.getC()%></h8>
+                    <br>
+                <%}else{%>
+                    <input type="radio" name="answer" value="C"> <h8><%=q.getC()%></h8>
+                    <br>
+                <%}%>
+
+                <%if(sAnswer == "D"){%>
+                    <input type="radio" name="answer" value="D" checked> <h8><%=q.getD()%></h8>
+                    <br>
+                <%}else{%>
+                    <input type="radio" name="answer" value="D"> <h8><%=q.getD()%></h8>
+                    <br>
+                <%}%>
+
+                <%
+        }
 %> 
-            
-        
-            
-            
-            
-            <br>
-           
-             
-                 <h2><%=q.getQuestion()%></h2>
-             <input type ="hidden" name="quizID" value="<%=quizID%>">
-             <input type ="hidden" name="questionNo" value="<%=counter%>">
-             <input type="radio" name="answer<%=x%>" value="A"> <h8><%=q.getA()%></h8>
-             <br>
-             <input type="radio" name="answer<%=x%>" value="B"> <h8><%=q.getB()%></h8>
-             <br>
-             <input type="radio" name="answer<%=x%>" value="C"> <h8><%=q.getC()%></h8>
-             <br>
-             <input type="radio" name="answer<%=x%>" value="D"> <h8><%=q.getD()%></h8>
-             <br>
-              
-             
-            
-                 <%
-                 x++;
-}
-                //request.setAttribute("Quiz", quiz);
+<input type="hidden" value="<%=questionNumber%>" name="questionNumber">
+
+<%
+    System.out.println("question number = " + questionNumber + " numOfQuestions = " + numOfQuestions);
+    if(questionNumber == -1 + numOfQuestions)
+    {
+        %>
+        <input type="submit" value="Finish Quiz" name="Finish Quiz" style="margin: auto;">
+        <%
+    }
+    else
+    {
+        %>
+        <input type="submit" value="Next Question" name="next" style="margin: auto;">
+        <%
+    }
 %>
-<input type="hidden" value="<%=x%>" name="counter">
-<input type="submit" value="Next Question" style="margin: auto;">
 <br>
 <input type="submit" value="Save" style="margin: auto;">
+<br>
+<%
+        for(int i=0;i<numOfQuestions;i++){
+            %>
+            <input type="submit" value="<%=i%>" name="jumpQuestion" style="margin: auto;">
+            <%
+        }
+
+            System.out.println("");
+%>
  </form>
 <br>
 <br>

@@ -28,9 +28,9 @@ public class QuestionModel {
         String query = "SELECT * FROM question_bank WHERE Question_ID = ?";
         
         try (Connection conn = db.connectToDatabase();
-                PreparedStatement ps = conn.prepareStatement(query)) {
+                PreparedStatement ps = conn.prepareStatement(query);) {
             ps.setInt(1,questionID);
-            try (ResultSet rs = ps.executeQuery()) {
+            try (ResultSet rs = ps.executeQuery();) {
                 while(rs.next()) {
                     question.setQuizID(rs.getInt("Quiz_ID"));
                     question.setQuestion(rs.getString("Question"));
@@ -88,6 +88,41 @@ public class QuestionModel {
         //CHANGE THIS
         return null;
         
+    }
+    
+    public String[] getRightAnswers(int[] quizIDs) {
+        String[] rightAnswers = new String[quizIDs.length];
+        
+        String query = "SELECT Answer FROM question_bank WHERE Question_ID = ?";
+        
+        try (Connection conn = db.connectToDatabase()) {
+            for (int i=0; i<quizIDs.length; i++) {
+                PreparedStatement ps = conn.prepareStatement(query);
+                ps.setInt(1, quizIDs[i]);
+                
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    rightAnswers[i] = rs.getString("Answer");
+                }
+            }
+        } catch (SQLException e) {
+            e.getMessage();
+        }
+        
+        return rightAnswers;
+    }
+    
+    public void storeAnswer(String answer, int qID, int matricNo) {
+        String query = "INSERT INTO answer_store VALUES (?,?,?)";
+        try (Connection con = db.connectToDatabase();
+                PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setInt(1, matricNo);
+            ps.setInt(2,qID);
+            ps.setString(3, answer);
+            ps.execute();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
     
 }

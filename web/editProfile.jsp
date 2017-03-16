@@ -7,6 +7,7 @@
 <%@page import="stores.LoggedIn"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ include file='cssStructure.jsp' %>
+<link rel="stylesheet" type="text/css" href="styles.css">
 <!DOCTYPE html>
 <html>
     <head>

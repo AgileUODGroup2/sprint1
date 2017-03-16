@@ -4,6 +4,8 @@
     Author     : daniellewilliams
 --%>
 
+<%@page import="java.util.Arrays"%>
+<%@page import="java.util.stream.*"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.ListIterator"%>
 <%@page import="stores.StudentResult"%>
@@ -24,10 +26,11 @@
             
             Gson gsonResults = new Gson();
             
-            int[] tempDivide = {2, 6, 5, 3, 5, 5, 4, 3, 3, 4};
+            int[] tempDivide = {0, 1, 2, 3, 4, 4, 3, 2, 1, 0};
+            int totalStudents = Arrays.stream(tempDivide).sum();
             String json = gsonResults.toJson(tempDivide);
-            
             //String json = gsonResults.toJson(quiz.getGradeDivide());
+            //int totalStudents = Arrays.stream(quiz.getGradeDivide()).sum();
         %>
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -37,41 +40,52 @@
             var parsed = JSON.parse('<%=json%>');
             var arr = $.map(parsed, function(el) { return el});
 
-            google.charts.load('current', {'packages':['corechart']});
-            
+            google.charts.load('current', {'packages':['bar']});
             google.charts.setOnLoadCallback(drawChart);
             
             function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Grade (%)', 'Students'],
+                    ['0 - 10%', arr[0]],
+                    ['10 - 20%', arr[1]],
+                    ['20 - 30%', arr[2]],
+                    ['30 - 40%', arr[3]],
+                    ['40 - 50%', arr[4]],
+                    ['50 - 60%', arr[5]],
+                    ['60 - 70%', arr[6]],
+                    ['70 - 80%', arr[7]],
+                    ['80 - 90%', arr[8]],
+                    ['90 - 100%', arr[9]]
+                ]);
+                
+                var options = {
+                    chart: {
+                       title: 'Grade Distribution',
+                       subtitle: 'Percentage Grade for <%=totalStudents%> Students on Module: <%=quiz.getModuleID()%>',
+                    },
+                    width: 800,
+                    height: 800,
+                    backgroundColor:'#d3dfeb',
+                    chartArea: {
+                        backgroundColor:'#d3dfeb',
+                    },
+                    vAxis: {
+                        textStyle: {
+                            color: "#d3dfeb",
+                        },
+                        gridlines: {
+                            color: "#d3dfeb",
+                        },
+                        baselineColor: "#d3dfeb",
+                    },
+                };
+                
+                var chart = new google.charts.Bar(document.getElementById('chart_div'));
+                chart.draw(data, google.charts.Bar.convertOptions(options));
 
-              var data = new google.visualization.DataTable();
-              data.addColumn('string', 'Grade');
-              data.addColumn('number', 'Students');
-              data.addRows([
-                ['0 - 10%', arr[0]],
-                ['10 - 20%', arr[1]],
-                ['20 - 30%', arr[2]],
-                ['30 - 40%', arr[3]],
-                ['40 - 50%', arr[4]],
-                ['50 - 60%', arr[5]],
-                ['60 - 70%', arr[6]],
-                ['70 - 80%', arr[7]],
-                ['80 - 90%', arr[8]],
-                ['90 - 100%', arr[9]]
-              ]);
-
-              var options = {title:'Grade Distribution',
-                            backgroundColor:'#d3dfeb',
-                            colors:['#1c2888','#2b2b87','#3a2e87','#483187','#573486','#663785','#753b85','#843e84','#934184','#a14484'],
-                            fontName:'Verdana',
-                            pieSliceText:'value',
-                            pieHole:0.4,
-                            'width':800,
-                            'height':800,
-                            'chartArea':{'width':'100%','height':'80%'}};
-
-              var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-              chart.draw(data, options);
             }
+            
+            
     </script>
 
 

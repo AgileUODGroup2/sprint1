@@ -68,7 +68,7 @@
             <input type="hidden" value="studentcompleted" name="table" />
             <input type="hidden" value="<%=matricNo%>" name="MatricNo" />
         </form>
-        <a href="studentStats.jsp"><button id="fourth-button">View Stats</button></a>
+       
         <%
             } else if (type.equals("Incomplete Quizzes")) {
         %>
