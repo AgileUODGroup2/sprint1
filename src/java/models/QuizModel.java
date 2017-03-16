@@ -89,7 +89,7 @@ public int getQuizNumberOfQuestions(int quizID)
     return 0;  
 }
 
-public int getQuizId() throws SQLException
+public int getQuizId()
 {
     try(Connection conn = db.connectToDatabase()){
         int result =0;
