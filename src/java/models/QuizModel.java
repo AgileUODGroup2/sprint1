@@ -81,7 +81,7 @@ public int getQuizNumberOfQuestions(int quizID)
 
         ResultSet rs = ps.executeQuery();
         while (rs.next()){      
-        }
+        }        
         return result;
     }
     catch(SQLException err){

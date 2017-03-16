@@ -28,7 +28,7 @@
             <div class="centerContent1">
                  
         <div id="cc1">
-            <img src="<%=contextPath + "/staff-img/" + lg.getID()%>" style="display: inline-block; float:right; width:33%;">
+            <img class="profImage" id="<%="img" + lg.getID()%>" src="<%=contextPath + "/staff-img/" + lg.getID()%>" style="display: inline-block; float:right; width:33%;">
             <h2>Your Profile</h2>
             <h3>Staff ID:&nbsp;<%=lg.getUsername()%></h3>
             <h3>First Name:&nbsp;<%=lg.getFirstName()%></h3>
@@ -77,6 +77,23 @@
     
        </div>
 
+            <div id="myModal" class="modal">
+                        <span class="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
+                        <img class="modal-content" id="modalImage">
+         </div>
+         <script>
+            var modal = document.getElementById('myModal');
+            var img = document.getElementById('<%="img" + lg.getID()%>');
+            var modalImg = document.getElementById("modalImage");
+            img.onclick = function(){
+                modal.style.display = "block";
+                modalImg.src = this.src;
+            }
+            var span = document.getElementsByClassName("close")[0];
+            span.onclick = function() {
+              modal.style.display = "none";
+            }
+         </script>
 
 </body>
 </html>
