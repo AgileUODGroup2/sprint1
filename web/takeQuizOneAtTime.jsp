@@ -120,7 +120,7 @@
 %> 
 <input type="hidden" value="<%=questionNumber%>" name="questionNumber">
 
-<input type="radio" name="flag" <%if(flagged[questionNumber]){%>checked<%}%>> Flag this question.
+<input type="checkbox" name="flag" <%if(flagged[questionNumber]){%>checked<%}%>> Flag this question.
 
 <%
     System.out.println("question number = " + questionNumber + " numOfQuestions = " + numOfQuestions);
