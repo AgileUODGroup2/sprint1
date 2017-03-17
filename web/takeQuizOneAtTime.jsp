@@ -21,6 +21,7 @@
             Quiz quiz = (Quiz) session.getAttribute("Quiz");
             String[] studentAnswers = (String[]) session.getAttribute("StudentAnswers");
             int[] qIDs = (int[]) session.getAttribute("QuestionIDs");
+            boolean[] flagged = (boolean[]) session.getAttribute("Flagged");
         %>
         
    
@@ -119,6 +120,8 @@
 %> 
 <input type="hidden" value="<%=questionNumber%>" name="questionNumber">
 
+<input type="radio" name="flag" <%if(flagged[questionNumber]){%>checked<%}%>> Flag this question.
+
 <%
     System.out.println("question number = " + questionNumber + " numOfQuestions = " + numOfQuestions);
     if(questionNumber == -1 + numOfQuestions)
@@ -138,13 +141,15 @@
 <input type="submit" value="Save" style="margin: auto;">
 <br>
 <%
+        Boolean flag;
         for(int i=0;i<numOfQuestions;i++){
+            flag = flagged[i];
             %>
-            <input type="submit" value="<%=i%>" name="jumpQuestion" style="margin: auto;">
+            <input type="submit" value="<%=i%><%if(flag == true){%> - FLAGGED<%}%>" name="jumpQuestion" style="margin: auto;">
             <%
+            System.out.println("Flagged value for question " + i + " = " + flag);
         }
-
-            System.out.println("");
+        System.out.println("");
 %>
  </form>
 <br>

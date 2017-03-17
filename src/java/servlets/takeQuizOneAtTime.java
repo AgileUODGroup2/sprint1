@@ -34,9 +34,11 @@ public class takeQuizOneAtTime extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         String[] studentAnswers = (String[]) session.getAttribute("StudentAnswers");
+        boolean[] flagged = (boolean[]) session.getAttribute("Flagged");
         int[] qIDs = (int[]) session.getAttribute("QuestionIDs");
         System.out.println("DO GET: student answers :" + Arrays.toString(studentAnswers));
         System.out.println("DO GET: question ID's :" + Arrays.toString(qIDs));
+        System.out.println("DO GET: flagged questions :" + Arrays.toString(flagged));
         
         String uri = request.getRequestURI();
         int i = uri.lastIndexOf("/");
@@ -52,6 +54,7 @@ public class takeQuizOneAtTime extends HttpServlet {
         HttpSession session = request.getSession();
         String[] studentAnswers = (String[]) session.getAttribute("StudentAnswers");
         int[] qIDs = (int[]) session.getAttribute("QuestionIDs");
+        boolean[] flagged = (boolean[]) session.getAttribute("Flagged");
         LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
         
         int matricNo = lg.getID();
@@ -59,17 +62,22 @@ public class takeQuizOneAtTime extends HttpServlet {
         int quiz_totalQuestionAmmount = Integer.parseInt(request.getParameter("numOfQuestions"));//Get total number of questions from page
         int quiz_currentQuestion = Integer.parseInt(request.getParameter("questionNumber"));//get current question
         Quiz quiz = qm.getQuizDetails(quizID);//Get all details of current quiz
+        String flag = request.getParameter("flag");
         
         String btn = request.getParameter("next");
         String btnFinish = request.getParameter("Finish Quiz");
         String btnSave = request.getParameter("Save");
+        
+        System.out.println("parameter flag == " + flag);
+        
+        flagged[quiz_currentQuestion] = flag != null && flag.equals("on");
             
         if(btnFinish == null){
             if(btn == null){
                 //BUTTON'S JUMP TO QUESTIONS
-                int jumpQuestion = Integer.parseInt(request.getParameter("jumpQuestion"));
+                String jumpQuestion = request.getParameter("jumpQuestion");
                 for(int p=0;p<quiz_totalQuestionAmmount;p++){
-                    if(jumpQuestion == p)
+                    if(jumpQuestion != null && jumpQuestion.contains("" + p))
                         quiz.setCounter(p);
                 }
             }
@@ -79,6 +87,7 @@ public class takeQuizOneAtTime extends HttpServlet {
             }
             else{
                 //BUTTON NEXT QUESTION
+                //request.setAttribute("Flagged",flagged);
                 studentAnswers[quiz_currentQuestion] = request.getParameter("answer");
                 int incrementQuestionNumber = quiz_currentQuestion;
                 incrementQuestionNumber ++;
@@ -92,7 +101,7 @@ public class takeQuizOneAtTime extends HttpServlet {
         }
         else{
             studentAnswers[quiz_currentQuestion] = request.getParameter("answer");
-            System.out.println("******* FINAL ANSWERS FOR QUIZ: student answers :" + Arrays.toString(studentAnswers));
+            System.out.println("*******     FINAL ANSWERS FOR QUIZ: student answers :" + Arrays.toString(studentAnswers));
             System.out.println("*** QUIZ ID's FOR QUIZ ANSWERS: question ID's :" + Arrays.toString(qIDs));
             Submit(request,response,studentAnswers,qIDs, matricNo);
         }

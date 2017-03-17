@@ -56,11 +56,13 @@ public class chooseQuizType extends HttpServlet{
             
             int i = quiz.getNumberOfQuestions();
             String[] studentAnswers = new String[i];
+            boolean[] flagged = new boolean[i];
             int[] qIDs = new int[i];
         
             session.setAttribute("Quiz", quiz);
             session.setAttribute("StudentAnswers", studentAnswers);
             session.setAttribute("QuestionIDs", qIDs);
+            session.setAttribute("Flagged", flagged);
             rd.forward(request, response);
     }
     
