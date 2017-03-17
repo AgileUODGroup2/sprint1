@@ -92,8 +92,8 @@ public class takeQuizOneAtTime extends HttpServlet {
         }
         else{
             studentAnswers[quiz_currentQuestion] = request.getParameter("answer");
-            System.out.println("*** FINAL ANSWERS: student answers :" + Arrays.toString(studentAnswers));
-            System.out.println("*** QUIZ ID's    : question ID's :" + Arrays.toString(qIDs));
+            System.out.println("******* FINAL ANSWERS FOR QUIZ: student answers :" + Arrays.toString(studentAnswers));
+            System.out.println("*** QUIZ ID's FOR QUIZ ANSWERS: question ID's :" + Arrays.toString(qIDs));
             Submit(request,response,studentAnswers,qIDs, matricNo);
         }
     }
