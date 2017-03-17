@@ -20,6 +20,7 @@
         <%
             Quiz quiz = (Quiz) session.getAttribute("Quiz");
             String[] studentAnswers = (String[]) session.getAttribute("StudentAnswers");
+            int[] qIDs = (int[]) session.getAttribute("QuestionIDs");
         %>
         
    
@@ -58,16 +59,19 @@
             //return full list of questions
             questionList = quizModel.getQuestionsAndAnswers(quizID);
             
+            
             if (questionList != null) {
                 
                 QuestionBank q = questionList.get(questionNumber);
+                qIDs[questionNumber] = q.getQuestionID();
+                System.out.println("QuestionID " + q.getQuestionID());
                 String sAnswer = studentAnswers[questionNumber];
                 System.out.println("The students answer for this question is: " + sAnswer);
             %>
             
                 <br>
 
-                <h2><%=q.getQuestion()%></h2>
+                <h2><%=questionNumber%>: <%=q.getQuestion()%></h2>
                 <%
                      if(q.HasMedia()){
                          //Adapted source - https://www.w3schools.com/howto/howto_css_modal_images.asp
@@ -97,43 +101,19 @@
                      }
                  %>
                  <br>
+                 
                 <input type ="hidden" name="quizID" value="<%=quizID%>">
                 <input type ="hidden" name="questionNo" value="<%=questionNumber%>">
                 <input type ="hidden" name="numOfQuestions" value="<%=numOfQuestions%>">
 
-                <%if(sAnswer == "A"){%>
-                    <%System.out.println(sAnswer + " Doesn't equal A");%>
-                    <input type="radio" name="answer" value="A" checked> <h8><%=q.getA()%></h8>
-                    <br>
-                <%}else{%>
-                    <input type="radio" name="answer" value="A"> <h8><%=q.getA()%></h8>
-                    <br>
-                <%}%>
-
-                <%if(sAnswer == "B"){%>
-                    <input type="radio" name="answer" value="B" checked> <h8><%=q.getB()%></h8>
-                    <br>
-                <%}else{%>
-                    <input type="radio" name="answer" value="B"> <h8><%=q.getB()%></h8>
-                    <br>
-                <%}%>
-
-                <%if(sAnswer == "C"){%>
-                    <input type="radio" name="answer" value="C" checked> <h8><%=q.getC()%></h8>
-                    <br>
-                <%}else{%>
-                    <input type="radio" name="answer" value="C"> <h8><%=q.getC()%></h8>
-                    <br>
-                <%}%>
-
-                <%if(sAnswer == "D"){%>
-                    <input type="radio" name="answer" value="D" checked> <h8><%=q.getD()%></h8>
-                    <br>
-                <%}else{%>
-                    <input type="radio" name="answer" value="D"> <h8><%=q.getD()%></h8>
-                    <br>
-                <%}%>
-
+                <input type="radio" name="answer" value="A" <%if(sAnswer != null && sAnswer.equals("A")){%>checked<%}%>> <h8><%=q.getA()%></h8>
+                <br>
+                <input type="radio" name="answer" value="B" <%if(sAnswer != null && sAnswer.equals("B")){%>checked<%}%>> <h8><%=q.getB()%></h8>
+                <br>
+                <input type="radio" name="answer" value="C" <%if(sAnswer != null && sAnswer.equals("C")){%>checked<%}%>> <h8><%=q.getC()%></h8>
+                <br>
+                <input type="radio" name="answer" value="D" <%if(sAnswer != null && sAnswer.equals("D")){%>checked<%}%>> <h8><%=q.getD()%></h8>
+                <br>
                 <%
         }
 %> 
