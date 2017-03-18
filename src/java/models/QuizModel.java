@@ -189,7 +189,7 @@ public java.util.LinkedList<QuestionBank> getQuestionsAndAnswers(int quizID) thr
                 
             }
             
-             Collections.shuffle(questionList);
+             //Collections.shuffle(questionList);
             } catch (SQLException e) {
         System.out.println(e.getMessage());
     }
