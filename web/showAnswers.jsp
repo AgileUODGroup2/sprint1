@@ -37,14 +37,14 @@
 
         <div class="navBar1">
             <ul>
-                <li><a>Here are your results</a></li>
+                <li><a>Your Results</a></li>
             </ul>
         </div>
         <br>
         <br>
         <div class="centerContent1">
-            
-            <h1> Your Score is <%=request.getAttribute("Score")%> </h1>
+            <br>
+            <h7> Your Score: <%=request.getAttribute("Score")%> % </h7>
         
         <%
             QuestionModel qm = new QuestionModel();
@@ -93,6 +93,8 @@
 <br>
 <br>
 <br>
-        </div>
+
+        </div><br>
+        <a href="<%=request.getContextPath() + "/studentPortal.jsp"%>"><button id="fifth-button" style="text-align: center; width:25%; background-color: #042356">Return to Student Portal</button></a> <br />
 </body>
 </html>

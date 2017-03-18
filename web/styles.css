@@ -229,7 +229,7 @@ input[type=radio] {
 }
 
 input[type=submit] {
-    background-color: #25619f; /* Green */
+    background-color: #25619f; 
     border: none;
     padding: 15px 32px;
     text-align: center;
@@ -240,6 +240,7 @@ input[type=submit] {
     display:block;
     margin: auto;
     -webkit-appearance: none;
+    
 }
 
 select {
@@ -301,6 +302,8 @@ button {
 
 a:link{
     text-decoration: none;
+    align-content: center;
+    
 }
 
 #fifth-button{
