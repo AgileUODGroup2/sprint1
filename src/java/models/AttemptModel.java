@@ -28,8 +28,10 @@ public void addNewAttempt(int matricNo, int quizID, Date date, int score)
     {
         ps.setInt(1,matricNo);
         ps.setInt(2,quizID);
-        ps.setDate(3,date);
-        ps.setInt(4,score);
+        ps.setInt(3,matricNo);
+        ps.setInt(4,quizID);
+        ps.setDate(5,date);
+        ps.setInt(6,score);
         ps.execute();
     }
     
