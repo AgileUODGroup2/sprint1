@@ -20,6 +20,8 @@
         <%
             Quiz quiz = (Quiz) session.getAttribute("Quiz");
             String[] studentAnswers = (String[]) session.getAttribute("StudentAnswers");
+            int[] qIDs = (int[]) session.getAttribute("QuestionIDs");
+            boolean[] flagged = (boolean[]) session.getAttribute("Flagged");
         %>
         
    
@@ -58,57 +60,67 @@
             //return full list of questions
             questionList = quizModel.getQuestionsAndAnswers(quizID);
             
+            
             if (questionList != null) {
                 
                 QuestionBank q = questionList.get(questionNumber);
+                qIDs[questionNumber] = q.getQuestionID();
+                System.out.println("QuestionID " + q.getQuestionID());
                 String sAnswer = studentAnswers[questionNumber];
                 System.out.println("The students answer for this question is: " + sAnswer);
             %>
             
                 <br>
 
-                <h2><%=q.getQuestion()%></h2>
+                <h2><%=questionNumber%>: <%=q.getQuestion()%></h2>
+                <%
+                     if(q.HasMedia()){
+                         //Adapted source - https://www.w3schools.com/howto/howto_css_modal_images.asp
+                 %>
+                 
+                 <img class="qImage" id="<%="img" + q.getQuestionID()%>" src="<%=request.getContextPath() + "/question-img/" + q.getQuestionID()%>" width="200" style="display: inline-block;">
+                
+                 <div id="myModal" class="modal">
+                        <span class="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
+                        <img class="modal-content" id="modalImage">
+                </div>
+                 
+                 <script>
+                    var modal = document.getElementById('myModal');
+                    var img = document.getElementById('<%="img" + q.getQuestionID()%>');
+                    var modalImg = document.getElementById("modalImage");
+                    img.onclick = function(){
+                        modal.style.display = "block";
+                        modalImg.src = this.src;
+                    }
+                    var span = document.getElementsByClassName("close")[0];
+                    span.onclick = function() {
+                      modal.style.display = "none";
+                    }
+                 </script>
+                 <%
+                     }
+                 %>
+                 <br>
+                 
                 <input type ="hidden" name="quizID" value="<%=quizID%>">
                 <input type ="hidden" name="questionNo" value="<%=questionNumber%>">
                 <input type ="hidden" name="numOfQuestions" value="<%=numOfQuestions%>">
 
-                <%if(sAnswer == "A"){%>
-                    <%System.out.println(sAnswer + " Doesn't equal A");%>
-                    <input type="radio" name="answer" value="A" checked> <h8><%=q.getA()%></h8>
-                    <br>
-                <%}else{%>
-                    <input type="radio" name="answer" value="A"> <h8><%=q.getA()%></h8>
-                    <br>
-                <%}%>
-
-                <%if(sAnswer == "B"){%>
-                    <input type="radio" name="answer" value="B" checked> <h8><%=q.getB()%></h8>
-                    <br>
-                <%}else{%>
-                    <input type="radio" name="answer" value="B"> <h8><%=q.getB()%></h8>
-                    <br>
-                <%}%>
-
-                <%if(sAnswer == "C"){%>
-                    <input type="radio" name="answer" value="C" checked> <h8><%=q.getC()%></h8>
-                    <br>
-                <%}else{%>
-                    <input type="radio" name="answer" value="C"> <h8><%=q.getC()%></h8>
-                    <br>
-                <%}%>
-
-                <%if(sAnswer == "D"){%>
-                    <input type="radio" name="answer" value="D" checked> <h8><%=q.getD()%></h8>
-                    <br>
-                <%}else{%>
-                    <input type="radio" name="answer" value="D"> <h8><%=q.getD()%></h8>
-                    <br>
-                <%}%>
-
+                <input type="radio" name="answer" value="A" <%if(sAnswer != null && sAnswer.equals("A")){%>checked<%}%>> <h8><%=q.getA()%></h8>
+                <br>
+                <input type="radio" name="answer" value="B" <%if(sAnswer != null && sAnswer.equals("B")){%>checked<%}%>> <h8><%=q.getB()%></h8>
+                <br>
+                <input type="radio" name="answer" value="C" <%if(sAnswer != null && sAnswer.equals("C")){%>checked<%}%>> <h8><%=q.getC()%></h8>
+                <br>
+                <input type="radio" name="answer" value="D" <%if(sAnswer != null && sAnswer.equals("D")){%>checked<%}%>> <h8><%=q.getD()%></h8>
+                <br>
                 <%
         }
 %> 
 <input type="hidden" value="<%=questionNumber%>" name="questionNumber">
+
+<input type="checkbox" name="flag" <%if(flagged[questionNumber]){%>checked<%}%>> Flag this question.
 
 <%
     System.out.println("question number = " + questionNumber + " numOfQuestions = " + numOfQuestions);
@@ -129,13 +141,15 @@
 <input type="submit" value="Save" style="margin: auto;">
 <br>
 <%
+        Boolean flag;
         for(int i=0;i<numOfQuestions;i++){
+            flag = flagged[i];
             %>
-            <input type="submit" value="<%=i%>" name="jumpQuestion" style="margin: auto;">
+            <input type="submit" value="<%=i%><%if(flag == true){%> - FLAGGED<%}%>" name="jumpQuestion" style="margin: auto;">
             <%
+            System.out.println("Flagged value for question " + i + " = " + flag);
         }
-
-            System.out.println("");
+        System.out.println("");
 %>
  </form>
 <br>

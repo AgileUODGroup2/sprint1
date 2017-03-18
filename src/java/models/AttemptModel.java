@@ -18,21 +18,27 @@ import lib.database.DatabaseConnection;
 public class AttemptModel {
     DatabaseConnection db = new DatabaseConnection();
     
-    public void addNewAttempt(int matricNo, int quizID, Date date, int score) {
-        String query = "INSERT INTO attempts VALUES (?,?,(SELECT Attempted_Count FROM student_quiz WHERE Matriculation_Number=? AND Quiz_ID=?),?,?);";
-        
-        try (Connection con = db.connectToDatabase();
-                PreparedStatement ps = con.prepareStatement(query); ) {
-            ps.setInt(1,matricNo);
-            ps.setInt(2,quizID);
-            ps.setInt(3,matricNo);
-            ps.setInt(4,quizID);
-            ps.setDate(5,date);
-            ps.setInt(6, score);
-            ps.execute();
-        } catch (SQLException e) {
-            e.getMessage();
-        }
-        
+
+public void addNewAttempt(int matricNo, int quizID, Date date, int score)
+{
+    String query = "INSERT INTO attempts VALUES (?,?,(SELECT Attempted_Count FROM student_quiz WHERE Matriculation_Number=? AND Quiz_ID=?),?,?);";
+    
+    try(Connection conn = db.connectToDatabase();
+    PreparedStatement ps = conn.prepareStatement(query);)
+    {
+        ps.setInt(1,matricNo);
+        ps.setInt(2,quizID);
+        ps.setDate(3,date);
+        ps.setInt(4,score);
+        ps.execute();
     }
+    
+    catch(SQLException e)
+    {
+        System.out.println(e.getMessage());
+    }
+    
 }
+    
+}
+
