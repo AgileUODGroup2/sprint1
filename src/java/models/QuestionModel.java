@@ -112,17 +112,4 @@ public class QuestionModel {
         return rightAnswers;
     }
     
-    public void storeAnswer(String answer, int qID, int matricNo) {
-        String query = "INSERT INTO answer_store VALUES (?,?,?)";
-        try (Connection con = db.connectToDatabase();
-                PreparedStatement ps = con.prepareStatement(query);) {
-            ps.setInt(1, matricNo);
-            ps.setInt(2,qID);
-            ps.setString(3, answer);
-            ps.execute();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-    
 }

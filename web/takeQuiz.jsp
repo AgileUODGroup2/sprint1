@@ -4,6 +4,7 @@
     Author     : erincoey
 --%>
 
+<%@page import="models.AnswerModel"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="stores.QuestionBank"%>
 <%@page import="models.QuizModel"%>
@@ -44,6 +45,7 @@
         <%
             QuizModel quizModel = new QuizModel();
             java.util.LinkedList<QuestionBank> questionList = new java.util.LinkedList<>();
+            AnswerModel am = new AnswerModel();
            
             int quizID = quiz.getQuizID();
             int numOfQuestions = quiz.getNumberOfQuestions();
@@ -94,16 +96,17 @@
                     }
                  </script>
                  <%
-                     }
+                    }
+                    String pa = am.getStudentAnswer(lg.getID(),q.getQuestionID());
                  %>
              <br>   
-             <input type="radio" name="answer<%=i%>" value="A"> <h8><%=q.getA()%></h8>
+             <input type="radio" name="answer<%=i%>" value="A"<%if(pa != null && pa.equals("A")){%> checked<%}%>><%=q.getA()%></h8>
              <br>
-             <input type="radio" name="answer<%=i%>" value="B"> <h8><%=q.getB()%></h8>
+             <input type="radio" name="answer<%=i%>" value="B"<%if(pa != null && pa.equals("B")){%> checked<%}%>> <h8><%=q.getB()%></h8>
              <br>
-             <input type="radio" name="answer<%=i%>" value="C"> <h8><%=q.getC()%></h8>
+             <input type="radio" name="answer<%=i%>" value="C"<%if(pa != null && pa.equals("C")){%> checked<%}%>> <h8><%=q.getC()%></h8>
              <br>
-             <input type="radio" name="answer<%=i%>" value="D"> <h8><%=q.getD()%></h8>
+             <input type="radio" name="answer<%=i%>" value="D"<%if(pa != null && pa.equals("D")){%> checked<%}%>> <h8><%=q.getD()%></h8>
              <input type="hidden" name="questionID<%=i%>" value="<%=q.getQuestionID()%>" />
              <br>
               
