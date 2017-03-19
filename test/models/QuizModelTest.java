@@ -437,7 +437,8 @@ public class QuizModelTest {
     @Test
     public void testAddNewAttempt(){
         
-        // Code to be used later
+        System.out.println("addNewAttempt");
+        
         /**int matricNo = 1181180;
         int quizID = 15;
         int score = 100;
@@ -455,8 +456,6 @@ public class QuizModelTest {
         }
         
         qm.addNewAttempt(matricNo, quizID, score, date);**/
-        
-        
         
     }
 }

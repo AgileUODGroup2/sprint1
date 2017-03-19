@@ -7,6 +7,9 @@ package servlets;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -55,11 +58,15 @@ public class DisplayImage extends HttpServlet{
         user us = new user();
         byte byteArray[] = us.getProfileImage(isStaff, userID);
         
-        response.setContentType("image");
-        OutputStream os = response.getOutputStream();
-        os.write(byteArray);
-        os.flush();
-        os.close();
+        if(byteArray == null){
+            response.sendRedirect(request.getContextPath() + "/pic1.png");
+        } else {
+            response.setContentType("image");
+            OutputStream os = response.getOutputStream();
+            os.write(byteArray);
+            os.flush();
+            os.close();
+        }
     }
     
     private void displayQuestionImage(int questionID, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

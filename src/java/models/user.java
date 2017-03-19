@@ -179,7 +179,16 @@ public class user {
                 while(rs.next()) {
                     
                     Blob blob = rs.getBlob("Profile_Image");
-                    byte byteArray[] = blob.getBytes(1, (int)blob.length());
+                    
+                    byte byteArray[];
+                    
+                    if(blob == null){
+                        byteArray = null;
+                    } else {
+                        byteArray = blob.getBytes(1, (int)blob.length());
+                    }
+                    
+                    System.out.println(byteArray);
                     
                     return byteArray;
                     
@@ -196,10 +205,7 @@ public class user {
                 }
             }
         }
-        
-        //CHANGE THIS
         return null;
-        
     }
 
     public String[] getStudentDetails(int matriculationNo) throws SQLException {
