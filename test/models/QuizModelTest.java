@@ -220,7 +220,7 @@ public class QuizModelTest {
     public void testGetQuizID()  {
         
         int count = 0;
-        int result = 18;
+        int result = 19;
         Quiz q = new Quiz();
       
         System.out.println("\nTest: get Quiz ID ");
@@ -228,7 +228,7 @@ public class QuizModelTest {
         //boolean result;
         boolean expected = true;
         boolean state;
-        //int result = qm.getQuizId();
+       
          db = new DatabaseConnection();
         java.util.LinkedList<Quiz> quizzes = new java.util.LinkedList<>();
         try(Connection conn = db.connectToDatabase()) {
@@ -402,6 +402,32 @@ public class QuizModelTest {
      System.out.println(" ");
        
            
+    }
+    
+    /**
+     * Test for getStudentQuizzes
+     */
+    @Test 
+    public void testGetStudentQuizzes(){
+        
+        boolean expected;
+        boolean compResult, incompResult, pendResult;
+        boolean state = true; 
+         
+        System.out.println("\nTest: Get Student Quizzes");
+        
+      java.util.LinkedList<StudentQuiz> StudentCompleted = qm.getStudentQuizzes("select * from studentcompleted where Matriculation_Number=? order by Module_ID",1);
+      if (StudentCompleted != null){
+          Iterator<StudentQuiz> it = StudentCompleted.iterator();
+          while(it.hasNext()){
+              StudentQuiz sQ = (StudentQuiz) it.next();
+              System.out.println("Completed Student Quizzes:" + sQ.getQuizID());
+              
+                
+          
+          }
+      }
+        
     }
 }
 
