@@ -4,19 +4,19 @@
     Author     : erincoey
 --%>
 
-<%@page import="stores.LoggedIn"%>
 <%@page import="stores.Quiz"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ include file='cssStructure.jsp' %>
 <!DOCTYPE html>
 <html>
-    <head>
+
       
         <div class="navBar1">
             <ul>
                 <li><a> Create Quiz</a></li>
             </ul>
-        </div><br><br>
+        </div>
+        <br><br>
         
         <div class ="centerContent1">
             
@@ -54,7 +54,7 @@
                         <br>
 
                         <label for = "answerDesc">Answer Description: </label>
-                        <textarea name="answerDesc" cols="70" rows="4" id="answerDesc"></textarea>
+                        <textarea name="answerDesc" cols="70" rows="8" id="answerDesc"></textarea>
                         <br>
                         <br>
                         <br>

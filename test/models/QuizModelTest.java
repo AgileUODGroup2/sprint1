@@ -7,9 +7,13 @@ package models;
 
 import java.sql.ResultSet;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import lib.database.DatabaseConnection;
 import java.util.LinkedList;
@@ -64,15 +68,15 @@ public class QuizModelTest {
             String query =  "DELETE FROM quiz WHERE Quiz_Name = ?;";
             
             PreparedStatement preparedStmt = conn.prepareStatement(query);
-            PreparedStatement preparedStmt2 = conn.prepareStatement(query);
+            //PreparedStatement preparedStmt2 = conn.prepareStatement(query);
             
             //Sort Inputs
-            preparedStmt.setString(1, "TestQuiz");
-            preparedStmt2.setString(1, "UpdateQuestionAmount");
+           preparedStmt.setString(1, "TestQuiz");
+           // preparedStmt2.setString(1, "UpdateQuestionAmount");
             
             //Execute
-            preparedStmt.executeUpdate();
-            preparedStmt2.executeUpdate();
+           preparedStmt.executeUpdate();
+            //preparedStmt2.executeUpdate();
         }
       
     }
@@ -124,7 +128,7 @@ public class QuizModelTest {
        assertEquals("Should equal true", expected, result);
        
    }
-   
+     
     
    /**
     * Test for updating the question amount for a quiz 
@@ -214,13 +218,13 @@ public class QuizModelTest {
    }
       
    /**
-    * Test of to get Quiz ID
+    * Test to get Quiz ID
     */ 
     @Test
     public void testGetQuizID()  {
         
         int count = 0;
-        int result = 18;
+        int result = 19;
         Quiz q = new Quiz();
       
         System.out.println("\nTest: get Quiz ID ");
@@ -228,7 +232,7 @@ public class QuizModelTest {
         //boolean result;
         boolean expected = true;
         boolean state;
-        //int result = qm.getQuizId();
+       
          db = new DatabaseConnection();
         java.util.LinkedList<Quiz> quizzes = new java.util.LinkedList<>();
         try(Connection conn = db.connectToDatabase()) {
@@ -260,18 +264,18 @@ public class QuizModelTest {
     }
 
    /**
-    * Test for randomising questions in quizzes 
+    * Test for Get questions and answers 
     */
    @Test 
    public void testGetQuestionsAndAnswers()throws SQLException {
        
-       boolean result = false;
+       boolean result;
        boolean expected = true;
        
-        System.out.println("\nTest: Randomising Questions ");
+        System.out.println("\nTest: Get Questions and Answsers ");
         qm.getQuestionsAndAnswers(4);
         LinkedList<QuestionBank> QBtest = qm.getQuestionsAndAnswers(4);
-        int[] test = new int[5];
+        int[] test = new int[4];
         int count = 0;
                 if (QBtest != null) {
                     Iterator<QuestionBank> it = QBtest.iterator();
@@ -294,9 +298,9 @@ public class QuizModelTest {
                 System.out.println("test array" + test[1]);
                 System.out.println("test array" + test[2]);
                 System.out.println("test array" + test[3]);
-                System.out.println("test array" + test[4]);
                 
-               if ((test[0] == 1) && (test[1] == 2) && (test[2] == 3) && (test[3] == 4) && (test[4] == 5)){
+                
+               if ((test[0] == 1) && (test[1] == 2) && (test[2] == 3) && (test[3] == 4)){
                    result = false;
                }
                else {
@@ -365,20 +369,95 @@ public class QuizModelTest {
     public void testGetQuizDetails(){
         System.out.println("\nTest: Get Quiz Details");
         
-        boolean QuizID, ModuleID, DateCreated, QuizName, NumberOfQuestions, Status, Quiz, StaffID; 
+        boolean QuizID, ModuleID, DateCreated, QuizName, NumberOfQuestions, QuizStatus, StaffID; 
+        boolean expected = true;
+        boolean result;
             
         Quiz q =  qm.getQuizDetails(1);
         
-        System.out.println("Quiz ID: "+q.getQuizID());
-        System.out.println("Module ID: "+q.getModuleID());
-        System.out.println("Date Created: "+q.getDateCreated()); 
-        System.out.println("Quiz Name: "+q.getQuizName());
-        System.out.println("Number of questions: "+q.getNumberOfQuestions());
-        System.out.println("Status: "+q.getStatus());
-        System.out.println("Quiz ID: "+q.getQuizID());
-        System.out.println("Staff ID: "+q.getStaffID());
-                
+        QuizID = (1 == q.getQuizID()); 
+        System.out.println("QuizID: " + QuizID);
+
+        ModuleID = "AC31007".equals(q.getModuleID());
+        System.out.println("ModuleID: " + ModuleID);
+        
+        QuizName = "Week 1 Revision".equals(q.getQuizName());
+        System.out.println("Quiz Name: " + QuizName);
+        
+        NumberOfQuestions = (5 == q.getNumberOfQuestions());
+        System.out.println("Number of questions: " + NumberOfQuestions);
+        
+        QuizStatus = "Live".equals(q.getStatus());
+        System.out.println("Status: " + QuizStatus);
+        
+        StaffID = (3 == q.getStaffID());
+        System.out.println("StaffID: " + StaffID);
+        
+       if ((QuizID == true) && (ModuleID == true) && (QuizName == true) && (NumberOfQuestions == true) && (QuizStatus == true) && (StaffID == true)) {
            
+           result = true;   
+       }
+       else 
+       {
+           result = false; 
+       }
+       
+     assertEquals("Should equal true", expected, result);
+     System.out.println(" ");
+       
+           
+    }
+    
+    /**
+     * Test for getStudentQuizzes
+     */
+    @Test 
+    public void testGetStudentQuizzes(){
+        
+        boolean expected;
+        boolean compResult, incompResult, pendResult;
+        boolean state = true; 
+         
+        System.out.println("\nTest: Get Student Quizzes");
+        
+      java.util.LinkedList<StudentQuiz> StudentCompleted = qm.getStudentQuizzes("select * from studentcompleted where Matriculation_Number=? order by Module_ID",1);
+      if (StudentCompleted != null){
+          Iterator<StudentQuiz> it = StudentCompleted.iterator();
+          while(it.hasNext()){
+              StudentQuiz sQ = (StudentQuiz) it.next();
+              System.out.println("Completed Student Quizzes:" + sQ.getQuizID());
+              
+                
+          
+          }
+      }
+        
+    }
+    
+    @Test
+    public void testAddNewAttempt(){
+        
+        // Code to be used later
+        /**int matricNo = 1181180;
+        int quizID = 15;
+        int score = 100;
+        Date date;
+        
+        String dateString = "2017/03/06";
+        DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+        
+        try {
+            date = (Date) df.parse(dateString);
+            String newDateString = df.format(dateString);
+            System.out.println(newDateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        
+        qm.addNewAttempt(matricNo, quizID, score, date);**/
+        
+        
+        
     }
 }
 
@@ -391,3 +470,4 @@ public class QuizModelTest {
 
 
     
+

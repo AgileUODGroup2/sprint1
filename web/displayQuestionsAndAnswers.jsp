@@ -8,7 +8,6 @@
 <%@page import="stores.QuestionBank"%>
 <%@page import="models.QuizModel"%>
 <%@page import="stores.Quiz"%>
-<%@page import="stores.LoggedIn"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -18,14 +17,13 @@
         <link rel="stylesheet" type="text/css" href="/AC31007Quiz/styles.css">
         
         <%
-            LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
             Quiz quiz = (Quiz) request.getAttribute("Quiz");
         %>
  
     </head>
     <body bgcolor="d3dfeb">
     <img src="<%=request.getContextPath() +"/logo123.png"%>" width="115" style="position: absolute; left:0; top: 0;">
-        <img src="<%=request.getContextPath() +"/logo123.png"%>" width="115" style="position: absolute; right:0; top: 0;">
+    <img src="<%=request.getContextPath() +"/logo123.png"%>" width="115" style="position: absolute; right:0; top: 0;">
 
         <div class="navBar">
             <ul>
@@ -85,89 +83,86 @@
                     <h4>D: <%=q.getD() %></h4>
                     <h4>Answer: <%=q.getAnswer()%></h4>
                     <h4>Answer Description  : <%=q.getAnswerDesc()%></h4>
-                    
+                    <br><Br>
            <%
                     }
                 } else { %>
                 <h7>No quizzes to show</h7>
+                <br>
                 <%}%>
         </div>
-        </div>
+        <br>
+        </div><br>
         
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function () {
+        <script type="text/javascript">
+        $(document).ready(function () {
 
-	//min font size
-	var min=9; 	
+                //min font size
+                var min=9; 	
 
-	//max font size
-	var max=70;	
-	
-	//grab the default font size
-	var reset = $('p').css('fontSize'); 
-	
-	//font resize these elements
-	var elm = $('h3, h2, h4');  
-	
-	//set the default font size and remove px from the value
-	var size = str_replace(reset, 'px', ''); 
-	
-	//Increase font size
-	$('a.fontSizePlus').click(function() {
-		
-		//if the font size is lower or equal than the max value
-		if (size<=max) {
-			
-			//increase the size
-			size++;
-			
-			//set the font size
-			elm.css({'fontSize' : size});
-		}
-		
-		//cancel a click event
-		return false;	
-		
-	});
+                //max font size
+                var max=70;	
 
-	$('a.fontSizeMinus').click(function() {
+                //grab the default font size
+                var reset = $('p').css('fontSize'); 
 
-		//if the font size is greater or equal than min value
-		if (size>=min) {
-			
-			//decrease the size
-			size--;
-			
-			//set the font size
-			elm.css({'fontSize' : size});
-		}
-		
-		//cancel a click event
-		return false;	
-		
-	});
-	
-	//Reset the font size
-	$('a.fontReset').click(function () {
-		
-		//set the default font size	
-		 elm.css({'fontSize' : reset});		
-	});
-		
-});
+                //font resize these elements
+                var elm = $('h3, h2, h4');  
 
-//A string replace function
-function str_replace(haystack, needle, replacement) {
-	var temp = haystack.split(needle);
-	return temp.join(replacement);
-}
-</script>
-<style type="text/css">
+                //set the default font size and remove px from the value
+                var size = str_replace(reset, 'px', ''); 
 
-</style>
-</head>
+                //Increase font size
+                $('a.fontSizePlus').click(function() {
 
+                        //if the font size is lower or equal than the max value
+                        if (size<=max) {
+
+                                //increase the size
+                                size++;
+
+                                //set the font size
+                                elm.css({'fontSize' : size});
+                        }
+
+                        //cancel a click event
+                        return false;	
+
+                });
+
+                $('a.fontSizeMinus').click(function() {
+
+                        //if the font size is greater or equal than min value
+                        if (size>=min) {
+
+                                //decrease the size
+                                size--;
+
+                                //set the font size
+                                elm.css({'fontSize' : size});
+                        }
+
+                        //cancel a click event
+                        return false;	
+
+                });
+
+                //Reset the font size
+                $('a.fontReset').click(function () {
+
+                        //set the default font size	
+                         elm.css({'fontSize' : reset});		
+                });
+
+        });
+
+        //A string replace function
+        function str_replace(haystack, needle, replacement) {
+                var temp = haystack.split(needle);
+                return temp.join(replacement);
+        }
+        </script>
 
 <a href="#" class="fontSizePlus">A+</a> | 
 <a href="#" class="fontReset">Reset</a> | 
@@ -178,6 +173,6 @@ function str_replace(haystack, needle, replacement) {
 
 <script type="text/javascript" src="http://www.queness.com/js/bsa.js"></script>
 
-
+<br>
     </body>
 </html>
