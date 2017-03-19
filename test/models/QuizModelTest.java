@@ -840,5 +840,30 @@ public class QuizModelTest {
         
         
     }
+    
+    @Test
+    public void testAddNewAttempt(){
+        
+        System.out.println("addNewAttempt");
+        
+        /**int matricNo = 1181180;
+        int quizID = 15;
+        int score = 100;
+        Date date;
+        
+        String dateString = "2017/03/06";
+        DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+        
+        try {
+            date = (Date) df.parse(dateString);
+            String newDateString = df.format(dateString);
+            System.out.println(newDateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        
+        qm.addNewAttempt(matricNo, quizID, score, date);**/
+        
+    }
 }
 
