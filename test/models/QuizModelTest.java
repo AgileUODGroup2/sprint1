@@ -7,9 +7,13 @@ package models;
 
 import java.sql.ResultSet;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import lib.database.DatabaseConnection;
 import java.util.LinkedList;
@@ -429,6 +433,32 @@ public class QuizModelTest {
       }
         
     }
+    
+    @Test
+    public void testAddNewAttempt(){
+        
+        // Code to be used later
+        /**int matricNo = 1181180;
+        int quizID = 15;
+        int score = 100;
+        Date date;
+        
+        String dateString = "2017/03/06";
+        DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+        
+        try {
+            date = (Date) df.parse(dateString);
+            String newDateString = df.format(dateString);
+            System.out.println(newDateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        
+        qm.addNewAttempt(matricNo, quizID, score, date);**/
+        
+        
+        
+    }
 }
 
    
@@ -440,3 +470,4 @@ public class QuizModelTest {
 
 
     
+

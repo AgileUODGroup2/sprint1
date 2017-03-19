@@ -110,7 +110,7 @@
            <br>
            <br>
          <div class="centerContent1">
-        
+
           
         <%
                 if(type == "Completed Quizzes")
@@ -164,6 +164,56 @@
         
         <div id="cc2">
             <br><br>
+            
+                    <% 
+            if (!type.equals("Unfinished Quizzes")) { 
+        %>
+
+        <form method="POST" action="<%=contextPath%>/SearchResults">
+            <select name="day1">
+            <% for(int i=1;i<=31;i++) {
+                %> <option value="<%=i%>"><%=i%></option> <%
+                } %>
+            </select>
+
+            <select name="month1">
+            <%
+            String[] months = {"January","February","March","April","May","June","July","August","September","October","November","December"};
+            for(int i=1;i<=12;i++) {
+            %> <option value="<%=i%>"><%=months[i-1]%></option> <%
+            } %>
+            </select>
+            <select name="year1">
+            <%
+            for(int i=2005;i<=2017;i++) {
+            %> <option value="<%=i%>"><%=i%></option> <%
+            } %>
+            </select>
+            <br />
+            <select name="day2">
+            <% for(int i=1;i<=31;i++) {
+                %> <option value="<%=i%>"><%=i%></option> <%
+                } %>
+            </select>
+
+            <select name="month2">
+            <%
+            for(int i=1;i<=12;i++) {
+            %> <option value="<%=i%>"><%=months[i-1]%></option> <%
+            } %>
+            </select>
+            <select name="year2">
+            <%
+            for(int i=2005;i<=2016;i++) {
+            %> <option value="<%=i%>"><%=i%></option> <%
+            } %><option value="2017" selected="selected">2017</option>
+            </select>
+            <input type="hidden" name="QuizID" value="<%=quiz.getQuizID()%>" />
+            <input type="submit" value="Filter" />
+        </form>
+        <%
+            }
+            %>
         <form method="GET" action=<%=contextPath + "/displayQuestionsAndAnswers/" + quiz.getQuizID()%>><input type="submit" value="View Q's and A's" /></form>
         </div>
         <br>
@@ -253,6 +303,7 @@
 
                      <%
                          }
+
 %>
     </body>
 </html>
