@@ -104,7 +104,7 @@
 
         <div class="navBar1">
             <ul>
-                <li><a><%=quiz.getQuizName()%> </a></li>
+                <li><a>Quiz Name: <%=quiz.getQuizName()%> </a></li>
             </ul>
         </div>
            <br>
