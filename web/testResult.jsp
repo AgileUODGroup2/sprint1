@@ -28,7 +28,7 @@
 
         <div class="navBar1">
             <ul>
-                <li><a>Your Quiz </a></li>
+                <li><a>Quiz Results</a></li>
             </ul>
         </div>
         <br><br>
@@ -40,8 +40,8 @@
         <h2>Quiz Profile</h2>
         
         <h3> Quiz ID: <%=quiz.getQuizID()%> </h3>
-        <h3> Quiz ID: <%=quiz.getQuizName()%> </h3>
-        <h3> Quiz ID: <%=quiz.getModuleID()%> </h3>
+        <h3> Quiz Name: <%=quiz.getQuizName()%> </h3>
+        <h3> Module ID: <%=quiz.getModuleID()%> </h3>
        
      
         
@@ -69,11 +69,19 @@
         <div id="cc3" style="background-color: #d3dfeb;">
            
    
-         
+         <a href="/AC31007Quiz/quizInstructions.jsp"><button id="sec-button">Click here for quiz instructions</button></a><br>
             <form method="GET" action="<%=contextPath + "/chooseQuizType/" + quiz.getQuizID()%>"><input type="submit" value="Take Quiz" /></form>
             <br>
-            <a href="/AC31007Quiz/quizInstructions.jsp"><button id="third-button">Click here for quiz instructions</button></a><br>
+            
+            <button10 onclick="goBack()">Return to your Quizzes</button10><br>
+                <script>
+                    function goBack() {
+                        window.history.back();
+                    
+                    }
+                    </script>
         </div>
+            
         </div>
         
 </body>

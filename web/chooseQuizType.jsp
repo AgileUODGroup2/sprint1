@@ -39,8 +39,11 @@
         <br>
         <br>
         <div class="centerContent1">
-       
-        <form method="GET" action="<%=contextPath + "/takeQuiz/" + quiz.getQuizID()%>"><input type="submit" value="All Questions" /></form>
+            <br>
+            <h3 style="text-align: center;"> Please select from the options below </h3><br>
+            <h4 style="text-align: center;"> This option will display all questions of the quiz on the same page </h4>
+            <form method="GET" action="<%=contextPath + "/takeQuiz/" + quiz.getQuizID()%>"><input type="submit" value="All Questions" /></form><br><br>
+            <h4 style="text-align: center;"> This option will display one question at a time </h4>
         <form method="GET" action="<%=contextPath + "/takeQuizOneAtTime/" + quiz.getQuizID()%>"><input type="submit" value="One Question at a time" /></form>
 <br>
 <br>

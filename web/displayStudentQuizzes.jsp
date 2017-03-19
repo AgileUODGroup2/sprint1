@@ -46,6 +46,7 @@
             String path = request.getContextPath();
             java.util.Vector<String> modules = studentUser.getStudentModules(matricNo);
         %>
+        
         <form method="POST" action="filterByModuleStudent">
             
             <select name="module">
@@ -58,37 +59,38 @@
             <input type="submit" value="Filter by Module" />
             </select>
         </form>
-            <br>
+           
         <%
             if (type.equals("Completed Quizzes")) {
         %>
-        <a href="<%=path%>/completedQuizzes">Reset</a> <br />
+        
         <form method="POST" action="orderByDate">
             <input type="submit" value="Order By Date" />
             <input type="hidden" value="studentcompleted" name="table" />
             <input type="hidden" value="<%=matricNo%>" name="MatricNo" />
         </form>
-       
+        <a href="<%=path%>/completedQuizzes"><button id="fifth-button" style="text-align: center; width:25%; background-color: #042356">Reset</button></a> <br />
         <%
             } else if (type.equals("Incomplete Quizzes")) {
         %>
-        <br>
-        <a href="<%=path%>/incompleteQuizzes">Reset</a> <br />
+        
+        
         <form method="POST" action="orderByDate">
             <input type="submit" value="Order By Date" />
             <input type="hidden" value="studentincomplete" name="table" />
             <input type="hidden" value="<%=matricNo%>" name="MatricNo" />
         </form>
-        
+        <a href="<%=path%>/incompleteQuizzes"><button id="fifth-button" style="text-align: center; width:25%; background-color:  #042356">Reset</button></a> <br />
         <%
             } else {
         %>
-        <a href="<%=path%>/pendingdQuizzes">Reset</a> <br />
+        
         <form method="POST" action="orderByDate">
             <input type="submit" value="Order By Date" />
             <input type="hidden" value="studentpending" name="table" />
             <input type="hidden" value="<%=matricNo%>" name="MatricNo" />
         </form>
+         <a href="<%=path%>/pendingdQuizzes"><button id="fifth-button" style="text-align: center; width:25%; background-color: #042356">Reset</button></a> <br />
              
          <% }   java.util.LinkedList<StudentQuiz> quizList = (java.util.LinkedList<StudentQuiz>) session.getAttribute("StudentQuizList");
                 Iterator<StudentQuiz> it = quizList.iterator();
@@ -117,7 +119,7 @@
                     }
                     request.setAttribute("StudentQuizList", null);
                 } else {%>
-                No quizzes to show
+            <h7>No quizzes to show</h7>
                 <%}%>
                 <br>
                 <br>
