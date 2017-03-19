@@ -163,7 +163,7 @@ public java.util.LinkedList<QuestionBank> getQuestionsAndAnswers(int quizID) thr
 {
     db = new DatabaseConnection();
     java.util.LinkedList<QuestionBank> questionList= new java.util.LinkedList<>();
-    String query = "SELECT * FROM question_bank WHERE Quiz_ID = ?";
+    String query = "SELECT * FROM question_bank WHERE Quiz_ID = ? ORDER BY Question_ID";
     
     try (Connection conn = db.connectToDatabase();
             PreparedStatement ps = conn.prepareStatement(query))
@@ -255,8 +255,6 @@ public java.util.LinkedList<Quiz> getArchived(int staffID) {
     return getQuizzes(query, staffID);
 }
 
-
-
 public Quiz getQuizDetails(int quizID) {
         Quiz quiz = new Quiz();
         String query = "SELECT * FROM quiz WHERE Quiz_ID = ?";
@@ -289,6 +287,25 @@ public Quiz getQuizDetails(int quizID) {
         return quiz;
 
     }
+
+public String getStudentStatus(int matricNo, int quizID) {
+    String completed = null;
+    String query = "SELECT Has_Completed FROM student_quiz WHERE Quiz_ID=? AND Matriculation_Number=?";
+    try (Connection con = db.connectToDatabase();
+            PreparedStatement ps = con.prepareStatement(query);) {
+        ps.setInt(1, quizID);
+        ps.setInt(2, matricNo);
+        try(ResultSet rs = ps.executeQuery()) {
+            if  (rs.next()) {
+                completed = rs.getString("Has_Completed");
+            }
+        }
+    } catch (SQLException e) {
+        System.out.println(e.getMessage());
+    }
+    
+    return completed;
+}
 
 public java.util.LinkedList<StudentQuiz> getStudentQuizzes(String query, int matricNo) {
     

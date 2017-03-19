@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import models.AnswerModel;
 import models.AttemptModel;
 import models.QuestionModel;
 import models.QuizModel;
@@ -135,6 +136,12 @@ public class takeQuizOneAtTime extends HttpServlet {
         AttemptModel am = new AttemptModel();
         am.addNewAttempt(matricNo, quizID, date, score);
         
+        if(qm.getStudentStatus(matricNo, quizID).equals("Incomplete")) {
+            AnswerModel ansM = new AnswerModel();
+            ansM.deleteAnswers(qIDs, matricNo);
+            qm.updateStudentQuizStatus(matricNo, quizID, "Completed");
+        }
+        
         request.setAttribute("StudentAnswers",studentAnswers);
         request.setAttribute("RightAnswers",rightAnswers);
         request.setAttribute("QuestionIDs",qIDs);
@@ -146,11 +153,11 @@ public class takeQuizOneAtTime extends HttpServlet {
     }
     
     private void Save(HttpServletRequest request, HttpServletResponse response, String[] studentAnswers, int[] qIDs, int matricNo) throws ServletException, IOException {
-        QuestionModel questionM = new QuestionModel();
+        AnswerModel am = new AnswerModel();
         
         for (int j=0; j<studentAnswers.length;j++) {
             if (studentAnswers[j] != null) {
-                questionM.storeAnswer(studentAnswers[j],qIDs[j],matricNo);
+                am.storeAnswer(studentAnswers[j],qIDs[j],matricNo);
             }
         }
         

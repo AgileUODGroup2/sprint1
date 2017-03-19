@@ -49,18 +49,28 @@
         <h2>Your Results</h2>
        <%   Result result = new Result();
             if (quizResults != null) {
-                Iterator<Result> it = quizResults.iterator();
-                if (it.hasNext()) { Result r = it.next();
-        %>
-        <h3>Most Recent Score: <%=r.getScore()%> </h3>
-        <h3>Attempt: <%=r.getAttempts()%></h3>
-        <h3>Date Completed: <%=r.getDate()%></h3>
-        <%      } while(it.hasNext()) {
+                    Iterator<Result> it = quizResults.iterator();
+                    if (it.hasNext()) 
+                    {     
+                        Result r = it.next();
+            %>
+                        <h3>Most Recent Score: <%=r.getScore()%> </h3>
+                        <h3>Attempt: <%=r.getAttempts()%></h3>
+                        <h3>Date Completed: <%=r.getDate()%></h3>
+            <%      } 
+                    while(it.hasNext()) {
                         Result r = (Result) it.next(); %>
-        <h4>Score: <%=r.getScore()%>, Attempt: <%=r.getAttempts()%>, Date Completed: <%=r.getDate()%></h4>
-        <%      } } else { %>
-        No results to show
-        <% } %>
+                        <h4>Score: <%=r.getScore()%>, Attempt: <%=r.getAttempts()%>, Date Completed: <%=r.getDate()%></h4>
+        <%                              } 
+                    } 
+                    else  { 
+        %>
+                        
+                        <p> No results to show <p>
+                            
+        <%      
+                                                    }
+        %>
  
         </div>
         <br>

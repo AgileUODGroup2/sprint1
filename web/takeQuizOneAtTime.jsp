@@ -4,6 +4,8 @@
     Author     : erincoey
 --%>
 
+<%@page import="models.AnswerModel"%>
+<%@page import="java.util.Arrays"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="stores.QuestionBank"%>
 <%@page import="models.QuizModel"%>
@@ -19,6 +21,7 @@
     </head>
         <%
             Quiz quiz = (Quiz) session.getAttribute("Quiz");
+            LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
             String[] studentAnswers = (String[]) session.getAttribute("StudentAnswers");
             int[] qIDs = (int[]) session.getAttribute("QuestionIDs");
             boolean[] flagged = (boolean[]) session.getAttribute("Flagged");
@@ -65,9 +68,15 @@
                 
                 QuestionBank q = questionList.get(questionNumber);
                 qIDs[questionNumber] = q.getQuestionID();
+                AnswerModel answerM = new AnswerModel();
                 System.out.println("QuestionID " + q.getQuestionID());
                 String sAnswer = studentAnswers[questionNumber];
+                String prevAnswer = answerM.getStudentAnswer(lg.getID(),q.getQuestionID());
+                if (sAnswer == null && prevAnswer != null) {
+                    sAnswer = prevAnswer;
+                }
                 System.out.println("The students answer for this question is: " + sAnswer);
+             
             %>
             
                 <br>
