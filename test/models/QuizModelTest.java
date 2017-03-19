@@ -260,18 +260,18 @@ public class QuizModelTest {
     }
 
    /**
-    * Test for randomising questions in quizzes 
+    * Test for Get questions and answers 
     */
    @Test 
    public void testGetQuestionsAndAnswers()throws SQLException {
        
-       boolean result = false;
+       boolean result;
        boolean expected = true;
        
-        System.out.println("\nTest: Randomising Questions ");
+        System.out.println("\nTest: Get Questions and Answsers ");
         qm.getQuestionsAndAnswers(4);
         LinkedList<QuestionBank> QBtest = qm.getQuestionsAndAnswers(4);
-        int[] test = new int[5];
+        int[] test = new int[4];
         int count = 0;
                 if (QBtest != null) {
                     Iterator<QuestionBank> it = QBtest.iterator();
@@ -294,9 +294,9 @@ public class QuizModelTest {
                 System.out.println("test array" + test[1]);
                 System.out.println("test array" + test[2]);
                 System.out.println("test array" + test[3]);
-                System.out.println("test array" + test[4]);
                 
-               if ((test[0] == 1) && (test[1] == 2) && (test[2] == 3) && (test[3] == 4) && (test[4] == 5)){
+                
+               if ((test[0] == 1) && (test[1] == 2) && (test[2] == 3) && (test[3] == 4)){
                    result = false;
                }
                else {
