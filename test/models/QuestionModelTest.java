@@ -48,6 +48,7 @@ public class QuestionModelTest {
                 PreparedStatement ps = conn.prepareStatement(query)) {
             ps.executeUpdate();
         }
+        
     }
 
     @Test
