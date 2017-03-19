@@ -13,7 +13,7 @@
  <%@ include file='cssStructure.jsp' %>
 <!DOCTYPE html>
 <html>
-    <head>
+  
         <div class="navBar1">
             <ul>
                 <li><a> Create Quiz</a></li>
@@ -28,7 +28,14 @@
             String name = firstName + " " + lastName;
 
         %>
-        <div class ="centerContent1" style="display: block; text-align: center;">
+        
+        <script>
+                function goBack() {
+                    window.history.back();
+                }
+        </script>
+        
+            <div class ="centerContent1" style="display: block; text-align: center;">
             <br>
             <br>
             <h2> Please enter the Quiz details </h2>
@@ -62,11 +69,7 @@
                         <br>
                         <button10 onclick="goBack()">Return to Portal</button10>
 
-<script>
-function goBack() {
-    window.history.back();
-}
-</script>
+
         
     </body>
 </html>
