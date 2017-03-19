@@ -160,16 +160,16 @@
         <h3>Class Average: <%=quiz.getAverageScore()%></h3>
        
         
-        </div>
+        </div> 
         
         <div id="cc2">
-            
+            <br><br>
         <form method="GET" action=<%=contextPath + "/displayQuestionsAndAnswers/" + quiz.getQuizID()%>><input type="submit" value="View Q's and A's" /></form>
         </div>
         <br>
         <br>
     
-        <div id="table">
+        <div id="cc3">
        <%
                         if(!quizResult.isEmpty()) {
                             %>

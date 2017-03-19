@@ -72,7 +72,7 @@ h7{
 
 h8{
      color: white;
-    font-size: 30px;
+    font-size: 22px;
     margin:10px;
     margin: 2%;
     
@@ -383,7 +383,7 @@ button10 {
         background: #d3dfeb;
 }
 #cc3{
-        width: 100%;		/*welcome message is 50% width of centreContent div*/
+        width: 100%;		
 	float: left;
 	height: 30%;
 	overflow: auto;
@@ -392,7 +392,7 @@ button10 {
         margin-top: 30px;
 }
 #cc4{
-      width: 100%;		/*welcome message is 50% width of centreContent div*/
+        width: 100%;		
 	float: left;
 	height:30%;
 	overflow: auto;
@@ -400,15 +400,34 @@ button10 {
     
 }
 
+#cc5{
+        width: 100%;		
+	overflow: auto;
+	height:30%;
+	align-content: center;
+        text-align: center;
+        background: #25619f;
+    
+}
+
+#cc6{
+        width: 100%;		
+	overflow: auto;
+	height:10%;
+        background: #CC0000;
+        
+}
+
+
 #chart_div{
-        width: 100%;		/*welcome message is 50% width of centreContent div*/
+        width: 100%;		
 	float: left;
 	height: 30%;
         margin-top: 30px;
 }
 
 #table{
-        width: 60%;		/*welcome message is 50% width of centreContent div*/
+        width: 100%;		
 	float: left;
 	height: 30%;
 	overflow: auto;
@@ -417,7 +436,7 @@ button10 {
 }
 
 #questions{
-	width: 50%;		/*welcome message is 50% width of centreContent div*/
+	width: 50%;		
 	float: left;
 	height: 30%;
 	overflow: auto;
@@ -425,7 +444,7 @@ button10 {
 }
 
 #result{
-        width: 40%;		/*welcome message is 50% width of centreContent div*/
+        width: 40%;		
 	float: right;
 	height: 30%;
 	overflow: auto;
@@ -434,7 +453,7 @@ button10 {
 
 #quizprofile{
         display:inline-block;
-	width: 45%;		/*welcome message is 50% width of centreContent div*/
+	width: 45%;		
 	float: left;
 	height: 30%;
         background: #042356;

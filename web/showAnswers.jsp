@@ -61,7 +61,7 @@
                     }
                     if (rightAnswers[x].equals(studentAnswers[x])) {
                  %>
-                 <h8 style="color: green; font-weight: bold;">You Answered: Correct</font></h8> <br />
+                 <h8 style="color: green; font-weight: bold;">You Answered: Correct</font></h8><br>
                  <% if (rightAnswers[x].equals("A")){%><h8><font color="green" ><%=q.getA()%></font></h8> <br /><%}
                     else { %><h8><%=q.getA()%></h8> <br />
                     <% } if (rightAnswers[x].equals("B")){%><h8 style ="color: green; font-weight: bold;"><%=q.getB()%></h8> <br /><%}
