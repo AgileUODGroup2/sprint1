@@ -83,14 +83,16 @@
                     <h4>D: <%=q.getD() %></h4>
                     <h4>Answer: <%=q.getAnswer()%></h4>
                     <h4>Answer Description  : <%=q.getAnswerDesc()%></h4>
-                    
+                    <br><Br>
            <%
                     }
                 } else { %>
                 <h7>No quizzes to show</h7>
+                <br>
                 <%}%>
         </div>
-        </div>
+        <br>
+        </div><br>
         
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script type="text/javascript">
@@ -171,6 +173,6 @@
 
 <script type="text/javascript" src="http://www.queness.com/js/bsa.js"></script>
 
-
+<br>
     </body>
 </html>

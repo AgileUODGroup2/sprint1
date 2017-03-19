@@ -103,27 +103,6 @@ public class EditQuiz {
         }
     }
     
-    //
-    public void DeleteQuestion(int questionID, int quizID){
-        try(Connection conn = db.connectToDatabase();) {
-            //Create and prepare query
-            String query =  "DELETE FROM Question_Bank " +
-                            "WHERE Question_ID=? " +
-                            "AND Quiz_Id=?;";
-            PreparedStatement preparedStmt = conn.prepareStatement(query);
-            
-            //Inputs to Query
-            preparedStmt.setInt(1, questionID);
-            preparedStmt.setInt(2, quizID);
-            
-            //Execute Query
-            preparedStmt.executeUpdate();
-        }
-        catch(SQLException err){
-            System.out.println(err.getMessage());
-        }
-    }
-    
     public void EditWholeQuiz(QuestionBank qBank){
         try(Connection conn = db.connectToDatabase();) {
             //Create and prepare query

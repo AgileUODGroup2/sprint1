@@ -36,13 +36,13 @@
 
         <div class="navBar1">
             <ul>
-                <li><a> Get ready to start your quiz!</a></li>
+                <li><a> Quiz time... good luck!</a></li>
             </ul>
         </div>
         <br>
         <br>
         <div class="centerContent1">
-        <form method="post" action="<%=request.getContextPath()%>/takeQuizOneAtTime" style="display: inline-block; margin: auto; text-align: left;">
+        <form method="post" action="<%=request.getContextPath()%>/takeQuizOneAtTime" style="display: inline-block; margin: auto; text-align: left; width:100%;">
         
             <%
             QuizModel quizModel = new QuizModel();
@@ -72,7 +72,7 @@
             
                 <br>
 
-                <h2><%=questionNumber%>: <%=q.getQuestion()%></h2>
+                <h2><%=q.getQuestion()%></h2>
                 <%
                      if(q.HasMedia()){
                          //Adapted source - https://www.w3schools.com/howto/howto_css_modal_images.asp
@@ -118,9 +118,10 @@
                 <%
         }
 %> 
-<input type="hidden" value="<%=questionNumber%>" name="questionNumber">
+<input type="hidden" value="<%=questionNumber%>" name="questionNumber"><br>
 
-<input type="checkbox" name="flag" <%if(flagged[questionNumber]){%>checked<%}%>> Flag this question.
+<input type="checkbox" name="flag" <%if(flagged[questionNumber]){%>checked<%}%>> <h8 style="font-weight: bold;">Flag this question</h8><br>
+<br>
 
 <%
     System.out.println("question number = " + questionNumber + " numOfQuestions = " + numOfQuestions);
@@ -132,31 +133,38 @@
     }
     else
     {
-        %>
+%><br>
         <input type="submit" value="Next Question" name="next" style="margin: auto;">
         <%
     }
 %>
 <br>
-<input type="submit" value="Save" style="margin: auto;">
+<input type="submit" value="Save for another time" style="margin: auto;">
 <br>
+<br>
+
+<div id ="cc5">
+    <h3>Flagged Questions </h3>
 <%
         Boolean flag;
         for(int i=0;i<numOfQuestions;i++){
             flag = flagged[i];
             %>
-            <input type="submit" value="<%=i%><%if(flag == true){%> - FLAGGED<%}%>" name="jumpQuestion" style="margin: auto;">
+
+            <input type="submit" value="<%=i%><%if(flag == true){%> - FLAGGED<%}%>" name="jumpQuestion" style="margin: auto; display: inline-block; text-align: center; background-color: #042356;">
             <%
             System.out.println("Flagged value for question " + i + " = " + flag);
         }
         System.out.println("");
 %>
- </form>
+
+
+</form><br>
+<br><br>
+            </div>
 <br>
-<br>
-<br>
+<br><br><br>
              
-        
-        </div>
+     </div>
     </body>
 </html>

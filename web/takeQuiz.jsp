@@ -34,7 +34,7 @@
 
         <div class="navBar1">
             <ul>
-                <li><a> Get ready to start your quiz!</a></li>
+                <li><a> Quiz time... good luck!</a></li>
             </ul>
         </div>
         <br>
@@ -67,7 +67,7 @@
             <br>
            
              
-                 <h2><%=q.getQuestion()%></h2>
+                 <h3><%=q.getQuestion()%></h3>
                  <%
                      if(q.HasMedia()){
                          //Adapted source - https://www.w3schools.com/howto/howto_css_modal_images.asp
