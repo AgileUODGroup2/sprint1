@@ -74,7 +74,7 @@
         </table>
 <br>
 <br>
-</div>
+                    </div><Br>
 
 <button10 onclick="goBack()">Return to Portal</button10>
 

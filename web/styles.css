@@ -71,7 +71,11 @@ h7{
 }
 
 h8{
-    font-size: 25px;
+     color: white;
+    font-size: 30px;
+    margin:10px;
+    margin: 2%;
+    
 }
 
 h10{
@@ -239,6 +243,7 @@ input[type=submit] {
     border-radius: 8px;
     display:block;
     margin: auto;
+    align-content: center;
     -webkit-appearance: none;
     
 }
@@ -257,6 +262,10 @@ select {
 }
 
 span { display: block; margin: 0 0 3px; font-size: 1.2em; font-weight: bold; }
+.buttonHolder{
+    text-align: center; 
+    align-content: center;
+}
 
 button {
     background-color: yellow;
@@ -381,6 +390,14 @@ button10 {
         background: #25619f;
         align-content: center;
         margin-top: 30px;
+}
+#cc4{
+      width: 100%;		/*welcome message is 50% width of centreContent div*/
+	float: left;
+	height:30%;
+	overflow: auto;
+        background: #CC0000;
+    
 }
 
 #chart_div{
