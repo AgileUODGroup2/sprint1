@@ -50,20 +50,20 @@ public class chooseQuizType extends HttpServlet{
         QuizModel qm = new QuizModel();
         Quiz quiz = qm.getQuizDetails(quizID);
         
-            RequestDispatcher rd = request.getRequestDispatcher("/chooseQuizType.jsp"); 
-            quiz.setCounter(0);
-            HttpSession session = request.getSession();
+        RequestDispatcher rd = request.getRequestDispatcher("/chooseQuizType.jsp"); 
+        quiz.setCounter(0);
+        HttpSession session = request.getSession();
             
-            int i = quiz.getNumberOfQuestions();
-            String[] studentAnswers = new String[i];
-            boolean[] flagged = new boolean[i];
-            int[] qIDs = new int[i];
+        int i = quiz.getNumberOfQuestions();
+        String[] studentAnswers = new String[i];
+        boolean[] flagged = new boolean[i];
+        int[] qIDs = new int[i];
         
-            session.setAttribute("Quiz", quiz);
-            session.setAttribute("StudentAnswers", studentAnswers);
-            session.setAttribute("QuestionIDs", qIDs);
-            session.setAttribute("Flagged", flagged);
-            rd.forward(request, response);
+        session.setAttribute("Quiz", quiz);
+        session.setAttribute("StudentAnswers", studentAnswers);
+        session.setAttribute("QuestionIDs", qIDs);
+        session.setAttribute("Flagged", flagged);
+        rd.forward(request, response);
     }
     
 

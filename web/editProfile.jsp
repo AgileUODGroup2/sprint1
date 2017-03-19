@@ -61,19 +61,20 @@
             <br>
             
             <br>
-            <br>
-            <br>
+       
                 <input type="submit" style="float-left: 50%;" value="Submit">
-                <button10 onclick="goBack()">Return to Portal</button10>
+               
+        </form>
+            <br>
+            <br>
+       </div><br>
+            
+             <button10 onclick="goBack()">Return to Portal</button10>
                 <script>
                     function goBack() {
                         window.history.back();
                     
                     }
                     </script>
-        </form>
-            <br>
-            <br>
-       </div>
     </body>
 </html>

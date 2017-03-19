@@ -16,9 +16,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="/AC31007Quiz/styles.css">
-        <title>Take Quiz</title>
+        <title>Your Results</title>
     </head>
-    <body>
+    <body bgcolor="d3dfeb">
       <%
             String[] studentAnswers = (String[]) request.getAttribute("StudentAnswers");
             String[] rightAnswers = (String[]) request.getAttribute("RightAnswers");
@@ -43,51 +43,52 @@
         <br>
         <br>
         <div class="centerContent1">
-            <br>
-            <h7> Your Score: <%=request.getAttribute("Score")%> % </h7>
-        
+            <div id ="cc4"><br>
+                <h7>  Your Score: <%=request.getAttribute("Score")%> %  </h7><br>
+            </div><br><br>
         <%
             QuestionModel qm = new QuestionModel();
             for (int x=0;x<questionIDs.length;x++) {
                 QuestionBank q = qm.getQuestion(questionIDs[x]);
             
 %> 
-<br>
-<h2><%=q.getQuestion()%></h2>
+<br><br>
+<br><h3><%=q.getQuestion()%></h3>
                  <%
                     if(q.HasMedia()){
-                 %><img src="<%=request.getContextPath() + "/question-img/" + q.getQuestionID()%>" width="200" style="display: inline-block;">
+                        %><img src="<%=request.getContextPath() + "/question-img/" + q.getQuestionID()%>" width="200" style="display: inline-block;">
                  <%
                     }
                     if (rightAnswers[x].equals(studentAnswers[x])) {
                  %>
-                 <font color="green">Correct!</font> <br />
-                 <% if (rightAnswers[x].equals("A")){%><font color="green"><%=q.getA()%></font> <br /><%}
-                    else { %><%=q.getA()%> <br />
-                 <% } if (rightAnswers[x].equals("B")){%><font color="green"><%=q.getB()%></font> <br /><%}
-                    else { %><%=q.getB()%> <br />
-                 <% } if (rightAnswers[x].equals("C")){%><font color="green"><%=q.getC()%></font> <br /><%}
-                    else { %><%=q.getC()%> <br />
-                 <% } if (rightAnswers[x].equals("D")){%><font color="green"><%=q.getD()%></font> <br /><%}
-                    else { %><%=q.getD()%> <br />
-                 <% }
-   } else { %>
-                 <font color="red">Wrong answer</font> <br/>
-                 <% if (rightAnswers[x].equals("A")){%><font color="green"><%=q.getA()%></font> <br />
-                 <% } else if (studentAnswers[x].equals("A")) { %><font color="red"><%=q.getA()%></font> <br />
-                 <% } else { %><%=q.getA()%> <br />
-                 <% } if (rightAnswers[x].equals("B")){%><font color="green"><%=q.getB()%></font> <br />
-                 <% } else if (studentAnswers[x].equals("B")) { %><font color="red"><%=q.getB()%></font> <br />
-                 <% } else { %><%=q.getB()%> <br />
-                 <% } if (rightAnswers[x].equals("C")){%><font color="green"><%=q.getC()%></font> <br />
-                 <% } else if (studentAnswers[x].equals("C")) { %><font color="red"><%=q.getC()%></font> <br />
-                 <% } else { %><%=q.getC()%> <br />
-                 <% } if (rightAnswers[x].equals("D")){%><font color="green"><%=q.getD()%></font> <br />
-                 <% }  else if (studentAnswers[x].equals("D")) { %><font color="red"><%=q.getD()%></font> <br />
-                 <% } else { %><%=q.getD()%> <br />
+                 <h8 style="color: green; font-weight: bold;">You Answered: Correct</font></h8><br>
+                 <% if (rightAnswers[x].equals("A")){%><h8><font color="green" ><%=q.getA()%></font></h8> <br /><%}
+                    else { %><h8><%=q.getA()%></h8> <br />
+                    <% } if (rightAnswers[x].equals("B")){%><h8 style ="color: green; font-weight: bold;"><%=q.getB()%></h8> <br /><%}
+                    else { %><h8><%=q.getB()%></h8> <br />
+                    <% } if (rightAnswers[x].equals("C")){%><h8 style ="color: green; font-weight: bold;"><%=q.getC()%></h8> <br /><%}
+                    else { %><h8><%=q.getC()%> </h8><br />
+                    <% } if (rightAnswers[x].equals("D")){%><h8 style ="color: green; font-weight: bold;"><%=q.getD()%></h8> <br /><%}
+                    else { %><h8><%=q.getD()%></h8> <br />
+                  <% }
+                    } else { %>
+                    
+                 <h8 style="color: red; font-weight: bold;">You Answered: Wrong</font></h8> <br />
+                 <% if (rightAnswers[x].equals("A")){%><h8 style ="color: green; font-weight: bold;"><%=q.getA()%></h8> <br />
+                 <% } else if (studentAnswers[x].equals("A")) { %><h8 style ="color: red; font-weight: bold;"><%=q.getA()%></h8> <br />
+                 <% } else { %><h8><%=q.getA()%></h8> <br />
+                 <% } if (rightAnswers[x].equals("B")){%><h8 style ="color: green; font-weight: bold;"><%=q.getB()%></h8> <br />
+                 <% } else if (studentAnswers[x].equals("B")) { %><h8 style ="color: red; font-weight: bold;"><%=q.getB()%></h8> <br />
+                 <% } else { %><h8><%=q.getB()%> </h8><br />
+                 <% } if (rightAnswers[x].equals("C")){%><h8 style ="color: green; font-weight: bold;"><%=q.getC()%></h8> <br />
+                 <% } else if (studentAnswers[x].equals("C")) { %><h8 style ="color: red; font-weight: bold;"><%=q.getC()%></h8> <br />
+                 <% } else { %><h8><%=q.getC()%> </h8> <br />
+                 <% } if (rightAnswers[x].equals("D")){%><h8 style ="color: green; font-weight: bold;"><%=q.getD()%></h8> <br />
+                 <% }  else if (studentAnswers[x].equals("D")) { %><h8 style ="color: red; font-weight: bold;"><%=q.getD()%></h8> <br />
+                 <% } else { %><h8><%=q.getD()%> </h8><br />
                 <%  }
 }
-%> Answer Description: <%=q.getAnswerDesc()%> <br /><br /> <%
+                %> <h8 style="text-align: center;">Answer Description: <%=q.getAnswerDesc()%> </h8> <%
 }
 %>
 <br>

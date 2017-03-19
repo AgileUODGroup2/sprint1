@@ -4,6 +4,7 @@
     Author     : erincoey
 --%>
 
+<%@page import="models.AnswerModel"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="stores.QuestionBank"%>
 <%@page import="models.QuizModel"%>
@@ -34,7 +35,7 @@
 
         <div class="navBar1">
             <ul>
-                <li><a> Get ready to start your quiz!</a></li>
+                <li><a> Quiz time... good luck!</a></li>
             </ul>
         </div>
         <br>
@@ -44,6 +45,7 @@
         <%
             QuizModel quizModel = new QuizModel();
             java.util.LinkedList<QuestionBank> questionList = new java.util.LinkedList<>();
+            AnswerModel am = new AnswerModel();
            
             int quizID = quiz.getQuizID();
             int numOfQuestions = quiz.getNumberOfQuestions();
@@ -67,19 +69,19 @@
             <br>
            
              
-                 <h2><%=q.getQuestion()%></h2>
+                 <h3><%=q.getQuestion()%></h3>
                  <%
                      if(q.HasMedia()){
                          //Adapted source - https://www.w3schools.com/howto/howto_css_modal_images.asp
                  %>
                  
-                 <img class="qImage" id="<%="img" + q.getQuestionID()%>" src="<%=request.getContextPath() + "/question-img/" + q.getQuestionID()%>" width="200" style="display: inline-block;">
+                 <img class="qImage" id="<%="img" + q.getQuestionID()%>" src="<%=request.getContextPath() + "/question-img/" + q.getQuestionID()%>" width="200" style="display: inline-block; margin-left: 10px;">
                 
                  <div id="myModal" class="modal">
                         <span class="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
                         <img class="modal-content" id="modalImage">
                 </div>
-                 
+                                                                                                                                                                                                                                                                                                                          
                  <script>
                     var modal = document.getElementById('myModal');
                     var img = document.getElementById('<%="img" + q.getQuestionID()%>');
@@ -94,16 +96,17 @@
                     }
                  </script>
                  <%
-                     }
+                    }
+                    String pa = am.getStudentAnswer(lg.getID(),q.getQuestionID());
                  %>
              <br>   
-             <input type="radio" name="answer<%=i%>" value="A"> <h8><%=q.getA()%></h8>
+             <input type="radio" name="answer<%=i%>" value="A"<%if(pa != null && pa.equals("A")){%> checked<%}%>><%=q.getA()%></h8>
              <br>
-             <input type="radio" name="answer<%=i%>" value="B"> <h8><%=q.getB()%></h8>
+             <input type="radio" name="answer<%=i%>" value="B"<%if(pa != null && pa.equals("B")){%> checked<%}%>> <h8><%=q.getB()%></h8>
              <br>
-             <input type="radio" name="answer<%=i%>" value="C"> <h8><%=q.getC()%></h8>
+             <input type="radio" name="answer<%=i%>" value="C"<%if(pa != null && pa.equals("C")){%> checked<%}%>> <h8><%=q.getC()%></h8>
              <br>
-             <input type="radio" name="answer<%=i%>" value="D"> <h8><%=q.getD()%></h8>
+             <input type="radio" name="answer<%=i%>" value="D"<%if(pa != null && pa.equals("D")){%> checked<%}%>> <h8><%=q.getD()%></h8>
              <input type="hidden" name="questionID<%=i%>" value="<%=q.getQuestionID()%>" />
              <br>
               
@@ -115,7 +118,10 @@
 %>
 <input type="hidden" value="<%=i%>" name="counter">
 <input type="hidden" value="<%=quiz.getQuizID()%>" name="quizID" />
-<input type="submit" value="Submit" name="submit" style="margin: auto;"> <input type="submit" value="Save" name="submit" />
+
+<input type="submit" value="Submit" name="submit"> <br>
+<input type="submit" value="Save for another time" name="submit" />
+
  </form>
 <br>
 <br>

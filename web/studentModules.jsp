@@ -10,7 +10,7 @@
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="lib.database.DatabaseConnection"%>
-<%@page import="models.staffModulesModel"%>
+<!--   @page import="models.staffModulesModel"    -->
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ include file='cssStructure.jsp' %>
 <!DOCTYPE html>
@@ -74,7 +74,7 @@
         </table>
 <br>
 <br>
-</div>
+                    </div><Br>
 
 <button10 onclick="goBack()">Return to Portal</button10>
 
