@@ -8,6 +8,7 @@ package models;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.servlet.http.Part;
 import lib.database.DatabaseConnection;
@@ -17,6 +18,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import stores.QuestionBank;
 
 /**
  *
@@ -58,5 +60,35 @@ public class QuestionModelTest {
         String[] rightAnswers = questionM.getRightAnswers(questionIDs);
         
         assertArrayEquals(rightAnswers, answers);
+    }
+    
+    @Test
+    public void testGetQuestions() {
+        System.out.println("Test for get questions");
+        
+        QuestionModel questionM = new QuestionModel();
+        boolean state;
+        
+        QuestionBank questionBank = new QuestionBank();
+        questionBank.setQuestionID(200); 
+        questionBank.setQuizID(1);
+        questionBank.setQuestion("Test?");
+        questionBank.setA("Yes");
+        questionBank.setB("No");
+        questionBank.setC("Maybe");
+        questionBank.setD("Dunno");
+        questionBank.setCorrectAnswer("A");
+        questionBank.setAnswerDesc("Description");        
+        
+        QuestionBank questionBankTest = questionM.getQuestion(200);
+        
+        String question1 = questionBank.getQuestion();
+        String question2 = questionBankTest.getQuestion();
+        
+        
+       
+        assertEquals("True",question1,question2);
+        
+        //System.out.println("Test " + state);
     }
 }
