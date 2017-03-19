@@ -54,7 +54,7 @@
                         <br>
 
                         <label for = "answerDesc">Answer Description: </label>
-                        <textarea name="answerDesc" cols="70" rows="4" id="answerDesc"></textarea>
+                        <textarea name="answerDesc" cols="70" rows="8" id="answerDesc"></textarea>
                         <br>
                         <br>
                         <br>
