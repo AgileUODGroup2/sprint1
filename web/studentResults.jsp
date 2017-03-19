@@ -207,73 +207,52 @@
                         }
    
                 }
-                else {
-                    %>
-                    <div id="cc1">  
-                        <h2>Quiz Profile</h2>
-
-                        <h3>Quiz ID: <%=quiz.getQuizID()%></h3>
-                        <h3>Date Created: <%=quiz.getDateCreated()%></h3>
-                        <h3>Number of Q's: <%=quiz.getNumberOfQuestions()%></h3>
-                        <h3>Quiz Status: <%=quiz.getStatus()%></h3>
-
-                         <h3>Class Average: <%=quiz.getAverageScore()%></h3>
-                        </div>
-                        <div id="cc2">
+                else if (type == "Archived Quizzes")
+{
+         %>
+         <div id="cc1">  
+        <h2>Quiz Profile</h2>
+        
+        <h3>Quiz ID: <%=quiz.getQuizID()%></h3>
+        <h3>Date Created: <%=quiz.getDateCreated()%></h3>
+        <h3>Number of Q's: <%=quiz.getNumberOfQuestions()%></h3>
+        <h3>Quiz Status: <%=quiz.getStatus()%></h3>
+        <br>
+       
+        
+        </div>
+        
+        <div id="cc2">
                         
                      <form method="GET" action=<%=contextPath + "/displayQuestionsAndAnswers/" + quiz.getQuizID()%>><input type="submit" value="View Q's and A's" /></form>
                     </div>
-   
-                    <%
-                }
+        <%
+}
+       
+        
+        
+           else if (type == "Unfinished Quizzes")
+{
+         %>
+         <div id="cc1">  
+        <h2>Quiz Profile</h2>
+        
+        <h3>Quiz ID: <%=quiz.getQuizID()%></h3>
+        <h3>Date Created: <%=quiz.getDateCreated()%></h3>
+        <h3>Number of Q's: <%=quiz.getNumberOfQuestions()%></h3>
+        <h3>Quiz Status: <%=quiz.getStatus()%></h3>
+        <br>
+       
+        
+        </div>
+        
+        <div id="cc2">
+                        
+                     <form method="GET" action=<%=contextPath + "/displayQuestionsAndAnswers/" + quiz.getQuizID()%>><input type="submit" value="View Q's and A's" /></form>
+                    </div>
 
-                if (!type.equals("Unfinished Quizzes")) { %>
-
-<form method="POST" action="<%=contextPath%>/SearchResults">
-    <select name="day1">
-    <% for(int i=1;i<=31;i++) {
-	%> <option value="<%=i%>"><%=i%></option> <%
-	} %>
-    </select>
-
-    <select name="month1">
-    <%
-    String[] months = {"January","February","March","April","May","June","July","August","September","October","November","December"};
-    for(int i=1;i<=12;i++) {
-    %> <option value="<%=i%>"><%=months[i-1]%></option> <%
-    } %>
-    </select>
-    <select name="year1">
-    <%
-    for(int i=2005;i<=2017;i++) {
-    %> <option value="<%=i%>"><%=i%></option> <%
-    } %>
-    </select>
-    <br />
-    <select name="day2">
-    <% for(int i=1;i<=31;i++) {
-	%> <option value="<%=i%>"><%=i%></option> <%
-	} %>
-    </select>
-
-    <select name="month2">
-    <%
-    for(int i=1;i<=12;i++) {
-    %> <option value="<%=i%>"><%=months[i-1]%></option> <%
-    } %>
-    </select>
-    <select name="year2">
-    <%
-    for(int i=2005;i<=2016;i++) {
-    %> <option value="<%=i%>"><%=i%></option> <%
-    } %><option value="2017" selected="selected">2017</option>
-    </select>
-    <input type="hidden" name="QuizID" value="<%=quiz.getQuizID()%>" />
-    <input type="submit" value="Filter" />
-</form>
-
-            <%  }
-        %>
-    
+                     <%
+                         }
+%>
     </body>
 </html>

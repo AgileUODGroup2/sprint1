@@ -4,19 +4,19 @@
     Author     : erincoey
 --%>
 
-<%@page import="stores.LoggedIn"%>
 <%@page import="stores.Quiz"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ include file='cssStructure.jsp' %>
 <!DOCTYPE html>
 <html>
-    <head>
+
       
         <div class="navBar1">
             <ul>
                 <li><a> Create Quiz</a></li>
             </ul>
-        </div><br><br>
+        </div>
+        <br><br>
         
         <div class ="centerContent1">
             

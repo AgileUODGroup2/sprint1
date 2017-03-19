@@ -68,9 +68,9 @@
         <form method="GET" action="unfinishedQuiz"><input type="submit" value="Reset" /></form>
         <br>
         <%
-            }  if (type.equals("Archived")) {
+            }  if (type.equals("Archived Quizzes")) {
         %>
-        <form method="GET" action="Archived"><input type="submit" value="Reset" /></form>
+        <form method="GET" action="archived"><input type="submit" value="Reset" /></form>
         <br>
         
          <% }java.util.LinkedList<Quiz> quizList = (java.util.LinkedList<Quiz>) request.getAttribute("QuizList");
