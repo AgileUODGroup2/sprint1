@@ -183,7 +183,7 @@ public class QuizModelTest {
     public void testGetQuizID()  {
         
         int count = 0;
-        int result = 17;
+        int result = 18;
         Quiz q = new Quiz();
       
         System.out.println("\nTest: get Quiz ID ");
@@ -285,11 +285,11 @@ public class QuizModelTest {
        
         boolean expected = true;
         boolean unfinResult, liveResult, completedResult, allResult, archivedResult;
-        boolean quiz1, quiz2, quiz3, quiz4,quiz5,quiz6, quiz7;
+        boolean quiz1, quiz2, quiz3, quiz4,quiz5,quiz6, quiz7, quiz8;
         int [] unfinishedQuizzes = new int[2];
         int [] liveQuiz = new int[5];
         int [] completedQuiz = new int[1];
-        int [] allQuizzes = new int[7];
+        int [] allQuizzes = new int[8];
         int [] archivedQuiz = new int[1];
         int ccount = 0, lcount = 0, uncount = 0, allcount = 0, archcount = 0;
         boolean state; 
@@ -416,10 +416,15 @@ public class QuizModelTest {
        System.out.println(quiz6);
        
        System.out.println("All count 6: " + allQuizzes[6]);
-       quiz7 = (332 == allQuizzes[6]);
+       quiz7 = (362 == allQuizzes[6]);
        System.out.println(quiz7);
+       
+       System.out.println("All count 7: " + allQuizzes[7]);
+       quiz8 = (370 == allQuizzes[7]);
+       System.out.println(quiz8);
+       
   
-       allResult = ((quiz1 == true) && (quiz2 == true) && (quiz3 == true) && (quiz4 == true) && (quiz5 == true) && (quiz6 == true) && (quiz7 == true));
+       allResult = ((quiz1 == true) && (quiz2 == true) && (quiz3 == true) && (quiz4 == true) && (quiz5 == true) && (quiz6 == true) && (quiz7 == true) && (quiz8 == true));
         System.out.println("AllResult: " + allResult);  
         
   //get Archived quizzes
@@ -609,9 +614,9 @@ public class QuizModelTest {
         boolean expected = true;
         boolean compResult, incompResult, pendResult;
         boolean quiz1, quiz2, quiz3, quiz4;
-        int [] completedQuiz = new int[5];
-        int [] incompleteQuiz = new int[2];
-        int [] pendingQuiz = new int[4];
+        int [] completedQuiz = new int[3];
+        int [] incompleteQuiz = new int[1];
+        int [] pendingQuiz = new int[2];
         int ccount = 0;
         int incount = 0;
         int pcount = 0;
@@ -631,8 +636,7 @@ public class QuizModelTest {
           }
       }
   
-       
-       if (ccount == 5){
+     if (ccount == 3){
            
            compResult = true;
        }
@@ -656,12 +660,10 @@ public class QuizModelTest {
        System.out.println("Incomplete count 0: " + incompleteQuiz[0]);
        quiz1 = (14 == incompleteQuiz[0]);
         System.out.println(quiz1);
-       System.out.println("Incompleted count 1: " + incompleteQuiz[1]); 
-       quiz2 = (15 == incompleteQuiz[1]);
-        System.out.println(quiz2);
+    
   
        
-       if ((quiz1 == true) && (quiz2 == true)){
+       if (quiz1 == true){
            
            incompResult = true;
        }
@@ -683,7 +685,7 @@ public class QuizModelTest {
       }
        
   
-       if (pcount != 4){
+       if (pcount != 2){
            pendResult = false;
        }
        else{
@@ -715,16 +717,16 @@ public class QuizModelTest {
         boolean expected = true;
         boolean compResult, incompResult, pendResult;
         boolean quiz1, quiz2, quiz3, quiz4;
-        int [] completedQuizMod = new int[1];
+        int [] completedQuizMod = new int[2];
         int [] incompleteQuizMod = new int[1];
-        int [] pendingQuizMod = new int[4];
+        int [] pendingQuizMod = new int[1];
         int ccount = 0;
         int incount = 0;
         int pcount = 0;
         boolean state;
-       String modulec = "AC32007";
+       String modulec = "AC31007";
        String modulei = "AC31007";
-       String modulep = "AC31007";
+       String modulep = "AC31009";
          
         System.out.println("\nTest: Get Student Quizzes Mod ");
       
@@ -738,12 +740,13 @@ public class QuizModelTest {
               StudentQuiz cQ = (StudentQuiz) it.next();
               completedQuizMod[ccount] = cQ.getQuizID();
               System.out.println("completed Quiz"+ccount + cQ.getQuizID());
+              System.out.println("Completed Quiz ID: "+ cQ.getQuizID());
               ccount++; 
           }
       }
-  
+      
        
-       if (ccount == 1){
+       if (ccount == 2){
            
            compResult = true;
        }
@@ -793,7 +796,7 @@ public class QuizModelTest {
       }
        
   
-       if (pcount != 3){
+       if (pcount != 1){
            pendResult = false;
        }
        else{
