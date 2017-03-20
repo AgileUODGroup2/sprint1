@@ -60,7 +60,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
     java.util.LinkedList<QuestionBank> questionList = new java.util.LinkedList();
     session.setAttribute("QuestionBank", questionList);
 
-    response.sendRedirect("/AC31007Quiz/addQuestions.jsp");
+    response.sendRedirect(request.getContextPath() + "/addQuestions.jsp");
     
 }
 
