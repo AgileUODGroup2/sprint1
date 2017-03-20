@@ -66,6 +66,7 @@
                     while(it.hasNext()) {
                         Result r = (Result) it.next();
                     %> <%=r.getMatricNo()%>, <%=r.getQuizID()%>, <%=r.getAttempts()%>, <%=r.getCompleted()%>, <%=r.getScore()%>, <%=r.getDate()%> <%
+                        System.out.println("Get Attempts " + r.getAttempts());
                     }
                     request.setAttribute("ResultList", null);
                 }
