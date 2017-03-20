@@ -47,37 +47,11 @@ public class ResultModel {
         }
         return results;
     }
-    
-    
-    public java.util.LinkedList<Result> getResultsByMatriculationDESC() {
-        java.util.LinkedList<Result> results = new java.util.LinkedList<>();
-        String query = "SELECT * FROM Student_Quiz ORDER BY Matriculation_Number DESC";
-        DatabaseConnection dConn = new DatabaseConnection();
-        try (Connection conn = dConn.connectToDatabase()){
-            PreparedStatement preparedStmt = conn.prepareStatement(query);
-            try (ResultSet set = preparedStmt.executeQuery()) {
-                while(set.next()) {
-                    Result res = new Result();
-                    res.setMatricNo(set.getInt("Matriculation_Number"));
-                    res.setQuizID(set.getInt("Quiz_ID"));
-                    res.setCompleted(set.getBoolean("Has_Completed"));
-                    res.setAttempts(set.getInt("Attempted_Count"));
-                    res.setScore(set.getInt("Score"));
-                    res.setDate(set.getDate("Date_Completed"));
-                    results.add(res);
-                 }
-            }
-        } catch(SQLException err) {
-            System.out.println(err.getMessage());
-        }
-        return results;
-    }
      
     public java.util.LinkedList<Result> getQuizResult(int matriculationNo, int quizID) {
         java.util.LinkedList<Result> studentResults = new java.util.LinkedList<>();
         String query = "SELECT * FROM attempts WHERE Quiz_ID = ? AND Matriculation_Number = ? ORDER BY AttemptNo DESC";
         
-        System.out.println("Getting attempts for "+quizID+" and "+matriculationNo);
         try (Connection con = db.connectToDatabase();
                 PreparedStatement ps = con.prepareStatement(query);) {
             ps.setInt(1, quizID);
