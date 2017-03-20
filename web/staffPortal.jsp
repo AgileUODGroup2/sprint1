@@ -32,14 +32,13 @@
             <h2>Your Profile</h2>
             <h3>Staff ID:&nbsp;<%=lg.getUsername()%></h3>
             <h3>First Name:&nbsp;<%=lg.getFirstName()%></h3>
-            <h3>Last Name:&nbsp;<%=lg.getLastName()%></h3>
+            <h3>Last Name:&nbsp;<%=lg.getLastName()%></h3><br><Br>
 
-            
-            
+         
        </div>
           
             
- 
+           
         <div id="cc2">
              <br>
              <br>
@@ -76,11 +75,13 @@
             <br><br><br>
     
        </div>
-
+           
             <div id="myModal" class="modal">
                         <span class="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
                         <img class="modal-content" id="modalImage">
          </div>
+             <br>
+             <br><br>
          <script>
             var modal = document.getElementById('myModal');
             var img = document.getElementById('<%="img" + lg.getID()%>');
@@ -94,6 +95,7 @@
               modal.style.display = "none";
             }
          </script>
-
+         <br>
+         <br>
 </body>
 </html>

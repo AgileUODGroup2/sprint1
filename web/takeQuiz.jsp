@@ -100,7 +100,7 @@
                     String pa = am.getStudentAnswer(lg.getID(),q.getQuestionID());
                  %>
              <br>   
-             <input type="radio" name="answer<%=i%>" value="A"<%if(pa != null && pa.equals("A")){%> checked<%}%>><%=q.getA()%></h8>
+             <input type="radio" name="answer<%=i%>" value="A"<%if(pa != null && pa.equals("A")){%> checked<%}%>><h8><%=q.getA()%></h8>
              <br>
              <input type="radio" name="answer<%=i%>" value="B"<%if(pa != null && pa.equals("B")){%> checked<%}%>> <h8><%=q.getB()%></h8>
              <br>

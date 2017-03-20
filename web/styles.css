@@ -251,14 +251,27 @@ input[type=submit] {
 select {
     background-color: #25619f;
     color: white;
-    padding: 15px 32px;
     text-align: center;
     text-decoration: none;
     display: block;
-    font-size: 20px;
+    font-size: 10px;
     border: 1px solid #042356;
     margin: auto;
+    padding: 15px 32px;
+    font-size: 20px;
     width: 25%;
+    
+}
+.select1{
+    background-color: #25619f;
+    padding: 1px;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 15px;
+    border: 1px solid #042356;
+    margin: auto;
 }
 
 span { display: block; margin: 0 0 3px; font-size: 1.2em; font-weight: bold; }
