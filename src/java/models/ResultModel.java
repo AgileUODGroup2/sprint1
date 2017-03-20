@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package models;
-import java.sql.Connection;
 import java.sql.*;
 import lib.database.DatabaseConnection;
 import stores.Result;

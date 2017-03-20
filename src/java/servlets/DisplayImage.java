@@ -28,6 +28,7 @@ import models.user;
 @MultipartConfig(maxFileSize = 16177216)
 public class DisplayImage extends HttpServlet{
     
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String uri = request.getRequestURI();
@@ -55,11 +56,15 @@ public class DisplayImage extends HttpServlet{
         user us = new user();
         byte byteArray[] = us.getProfileImage(isStaff, userID);
         
-        response.setContentType("image");
-        OutputStream os = response.getOutputStream();
-        os.write(byteArray);
-        os.flush();
-        os.close();
+        if(byteArray == null){
+            response.sendRedirect(request.getContextPath() + "/pic1.png");
+        } else {
+            response.setContentType("image");
+            OutputStream os = response.getOutputStream();
+            os.write(byteArray);
+            os.flush();
+            os.close();
+        }
     }
     
     private void displayQuestionImage(int questionID, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

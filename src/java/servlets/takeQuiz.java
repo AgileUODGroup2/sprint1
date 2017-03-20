@@ -19,7 +19,6 @@ import models.AnswerModel;
 import models.AttemptModel;
 import models.QuestionModel;
 import models.QuizModel;
-import models.ResultModel;
 import stores.LoggedIn;
 import stores.Quiz;
 
@@ -46,6 +45,7 @@ public class takeQuiz extends HttpServlet{
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String counter = request.getParameter("counter");
         int i = Integer.parseInt(counter);
+        int quizID = Integer.parseInt(request.getParameter("quizID"));
         
         HttpSession session = request.getSession();
         LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
@@ -53,6 +53,12 @@ public class takeQuiz extends HttpServlet{
         
         String[] studentAnswers = new String[i];
         int[] qIDs = new int[i];
+        
+        QuizModel qm = new QuizModel();
+        if(qm.getStudentStatus(matricNo, quizID).equals("Incomplete")) {
+            AnswerModel ansM = new AnswerModel();
+            ansM.deleteAnswers(qIDs, matricNo);
+        }
 
         for(int x=1; x<=i; x++) {
             studentAnswers[x-1] = request.getParameter("answer"+x);
@@ -60,7 +66,7 @@ public class takeQuiz extends HttpServlet{
         }
         
         String submit = request.getParameter("submit");
-        if (submit.equals("Save")) {
+        if (submit.equals("Save for another time")) {
             save(request,response,studentAnswers,qIDs, matricNo);
         } else {
             submit(request,response,studentAnswers,qIDs, matricNo);
@@ -100,8 +106,6 @@ public class takeQuiz extends HttpServlet{
         am.addNewAttempt(matricNo, quizID, date, score);
         
         if(qm.getStudentStatus(matricNo, quizID).equals("Incomplete")) {
-            AnswerModel ansM = new AnswerModel();
-            ansM.deleteAnswers(qIDs, matricNo);
             qm.updateStudentQuizStatus(matricNo, quizID, "Completed");
         }
         

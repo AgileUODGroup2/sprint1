@@ -13,13 +13,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import models.EditQuiz;
 import models.QuestionModel;
-import models.QuizModel;
 import stores.QuestionBank;
-import stores.Quiz;
 
 /**
  *
@@ -99,11 +96,11 @@ public class editQuiz extends HttpServlet {
         //Change question in database
         editQuiz.EditWholeQuiz(qBank);
         
-        if(questionMedia != null){
+        if(questionMedia.getSize() != 0){
             qBank.setMedia(questionMedia);
             qBank.setHasMedia(true);
             editQuiz.updateQuestionMedia(questionID, questionMedia);
-        } //else if(questionMedia = null)
+        }
         
         response.sendRedirect(contextPath+"/displayQuestionsAndAnswers/"+quizID);
     }

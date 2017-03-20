@@ -16,7 +16,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" type="text/css" href="/AC31007Quiz/styles.css">
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() + "/styles.css"%>">
         <title>Student Results</title>
        
         <%
@@ -98,11 +98,11 @@
     <body bgcolor="d3dfeb">
         <div class="navBar">
             <ul>
-                <li><a href="/AC31007Quiz/index.jsp">QUIZ MASTER </a></li>
+                <li><a href="<%=request.getContextPath() + "/index.jsp"%>">QUIZ MASTER </a></li>
              </ul>
         </div>
-        <img src="/AC31007Quiz/logo123.png" width="115" style="position: absolute; left:0; top: 0;">
-        <img src="/AC31007Quiz/logo123.png" width="115" style="position: absolute; right:0; top: 0;">
+        <img src="<%=request.getContextPath() + "/logo123.png"%>" width="115" style="position: absolute; left:0; top: 0;">
+        <img src="<%=request.getContextPath() + "/logo123.png"%>" width="115" style="position: absolute; right:0; top: 0;">
 
         <div class="navBar1">
             <ul>

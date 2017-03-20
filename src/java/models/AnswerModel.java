@@ -20,7 +20,7 @@ public class AnswerModel {
     
     
     public String getStudentAnswer(int matricNo, int questionID) {
-        String query = "SELECT Answer FROM answer_store WHERE Matriculation_Number=? AND Question_ID=?";
+        String query = "SELECT Student_Answer FROM answer_store WHERE Matriculation_Number=? AND Question_ID=?";
         String answer = null;
         
         try (Connection con = db.connectToDatabase();
@@ -29,7 +29,7 @@ public class AnswerModel {
             ps.setInt(2,questionID);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    answer = rs.getString("Answer");
+                    answer = rs.getString("Student_Answer");
                 }
             }
         } catch (SQLException e) {
