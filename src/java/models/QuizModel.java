@@ -356,7 +356,7 @@ public void updateStudentQuizStatus(int matricNo, int quizID, String status) {
 public void addNewAttempt(int matricNo, int quizID, int score, Date date) {
     
     String query = null;
-    if (check(matricNo,quizID).equals("Completed")) {
+    if (check(matricNo,quizID) != null && check(matricNo,quizID).equals("Completed")) {
         query = "UPDATE student_quiz SET Score=?, Date_Completed=?, Attempted_Count=Attempted_Count+1 WHERE Matriculation_Number=? AND Quiz_ID=?";
     } else {
         query = "UPDATE student_quiz SET Score=?, Date_Completed=?, Attempted_Count=Attempted_Count+1, Has_Completed='Completed' WHERE Matriculation_Number=? AND Quiz_ID=?";
