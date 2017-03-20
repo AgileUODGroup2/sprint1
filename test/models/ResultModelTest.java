@@ -148,7 +148,6 @@ public class ResultModelTest {
         try {
             date = (java.util.Date) df.parse(dateString);
         } catch (ParseException e) {
-            e.printStackTrace();
         }
         
         java.util.Date resultDate = result.getDate();
