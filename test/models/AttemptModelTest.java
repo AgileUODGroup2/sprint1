@@ -72,14 +72,14 @@ public class AttemptModelTest {
         boolean expected = true;
         int quizID = 0;
         Date date = new Date(Calendar.getInstance().getTime().getTime());
-        am.addNewAttempt(16,15,date,75);
+        am.addNewAttempt(1,4,date,75);
         
         try(Connection conn  = db.connectToDatabase();)
         {
             String query = "SELECT * FROM attempts WHERE Quiz_ID=? AND Matriculation_Number=?;";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
-            preparedStmt.setInt(1,15);
-            preparedStmt.setInt(2,16);
+            preparedStmt.setInt(1,4);
+            preparedStmt.setInt(2,1);
             
             ResultSet rs = preparedStmt.executeQuery();
             while(rs.next())
@@ -97,7 +97,7 @@ public class AttemptModelTest {
             System.out.println(e.getMessage());
         }
         
-        state = (15 == quizID);
+        state = (4 == quizID);
         System.out.println("Test" + state);
         assertEquals("Should equal true", expected, state );
         
