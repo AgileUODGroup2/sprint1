@@ -20,16 +20,6 @@ public class AnswerModel {
     
     
     public String getStudentAnswer(int matricNo, int questionID) {
-        String query = "SELECT Answer FROM answer_store WHERE Matriculation_Number=? AND Question_ID=?";
-        String answer = null;
-        
-        try (Connection con = db.connectToDatabase();
-                PreparedStatement ps = con.prepareStatement(query);) {
-            ps.setInt(1, matricNo);
-            ps.setInt(2,questionID);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    answer = rs.getString("Answer");
         String query = "SELECT Student_Answer FROM answer_store WHERE Matriculation_Number=? AND Question_ID=?";
         String answer = null;
         
