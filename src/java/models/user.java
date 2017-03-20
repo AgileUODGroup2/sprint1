@@ -125,8 +125,6 @@ public class user {
     
     public void updateProfileImage(boolean isStaff, int userID, Part profileImage) throws IOException{
         
-        
-        
         String query = "";
         
         if(isStaff) {

@@ -125,8 +125,6 @@ public class QuizModelTest {
        
    }
     
-   
-      
    /**
     * Test to get Quiz ID
     */ 
