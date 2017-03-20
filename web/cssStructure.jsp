@@ -14,7 +14,7 @@
 <html>
     <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-       <link rel="stylesheet" type="text/css" href="/AC31007Quiz/styles.css">
+       <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() + "/styles.css"%>">
         
         <%LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");%>
     </head>
@@ -24,7 +24,7 @@
                 <li><a href="index.jsp">QUIZ MASTER </a></li>
              </ul>
         </div>
-        <img src="/AC31007Quiz/logo123.png" width="115px" style="position: absolute; left:0; top: 0;">
-        <img src="/AC31007Quiz/logo123.png" width="115px" style="position: absolute; right:0; top: 0;">
+        <img src="<%="logo123.png"%>" width="115" style="position: absolute; left:0; top: 0;">
+        <img src="<%="logo123.png"%>" width="115" style="position: absolute; right:0; top: 0;">
     </body>
 </html>

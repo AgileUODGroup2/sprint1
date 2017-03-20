@@ -74,7 +74,6 @@ public class DateSearch extends HttpServlet {
             date1 = new Date(javaDate1.getTime());
             date2 = new Date(javaDate2.getTime());
         } catch (ParseException e) {
-            e.printStackTrace();
         }
         
         

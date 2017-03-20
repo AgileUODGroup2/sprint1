@@ -19,7 +19,6 @@ import models.AnswerModel;
 import models.AttemptModel;
 import models.QuestionModel;
 import models.QuizModel;
-import models.ResultModel;
 import stores.LoggedIn;
 import stores.Quiz;
 

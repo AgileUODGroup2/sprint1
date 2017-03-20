@@ -11,11 +11,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import lib.database.DatabaseConnection;
 import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  *
@@ -28,15 +26,13 @@ public class AnswerModelTest {
     public AnswerModelTest() {
     }
     
-    @BeforeClass
-    public static void setUpClass() {
+    @Before
+    public void setUp() {
         String q1 = "INSERT INTO answer_store VALUES (1,400,'A')";
         String q2 = "INSERT INTO answer_store VALUES (1,401,'A')";
         String q3 = "INSERT INTO answer_store VALUES (1,402,'A')";
         String q4 = "INSERT INTO answer_store VALUES (1,403,'B')";
         String[] qs = {q1,q2,q3,q4};
-        
-        DatabaseConnection db = new DatabaseConnection();
         
         try (Connection con = db.connectToDatabase()) {
             for (String q : qs) {
@@ -49,10 +45,10 @@ public class AnswerModelTest {
         }
     }
     
-    @AfterClass
-    public static void tearDownClass() {
-        DatabaseConnection db = new DatabaseConnection();
+    @After
+    public void tearDown() {
         String query = "DELETE FROM answer_store WHERE Question_ID IN (400,401,402,403,404) AND Matriculation_Number=1";
+        
         try (Connection con = db.connectToDatabase();
                 PreparedStatement ps = con.prepareStatement(query);) {
             ps.execute();
@@ -63,7 +59,7 @@ public class AnswerModelTest {
     
     @Test
     public void testGetStudentAnswer() {
-        assertEquals("B", instance.getStudentAnswer(1, 403));
+        assertEquals(instance.getStudentAnswer(1, 403), "B");
     }
     
     @Test
@@ -79,20 +75,18 @@ public class AnswerModelTest {
 
     @Test
     public void testStoreAnswer() {
-        instance.storeAnswer("A", 404, 1);
+        instance.storeAnswer("A", 400, 1);
         String expectedResult = null;
         
-        String check = "SELECT Student_Answer FROM answer_store WHERE Matriculation_Number=1 AND Question_ID=404";
+        String check = "SELECT Answer FROM student_answer WHERE Matriculation_Number=1 AND Question_ID=404";
         try (Connection con = db.connectToDatabase();
                 PreparedStatement ps = con.prepareStatement(check);
                 ResultSet rs = ps.executeQuery();) {
-            if (rs.next()) {
-                expectedResult = rs.getString("Student_Answer");
-            }
+            expectedResult = rs.getString("Answer");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         
-        assertEquals("A", expectedResult);
+        assertEquals(expectedResult, "A");
     }
 }
