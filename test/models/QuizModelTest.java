@@ -5,29 +5,22 @@
  */
 package models;
 
-import java.sql.ResultSet;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Collections;
-import lib.database.DatabaseConnection;
+import java.util.Iterator;
 import java.util.LinkedList;
+import lib.database.DatabaseConnection;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import stores.QuestionBank;
 import stores.Quiz;
-import models.QuizModel;
 import stores.StudentQuiz;
-import java.util.Iterator; 
 
 /**
  *

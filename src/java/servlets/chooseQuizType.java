@@ -14,8 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.QuizModel;
-import models.ResultModel;
-import stores.LoggedIn;
 import stores.Quiz;
 
 /**

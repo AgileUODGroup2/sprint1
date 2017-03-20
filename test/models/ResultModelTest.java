@@ -5,7 +5,6 @@
  */
 package models;
 
-import java.sql.Date;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.ParseException;
