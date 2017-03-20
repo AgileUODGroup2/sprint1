@@ -28,6 +28,7 @@ import models.user;
 @MultipartConfig(maxFileSize = 16177216)
 public class DisplayImage extends HttpServlet{
     
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String uri = request.getRequestURI();
