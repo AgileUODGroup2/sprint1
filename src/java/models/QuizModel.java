@@ -68,26 +68,6 @@ public void UpdateQuestionAmmount(int quizID){
         }
 }
 
-public int getQuizNumberOfQuestions(int quizID)
-{
-    try(Connection conn = db.connectToDatabase()){
-        int result =0;
-        Statement st = conn.createStatement();
-        String query = "SELECT Num_Of_Questions FROM quiz WHERE Quiz_ID=?;";
-
-        PreparedStatement ps = conn.prepareStatement(query);
-        ps.setInt(1, quizID);
-
-        ResultSet rs = ps.executeQuery();
-        while (rs.next()){      
-        }        
-        return result;
-    }
-    catch(SQLException err){
-        System.out.println(err.getMessage());
-    }
-    return 0;  
-}
 
 public int getQuizId()
 {

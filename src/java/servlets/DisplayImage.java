@@ -32,12 +32,12 @@ public class DisplayImage extends HttpServlet{
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String uri = request.getRequestURI();
-        int i = uri.lastIndexOf("/");
+        int i = uri.lastIndexOf('/');
         String strID = uri.substring(i+1);
         int imageID = Integer.parseInt(strID);
         
-        String command = uri.substring(uri.indexOf("/") + 1, uri.lastIndexOf("/"));
-        command = command.substring(command.lastIndexOf("/") + 1);
+        String command = uri.substring(uri.indexOf('/') + 1, uri.lastIndexOf('/'));
+        command = command.substring(command.lastIndexOf('/') + 1);
         
         boolean isStaff = false;
         

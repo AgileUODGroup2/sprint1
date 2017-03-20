@@ -46,7 +46,7 @@
      
         
         <div id="cc3">
-             <table border="0" cellpadding="10" style=" margin: auto; font-family: candara; color: white; font-size: 25px; background-color:#042356;">
+             
         <h2>Your Results</h2>
        <%   Result result = new Result();
             if (quizResults != null) {
@@ -55,25 +55,32 @@
                     {     
                         Result r = it.next();
             %>
-             <table border="0" cellpadding="10" style=" margin: auto; font-family: candara; color: white; font-size: 25px; background-color:#042356;">
-                                <tbody>
-                                <tr>       
-                                    <th><h4>Most Recent Score: </th><td><%=r.getScore()%> </h4></td>
-            <th><h4>Attempt: </th><td><%=r.getAttempts()%></h4></td>
-            <th> <h4>Date Completed: </th><td> <%=r.getDate()%></h4></td>
+            
+                                   
+                                    <h4>Most Recent Score:<%=r.getScore()%> </h4>
+            <h4>Attempt: <%=r.getAttempts()%></h4>
+             <h4>Date Completed:<%=r.getDate()%></h4>
                         
-                          </tr>
+                       
             
             <%      } 
-                    while(it.hasNext()) {
+%>
+<table border="0" cellpadding="10" style=" margin: auto; font-family: candara; color: white; font-size: 25px; background-color:#042356;">
+    <th> Score </th>
+    <th> Attempt </th>
+    <th> Date Completed </th>
+
+ <%                   while(it.hasNext()) {
                         Result r = (Result) it.next(); %>
                           <tr>
-                              <td><h4>Score: <%=r.getScore()%></h4> </td>
-                            <td> <h4>Attempt: <%=r.getAttempts()%></h4> </td>
-                            <td> <h4>Date Completed: <%=r.getDate()%></h4> </td>
+                              <td><h4><%=r.getScore()%></h4> </td>
+                            <td> <h4><%=r.getAttempts()%></h4> </td>
+                            <td> <h4><%=r.getDate()%></h4> </td>
                                <tr>
         <%                              } 
-                    } 
+%>
+</table>
+                 <%   } 
                     else  { 
         %>
                         
@@ -82,7 +89,7 @@
         <%      
                                                     }
         %>
-  </table>
+ 
         </div>
         <br>
         <br>

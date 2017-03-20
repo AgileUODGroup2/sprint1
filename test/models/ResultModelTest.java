@@ -18,6 +18,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import stores.Result;
 import stores.StudentResult;
 
 /**
@@ -77,26 +78,18 @@ public class ResultModelTest {
         java.util.LinkedList<StudentResult> answers = instance.getResultsForDates(date1, date2, 14);
         
         assertEquals(1, answers.size());
-        assertEquals(answers.getFirst().getMatriculationNumber(), 5);
-        assertEquals(answers.getFirst().getQuizID(), 14);
-    }
-    
-    @Test
-    public void testGetResultsByMatriculationDesc() {
-        //java.util.LinkedList<StudentResult> answers = instance.getResultsByMatriculationDESC();
-        
-        //assertEquals(1, answers.size());
-        //assertEquals(answers.getFirst().getMatriculationNumber(), 5);
-        //assertEquals(answers.getFirst().getQuizID(), 14);
+        assertEquals(5, answers.getFirst().getMatriculationNumber());
+        assertEquals(14, answers.getFirst().getQuizID());
     }
     
     @Test
     public void testGetQuizResult() {
-        //java.util.LinkedList<StudentResult> answers = instance.getQuizResult();
+        java.util.LinkedList<Result> answers = instance.getQuizResult(1, 4);
         
-        //assertEquals(1, answers.size());
-        //assertEquals(answers.getFirst().getMatriculationNumber(), 5);
-        //assertEquals(answers.getFirst().getQuizID(), 14);
+        assertEquals(1, answers.getLast().getAttempts());
+        assertEquals(4, answers.getFirst().getQuizID());
+        assertNotNull(answers.getFirst().getDate());
+        assertNotNull(answers.getFirst().getScore());
     }
 
     /**

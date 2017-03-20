@@ -75,16 +75,16 @@
                     
                  <h8 style="color: red; font-weight: bold;">You Answered: Wrong</font></h8> <br />
                  <% if (rightAnswers[x].equals("A")){%><h8 style ="color: green; font-weight: bold;"><%=q.getA()%></h8> <br />
-                 <% } else if (studentAnswers[x].equals("A")) { %><h8 style ="color: red; font-weight: bold;"><%=q.getA()%></h8> <br />
+                 <% } else if (studentAnswers[x] != null && studentAnswers[x].equals("A")) { %><h8 style ="color: red; font-weight: bold;"><%=q.getA()%></h8> <br />
                  <% } else { %><h8><%=q.getA()%></h8> <br />
                  <% } if (rightAnswers[x].equals("B")){%><h8 style ="color: green; font-weight: bold;"><%=q.getB()%></h8> <br />
-                 <% } else if (studentAnswers[x].equals("B")) { %><h8 style ="color: red; font-weight: bold;"><%=q.getB()%></h8> <br />
+                 <% } else if (studentAnswers[x] != null && studentAnswers[x].equals("B")) { %><h8 style ="color: red; font-weight: bold;"><%=q.getB()%></h8> <br />
                  <% } else { %><h8><%=q.getB()%> </h8><br />
                  <% } if (rightAnswers[x].equals("C")){%><h8 style ="color: green; font-weight: bold;"><%=q.getC()%></h8> <br />
-                 <% } else if (studentAnswers[x].equals("C")) { %><h8 style ="color: red; font-weight: bold;"><%=q.getC()%></h8> <br />
+                 <% } else if (studentAnswers[x] != null && studentAnswers[x].equals("C")) { %><h8 style ="color: red; font-weight: bold;"><%=q.getC()%></h8> <br />
                  <% } else { %><h8><%=q.getC()%> </h8> <br />
                  <% } if (rightAnswers[x].equals("D")){%><h8 style ="color: green; font-weight: bold;"><%=q.getD()%></h8> <br />
-                 <% }  else if (studentAnswers[x].equals("D")) { %><h8 style ="color: red; font-weight: bold;"><%=q.getD()%></h8> <br />
+                 <% }  else if (studentAnswers[x] != null && studentAnswers[x].equals("D")) { %><h8 style ="color: red; font-weight: bold;"><%=q.getD()%></h8> <br />
                  <% } else { %><h8><%=q.getD()%> </h8><br />
                 <%  }
 }
