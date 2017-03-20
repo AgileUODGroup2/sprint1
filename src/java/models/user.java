@@ -196,7 +196,7 @@ public class user {
             if(con != null){
                 try{
                     con.close();
-                } catch(Exception e){
+                } catch(SQLException e){
                     System.out.print(e.getMessage());
                 }
             }
