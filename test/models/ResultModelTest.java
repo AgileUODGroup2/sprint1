@@ -5,7 +5,6 @@
  */
 package models;
 
-import java.sql.Date;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -19,6 +18,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import stores.Result;
 import stores.StudentResult;
 
 /**
@@ -32,14 +32,6 @@ public class ResultModelTest {
     ResultModel instance = new ResultModel();
     
     public ResultModelTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
     }
     
     @Before
@@ -67,8 +59,25 @@ public class ResultModelTest {
         System.out.println(expResult);
     }
     
-    @After
-    public void tearDown() {
+    @Test
+    public void testGetResultsForDates() {
+        java.sql.Date date1 = java.sql.Date.valueOf("2017-11-01");
+        java.sql.Date date2 = java.sql.Date.valueOf("2017-11-03");
+        java.util.LinkedList<StudentResult> answers = instance.getResultsForDates(date1, date2, 14);
+        
+        assertEquals(1, answers.size());
+        assertEquals(5, answers.getFirst().getMatriculationNumber());
+        assertEquals(14, answers.getFirst().getQuizID());
+    }
+    
+    @Test
+    public void testGetQuizResult() {
+        java.util.LinkedList<Result> answers = instance.getQuizResult(1, 4);
+        
+        assertEquals(1, answers.getLast().getAttempts());
+        assertEquals(4, answers.getFirst().getQuizID());
+        assertNotNull(answers.getFirst().getDate());
+        assertNotNull(answers.getFirst().getScore());
     }
 
     /**
@@ -92,7 +101,7 @@ public class ResultModelTest {
         
         quizResult = instance.getQuizResults(quizID);
         
-        StudentResult result = quizResult.get(2);
+        StudentResult result = quizResult.get(0);
         
         boolean finalResult = false;
         boolean name, matriculationNo, hasCompleted, attempts, score, dateCompleted;
@@ -107,23 +116,15 @@ public class ResultModelTest {
         hasCompleted = (result.getHasCompleted());
         System.out.println("HasCompleted?: " + hasCompleted);
         
-        attempts = (46 == result.getAttemptedCount());
+        attempts = (5 == result.getAttemptedCount());
         System.out.println("Attempts: " + attempts);
         
-        score = (0 == result.getScore());
+        score = (25 == result.getScore());
         System.out.println("Score: " + score);
         
-        String dateString = "03/19/2017";
-        DateFormat df = new SimpleDateFormat("MM/dd/yyyy"); 
-        java.util.Date date = null;
+        java.sql.Date date = java.sql.Date.valueOf("2017-03-20");
         
-        try {
-            date = (java.util.Date) df.parse(dateString);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        
-        java.util.Date resultDate = result.getDate();
+        java.sql.Date resultDate = result.getDate();
         
         dateCompleted = (date.equals(resultDate));
         System.out.println("Date: " + dateCompleted);

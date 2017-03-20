@@ -20,7 +20,6 @@ import models.AnswerModel;
 import models.AttemptModel;
 import models.QuestionModel;
 import models.QuizModel;
-import models.ResultModel;
 import stores.LoggedIn;
 import stores.Quiz;
 
@@ -42,7 +41,7 @@ public class takeQuizOneAtTime extends HttpServlet {
         System.out.println("DO GET: flagged questions :" + Arrays.toString(flagged));
         
         String uri = request.getRequestURI();
-        int i = uri.lastIndexOf("/");
+        int i = uri.lastIndexOf('/');
         String strQuizID = uri.substring(i+1);
         int quizID = Integer.parseInt(strQuizID);
         display(studentAnswers, request, response);

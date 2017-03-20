@@ -24,17 +24,13 @@ public class EditQuiz {
     
     //
     public void AlterQuizTitle(String question, int questionID, int quizID) throws SQLException{
-        try(Connection conn = db.connectToDatabase()){
-            //Create and prepare query
-            String query = "UPDATE Question_Bank SET Question=? WHERE Question_ID=? AND Quiz_ID=?";
-            PreparedStatement preparedStmt = conn.prepareStatement(query);
-            
-            //Inputs to Query
+        String query = "UPDATE Question_Bank SET Question=? WHERE Question_ID=? AND Quiz_ID=?";
+        try(Connection conn = db.connectToDatabase();
+                PreparedStatement preparedStmt = conn.prepareStatement(query);){
             preparedStmt.setString(1, question);
             preparedStmt.setInt(2, questionID);
             preparedStmt.setInt(3, quizID);
             
-            //Execute Query
             preparedStmt.executeUpdate();
         }
         catch(SQLException err){
@@ -44,18 +40,13 @@ public class EditQuiz {
     
     //Pass (A, B, C, D) depending on what answer is being changed
     public void AlterQuestionAnswers(char option, String edit, int questionID, int quizID) throws SQLException{
-        try(Connection conn = db.connectToDatabase()){
-            
-            //Create and prepare query
-            String query = "UPDATE Question_Bank SET " + option + "=? WHERE Question_ID=? AND Quiz_ID=?";
-            PreparedStatement preparedStmt = conn.prepareStatement(query);
-            
-            //Inputs to Query
+        String query = "UPDATE Question_Bank SET " + option + "=? WHERE Question_ID=? AND Quiz_ID=?";
+        try(Connection conn = db.connectToDatabase();
+                PreparedStatement preparedStmt = conn.prepareStatement(query);){
             preparedStmt.setString(1, edit);
             preparedStmt.setInt(2, questionID);
             preparedStmt.setInt(3, quizID);
             
-            //Execute Query
             preparedStmt.executeUpdate();
         }
         catch(SQLException err){
@@ -63,19 +54,14 @@ public class EditQuiz {
         }
     }
     
-    //
     public void AlterQuestionAnswersDescription(String desc, int questionID, int quizID) throws SQLException{
-        try(Connection conn = db.connectToDatabase();){
-            //Create and prepare query
-            String query = "UPDATE Question_Bank SET Answer_Desc=? WHERE Question_ID=? AND Quiz_ID=?";
-            PreparedStatement preparedStmt = conn.prepareStatement(query);
-            
-            //Inputs to Query
+        String query = "UPDATE Question_Bank SET Answer_Desc=? WHERE Question_ID=? AND Quiz_ID=?";
+        try(Connection conn = db.connectToDatabase();
+                PreparedStatement preparedStmt = conn.prepareStatement(query);){
             preparedStmt.setString(1, desc);
             preparedStmt.setInt(2, questionID);
             preparedStmt.setInt(3, quizID);
             
-            //Execute Query
             preparedStmt.executeUpdate();
         }
         catch(SQLException err){
@@ -83,19 +69,14 @@ public class EditQuiz {
         }
     }
     
-    //
     public void AlterQuestionAnswer(String answer, int questionID, int quizID) throws SQLException{
-        try(Connection conn = db.connectToDatabase(); ) {
-            //Create and prepare query
-            String query = "UPDATE Question_Bank SET Answer=? WHERE Question_ID=? AND Quiz_ID=?";
-            PreparedStatement preparedStmt = conn.prepareStatement(query);
-            
-            //Inputs to Query
+        String query = "UPDATE Question_Bank SET Answer=? WHERE Question_ID=? AND Quiz_ID=?";
+        try(Connection conn = db.connectToDatabase();
+                PreparedStatement preparedStmt = conn.prepareStatement(query);) {
             preparedStmt.setString(1, answer);
             preparedStmt.setInt(2, questionID);
             preparedStmt.setInt(3, quizID);
             
-            //Execute Query
             preparedStmt.executeUpdate();
         }
         catch(SQLException err){
@@ -104,15 +85,11 @@ public class EditQuiz {
     }
     
     public void EditWholeQuiz(QuestionBank qBank){
-        try(Connection conn = db.connectToDatabase();) {
-            //Create and prepare query
-            String query =     "UPDATE Question_Bank "
-                             + "SET Question=?, A=?, B=?, C=?, D=?, Answer=?, Answer_Desc=? "
-                             + "WHERE Question_ID=?;";
-            
-            PreparedStatement preparedStmt = conn.prepareStatement(query);
-            
-            //Inputs to Query
+        String query =     "UPDATE Question_Bank "
+                + "SET Question=?, A=?, B=?, C=?, D=?, Answer=?, Answer_Desc=? "
+                + "WHERE Question_ID=?;";
+        try(Connection conn = db.connectToDatabase();
+                PreparedStatement preparedStmt = conn.prepareStatement(query);) {
             preparedStmt.setString(1, qBank.getQuestion());
             preparedStmt.setString(2, qBank.getA());
             preparedStmt.setString(3, qBank.getB());
@@ -122,7 +99,6 @@ public class EditQuiz {
             preparedStmt.setString(7, qBank.getAnswerDesc());
             preparedStmt.setInt(8, qBank.getQuestionID());
             
-            //Execute Query
             preparedStmt.executeUpdate();
         }
         catch(SQLException err){
@@ -132,16 +108,12 @@ public class EditQuiz {
     
     public void updateQuestionMedia(int questionID, Part questionImage) throws IOException{
         
-        Connection con = db.connectToDatabase();
-        
         String query = "UPDATE question_bank SET Media = ? WHERE Question_ID = ?";
         
         // Java image to MySQL database query based on code found here: http://www.thejavaprogrammer.com/save-retrieve-image-mysql-database-using-servlet-jsp/
         
-        try{
-
-            PreparedStatement ps = con.prepareStatement(query);
-            
+        try (Connection con = db.connectToDatabase();
+                PreparedStatement ps = con.prepareStatement(query);) {
             if (questionImage != null){
                 InputStream is = questionImage.getInputStream();
                 ps.setBlob(1, is);
@@ -157,16 +129,7 @@ public class EditQuiz {
 
         } catch (SQLException e) {
             System.out.print(e.getMessage());
-        } finally {
-            if(con != null){
-                try{
-                    con.close();
-                } catch(Exception e){
-                    System.out.print(e.getMessage());
-                }
-            }
         }
-        
     }
     
 }

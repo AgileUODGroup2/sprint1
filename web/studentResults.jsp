@@ -16,7 +16,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" type="text/css" href="/AC31007Quiz/styles.css">
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() + "/styles.css"%>">
         <title>Student Results</title>
        
         <%
@@ -78,6 +78,7 @@
                         },
                         baselineColor: "#d3dfeb",
                     },
+                            colors: ['#25619f'],
                 };
                 
                 var chart = new google.charts.Bar(document.getElementById('chart_div'));
@@ -87,6 +88,7 @@
             
             
     </script>
+    <br>
 
 
         <%String type = (String) session.getAttribute("QuizType");%>
@@ -96,11 +98,11 @@
     <body bgcolor="d3dfeb">
         <div class="navBar">
             <ul>
-                <li><a href="/AC31007Quiz/index.jsp">QUIZ MASTER </a></li>
+                <li><a href="<%=request.getContextPath() + "/index.jsp"%>">QUIZ MASTER </a></li>
              </ul>
         </div>
-        <img src="/AC31007Quiz/logo123.png" width="115" style="position: absolute; left:0; top: 0;">
-        <img src="/AC31007Quiz/logo123.png" width="115" style="position: absolute; right:0; top: 0;">
+        <img src="<%=request.getContextPath() + "/logo123.png"%>" width="115" style="position: absolute; left:0; top: 0;">
+        <img src="<%=request.getContextPath() + "/logo123.png"%>" width="115" style="position: absolute; right:0; top: 0;">
 
         <div class="navBar1">
             <ul>
@@ -126,7 +128,7 @@
                         <h3>Number of Q's: <%=quiz.getNumberOfQuestions()%></h3>
                         <h3>Quiz Status: <%=quiz.getStatus()%></h3>
                         <h3>Class Average: <%=quiz.getAverageScore()%></h3>
-
+<br>
                         </div>
                       
                    
@@ -159,50 +161,48 @@
         <br>
         <h3>Class Average: <%=quiz.getAverageScore()%></h3>
        
-        
+        <br><Br>
         </div> 
         
         <div id="cc2">
-            <br><br>
             
-                    <% 
-            if (!type.equals("Unfinished Quizzes")) { 
-        %>
+            
+            <form method="GET" action=<%=contextPath + "/displayQuestionsAndAnswers/" + quiz.getQuizID()%>><input type="submit" value="View Q's and A's" /></form> <br>     
 
-        <form method="POST" action="<%=contextPath%>/SearchResults">
-            <select name="day1">
+        <form method="POST" action="<%=contextPath%>/SearchResults ">
+            <select class="select1" name="day1" style="width:60%; height: 40px;">
             <% for(int i=1;i<=31;i++) {
                 %> <option value="<%=i%>"><%=i%></option> <%
                 } %>
             </select>
 
-            <select name="month1">
+            <select class="select1" name="month1" style="width:60%; height: 40px;">
             <%
             String[] months = {"January","February","March","April","May","June","July","August","September","October","November","December"};
             for(int i=1;i<=12;i++) {
             %> <option value="<%=i%>"><%=months[i-1]%></option> <%
             } %>
             </select>
-            <select name="year1">
+            <select class="select1" name="year1" style="width:60%; height: 40px;">
             <%
             for(int i=2005;i<=2017;i++) {
             %> <option value="<%=i%>"><%=i%></option> <%
             } %>
             </select>
             <br />
-            <select name="day2">
+            <select class="select1" name="day2" style="width:60%; height: 40px;">
             <% for(int i=1;i<=31;i++) {
                 %> <option value="<%=i%>"><%=i%></option> <%
                 } %>
             </select>
 
-            <select name="month2">
+            <select class="select1" name="month2" style="width:60%; height: 40px;">
             <%
             for(int i=1;i<=12;i++) {
             %> <option value="<%=i%>"><%=months[i-1]%></option> <%
             } %>
             </select>
-            <select name="year2">
+            <select class="select1" name="year2" style="width:60%; height: 40px;">
             <%
             for(int i=2005;i<=2016;i++) {
             %> <option value="<%=i%>"><%=i%></option> <%
@@ -211,10 +211,8 @@
             <input type="hidden" name="QuizID" value="<%=quiz.getQuizID()%>" />
             <input type="submit" value="Filter" />
         </form>
-        <%
-            }
-            %>
-        <form method="GET" action=<%=contextPath + "/displayQuestionsAndAnswers/" + quiz.getQuizID()%>><input type="submit" value="View Q's and A's" /></form>
+       
+       
         </div>
         <br>
         <br>

@@ -13,13 +13,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import models.EditQuiz;
 import models.QuestionModel;
-import models.QuizModel;
 import stores.QuestionBank;
-import stores.Quiz;
 
 /**
  *
@@ -32,12 +29,12 @@ public class editQuiz extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uri = request.getRequestURI();
-        int i = uri.lastIndexOf("/");
+        int i = uri.lastIndexOf('/');
         String strQuestionID = uri.substring(i+1);
         int questionID = Integer.parseInt(strQuestionID);
         
-        String command = uri.substring(uri.indexOf("/") + 1, uri.lastIndexOf("/"));
-        command = command.substring(command.lastIndexOf("/") + 1);
+        String command = uri.substring(uri.indexOf('/') + 1, uri.lastIndexOf('/'));
+        command = command.substring(command.lastIndexOf('/') + 1);
         
         if(command.contains("edit")){
             

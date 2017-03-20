@@ -12,12 +12,11 @@ import java.sql.SQLException;
 import lib.database.DatabaseConnection;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import stores.QuestionBank;
-import stores.Quiz;
 
 /**
  *
@@ -60,7 +59,7 @@ public class EditQuizTest {
        try{
        conn.close();
        }
-       catch(Exception e)
+       catch(SQLException e)
        {
            System.out.println(e.getMessage());
        }
@@ -85,7 +84,7 @@ public class EditQuizTest {
        try{
        conn.close();
        }
-       catch(Exception e)
+       catch(SQLException e)
        {
            System.out.println(e.getMessage());
        }

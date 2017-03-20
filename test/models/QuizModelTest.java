@@ -5,29 +5,23 @@
  */
 package models;
 
-import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Collections;
-import lib.database.DatabaseConnection;
+import java.util.Iterator;
 import java.util.LinkedList;
+import lib.database.DatabaseConnection;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import stores.QuestionBank;
 import stores.Quiz;
-import models.QuizModel;
 import stores.StudentQuiz;
-import java.util.Iterator; 
 
 /**
  *
@@ -78,9 +72,21 @@ public class QuizModelTest {
             //Execute
            preparedStmt.executeUpdate();
             //preparedStmt2.executeUpdate();
-           conn.close();
         }
- 
+        
+        try(Connection conn = db.connectToDatabase()) {
+            
+            //Create and prepare query
+            String query =  "DELETE FROM student_quiz WHERE Quiz_ID = 90909090;";
+            
+            PreparedStatement preparedStmt = conn.prepareStatement(query);
+            //PreparedStatement preparedStmt2 = conn.prepareStatement(query);
+            
+            //preparedStmt.setString(1, "THIS IS COMPLETED");
+            
+            preparedStmt.executeUpdate();
+        }
+      
     }
     
     /**
@@ -132,50 +138,6 @@ public class QuizModelTest {
        
    }
     
-   /*
-    * Test for getting the number of questions in a quiz
-    */
-    @Test
-    public void testGetQuizNumberOfQuestions(){
-        
-        boolean state;
-        Quiz q = new Quiz();
-        qm.getQuizNumberOfQuestions(1);
-        
-        System.out.println("\nTest: Get Number of Question in a quiz");    
-           
-        db = new DatabaseConnection();
-        java.util.LinkedList<Quiz> quizzes = new java.util.LinkedList<>();
-        try(Connection conn = db.connectToDatabase()) {
-            
-            //Create and prepare query
-            String query =  "SELECT Num_Of_Questions FROM quiz WHERE Quiz_ID=?;";
-            PreparedStatement preparedStmt = conn.prepareStatement(query);
-       
-            //Sort Inputs
-            preparedStmt.setInt(1, 1);
-            
-          try (ResultSet rs = preparedStmt.executeQuery()) {   
-              while(rs.next()) {
-              
-               q.setNumberOfQuestions(rs.getInt("Num_Of_Questions"));
-                System.out.println("Number of question in quiz: " + q.getNumberOfQuestions());
-                 quizzes.add(q);
-                
-            }
-            
-        }
-          conn.close();
-    } catch (SQLException e) {
-        System.out.println(e.getMessage());
-    
-     }
-     state = ( 5 == q.getNumberOfQuestions());
-     System.out.println("State: "+state);
-     assertTrue("true", state);
-      
-   }
-      
    /**
     * Test to get Quiz ID
     */ 
@@ -625,16 +587,16 @@ public class QuizModelTest {
         System.out.println("\nTest: Get Student Quizzes");
       
         //completed Student Quiz
-      java.util.LinkedList<StudentQuiz> StudentCompleted = qm.getStudentQuizzes("select * from studentcompleted where Matriculation_Number=? order by Module_ID",1);
-      if (StudentCompleted != null){
-          Iterator<StudentQuiz> it = StudentCompleted.iterator();
-          while(it.hasNext()){
-              StudentQuiz cQ = (StudentQuiz) it.next();
-              completedQuiz[ccount] = cQ.getQuizID();
-              System.out.println("completed Quiz"+ccount + cQ.getQuizID());
-              ccount++; 
-          }
-      }
+        java.util.LinkedList<StudentQuiz> StudentCompleted = qm.getStudentQuizzes("select * from studentcompleted where Matriculation_Number=? order by Module_ID",1);
+        if (StudentCompleted != null){
+            Iterator<StudentQuiz> it = StudentCompleted.iterator();
+            while(it.hasNext()){
+                StudentQuiz cQ = (StudentQuiz) it.next();
+                completedQuiz[ccount] = cQ.getQuizID();
+                System.out.println("completed Quiz"+ccount + cQ.getQuizID());
+                ccount++; 
+            }
+        }
   
      if (ccount == 3){
            
@@ -699,12 +661,12 @@ public class QuizModelTest {
        }
        else {
            state = false; 
-       }
+        }
        
        
        
-     assertEquals("Should equal true", expected, state);
-     System.out.println(" ");
+        assertEquals("Should equal true", expected, state);
+        System.out.println(" ");
        
     }
     
@@ -817,6 +779,9 @@ public class QuizModelTest {
        
     }
     
+    /**
+     * Test for AddNewAttempt
+     */
     @Test
     public void testAddNewAttempt(){
         
@@ -840,5 +805,120 @@ public class QuizModelTest {
         qm.addNewAttempt(matricNo, quizID, score, date);**/
 
     }
+    
+    /**
+     * Test for testMakeQuizLive 
+     */
+    @Test
+    public void testUpdateStudentQuizStatus(){
+        
+        System.out.println("\nTest: testUpdateStudentQuizStatus()");
+        
+        int qID = qm.getQuizId();
+        int matricNo = 90909090;
+        int score = 0;
+        
+        String status = null;
+        
+        java.sql.Date d = java.sql.Date.valueOf("2012-12-12");
+        
+        System.out.println(matricNo +"   "+ qID +"   "+ score +"   "+ d);
+        
+        qm.addNewAttempt(matricNo, qID, score, d);
+        
+        qm.updateStudentQuizStatus(matricNo, qID, "pending");
+        
+        db = new DatabaseConnection();
+        try(Connection conn = db.connectToDatabase()) {
+            
+            String query =  "SELECT Has_Completed FROM Student_Quiz WHERE Quiz_ID = ?;";
+            PreparedStatement preparedStmt = conn.prepareStatement(query);
+            preparedStmt.setString(1, Integer.toString(qID));
+            
+            System.out.println(preparedStmt);
+            
+            try (ResultSet rs = preparedStmt.executeQuery()) {   
+                while(rs.next()){
+                    preparedStmt.setInt(1, qID);
+                    status = rs.getString("Quiz_Status");
+                    preparedStmt.executeUpdate();
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        boolean stat=false;
+        
+        if(status != null && status.equals("pending")) stat = true;
+        
+        assertEquals("Should equal true", true, stat);
+        System.out.println(" ");
+    }
+    
+    /**
+     * Test for OrderQuizByDate  
+     */
+    @Test
+    public void testOrderQuizByDate(){
+        
+        System.out.println("\nTest: testOrderQuizByDate()");
+        
+        boolean state = false;
+        java.util.LinkedList<StudentQuiz> quizzes = qm.orderByDate(1, "quiz");
+        System.out.println(quizzes);
+        
+        System.out.println(quizzes.getFirst().getDateCompleted());
+        
+        Date first = quizzes.getFirst().getDateCompleted();
+        Date last = quizzes.getLast().getDateCompleted();
+        
+        if(last.after(first))   state = true;
+        
+        assertEquals("Should equal true", true, state);
+        System.out.println(" ");
+    }
+    
+    /**
+     * Test for testMakeQuizLive  
+     */
+    @Test
+    public void testMakeQuizLive(){
+        
+        System.out.println("\nTest: testMakeQuizLive()");
+        
+        int qID = qm.getQuizId();
+        String status=null;
+        boolean stat=false;
+        
+        qm.makeQuizLive(qID);
+        
+        db = new DatabaseConnection();
+        try(Connection conn = db.connectToDatabase()) {
+            
+            String query =  "SELECT Quiz_Status FROM quiz WHERE Quiz_ID = ?;";
+            PreparedStatement preparedStmt = conn.prepareStatement(query);
+            preparedStmt.setString(1, Integer.toString(qID));
+            
+            System.out.println(preparedStmt);
+            
+            try (ResultSet rs = preparedStmt.executeQuery()) {   
+                while(rs.next()){
+                    System.out.println("IN LOOP: " + rs.getString("Quiz_Status"));
+                    status = rs.getString("Quiz_Status");
+                    preparedStmt.executeUpdate();
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        if(status != null && status.equals("Live")) stat = true;
+        
+        System.out.println("STATUS: " + status + "   " + stat);
+        
+        assertEquals("Should equal true", true, stat);
+        System.out.println(" ");
+    }
+    
 }
-

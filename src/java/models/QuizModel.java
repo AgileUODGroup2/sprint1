@@ -9,13 +9,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.Date;
-import java.util.Collections;
 import java.sql.PreparedStatement;
-import lib.database.DatabaseConnection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.servlet.http.Part;
+import lib.database.DatabaseConnection;
 import stores.QuestionBank;
 import stores.Quiz;
 import stores.StudentQuiz;
@@ -25,14 +24,12 @@ import stores.StudentQuiz;
  * @author erincoey
  */
 public class QuizModel {
-    
     DatabaseConnection db = new DatabaseConnection();
 
 public void createQuiz(String moduleID, String staffName, String dateCreated, String quizName,String available, String staffID ){
-    try(Connection conn = db.connectToDatabase()){
-        String query = "INSERT INTO quiz (Module_ID, Staff_Name, Date_Created, Quiz_Name,Quiz_Status,Staff_ID)"+"values(?,?,?,?,?,?)";
-        System.out.println("Result: "+moduleID+staffName+dateCreated+quizName);
-        PreparedStatement preparedStmt = conn.prepareStatement(query);
+    String query = "INSERT INTO quiz (Module_ID, Staff_Name, Date_Created, Quiz_Name,Quiz_Status,Staff_ID)"+"values(?,?,?,?,?,?)";
+    try(Connection conn = db.connectToDatabase();
+            PreparedStatement preparedStmt = conn.prepareStatement(query);){
         preparedStmt.setString(1, moduleID);
         preparedStmt.setString(2,staffName);
         preparedStmt.setString(3,dateCreated);
@@ -48,65 +45,37 @@ public void createQuiz(String moduleID, String staffName, String dateCreated, St
 
 //Call this function to update Num_Of_Questions column 
 public void UpdateQuestionAmmount(int quizID){
-        try (Connection conn = db.connectToDatabase()) {
-            //Create and prepare query
-            String query =  "UPDATE Quiz " +
-                            "SET Num_Of_Questions=(" +
-                            "SELECT COUNT(*) FROM Question_Bank " +
-                            "WHERE Quiz.Quiz_ID = Question_Bank.Quiz_ID " +
-                            ")"+
-                            "WHERE Quiz_ID=?";
-            PreparedStatement preparedStmt = conn.prepareStatement(query);
-
-            preparedStmt.setInt(1, quizID);
-            System.out.println(preparedStmt);
-
-            //Execute Query
-            preparedStmt.executeUpdate();
-        }
-        catch(SQLException err){
-            System.out.println(err.getMessage());
-        }
-}
-
-public int getQuizNumberOfQuestions(int quizID)
-{
-    try(Connection conn = db.connectToDatabase()){
-        int result =0;
-        Statement st = conn.createStatement();
-        String query = "SELECT Num_Of_Questions FROM quiz WHERE Quiz_ID=?;";
-
-        PreparedStatement ps = conn.prepareStatement(query);
-        ps.setInt(1, quizID);
-
-        ResultSet rs = ps.executeQuery();
-        while (rs.next()){      
-        }        
-        return result;
+    String query =  "UPDATE Quiz " +
+            "SET Num_Of_Questions=(" +
+            "SELECT COUNT(*) FROM Question_Bank " +
+            "WHERE Quiz.Quiz_ID = Question_Bank.Quiz_ID " +
+            ")"+
+            "WHERE Quiz_ID=?";
+    try (Connection conn = db.connectToDatabase();
+            PreparedStatement preparedStmt = conn.prepareStatement(query);) {
+        preparedStmt.setInt(1, quizID);
+        System.out.println(preparedStmt);
+        
+        preparedStmt.executeUpdate();
     }
     catch(SQLException err){
         System.out.println(err.getMessage());
     }
-    return 0;  
 }
 
-public int getQuizId()
-{
-    try(Connection conn = db.connectToDatabase()){
+public int getQuizId() {
+    String query = "SELECT * FROM quiz ORDER BY Quiz_ID;";
+    try(Connection conn = db.connectToDatabase();
+            PreparedStatement ps = conn.prepareStatement(query);){
         int result =0;
-        try (Statement st = conn.createStatement()) {
-            String query = "SELECT * FROM quiz ORDER BY Quiz_ID;";
-            
-            ResultSet rs = st.executeQuery(query);
-            while (rs.next())
-            {
+        try (ResultSet rs = ps.executeQuery(query)) {
+            while (rs.next()) {
                 int quizID = rs.getInt("Quiz_ID");
-                System.out.println(quizID);
                 
                 result = quizID; 
             }
         }
-            return result;
+        return result;
     }
     catch(SQLException err){
         System.out.println(err.getMessage());
@@ -114,60 +83,47 @@ public int getQuizId()
     return 0;
 }
 
-public void addQuestion(String[] array, Part[] parts) throws IOException
-{
+public void addQuestion(String[] array, Part[] parts) throws IOException {
     int i = 0;
     String query = "UPDATE question_bank SET Media = ? WHERE Question_ID = ?";
-    Connection conn = db.connectToDatabase();
     
-    try{
+    try (Connection conn = db.connectToDatabase()) {
         // Refactor antiquated for loop to JDK 5 enhanced for loop 
         for (String array1 : array) {
-            PreparedStatement preparedStmt = conn.prepareStatement(array1, Statement.RETURN_GENERATED_KEYS);
-            preparedStmt.executeUpdate();
-            
-            ResultSet rs = preparedStmt.getGeneratedKeys();
-            int questionID = 0;
-            if(rs.next()){
-                questionID = rs.getInt(1);
-            }
-            
-            // Insert Image into DB
-            preparedStmt = conn.prepareStatement(query);
-            if(parts[i] == null){
-                // Do nothing
-            } else {
-                InputStream is = parts[i].getInputStream();
-                preparedStmt.setBlob(1, is);
-                preparedStmt.setInt(2, questionID);
+            try (PreparedStatement preparedStmt = conn.prepareStatement(array1, Statement.RETURN_GENERATED_KEYS);
+                    PreparedStatement preparedStmt2 = conn.prepareStatement(query);) {
                 preparedStmt.executeUpdate();
+                int questionID = 0;
+
+                try (ResultSet rs = preparedStmt.getGeneratedKeys()) {
+                    if(rs.next()){
+                        questionID = rs.getInt(1);
+                    }
+                }
+
+                // Insert Image into DB
+                if(parts[i] != null) {
+                    InputStream is = parts[i].getInputStream();
+                    preparedStmt2.setBlob(1, is);
+                    preparedStmt2.setInt(2, questionID);
+                    preparedStmt2.executeUpdate();
+                }
+
+                i++;
             }
-            
-            i++;
         }
     }
     catch(SQLException err){
         System.out.println(err.getMessage());
-    } finally {
-            if(conn != null){
-                try{
-                    conn.close();
-                } catch(Exception e){
-                    System.out.print(e.getMessage());
-                }
-            }
-        }
+    }
 }
 
-public java.util.LinkedList<QuestionBank> getQuestionsAndAnswers(int quizID) throws SQLException
-{
-    db = new DatabaseConnection();
+public java.util.LinkedList<QuestionBank> getQuestionsAndAnswers(int quizID) throws SQLException {
     java.util.LinkedList<QuestionBank> questionList= new java.util.LinkedList<>();
     String query = "SELECT * FROM question_bank WHERE Quiz_ID = ? ORDER BY Question_ID";
     
     try (Connection conn = db.connectToDatabase();
-            PreparedStatement ps = conn.prepareStatement(query))
-    {
+            PreparedStatement ps = conn.prepareStatement(query);) {
         ps.setInt(1,quizID);
         try (ResultSet rs = ps.executeQuery()) {
             while(rs.next()) {
@@ -186,7 +142,6 @@ public java.util.LinkedList<QuestionBank> getQuestionsAndAnswers(int quizID) thr
                 if(rs.getBlob("Media") != null){
                     questions.setHasMedia(true);
                 }
-                
             }
             
              //Collections.shuffle(questionList);
@@ -198,8 +153,6 @@ public java.util.LinkedList<QuestionBank> getQuestionsAndAnswers(int quizID) thr
     
 }
 public java.util.LinkedList<Quiz> getQuizzes(String query, int staffID) {
-    
-    db = new DatabaseConnection();
     java.util.LinkedList<Quiz> quizzes = new java.util.LinkedList<>();
     try (Connection con = db.connectToDatabase();
         PreparedStatement ps = con.prepareStatement(query)) {
@@ -256,37 +209,28 @@ public java.util.LinkedList<Quiz> getArchived(int staffID) {
 }
 
 public Quiz getQuizDetails(int quizID) {
-        Quiz quiz = new Quiz();
-        String query = "SELECT * FROM quiz WHERE Quiz_ID = ?";
-        try (Connection con = db.connectToDatabase(); ) {
-
-            PreparedStatement ps = con.prepareStatement(query);
-
-            ps.setInt(1, quizID);
-
-            try (ResultSet rs = ps.executeQuery()) {
-                while(rs.next()) {
-                    
-                    quiz.setQuizID(rs.getInt("Quiz_ID"));
-                    quiz.setModuleID(rs.getString("Module_ID"));
-                    //quiz.setStaffName(rs.getString("Staff_Name")); Not needed?
-                    quiz.setDateCreated(rs.getDate("Date_Created"));
-                    quiz.setQuizName(rs.getString("Quiz_Name"));
-                    quiz.setNumberOfQuestions(rs.getInt("Num_Of_Questions"));
-                    quiz.setStatus(rs.getString("Quiz_Status"));
-                    quiz.setStaffID(rs.getInt("Staff_ID"));
-                    
-                }
+    Quiz quiz = new Quiz();
+    String query = "SELECT * FROM quiz WHERE Quiz_ID = ?";
+    try (Connection con = db.connectToDatabase();
+            PreparedStatement ps = con.prepareStatement(query);) {
+        ps.setInt(1, quizID);
+        
+        try (ResultSet rs = ps.executeQuery()) {
+            while(rs.next()) {
+                quiz.setQuizID(rs.getInt("Quiz_ID"));
+                quiz.setModuleID(rs.getString("Module_ID"));
+                quiz.setDateCreated(rs.getDate("Date_Created"));
+                quiz.setQuizName(rs.getString("Quiz_Name"));
+                quiz.setNumberOfQuestions(rs.getInt("Num_Of_Questions"));
+                quiz.setStatus(rs.getString("Quiz_Status"));
+                quiz.setStaffID(rs.getInt("Staff_ID"));
             }
-
-
-        } catch (SQLException e) {
-            System.out.print(e.getMessage());
         }
-
-        return quiz;
-
+    } catch (SQLException e) {
+        System.out.print(e.getMessage());
     }
+    return quiz;
+}
 
 public String getStudentStatus(int matricNo, int quizID) {
     String completed = null;
@@ -311,7 +255,7 @@ public java.util.LinkedList<StudentQuiz> getStudentQuizzes(String query, int mat
     
     java.util.LinkedList<StudentQuiz> quizzes = new java.util.LinkedList<>();
     try (Connection con = db.connectToDatabase();
-        PreparedStatement ps = con.prepareStatement(query)) {
+        PreparedStatement ps = con.prepareStatement(query);) {
         ps.setInt(1, matricNo);
         try (ResultSet rs = ps.executeQuery()) {
             while(rs.next()) {
@@ -328,7 +272,6 @@ public java.util.LinkedList<StudentQuiz> getStudentQuizzes(String query, int mat
             
                 quizzes.add(q);
             }
-           
         }
     } catch (SQLException e) {
         System.out.println(e.getMessage());
@@ -363,17 +306,13 @@ public java.util.LinkedList<StudentQuiz> getPendingStudentQuizzesMod(int matricN
 }
 
 public void makeQuizLive(int QuizID){ //change to session variables
-    try(Connection conn = db.connectToDatabase()){
-        
-        String query = "UPDATE quiz set Quiz_Status = 'Live' WHERE Quiz_ID = ?";
-        
-        PreparedStatement preparedStmt = conn.prepareStatement(query);
-       
+    String query = "UPDATE quiz set Quiz_Status = 'Live' WHERE Quiz_ID = ?";
+    try(Connection conn = db.connectToDatabase();
+            PreparedStatement preparedStmt = conn.prepareStatement(query);){
         preparedStmt.setInt(1,QuizID);
         
         preparedStmt.executeUpdate();
-    }
-    catch(SQLException err){
+    } catch(SQLException err){
             System.out.println(err.getMessage());
     }
  }
@@ -383,20 +322,17 @@ public java.util.LinkedList<StudentQuiz> orderByDate(int matricNo, String table)
     return getStudentQuizzes(query, matricNo);
 }
 
-public void updateQuizStatus(int quizID, String status)
-{
-    try(Connection conn = db.connectToDatabase()){
-        String query = "UPDATE quiz set Quiz_Status = ? WHERE Quiz_ID = ?";
-        
-        PreparedStatement preparedStmt = conn.prepareStatement(query);
-        
+public void updateQuizStatus(int quizID, String status) {
+    String query = "UPDATE quiz set Quiz_Status = ? WHERE Quiz_ID = ?";
+    try(Connection conn = db.connectToDatabase();
+            PreparedStatement preparedStmt = conn.prepareStatement(query);){
         preparedStmt.setString(1,status);
         preparedStmt.setInt(2,quizID);
         
         preparedStmt.executeUpdate();
     }
     catch(SQLException err){
-            System.out.println(err.getMessage());
+        System.out.println(err.getMessage());
     }
 }
 
@@ -420,7 +356,7 @@ public void updateStudentQuizStatus(int matricNo, int quizID, String status) {
 public void addNewAttempt(int matricNo, int quizID, int score, Date date) {
     
     String query = null;
-    if (check(matricNo,quizID).equals("Completed")) {
+    if (check(matricNo,quizID) != null && check(matricNo,quizID).equals("Completed")) {
         query = "UPDATE student_quiz SET Score=?, Date_Completed=?, Attempted_Count=Attempted_Count+1 WHERE Matriculation_Number=? AND Quiz_ID=?";
     } else {
         query = "UPDATE student_quiz SET Score=?, Date_Completed=?, Attempted_Count=Attempted_Count+1, Has_Completed='Completed' WHERE Matriculation_Number=? AND Quiz_ID=?";
@@ -456,6 +392,5 @@ private String check(int matricNo, int quizID) {
     }
     return null;
 }
- 
 }
 

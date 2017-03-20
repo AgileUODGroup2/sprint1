@@ -19,7 +19,6 @@ import models.AnswerModel;
 import models.AttemptModel;
 import models.QuestionModel;
 import models.QuizModel;
-import models.ResultModel;
 import stores.LoggedIn;
 import stores.Quiz;
 
@@ -35,7 +34,7 @@ public class takeQuiz extends HttpServlet{
 
         String uri = request.getRequestURI();
         System.out.println(uri);
-        int i = uri.lastIndexOf("/");
+        int i = uri.lastIndexOf('/');
         String strQuizID = uri.substring(i+1);
         int quizID = Integer.parseInt(strQuizID);
         display(quizID, request, response);

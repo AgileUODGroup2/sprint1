@@ -13,7 +13,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" type="text/css" href="styles.css" />
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() + "/styles.css"%>" />
         <title>Quiz Master</title>
     </head>
       <body bgcolor="d3dfeb">
@@ -24,8 +24,8 @@
                  <li><a href="index.jsp">QUIZ MASTER </a></li>
           </ul>
       </div>
-      <img src="logo123.png" width="115px" style="position: absolute; left:0; top: 0;">
-        <img src="logo123.png" width="115px" style="position: absolute; right:0; top: 0;">
+      <img src="<%=request.getContextPath() + "/logo123.png"%>" width="115" style="position: absolute; left:0; top: 0;">
+        <img src="<%=request.getContextPath() + "/logo123.png"%>" width="115" style="position: absolute; right:0; top: 0;">
         
         
         <div class="navBar1">

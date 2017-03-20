@@ -14,7 +14,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title> View Questions and Answers </title>
-        <link rel="stylesheet" type="text/css" href="/AC31007Quiz/styles.css">
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() + "/styles.css"%>">
         
         <%
             Quiz quiz = (Quiz) request.getAttribute("Quiz");
@@ -22,8 +22,8 @@
  
     </head>
     <body bgcolor="d3dfeb">
-    <img src="<%=request.getContextPath() +"/logo123.png"%>" width="115" style="position: absolute; left:0; top: 0;">
-    <img src="<%=request.getContextPath() +"/logo123.png"%>" width="115" style="position: absolute; right:0; top: 0;">
+    <img src="<%=request.getContextPath() + "/logo123.png"%>" width="115" style="position: absolute; left:0; top: 0;">
+    <img src="<%=request.getContextPath() + "/logo123.png"%>" width="115" style="position: absolute; right:0; top: 0;">
 
         <div class="navBar">
             <ul>

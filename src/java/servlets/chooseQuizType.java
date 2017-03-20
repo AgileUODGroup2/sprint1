@@ -14,8 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.QuizModel;
-import models.ResultModel;
-import stores.LoggedIn;
 import stores.Quiz;
 
 /**
@@ -31,7 +29,7 @@ public class chooseQuizType extends HttpServlet{
 
         String uri = request.getRequestURI();
         System.out.println(uri);
-        int i = uri.lastIndexOf("/");
+        int i = uri.lastIndexOf('/');
         String strQuizID = uri.substring(i+1);
         int quizID = Integer.parseInt(strQuizID);
         System.out.println("Quiz ID: "+quizID);

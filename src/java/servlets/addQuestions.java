@@ -150,7 +150,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
             }
             
             Quiz quiz= new Quiz();
-            response.sendRedirect("/AC31007Quiz/staffPortal.jsp");
+            response.sendRedirect(request.getContextPath() + "/staffPortal.jsp");
             
         }
         else if (save!=null)
@@ -243,11 +243,11 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
             }
             
             Quiz quiz= new Quiz();
-            response.sendRedirect("/AC31007Quiz/staffPortal.jsp");
+            response.sendRedirect(request.getContextPath() + "/staffPortal.jsp");
         }
         else if (addQuestion!=null)
         {
-            response.sendRedirect("/AC31007Quiz/addQuestions.jsp");
+            response.sendRedirect(request.getContextPath() +  "/addQuestions.jsp");
             
             HttpSession session = request.getSession();
             Quiz quizStore = (Quiz) session.getAttribute("Quiz");
@@ -289,7 +289,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
         }
         else if(cancel!=null)
         {
-            response.sendRedirect("/AC31007Quiz/staffPortal.jsp");
+            response.sendRedirect(request.getContextPath() + "/staffPortal.jsp");
         }
 }
 

@@ -25,7 +25,7 @@ public class EditProfile extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
         String uri = request.getRequestURI();
-        int i = uri.lastIndexOf("/");
+        int i = uri.lastIndexOf('/');
         String strUserID = uri.substring(i+1);
         int userID = Integer.parseInt(strUserID);
         
@@ -51,19 +51,18 @@ public class EditProfile extends HttpServlet {
         
         user us = new user();
         
-        if (!firstName.equals("")){
+        if (!firstName.isEmpty()){
             us.updateFirstName(isStaff, userID, firstName);
         }
-        if (!lastName.equals("")){
+        if (!lastName.isEmpty()){
             us.updateLastName(isStaff, userID, lastName);
         }
-        if (password.equals(rePassword) && !password.equals("")){
+        if (password.equals(rePassword) && !password.isEmpty()){
             us.updatePassword(isStaff, userID, password);
         }
-        if (profileImage != null){
+        if (profileImage.getSize() != 0){
             us.updateProfileImage(isStaff, userID, profileImage);
         }
-        
         
         response.sendRedirect(contextPath);
         

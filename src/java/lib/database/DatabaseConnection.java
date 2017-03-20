@@ -26,7 +26,7 @@ public class DatabaseConnection{
             System.out.println(err.getMessage());
             return null; 
         }
-        catch(Exception e) {
+        catch(ClassNotFoundException e) {
             System.out.println("Connection to database failed");
             System.out.println(e.getMessage());
             return null;

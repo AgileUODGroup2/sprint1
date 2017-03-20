@@ -37,7 +37,7 @@ public class DisplayResult extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String uri = request.getRequestURI();
-        int i = uri.lastIndexOf("/");
+        int i = uri.lastIndexOf('/');
         String strQuizID = uri.substring(i+1);
         int quizID = Integer.parseInt(strQuizID);
         HttpSession session = request.getSession();

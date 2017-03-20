@@ -6,7 +6,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" type="text/css" href="/AC31007Quiz/styles.css">
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() + "/styles.css"%>">
     <title>Results</title>
 
     <%
@@ -20,11 +20,11 @@
 <body bgcolor="d3dfeb">
         <div class="navBar">
             <ul>
-                <li><a href="/AC31007Quiz/index.jsp">QUIZ MASTER </a></li>
+                <li><a href="<%=request.getContextPath() + "/index.jsp"%>">QUIZ MASTER </a></li>
              </ul>
         </div>
-        <img src="/AC31007Quiz/logo123.png" width="115px" style="position: absolute; left:0; top: 0;">
-        <img src="/AC31007Quiz/logo123.png" width="115px" style="position: absolute; right:0; top: 0;">
+        <img src="<%=request.getContextPath() + "/logo123.png"%>" width="115" style="position: absolute; left:0; top: 0;">
+        <img src="<%=request.getContextPath() + "/logo123.png"%>" width="115" style="position: absolute; right:0; top: 0;">
 
         <div class="navBar1">
             <ul>
@@ -46,6 +46,7 @@
      
         
         <div id="cc3">
+             
         <h2>Your Results</h2>
        <%   Result result = new Result();
             if (quizResults != null) {
@@ -54,15 +55,34 @@
                     {     
                         Result r = it.next();
             %>
-                        <h3>Most Recent Score: <%=r.getScore()%> </h3>
-                        <h3>Attempt: <%=r.getAttempts()%></h3>
-                        <h3>Date Completed: <%=r.getDate()%></h3>
+            
+                                   
+                                    <h3>Most Recent Score:<%=r.getScore()%> </h3>
+            <h3>Attempt: <%=r.getAttempts()%></h3>
+             <h3>Date Completed:<%=r.getDate()%></h3>
+                        
+                       
+            
             <%      } 
-                    while(it.hasNext()) {
+%>
+<table border="0" cellpadding="10" style=" margin: auto; font-family: candara; color: white; font-size: 25px; background-color:#042356;">
+    <th> Score </th>
+    <th> Attempt </th>
+    <th> Date Completed </th>
+
+ <%                   while(it.hasNext()) {
                         Result r = (Result) it.next(); %>
-                        <h4>Score: <%=r.getScore()%>, Attempt: <%=r.getAttempts()%>, Date Completed: <%=r.getDate()%></h4>
+                          <tr>
+                              <td><h4><%=r.getScore()%></h4> </td>
+                            <td> <h4><%=r.getAttempts()%></h4> </td>
+                            <td> <h4><%=r.getDate()%></h4> </td>
+                               <tr>
         <%                              } 
-                    } 
+%>
+</table>
+</br>
+</br>
+                 <%   } 
                     else  { 
         %>
                         
@@ -79,8 +99,8 @@
         <div id="cc3" style="background-color: #d3dfeb;">
            
    
-         <a href="/AC31007Quiz/quizInstructions.jsp"><button id="sec-button">Click here for quiz instructions</button></a><br>
-            <form method="GET" action="<%=contextPath + "/chooseQuizType/" + quiz.getQuizID()%>"><input type="submit" value="Take Quiz" /></form>
+         <a href="<%=request.getContextPath() + "/quizInstructions.jsp"%>"><button id="sec-button">Click here for quiz instructions</button></a><br>
+            <form method="GET" action="<%=contextPath + "/chooseQuizType/" + quiz.getQuizID()%>"><input id="sec-button" type="submit" value="Take Quiz" /></form>
             <br>
             
             <button10 onclick="goBack()">Return to your Quizzes</button10><br>
