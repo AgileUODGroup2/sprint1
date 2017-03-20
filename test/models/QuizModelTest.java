@@ -124,7 +124,7 @@ public class QuizModelTest {
        assertEquals("Should equal true", expected, result);
        
    }
-      
+    
    /**
     * Test to get Quiz ID
     */ 
