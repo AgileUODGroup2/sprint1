@@ -807,7 +807,7 @@ public class QuizModelTest {
     }
     
     /**
-     * Test for testMakeQuizLive 
+     * Test for testUpdateStudentQuizStatus
      */
     @Test
     public void testUpdateStudentQuizStatus(){
@@ -862,8 +862,49 @@ public class QuizModelTest {
     @Test
     public void testOrderQuizByDate(){
         
+        String table = "studentcompleted";
+        boolean expected = true;
+        boolean orderDateResult;
+        boolean quiz1, quiz2, quiz3;
+        int [] orderDate = new int[3];
+        int oDCount = 0;
+        
+        boolean state;
+        
         System.out.println("\nTest: testOrderQuizByDate()");
         
+          java.util.LinkedList<StudentQuiz> orderByDate = qm.getStudentQuizzes("SELECT * FROM "+table+" WHERE Matriculation_Number=? ORDER BY Date_Created DESC",1);
+      if (orderByDate != null){
+          Iterator<StudentQuiz> it = orderByDate.iterator();
+          while(it.hasNext()){
+              StudentQuiz oD = (StudentQuiz) it.next();
+              orderDate[oDCount] = oD.getQuizID();
+              System.out.println("Order by Date: "+oDCount+ " " + oD.getQuizID());
+              oDCount++; 
+          }
+      }
+   
+      if (oDCount != 3){
+           orderDateResult = false;
+       }
+       else{
+
+           orderDateResult = true;
+       }
+        System.out.println("orderDateResult: " + orderDateResult);
+        
+       if ((orderDateResult == true)){
+           state = true;
+       }
+       else {
+           state = false; 
+        }
+       
+       
+       
+        assertEquals("Should equal true", expected, state);
+        System.out.println(" ");
+        /*
         boolean state = false;
         java.util.LinkedList<StudentQuiz> quizzes = qm.orderByDate(1, "quiz");
         System.out.println(quizzes);
@@ -877,8 +918,12 @@ public class QuizModelTest {
         
         assertEquals("Should equal true", true, state);
         System.out.println(" ");
+        */
+        
+        
     }
     
+        
     /**
      * Test for testMakeQuizLive  
      */
