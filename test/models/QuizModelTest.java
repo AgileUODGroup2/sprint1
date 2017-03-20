@@ -124,50 +124,6 @@ public class QuizModelTest {
        assertEquals("Should equal true", expected, result);
        
    }
-    
-   /*
-    * Test for getting the number of questions in a quiz
-    */
-    @Test
-    public void testGetQuizNumberOfQuestions(){
-        
-        boolean state;
-        Quiz q = new Quiz();
-        qm.getQuizNumberOfQuestions(1);
-        
-        System.out.println("\nTest: Get Number of Question in a quiz");    
-           
-        db = new DatabaseConnection();
-        java.util.LinkedList<Quiz> quizzes = new java.util.LinkedList<>();
-        try(Connection conn = db.connectToDatabase()) {
-            
-            //Create and prepare query
-            String query =  "SELECT Num_Of_Questions FROM quiz WHERE Quiz_ID=?;";
-            PreparedStatement preparedStmt = conn.prepareStatement(query);
-       
-            //Sort Inputs
-            preparedStmt.setInt(1, 1);
-            
-          try (ResultSet rs = preparedStmt.executeQuery()) {   
-              while(rs.next()) {
-              
-               q.setNumberOfQuestions(rs.getInt("Num_Of_Questions"));
-                System.out.println("Number of question in quiz: " + q.getNumberOfQuestions());
-                 quizzes.add(q);
-                
-            }
-            
-        }
-          conn.close();
-    } catch (SQLException e) {
-        System.out.println(e.getMessage());
-    
-     }
-     state = ( 5 == q.getNumberOfQuestions());
-     System.out.println("State: "+state);
-     assertTrue("true", state);
-      
-   }
       
    /**
     * Test to get Quiz ID

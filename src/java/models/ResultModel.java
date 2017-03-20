@@ -78,9 +78,8 @@ public class ResultModel {
         
         String query = "SELECT AVG(Score) FROM student_quiz WHERE Has_Completed = 'Completed' AND Quiz_ID = ?";
         
-        try (Connection con = db.connectToDatabase(); ) {
-            
-            PreparedStatement ps = con.prepareStatement(query);
+        try (Connection con = db.connectToDatabase();
+                PreparedStatement ps = con.prepareStatement(query);) {
             ps.setInt(1, quizID);
             
             try (ResultSet rs = ps.executeQuery()) {
@@ -122,9 +121,8 @@ public class ResultModel {
         
         java.util.LinkedList<StudentResult> quizResult = new java.util.LinkedList<>();
         
-        try (Connection con = db.connectToDatabase();) {
-            
-            PreparedStatement ps = con.prepareStatement(query);
+        try (Connection con = db.connectToDatabase();
+                PreparedStatement ps = con.prepareStatement(query);) {
             ps.setInt(1, quizID);
             
             try (ResultSet rs = ps.executeQuery()) {
