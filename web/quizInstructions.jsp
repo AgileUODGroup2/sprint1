@@ -20,7 +20,7 @@
             <br>
             <br>
             <div class="centerContent2">
-                <iframe id="instructionVideo" width="560" height="315" src="https://www.youtube-nocookie.com/embed/V-Cb9x70gYQ?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" align="middle"></iframe>
+                <iframe id="instructionVideo" width="560" height="315" src="https://www.youtube-nocookie.com/embed/TjPE8M1z9X8?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" align="middle"></iframe>
                 <br>
                 <br>
                 <h7>Follow the steps below to complete a quiz:</h7>
