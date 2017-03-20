@@ -27,7 +27,7 @@ public class displayQuizzes extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uri = request.getRequestURI();
-        int i = uri.lastIndexOf("/");
+        int i = uri.lastIndexOf('/');
         String type = uri.substring(i+1);
         DisplayQuizzes(type, request, response);
     }
