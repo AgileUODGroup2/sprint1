@@ -51,13 +51,13 @@ public class EditProfile extends HttpServlet {
         
         user us = new user();
         
-        if (!firstName.equals("")){
+        if (!firstName.isEmpty()){
             us.updateFirstName(isStaff, userID, firstName);
         }
-        if (!lastName.equals("")){
+        if (!lastName.isEmpty()){
             us.updateLastName(isStaff, userID, lastName);
         }
-        if (password.equals(rePassword) && !password.equals("")){
+        if (password.equals(rePassword) && !password.isEmpty()){
             us.updatePassword(isStaff, userID, password);
         }
         if (profileImage != null){
