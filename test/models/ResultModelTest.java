@@ -97,11 +97,11 @@ public class ResultModelTest {
         System.out.println("getQuizResults");
         
         java.util.LinkedList<StudentResult> quizResult = new java.util.LinkedList<>();
-        int numberOfStudents = 4;
         
-        quizResult = instance.getQuizResults(quizID);
         
-        StudentResult result = quizResult.get(0);
+        quizResult = instance.getQuizResults(4);
+        
+        StudentResult result = quizResult.get(1);
         
         boolean finalResult = false;
         boolean name, matriculationNo, hasCompleted, attempts, score, dateCompleted;
@@ -116,10 +116,10 @@ public class ResultModelTest {
         hasCompleted = (result.getHasCompleted());
         System.out.println("HasCompleted?: " + hasCompleted);
         
-        attempts = (5 == result.getAttemptedCount());
+        attempts = (6 == result.getAttemptedCount());
         System.out.println("Attempts: " + attempts);
         
-        score = (25 == result.getScore());
+        score = (0 == result.getScore());
         System.out.println("Score: " + score);
         
         java.sql.Date date = java.sql.Date.valueOf("2017-03-20");

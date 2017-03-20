@@ -138,6 +138,7 @@ public class QuizModelTest {
        
    }
     
+    
    /**
     * Test to get Quiz ID
     */ 
@@ -782,11 +783,12 @@ public class QuizModelTest {
     /**
      * Test for AddNewAttempt
      */
-    @Test
+   /* @Test
     public void testAddNewAttempt(){
         
-        // Code to be used later
-        /**int matricNo = 1181180;
+        
+        //Code to be used later
+        int matricNo = 1181180;
         int quizID = 15;
         int score = 100;
         Date date;
@@ -802,10 +804,11 @@ public class QuizModelTest {
             e.printStackTrace();
         }
         
-        qm.addNewAttempt(matricNo, quizID, score, date);**/
+        qm.addNewAttempt(matricNo, quizID, score, date);
 
     }
-    
+    */
+        
     /**
      * Test for testUpdateStudentQuizStatus
      */
@@ -814,35 +817,38 @@ public class QuizModelTest {
         
         System.out.println("\nTest: testUpdateStudentQuizStatus()");
         
-        int qID = qm.getQuizId();
-        int matricNo = 90909090;
+        int qID = 4;
+        int matricNo = 4;
         int score = 0;
         
+        //System.out.println("Quiz id " + qID);
         String status = null;
         
         java.sql.Date d = java.sql.Date.valueOf("2012-12-12");
         
-        System.out.println(matricNo +"   "+ qID +"   "+ score +"   "+ d);
+        //System.out.println(matricNo +"   "+ qID +"   "+ score +"   "+ d);
         
         qm.addNewAttempt(matricNo, qID, score, d);
         
-        qm.updateStudentQuizStatus(matricNo, qID, "pending");
+        qm.updateStudentQuizStatus(matricNo, qID, "Completed");
         
         db = new DatabaseConnection();
         try(Connection conn = db.connectToDatabase()) {
             
-            String query =  "SELECT Has_Completed FROM Student_Quiz WHERE Quiz_ID = ?;";
+            String query =  "SELECT Has_Completed FROM Student_Quiz WHERE Quiz_ID = ? AND Matriculation_Number=?;";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
-            preparedStmt.setString(1, Integer.toString(qID));
+            preparedStmt.setInt(1,4);
+            preparedStmt.setInt(2,4);
             
-            System.out.println(preparedStmt);
+            //System.out.println(preparedStmt);
             
             try (ResultSet rs = preparedStmt.executeQuery()) {   
-                while(rs.next()){
-                    preparedStmt.setInt(1, qID);
-                    status = rs.getString("Quiz_Status");
-                    preparedStmt.executeUpdate();
-                }
+              while(rs.next()){
+                 
+                    status = rs.getString("Has_Completed");
+                    System.out.println(status);
+                  
+               }
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -850,7 +856,7 @@ public class QuizModelTest {
         
         boolean stat=false;
         
-        if(status != null && status.equals("pending")) stat = true;
+        if(status != null && status.equals("Completed")) stat = true;
         
         assertEquals("Should equal true", true, stat);
         System.out.println(" ");
@@ -904,23 +910,7 @@ public class QuizModelTest {
        
         assertEquals("Should equal true", expected, state);
         System.out.println(" ");
-        /*
-        boolean state = false;
-        java.util.LinkedList<StudentQuiz> quizzes = qm.orderByDate(1, "quiz");
-        System.out.println(quizzes);
-        
-        System.out.println(quizzes.getFirst().getDateCompleted());
-        
-        Date first = quizzes.getFirst().getDateCompleted();
-        Date last = quizzes.getLast().getDateCompleted();
-        
-        if(last.after(first))   state = true;
-        
-        assertEquals("Should equal true", true, state);
-        System.out.println(" ");
-        */
-        
-        
+       
     }
     
         
