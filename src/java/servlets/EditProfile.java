@@ -60,10 +60,9 @@ public class EditProfile extends HttpServlet {
         if (password.equals(rePassword) && !password.isEmpty()){
             us.updatePassword(isStaff, userID, password);
         }
-        if (profileImage != null){
+        if (profileImage.getSize() != 0){
             us.updateProfileImage(isStaff, userID, profileImage);
         }
-        
         
         response.sendRedirect(contextPath);
         
