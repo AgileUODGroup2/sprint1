@@ -186,8 +186,6 @@ public class user {
                         byteArray = blob.getBytes(1, (int)blob.length());
                     }
                     
-                    System.out.println(byteArray);
-                    
                     return byteArray;
                     
                 }
