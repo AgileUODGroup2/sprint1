@@ -70,6 +70,35 @@ public class ResultModelTest {
     @After
     public void tearDown() {
     }
+    
+    @Test
+    public void testGetResultsForDates() {
+        java.sql.Date date1 = new java.sql.Date(2014-11-01);
+        java.sql.Date date2 = new java.sql.Date(2019-11-03);
+        java.util.LinkedList<StudentResult> answers = instance.getResultsForDates(date1, date2, 14);
+        
+        assertEquals(1, answers.size());
+        assertEquals(answers.getFirst().getMatriculationNumber(), 5);
+        assertEquals(answers.getFirst().getQuizID(), 14);
+    }
+    
+    @Test
+    public void testGetResultsByMatriculationDesc() {
+        //java.util.LinkedList<StudentResult> answers = instance.getResultsByMatriculationDESC();
+        
+        //assertEquals(1, answers.size());
+        //assertEquals(answers.getFirst().getMatriculationNumber(), 5);
+        //assertEquals(answers.getFirst().getQuizID(), 14);
+    }
+    
+    @Test
+    public void testGetQuizResult() {
+        //java.util.LinkedList<StudentResult> answers = instance.getQuizResult();
+        
+        //assertEquals(1, answers.size());
+        //assertEquals(answers.getFirst().getMatriculationNumber(), 5);
+        //assertEquals(answers.getFirst().getQuizID(), 14);
+    }
 
     /**
      * Test of getQuizAverage method, of class ResultModel.
@@ -92,7 +121,7 @@ public class ResultModelTest {
         
         quizResult = instance.getQuizResults(quizID);
         
-        StudentResult result = quizResult.get(2);
+        StudentResult result = quizResult.get(0);
         
         boolean finalResult = false;
         boolean name, matriculationNo, hasCompleted, attempts, score, dateCompleted;
