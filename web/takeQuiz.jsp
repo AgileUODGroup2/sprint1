@@ -110,7 +110,6 @@
              <input type="hidden" name="questionID<%=i%>" value="<%=q.getQuestionID()%>" />
              <br>
               
-             
             
                  <%
 }}
