@@ -6,7 +6,7 @@
 
 <!DOCTYPE html>
 <html>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() + "/styles.css"%>">
   <body bgcolor=#042356>
      
       <div class="centerContent2">

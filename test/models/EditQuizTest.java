@@ -59,7 +59,7 @@ public class EditQuizTest {
        try{
        conn.close();
        }
-       catch(Exception e)
+       catch(SQLException e)
        {
            System.out.println(e.getMessage());
        }
@@ -84,7 +84,7 @@ public class EditQuizTest {
        try{
        conn.close();
        }
-       catch(Exception e)
+       catch(SQLException e)
        {
            System.out.println(e.getMessage());
        }

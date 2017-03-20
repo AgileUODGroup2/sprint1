@@ -186,8 +186,6 @@ public class user {
                         byteArray = blob.getBytes(1, (int)blob.length());
                     }
                     
-                    System.out.println(byteArray);
-                    
                     return byteArray;
                     
                 }
@@ -198,7 +196,7 @@ public class user {
             if(con != null){
                 try{
                     con.close();
-                } catch(Exception e){
+                } catch(SQLException e){
                     System.out.print(e.getMessage());
                 }
             }

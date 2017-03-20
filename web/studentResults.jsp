@@ -27,10 +27,10 @@
             Gson gsonResults = new Gson();
             
             int[] tempDivide = {0, 1, 2, 3, 4, 4, 3, 2, 1, 0};
-            //int totalStudents = Arrays.stream(tempDivide).sum();
-            //String json = gsonResults.toJson(tempDivide);
-            String json = gsonResults.toJson(quiz.getGradeDivide());
-            int totalStudents = Arrays.stream(quiz.getGradeDivide()).sum();
+            int totalStudents = Arrays.stream(tempDivide).sum();
+            String json = gsonResults.toJson(tempDivide);
+            //String json = gsonResults.toJson(quiz.getGradeDivide());
+            //int totalStudents = Arrays.stream(quiz.getGradeDivide()).sum();
         %>
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
