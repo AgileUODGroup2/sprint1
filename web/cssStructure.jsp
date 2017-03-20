@@ -21,10 +21,10 @@
     <body bgcolor="d3dfeb">
         <div class="navBar">
             <ul>
-                <li><a href="<%=request.getContextPath()%>/index.jsp">QUIZ MASTER </a></li>
+                <li><a href="<%=request.getContextPath() + "/index.jsp"%>">QUIZ MASTER </a></li>
              </ul>
         </div>
-        <img src="<%=request.getContextPath()%>/<%="logo123.png"%>" width="115" style="position: absolute; left:0; top: 0;">
-        <img src="<%=request.getContextPath()%>/<%="logo123.png"%>" width="115" style="position: absolute; right:0; top: 0;">
+        <img src="<%=request.getContextPath() + "/logo123.png"%>" width="115" style="position: absolute; left:0; top: 0;">
+        <img src="<%=request.getContextPath() + "/logo123.png"%>" width="115" style="position: absolute; right:0; top: 0;">
     </body>
 </html>

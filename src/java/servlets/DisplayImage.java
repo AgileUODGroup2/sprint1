@@ -57,7 +57,7 @@ public class DisplayImage extends HttpServlet{
         byte byteArray[] = us.getProfileImage(isStaff, userID);
         
         if(byteArray == null){
-            response.sendRedirect(request.getContextPath() + "/pic1.png");
+            response.sendRedirect("profile-image.png");
         } else {
             response.setContentType("image");
             OutputStream os = response.getOutputStream();
