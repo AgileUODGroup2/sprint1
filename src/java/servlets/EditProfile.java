@@ -25,7 +25,7 @@ public class EditProfile extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
         String uri = request.getRequestURI();
-        int i = uri.lastIndexOf("/");
+        int i = uri.lastIndexOf('/');
         String strUserID = uri.substring(i+1);
         int userID = Integer.parseInt(strUserID);
         
