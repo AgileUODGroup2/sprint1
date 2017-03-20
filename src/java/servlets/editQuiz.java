@@ -99,11 +99,11 @@ public class editQuiz extends HttpServlet {
         //Change question in database
         editQuiz.EditWholeQuiz(qBank);
         
-        if(questionMedia != null){
+        if(questionMedia.getSize() != 0){
             qBank.setMedia(questionMedia);
             qBank.setHasMedia(true);
             editQuiz.updateQuestionMedia(questionID, questionMedia);
-        } //else if(questionMedia = null)
+        }
         
         response.sendRedirect(contextPath+"/displayQuestionsAndAnswers/"+quizID);
     }
