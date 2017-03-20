@@ -57,9 +57,9 @@
             %>
             
                                    
-                                    <h4>Most Recent Score:<%=r.getScore()%> </h4>
-            <h4>Attempt: <%=r.getAttempts()%></h4>
-             <h4>Date Completed:<%=r.getDate()%></h4>
+                                    <h3>Most Recent Score:<%=r.getScore()%> </h3>
+            <h3>Attempt: <%=r.getAttempts()%></h3>
+             <h3>Date Completed:<%=r.getDate()%></h3>
                         
                        
             
@@ -80,6 +80,8 @@
         <%                              } 
 %>
 </table>
+</br>
+</br>
                  <%   } 
                     else  { 
         %>
@@ -98,7 +100,7 @@
            
    
          <a href="<%=request.getContextPath() + "/quizInstructions.jsp"%>"><button id="sec-button">Click here for quiz instructions</button></a><br>
-            <form method="GET" action="<%=contextPath + "/chooseQuizType/" + quiz.getQuizID()%>"><input type="submit" value="Take Quiz" /></form>
+            <form method="GET" action="<%=contextPath + "/chooseQuizType/" + quiz.getQuizID()%>"><input id="sec-button" type="submit" value="Take Quiz" /></form>
             <br>
             
             <button10 onclick="goBack()">Return to your Quizzes</button10><br>
