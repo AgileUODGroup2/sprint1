@@ -34,14 +34,6 @@ public class ResultModelTest {
     public ResultModelTest() {
     }
     
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
     @Before
     public void setUp() {
         LinkedList<StudentResult> quizResult = instance.getQuizResults(4);
@@ -67,14 +59,10 @@ public class ResultModelTest {
         System.out.println(expResult);
     }
     
-    @After
-    public void tearDown() {
-    }
-    
     @Test
     public void testGetResultsForDates() {
-        java.sql.Date date1 = new java.sql.Date(2014-11-01);
-        java.sql.Date date2 = new java.sql.Date(2019-11-03);
+        java.sql.Date date1 = java.sql.Date.valueOf("2017-11-01");
+        java.sql.Date date2 = java.sql.Date.valueOf("2017-11-03");
         java.util.LinkedList<StudentResult> answers = instance.getResultsForDates(date1, date2, 14);
         
         assertEquals(1, answers.size());
@@ -128,22 +116,15 @@ public class ResultModelTest {
         hasCompleted = (result.getHasCompleted());
         System.out.println("HasCompleted?: " + hasCompleted);
         
-        attempts = (46 == result.getAttemptedCount());
+        attempts = (5 == result.getAttemptedCount());
         System.out.println("Attempts: " + attempts);
         
-        score = (0 == result.getScore());
+        score = (25 == result.getScore());
         System.out.println("Score: " + score);
         
-        String dateString = "03/19/2017";
-        DateFormat df = new SimpleDateFormat("MM/dd/yyyy"); 
-        java.util.Date date = null;
+        java.sql.Date date = java.sql.Date.valueOf("2017-03-20");
         
-        try {
-            date = (java.util.Date) df.parse(dateString);
-        } catch (ParseException e) {
-        }
-        
-        java.util.Date resultDate = result.getDate();
+        java.sql.Date resultDate = result.getDate();
         
         dateCompleted = (date.equals(resultDate));
         System.out.println("Date: " + dateCompleted);
