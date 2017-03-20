@@ -609,7 +609,7 @@ public class QuizModelTest {
         boolean expected = true;
         boolean compResult, incompResult, pendResult;
         boolean quiz1, quiz2, quiz3, quiz4;
-        int [] completedQuiz = new int[4];
+        int [] completedQuiz = new int[5];
         int [] incompleteQuiz = new int[2];
         int [] pendingQuiz = new int[4];
         int ccount = 0;
@@ -632,7 +632,7 @@ public class QuizModelTest {
       }
   
        
-       if (ccount == 4){
+       if (ccount == 5){
            
            compResult = true;
        }
@@ -808,9 +808,7 @@ public class QuizModelTest {
        else {
            state = false; 
        }
-       
-       
-       
+     
      assertEquals("Should equal true", expected, state);
      System.out.println(" ");
        
@@ -837,9 +835,7 @@ public class QuizModelTest {
         }
         
         qm.addNewAttempt(matricNo, quizID, score, date);**/
-        
-        
- 
+
     }
 }
 
