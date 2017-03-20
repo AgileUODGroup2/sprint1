@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ include file='cssStructure.jsp' %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,10 +19,11 @@
         </div>
             <br>
             <br>
-            <div class="centerContent1">
+            <div class="centerContent2">
+                <iframe id="instructionVideo" width="560" height="315" src="https://www.youtube-nocookie.com/embed/V-Cb9x70gYQ?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" align="middle"></iframe>
                 <br>
                 <br>
-                <h7>Here you will find instructions on how to successfully complete the quiz</h7>
+                <h7>Follow the steps below to complete a quiz:</h7>
                 <br>
                 <h7>Step 1</h7>
                 <h5>Click 'Take Quiz' to begin the quiz</h5>

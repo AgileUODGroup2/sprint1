@@ -359,6 +359,19 @@ button10 {
 	background: #042356;
 }
 
+/* Center Content used on the Quiz Instructions page (quizInstruction.jsp) */
+.centerContent2{
+	width: 70%;
+	margin: 0 auto;				/*Sets div to centre of page and is 70% width of the page*/
+	background: #042356;
+        text-align: center;
+}
+
+/* iFrame for the video embed on quizInstruction.jsp */
+#instructionVideo{
+    padding-top: 20px;
+}
+
 .cent1{
 	width: 70%;			/*Sets div to centre of page and is 70% width of the page*/
 	background: #b71010;
